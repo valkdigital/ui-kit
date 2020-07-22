@@ -1,0 +1,140 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { CardList } from "@valk-digital/ui";
+import { View } from "react-native";
+import { WithFigma } from "storybook-addon-figma";
+
+<Meta title="CardList" />
+
+With `MDX` we can define a story for `stories`
+
+# Preview
+
+<Preview>
+  <Story
+    name="CardList"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2690%3A217",
+      },
+    }}
+  >
+    <View>
+      <View style={{ marginTop: 24 }}>
+        <CardList
+          direction="horizontal"
+          size="large"
+          data={[
+            {
+              id: "1",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              imageHeader: "Header tekst",
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+            {
+              id: "2",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              imageHeader: "Header tekst",
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+            {
+              id: "3",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              imageHeader: "Header tekst",
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+          ]}
+        />
+      </View>
+      <View style={{ marginTop: 24 }}>
+        <CardList
+          direction="vertical"
+          size="small"
+          data={[
+            {
+              id: "4",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+            {
+              id: "5",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+            {
+              id: "6",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+          ]}
+        />
+      </View>
+      <View style={{ marginTop: 24 }}>
+        <CardList
+          direction="vertical"
+          size="tiny"
+          data={[
+            {
+              id: "7",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+            },
+          ]}
+          style={{ paddingVertical: 80 }}
+        />
+      </View>
+      <View style={{ marginTop: 24 }}>
+        <CardList
+          direction="vertical"
+          size="medium"
+          data={[
+            {
+              id: "8",
+              image: {
+                uri:
+                  "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+              },
+              imageHeader: "Header tekst",
+              header: "Vrolijk voorjaar",
+              subHeader: "Beschikbaar voor 37 hotels",
+              buttonText: "Doorgaan",
+            },
+          ]}
+        />
+      </View>
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={CardList} />

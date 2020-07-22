@@ -1,0 +1,41 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Card } from "@valk-digital/ui";
+import { View } from "react-native";
+import { WithFigma } from "storybook-addon-figma";
+
+<Meta title="Card" />
+
+With `MDX` we can define a story for `stories`
+
+# Preview
+
+<Preview>
+  <Story
+    name="Card"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2690%3A217",
+      },
+    }}
+  >
+    <View style={{ marginTop: 24 }}>
+      <Card
+        id="1"
+        image={{
+          uri:
+            "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+        }}
+        imageHeader="Header tekst"
+        header="Vrolijk voorjaar"
+        subHeader="Beschikbaar voor 37 hotels"
+        size="large"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Card} />

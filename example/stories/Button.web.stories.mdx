@@ -1,0 +1,60 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View } from "react-native";
+import { Button, Text } from "vex-ui";
+import { WithFigma } from "storybook-addon-figma";
+
+<Meta title="Buttons" />
+
+With `MDX` we can define a story for `stories`
+
+# Preview
+
+<Preview>
+  <Story
+    name="CTA"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/7Sh8nuwN3NqpwMCoOUPu9G/Styleguide-Test?node-id=104%3A525",
+      },
+    }}
+  >
+    <View style={{ alignItems: "center" }}>
+      <View
+        style={{
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          height: 600,
+          marginBottom: 200,
+          width: 900,
+          borderWidth: 2,
+          borderColor: "grey",
+          paddingHorizontal: 16,
+        }}
+      >
+        <Button
+          title="CTA primary"
+          type="filled"
+          size="medium"
+          loading={true}
+        />
+        <Button title="CTA primary" type="skeleton" size="medium" />
+        <Button title="CTA secundairy" type="skeleton" />
+        <Button title="CTA primary" type="filled" size="large" loading={true} />
+        <Button title="CTA primary" type="filled" size="full" />
+      </View>
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Button} />
