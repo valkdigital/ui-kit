@@ -1,8 +1,8 @@
 export enum Fonts {
-  Regular = "source-sans-regular",
-  SemiBold = "source-sans-semibold",
-  Bold = "source-sans-bold",
-  Italic = "source-sans-italic",
+  Regular = "SourceSansPro-Regular",
+  SemiBold = "SourceSansPro-Semibold",
+  Bold = "SourceSansPro-Bold",
+  Italic = "SourceSansPro-Italic",
 }
 
 const Typography = {

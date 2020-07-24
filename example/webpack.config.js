@@ -19,6 +19,7 @@ module.exports = async function (env, argv) {
   Object.assign(config.resolve.alias, {
     ...resolver.extraNodeModules,
     "react-native-web": path.join(node_modules, "react-native-web"),
+    "react-native-linear-gradient": "react-native-web-linear-gradient",
   });
 
   return config;

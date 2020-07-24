@@ -11,30 +11,30 @@ jsconfig.json
 
 # Xcode
 #
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-project.xcworkspace
+example/build/
+example/*.pbxuser
+example/!default.pbxuser
+example/*.mode1v3
+example/!default.mode1v3
+example/*.mode2v3
+example/!default.mode2v3
+example/*.perspectivev3
+example/!default.perspectivev3
+example/xcuserdata
+example/*.xccheckout
+example/*.moved-aside
+example/DerivedData
+example/*.hmap
+example/*.ipa
+example/*.xcuserstate
+example/project.xcworkspace
 
 # Android/IJ
 #
-.idea
-.gradle
-local.properties
-android.iml
+example/.idea
+example/.gradle
+example/local.properties
+example/android.iml
 
 # Cocoapods
 #
@@ -48,10 +48,10 @@ yarn-debug.log
 yarn-error.log
 
 # BUCK
-buck-out/
-\.buckd/
-android/app/libs
-android/keystores/debug.keystore
+example/buck-out/
+example//\.buckd/
+example/android/app/libs
+example/android/keystores/debug.keystore
 
 # Expo
 .expo/*

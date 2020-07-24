@@ -13,7 +13,7 @@ import Text from "./Text";
 import Button from "./Button";
 import spacing from "../style/spacing";
 import shadow from "../style/shadow";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "react-native-linear-gradient";
 
 type Sizes = "large" | "medium" | "small" | "tiny";
 
@@ -106,14 +106,8 @@ const Card: React.FC<CardProps> = ({
             </View>
             <LinearGradient
               colors={["rgba(0,0,0,0.4)", "transparent"]}
-              style={{
-                position: "absolute",
-                bottom: 0,
-                width: "100%",
-                height: (getImageStyle().height as number) * 0.5,
-              }}
-              start={[0, 1]}
-              end={[0, 0]}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 0, y: 0 }}
             />
           </>
         )}

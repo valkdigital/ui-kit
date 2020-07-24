@@ -29,6 +29,7 @@ module.exports = {
       "react": path.resolve(node_modules, "react"),
       "react-native": path.resolve(node_modules, "react-native-web"),
       "react-native-web": path.resolve(node_modules, "react-native-web"),
+      "react-native-linear-gradient": "react-native-web-linear-gradient",
     });
 
     return config;

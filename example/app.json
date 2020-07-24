@@ -11,6 +11,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": ["**/*"],
+    "entryPoint": "index.js"
   }
 }
