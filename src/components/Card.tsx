@@ -132,7 +132,7 @@ const Card: React.FC<CardProps> = ({
           title={buttonText}
           onPress={() => onPress(id)}
           size="large"
-          style={styles.space24}
+          style={[styles.space24, { borderRadius: 0 }]}
         />
       )}
     </TouchableOpacity>

@@ -2,16 +2,16 @@ export default {
   light: {
     background: "#F2F2F2",
     typography: {
-      color: "black",
+      color: "#010F14",
     },
     cta: {
-      primary: "orange",
+      primary: "#FF8100",
       primaryLabel: "white",
-      secondary: "blue",
+      secondary: "#00ACF5",
     },
   },
   dark: {
-    background: "#000000",
+    background: "#010F14",
     typography: {
       color: "white",
     },

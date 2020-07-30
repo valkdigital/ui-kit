@@ -48,7 +48,7 @@ interface TestProps {
   disabled?: boolean;
   iconSource?: object | number | Function;
   iconStyle?: ImageStyle;
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
 }
 
 export const Button: React.FC<TestProps> = ({
@@ -148,7 +148,7 @@ const Label: React.FC<{
   // Medium button show only loading indicator, when loading.
   if (loading && buttonSize === "medium") return null;
   return (
-    <Text type="label" textAlign="center" color={color} style={styles.title}>
+    <Text type="h6" textAlign="center" color={color} style={styles.title}>
       {title}
     </Text>
   );
