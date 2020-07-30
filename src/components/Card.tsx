@@ -105,15 +105,23 @@ const Card: React.FC<CardProps> = ({
               )}
             </View>
             <LinearGradient
-              colors={["rgba(0,0,0,0.4)", "transparent"]}
-              start={{ x: 0, y: 1 }}
-              end={{ x: 0, y: 0 }}
+              colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              style={{
+                position: "absolute",
+                top: (getImageStyle().height as number) * 0.5,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: (getImageStyle().height as number) * 0.5,
+              }}
             />
           </>
         )}
       </View>
 
-      <View style={[styles.bodyContainer, { height: getImageStyle().height }]}>
+      <View style={styles.bodyContainer}>
         {header && <Text type="h5">{header}</Text>}
         {subHeader && (
           <Text type="subtextRegular" style={styles.subHeader}>
@@ -125,7 +133,7 @@ const Card: React.FC<CardProps> = ({
             {supportiveText}
           </Text>
         )}
-        {assets && <View style={styles.space24}>{assets}</View>}
+        {assets && assets}
       </View>
       {!!buttonText && (
         <Button
@@ -143,12 +151,11 @@ export default Card;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginLeft: spacing.sp3,
     width: Dimensions.get("window").width - spacing.sp6,
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
     borderRadius: spacing["sp1/2"],
-    overflow: "hidden",
+    overflow: "visible",
   },
   imageContainer: {
     position: "absolute",
@@ -174,7 +181,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   bodyContainer: {
-    flex: 1,
     padding: spacing.sp2,
     minHeight: spacing.sp8,
     backgroundColor: "white",

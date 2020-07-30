@@ -11,7 +11,7 @@ interface CardListProps {
   direction: Directions;
   size: CardProps["size"];
   onPress: CardProps["onPress"];
-  style: ViewStyle;
+  style?: ViewStyle;
 }
 
 const SEPARATOR_STYLE: { [key in Directions]: ViewStyle } = {
@@ -36,7 +36,6 @@ export default ({ data, direction, size, onPress, style }: CardListProps) => {
 
   return (
     <FlatList
-      style={styles.overflow}
       data={data}
       keyExtractor={(item) => item.id}
       horizontal={horizontal}
@@ -44,17 +43,8 @@ export default ({ data, direction, size, onPress, style }: CardListProps) => {
         <Card {...item} size={size} onPress={onPress} />
       )}
       ItemSeparatorComponent={() => <View style={getSeparatorStyle()} />}
-      contentContainerStyle={[
-        styles.overflow,
-        horizontal && { paddingRight: sp3 },
-        style,
-      ]}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={[horizontal && { paddingRight: sp3 }, style]}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  overflow: {
-    overflow: "visible",
-  },
-});

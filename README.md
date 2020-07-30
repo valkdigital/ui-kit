@@ -65,7 +65,7 @@ That's all!
 
 ## Playground
 
-You can see an extensive documented web preview of the component library by running `yarn && yarn storybook` in the examples directory. With the use of storybook you'll be able to see each component with the following topics:
+You can see an extensive documented web preview of the component library by running `yarn && yarn storybook` in the example directory. With the use of storybook you'll be able to see each component with the following topics:
 
 - Preview
 - Props overview

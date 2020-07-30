@@ -1,5 +1,5 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { Card } from "vex-ui";
+import { Card, Text } from "vex-ui";
 import { View } from "react-native";
 import { WithFigma } from "storybook-addon-figma";
 
@@ -24,13 +24,21 @@ With `MDX` we can define a story for `stories`
       <Card
         id="1"
         image={{
-          uri:
-            "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
         }}
-        imageHeader="Header tekst"
-        header="Vrolijk voorjaar"
-        subHeader="Beschikbaar voor 37 hotels"
+        imageHeader="Diner"
         size="large"
+        onPress={() => null}
+        assets={
+          <View style={{ flexDirection: "row" }}>
+            <Text type="subtextRegular" style={{ marginRight: 24 }}>
+              2 personen
+            </Text>
+            <Text type="subtextRegular" style={{ marginLeft: 8 }}>
+              18:00
+            </Text>
+          </View>
+        }
       />
     </View>
   </Story>
