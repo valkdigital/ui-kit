@@ -52,7 +52,6 @@ const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
 };
 
 export interface CardProps {
-  data?: any;
   image: ImageSourcePropType;
   imageHeader?: string;
   imageOverlay?: ReactChild;
@@ -61,11 +60,11 @@ export interface CardProps {
   supportiveText?: string;
   assets?: ReactChild;
   buttonText?: string;
-  onPress: (data?: any) => void;
+  onPressParam?: any;
+  onPress: (onPressParam?: any) => void;
   size: Sizes;
 }
 const Card: React.FC<CardProps> = ({
-  data,
   image,
   imageHeader,
   imageOverlay,
@@ -74,6 +73,7 @@ const Card: React.FC<CardProps> = ({
   supportiveText,
   assets,
   buttonText,
+  onPressParam,
   onPress,
   size = "large",
 }) => {
@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, getContainerStyle()]}
-      onPress={() => onPress(data)}
+      onPress={() => onPress(onPressParam)}
       disabled={!!buttonText}
     >
       <View>
@@ -138,7 +138,7 @@ const Card: React.FC<CardProps> = ({
       {!!buttonText && (
         <Button
           title={buttonText}
-          onPress={() => onPress(data)}
+          onPress={() => onPress(onPressParam)}
           size="large"
           style={[styles.space24, { borderRadius: 0 }]}
         />

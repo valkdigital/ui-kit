@@ -10,12 +10,12 @@ const CenteredView: React.FC = ({ children }) => {
 storiesOf("Cards", module).add("Single card", () => (
   <CenteredView>
     <Card
-      id="1"
       image={{
         uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
       }}
       imageHeader="Diner"
       size="large"
+      onPressParam="1"
       onPress={() => null}
       assets={
         <View style={{ flexDirection: "row" }}>
@@ -38,7 +38,7 @@ storiesOf("Cards", module).add("Card list", () => (
       onPress={() => null}
       data={[
         {
-          id: "1",
+          onPressParam: "1",
           image: {
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
@@ -48,7 +48,7 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Beschikbaar voor 37 hotels",
         },
         {
-          id: "2",
+          onPressParam: "2",
           image: {
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
@@ -58,7 +58,7 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Beschikbaar voor 37 hotels",
         },
         {
-          id: "3",
+          onPressParam: "3",
           image: {
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
