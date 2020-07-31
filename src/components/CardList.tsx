@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FlatList, View, ViewStyle, StyleSheet } from "react-native";
+import { FlatList, View, ViewStyle } from "react-native";
 import Card, { CardProps } from "./Card";
 import spacing from "../style/spacing";
 import ThemeContext from "../style/ThemeContext";

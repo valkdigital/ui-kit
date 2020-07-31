@@ -4,7 +4,7 @@ import { addDecorator } from "@storybook/react";
 import * as Font from "expo-font";
 
 // your theme provider
-import { ThemeContext, ThemeManager, Spacing, Text } from "vex-ui";
+import { ThemeContext, ThemeManager, Spacing, Text } from "@valkdigital/vex-ui";
 // create a component that uses the dark mode hook
 const ThemeWrapper = ({ children }) => {
   const [loading, setLoading] = useState(true);

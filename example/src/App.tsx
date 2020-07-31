@@ -1,6 +1,6 @@
 import React from "react";
 import StorybookUIRoot from "../storybook";
-// import { Fonts } from "vex-ui";
+// import { Fonts } from "@valkdigital/vex-ui";
 
 const App: React.FC = () => {
   return <StorybookUIRoot />;

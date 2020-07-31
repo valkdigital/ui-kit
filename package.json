@@ -1,6 +1,6 @@
 {
-  "name": "vex-ui",
-  "version": "0.1.0",
+  "name": "@valkdigital/vex-ui",
+  "version": "0.0.1",
   "description": "ui kit for Valk Digital",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
