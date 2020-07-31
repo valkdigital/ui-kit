@@ -37,7 +37,9 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/valkdigital/vex-ui",
+  "repository": {
+    "url": "git@github.com:valkdigital/vex-ui.git"
+  },
   "author": "Valk Digital <developer@valk.nl> (https://github.com/valkdigital)",
   "license": "MIT",
   "bugs": {
