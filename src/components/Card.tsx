@@ -52,7 +52,7 @@ const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
 };
 
 export interface CardProps {
-  id: string;
+  data?: any;
   image: ImageSourcePropType;
   imageHeader?: string;
   imageOverlay?: ReactChild;
@@ -61,11 +61,11 @@ export interface CardProps {
   supportiveText?: string;
   assets?: ReactChild;
   buttonText?: string;
-  onPress: (id?: string) => void;
+  onPress: (data?: any) => void;
   size: Sizes;
 }
 const Card: React.FC<CardProps> = ({
-  id,
+  data,
   image,
   imageHeader,
   imageOverlay,
@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, getContainerStyle()]}
-      onPress={() => onPress(id)}
+      onPress={() => onPress(data)}
       disabled={!!buttonText}
     >
       <View>
@@ -138,7 +138,7 @@ const Card: React.FC<CardProps> = ({
       {!!buttonText && (
         <Button
           title={buttonText}
-          onPress={() => onPress(id)}
+          onPress={() => onPress(data)}
           size="large"
           style={[styles.space24, { borderRadius: 0 }]}
         />
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width - spacing.sp6,
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
     borderRadius: spacing["sp1/2"],
-    overflow: "visible",
+    overflow: "hidden",
   },
   imageContainer: {
     position: "absolute",

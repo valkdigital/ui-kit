@@ -37,7 +37,7 @@ export default ({ data, direction, size, onPress, style }: CardListProps) => {
   return (
     <FlatList
       data={data}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(_, index) => index.toString()}
       horizontal={horizontal}
       renderItem={({ item }) => (
         <Card {...item} size={size} onPress={onPress} />
