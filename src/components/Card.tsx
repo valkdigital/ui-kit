@@ -86,63 +86,65 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <TouchableOpacity
-      style={[styles.container, getContainerStyle()]}
+      style={styles.card}
       onPress={() => onPress(onPressParam)}
       disabled={!!buttonText}
     >
-      <View>
-        <Image source={image} style={[styles.image, getImageStyle()]} />
-        {size !== "small" && size !== "tiny" && (
-          <>
-            <View style={styles.imageOverlay}>
-              {imageOverlay && imageOverlay}
-            </View>
-            <View style={[styles.imageContainer, getImageStyle()]}>
-              {imageHeader && (
-                <Text type="h4" color="#ffffff" style={styles.imageHeader}>
-                  {imageHeader}
-                </Text>
-              )}
-            </View>
-            <LinearGradient
-              colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0, y: 1 }}
-              style={{
-                position: "absolute",
-                top: (getImageStyle().height as number) * 0.5,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                height: (getImageStyle().height as number) * 0.5,
-              }}
-            />
-          </>
-        )}
-      </View>
+      <View style={[styles.container, getContainerStyle()]}>
+        <View>
+          <Image source={image} style={[styles.image, getImageStyle()]} />
+          {size !== "small" && size !== "tiny" && (
+            <>
+              <View style={styles.imageOverlay}>
+                {imageOverlay && imageOverlay}
+              </View>
+              <View style={[styles.imageContainer, getImageStyle()]}>
+                {imageHeader && (
+                  <Text type="h4" color="#ffffff" style={styles.imageHeader}>
+                    {imageHeader}
+                  </Text>
+                )}
+              </View>
+              <LinearGradient
+                colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={{
+                  position: "absolute",
+                  top: (getImageStyle().height as number) * 0.5,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: (getImageStyle().height as number) * 0.5,
+                }}
+              />
+            </>
+          )}
+        </View>
 
-      <View style={styles.bodyContainer}>
-        {header && <Text type="h5">{header}</Text>}
-        {subHeader && (
-          <Text type="subtextRegular" style={styles.subHeader}>
-            {subHeader}
-          </Text>
+        <View style={styles.bodyContainer}>
+          {header && <Text type="h5">{header}</Text>}
+          {subHeader && (
+            <Text type="subtextRegular" style={styles.subHeader}>
+              {subHeader}
+            </Text>
+          )}
+          {supportiveText && (
+            <Text type="bodyRegular" style={styles.supportive}>
+              {supportiveText}
+            </Text>
+          )}
+          {assets && assets}
+        </View>
+        {!!buttonText && (
+          <Button
+            title={buttonText}
+            onPress={() => onPress(onPressParam)}
+            size="large"
+            style={[styles.space24, { borderRadius: 0 }]}
+          />
         )}
-        {supportiveText && (
-          <Text type="bodyRegular" style={styles.supportive}>
-            {supportiveText}
-          </Text>
-        )}
-        {assets && assets}
       </View>
-      {!!buttonText && (
-        <Button
-          title={buttonText}
-          onPress={() => onPress(onPressParam)}
-          size="large"
-          style={[styles.space24, { borderRadius: 0 }]}
-        />
-      )}
     </TouchableOpacity>
   );
 };
@@ -150,10 +152,12 @@ const Card: React.FC<CardProps> = ({
 export default Card;
 
 const styles = StyleSheet.create({
-  container: {
+  card: {
     marginLeft: spacing.sp3,
     width: Dimensions.get("window").width - spacing.sp6,
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
+  },
+  container: {
     borderRadius: spacing["sp1/2"],
     overflow: "hidden",
   },

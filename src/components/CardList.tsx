@@ -23,7 +23,13 @@ const SEPARATOR_STYLE: { [key in Directions]: ViewStyle } = {
   },
 };
 
-export default ({ data, direction, size, onPress, style }: CardListProps) => {
+const CardList: React.FC<CardListProps> = ({
+  data,
+  direction,
+  size,
+  onPress,
+  style,
+}) => {
   const {
     spacing: { sp3 },
   } = useContext(ThemeContext);
@@ -48,3 +54,5 @@ export default ({ data, direction, size, onPress, style }: CardListProps) => {
     />
   );
 };
+
+export default CardList;
