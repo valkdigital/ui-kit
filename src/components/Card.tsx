@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     padding: spacing.sp2,
-    minHeight: spacing.sp8,
+    minHeight: spacing.sp6,
     backgroundColor: "white",
     overflow: "hidden",
   },
