@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { View, StyleSheet } from "react-native";
-import { Card, CardList, Text } from "@valkdigital/vex-ui";
+import { Card, CardList, Text } from "@valkdigital/ui-kit";
 
 const CenteredView: React.FC = ({ children }) => {
   return <View style={styles.container}>{children}</View>;

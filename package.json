@@ -1,5 +1,5 @@
 {
-  "name": "@valkdigital/vex-ui",
+  "name": "@valkdigital/ui-kit",
   "version": "0.0.2",
   "description": "ui kit for Valk Digital",
   "main": "lib/commonjs/index",
