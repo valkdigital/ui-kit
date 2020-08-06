@@ -82,6 +82,10 @@ const Card: React.FC<CardProps> = ({
   onPress,
   size = "large",
 }) => {
+  const showBody = size !== "single";
+  const showButton = !!buttonText && size === "large";
+  const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
+
   const getImageStyle = (): ViewStyle & ImageStyle => {
     return IMAGE_STYLE[size];
   };
@@ -98,7 +102,7 @@ const Card: React.FC<CardProps> = ({
       <View style={[styles.container, getContainerStyle()]}>
         <View>
           <Image source={image} style={[styles.image, getImageStyle()]} />
-          {size !== "small" && size !== "tiny" && (
+          {showElementsOnTopOfImage && (
             <>
               <View style={styles.imageOverlay}>
                 {imageOverlay && imageOverlay}
@@ -127,7 +131,7 @@ const Card: React.FC<CardProps> = ({
           )}
         </View>
 
-        {size !== "single" && (
+        {showBody && (
           <View style={styles.bodyContainer}>
             {header && <Text type="h5">{header}</Text>}
             {subHeader && (
@@ -143,9 +147,9 @@ const Card: React.FC<CardProps> = ({
             {assets && assets}
           </View>
         )}
-        {!!buttonText && size === "large" && (
+        {showButton && (
           <Button
-            title={buttonText}
+            title={buttonText!}
             onPress={() => onPress(onPressParam)}
             size="large"
             style={[styles.space24, { borderRadius: 0 }]}
