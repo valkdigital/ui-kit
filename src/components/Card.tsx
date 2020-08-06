@@ -15,7 +15,7 @@ import spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "react-native-linear-gradient";
 
-type Sizes = "large" | "medium" | "small" | "tiny";
+type Sizes = "large" | "medium" | "small" | "tiny" | "single";
 
 const IMAGE_STYLE: { [key in Sizes]: ViewStyle & ImageStyle } = {
   large: {
@@ -34,6 +34,10 @@ const IMAGE_STYLE: { [key in Sizes]: ViewStyle & ImageStyle } = {
     width: 80,
     height: 80,
   },
+  single: {
+    width: "100%",
+    height: 160,
+  },
 };
 
 const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
@@ -49,6 +53,7 @@ const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
   tiny: {
     flexDirection: "row",
   },
+  single: {},
 };
 
 export interface CardProps {
@@ -122,21 +127,23 @@ const Card: React.FC<CardProps> = ({
           )}
         </View>
 
-        <View style={styles.bodyContainer}>
-          {header && <Text type="h5">{header}</Text>}
-          {subHeader && (
-            <Text type="subtextRegular" style={styles.subHeader}>
-              {subHeader}
-            </Text>
-          )}
-          {supportiveText && (
-            <Text type="bodyRegular" style={styles.supportive}>
-              {supportiveText}
-            </Text>
-          )}
-          {assets && assets}
-        </View>
-        {!!buttonText && (
+        {size !== "single" && (
+          <View style={styles.bodyContainer}>
+            {header && <Text type="h5">{header}</Text>}
+            {subHeader && (
+              <Text type="subtextRegular" style={styles.subHeader}>
+                {subHeader}
+              </Text>
+            )}
+            {supportiveText && (
+              <Text type="bodyRegular" style={styles.supportive}>
+                {supportiveText}
+              </Text>
+            )}
+            {assets && assets}
+          </View>
+        )}
+        {!!buttonText && size === "large" && (
           <Button
             title={buttonText}
             onPress={() => onPress(onPressParam)}
@@ -158,6 +165,7 @@ const styles = StyleSheet.create({
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {
+    backgroundColor: "#ffffff",
     borderRadius: spacing["sp1/2"],
     overflow: "hidden",
   },

@@ -7,7 +7,7 @@ const CenteredView: React.FC = ({ children }) => {
   return <View style={styles.container}>{children}</View>;
 };
 
-storiesOf("Cards", module).add("Single card", () => (
+storiesOf("Cards", module).add("Large card", () => (
   <CenteredView>
     <Card
       image={{
@@ -20,13 +20,79 @@ storiesOf("Cards", module).add("Single card", () => (
       assets={
         <View style={{ flexDirection: "row" }}>
           <Text type="subtextRegular" style={{ marginRight: 24 }}>
-            2 personen
+            2 persons
           </Text>
           <Text type="subtextRegular" style={{ marginLeft: 8 }}>
             18:00
           </Text>
         </View>
       }
+      buttonText="Button"
+    />
+  </CenteredView>
+));
+storiesOf("Cards", module).add("Medium card", () => (
+  <CenteredView>
+    <Card
+      image={{
+        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      }}
+      imageHeader="Diner"
+      size="medium"
+      onPressParam="1"
+      onPress={() => null}
+      assets={
+        <View style={{ flexDirection: "row" }}>
+          <Text type="subtextRegular" style={{ marginRight: 24 }}>
+            2 persons
+          </Text>
+          <Text type="subtextRegular" style={{ marginLeft: 8 }}>
+            18:00
+          </Text>
+        </View>
+      }
+      buttonText="khjer"
+    />
+  </CenteredView>
+));
+storiesOf("Cards", module).add("Small card", () => (
+  <CenteredView>
+    <Card
+      image={{
+        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      }}
+      header="Diner"
+      subHeader="From €89,- per person"
+      size="small"
+      onPressParam="1"
+      onPress={() => null}
+    />
+  </CenteredView>
+));
+storiesOf("Cards", module).add("Tiny card", () => (
+  <CenteredView>
+    <Card
+      image={{
+        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      }}
+      header="Diner"
+      subHeader="From €89,- per person"
+      size="tiny"
+      onPressParam="1"
+      onPress={() => null}
+    />
+  </CenteredView>
+));
+storiesOf("Cards", module).add("Single card", () => (
+  <CenteredView>
+    <Card
+      image={{
+        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      }}
+      imageHeader="Diner"
+      size="single"
+      onPressParam="1"
+      onPress={() => null}
     />
   </CenteredView>
 ));
@@ -43,9 +109,9 @@ storiesOf("Cards", module).add("Card list", () => (
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
           },
-          imageHeader: "Header tekst",
-          header: "Vrolijk voorjaar",
-          subHeader: "Beschikbaar voor 37 hotels",
+          imageHeader: "Header text",
+          header: "Sprightly Spring",
+          subHeader: "Available for 37 hotels",
         },
         {
           onPressParam: "2",
@@ -53,9 +119,9 @@ storiesOf("Cards", module).add("Card list", () => (
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
           },
-          imageHeader: "Header tekst",
-          header: "Vrolijk voorjaar",
-          subHeader: "Beschikbaar voor 37 hotels",
+          imageHeader: "Header text",
+          header: "Sprightly Spring",
+          subHeader: "Available for 37 hotels",
         },
         {
           onPressParam: "3",
@@ -63,9 +129,9 @@ storiesOf("Cards", module).add("Card list", () => (
             uri:
               "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
           },
-          imageHeader: "Header tekst",
-          header: "Vrolijk voorjaar",
-          subHeader: "Beschikbaar voor 37 hotels",
+          imageHeader: "Header text",
+          header: "Sprightly Spring",
+          subHeader: "Available for 37 hotels",
         },
       ]}
     />
