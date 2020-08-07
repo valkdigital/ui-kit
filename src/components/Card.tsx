@@ -97,7 +97,7 @@ const Card: React.FC<CardProps> = ({
     <TouchableOpacity
       style={styles.card}
       onPress={() => onPress(onPressParam)}
-      disabled={!!buttonText}
+      disabled={showButton}
     >
       <View style={[styles.container, getContainerStyle()]}>
         <View>

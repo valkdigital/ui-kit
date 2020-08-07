@@ -51,7 +51,6 @@ storiesOf("Cards", module).add("Medium card", () => (
           </Text>
         </View>
       }
-      buttonText="khjer"
     />
   </CenteredView>
 ));
@@ -106,8 +105,7 @@ storiesOf("Cards", module).add("Card list", () => (
         {
           onPressParam: "1",
           image: {
-            uri:
-              "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
           imageHeader: "Header text",
           header: "Sprightly Spring",
@@ -116,8 +114,7 @@ storiesOf("Cards", module).add("Card list", () => (
         {
           onPressParam: "2",
           image: {
-            uri:
-              "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
           imageHeader: "Header text",
           header: "Sprightly Spring",
@@ -126,14 +123,14 @@ storiesOf("Cards", module).add("Card list", () => (
         {
           onPressParam: "3",
           image: {
-            uri:
-              "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
           imageHeader: "Header text",
           header: "Sprightly Spring",
           subHeader: "Available for 37 hotels",
         },
       ]}
+      style={{ paddingTop: 24 }}
     />
   </CenteredView>
 ));
