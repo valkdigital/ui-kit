@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   ViewStyle,
   ImageStyle,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
+
 import Text from "./Text";
 import Button from "./Button";
 import spacing from "../style/spacing";
@@ -17,7 +18,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
 
-const IMAGE_STYLE: { [key in Sizes]: ViewStyle & ImageStyle } = {
+const IMAGE_STYLE: { [key in Sizes]: ImageStyle } = {
   large: {
     width: "100%",
     height: 160,
@@ -65,9 +66,9 @@ export interface CardProps {
   supportiveText?: string;
   assets?: ReactChild;
   buttonText?: string;
-  onPressParam?: any;
-  onPress: (onPressParam?: any) => void;
-  size: Sizes;
+  onPress: () => void;
+  size?: Sizes;
+  wrapperStyle?: ViewStyle;
 }
 const Card: React.FC<CardProps> = ({
   image,
@@ -78,36 +79,33 @@ const Card: React.FC<CardProps> = ({
   supportiveText,
   assets,
   buttonText,
-  onPressParam,
   onPress,
   size = "large",
+  wrapperStyle,
 }) => {
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
+  let width = useWindowDimensions().width;
 
-  const getImageStyle = (): ViewStyle & ImageStyle => {
-    return IMAGE_STYLE[size];
-  };
-  const getContainerStyle = (): ViewStyle => {
-    return CONTAINER_STYLE[size];
-  };
-
+  // default size is full width minus the defualt 24 spacing.
+  // Not needed for a single (Header image)
+  if (size !== "single") width -= 48;
   return (
     <TouchableOpacity
-      style={styles.card}
-      onPress={() => onPress(onPressParam)}
+      style={[styles.card, { width }, wrapperStyle]}
+      onPress={onPress}
       disabled={showButton}
     >
-      <View style={[styles.container, getContainerStyle()]}>
+      <View style={[styles.container, CONTAINER_STYLE[size]]}>
         <View>
-          <Image source={image} style={[styles.image, getImageStyle()]} />
+          <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
           {showElementsOnTopOfImage && (
             <>
               <View style={styles.imageOverlay}>
                 {imageOverlay && imageOverlay}
               </View>
-              <View style={[styles.imageContainer, getImageStyle()]}>
+              <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
                 {imageHeader && (
                   <Text type="h4" color="#ffffff" style={styles.imageHeader}>
                     {imageHeader}
@@ -118,14 +116,7 @@ const Card: React.FC<CardProps> = ({
                 colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
-                style={{
-                  position: "absolute",
-                  top: (getImageStyle().height as number) * 0.5,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  height: (getImageStyle().height as number) * 0.5,
-                }}
+                style={styles.gradient}
               />
             </>
           )}
@@ -150,9 +141,9 @@ const Card: React.FC<CardProps> = ({
         {showButton && (
           <Button
             title={buttonText!}
-            onPress={() => onPress(onPressParam)}
+            onPress={onPress}
             size="large"
-            style={[styles.space24, { borderRadius: 0 }]}
+            style={styles.button}
           />
         )}
       </View>
@@ -164,13 +155,10 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    marginLeft: spacing.sp3,
-    width: Dimensions.get("window").width - spacing.sp6,
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {
     backgroundColor: "#ffffff",
-    borderRadius: spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
@@ -183,11 +171,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   imageOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
     zIndex: 10,
   },
   imageHeader: {
@@ -208,7 +192,16 @@ const styles = StyleSheet.create({
   supportive: {
     marginTop: spacing["sp1/2"],
   },
-  space24: {
+  button: {
     marginTop: spacing.sp3,
+    borderRadius: 0,
+  },
+  gradient: {
+    position: "absolute",
+    top: "50%",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: "50%",
   },
 });

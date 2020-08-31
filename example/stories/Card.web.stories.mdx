@@ -11,7 +11,7 @@ With `MDX` we can define a story for `stories`
 
 <Preview>
   <Story
-    name="Card"
+    name="Header"
     parameters={{
       design: {
         type: "figma",
@@ -20,27 +20,27 @@ With `MDX` we can define a story for `stories`
       },
     }}
   >
-    <View style={{ marginTop: 24 }}>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        imageHeader="Diner"
-        size="large"
-        onPressParam="1"
-        onPress={() => null}
-        assets={
-          <View style={{ flexDirection: "row" }}>
-            <Text type="subtextRegular" style={{ marginRight: 24 }}>
-              2 persons
-            </Text>
-            <Text type="subtextRegular" style={{ marginLeft: 8 }}>
-              18:00
-            </Text>
-          </View>
-        }
-      />
-    </View>
+    <Card
+      image={{
+        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      }}
+      imageHeader="Diner"
+      size="single"
+      onPressParam="1"
+      imageOverlay={
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            alignSelf: "flex-end",
+            paddingRight: 16,
+          }}
+        >
+          <Text type="h4">1 2 3 </Text>
+        </View>
+      }
+      onPress={() => null}
+    />
   </Story>
 </Preview>
 

@@ -6,20 +6,22 @@ import ThemeContext from "../style/ThemeContext";
 
 type Directions = "horizontal" | "vertical";
 
+interface CardItem extends Omit<CardProps, "size" | "onPress"> {}
+
 interface CardListProps {
-  data: Omit<CardProps, "size" | "onPress">[];
+  data: CardItem[];
   direction: Directions;
   size: CardProps["size"];
-  onPress: CardProps["onPress"];
-  style?: ViewStyle;
+  onItemPress: (item: CardItem) => void;
+  containerStyle?: ViewStyle;
 }
 
 const SEPARATOR_STYLE: { [key in Directions]: ViewStyle } = {
   horizontal: {
-    marginLeft: -spacing.sp2,
+    width: spacing.sp1,
   },
   vertical: {
-    marginBottom: spacing.sp1,
+    height: spacing.sp1,
   },
 };
 
@@ -27,18 +29,14 @@ const CardList: React.FC<CardListProps> = ({
   data,
   direction,
   size,
-  onPress,
-  style,
+  onItemPress,
+  containerStyle,
 }) => {
   const {
-    spacing: { sp3 },
+    spacing: { sp1 },
   } = useContext(ThemeContext);
 
   const horizontal = direction === "horizontal";
-
-  const getSeparatorStyle = () => {
-    return SEPARATOR_STYLE[direction];
-  };
 
   return (
     <FlatList
@@ -46,11 +44,14 @@ const CardList: React.FC<CardListProps> = ({
       keyExtractor={(_, index) => index.toString()}
       horizontal={horizontal}
       renderItem={({ item }) => (
-        <Card {...item} size={size} onPress={onPress} />
+        <Card {...item} size={size} onPress={() => onItemPress(item)} />
       )}
-      ItemSeparatorComponent={() => <View style={getSeparatorStyle()} />}
+      ItemSeparatorComponent={() => <View style={SEPARATOR_STYLE[direction]} />}
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={[horizontal && { paddingRight: sp3 }, style]}
+      contentContainerStyle={[
+        horizontal && { paddingBottom: sp1 },
+        containerStyle,
+      ]}
     />
   );
 };

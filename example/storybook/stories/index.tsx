@@ -15,7 +15,6 @@ storiesOf("Cards", module).add("Large card", () => (
       }}
       imageHeader="Diner"
       size="large"
-      onPressParam="1"
       onPress={() => null}
       assets={
         <View style={{ flexDirection: "row" }}>
@@ -39,7 +38,6 @@ storiesOf("Cards", module).add("Medium card", () => (
       }}
       imageHeader="Diner"
       size="medium"
-      onPressParam="1"
       onPress={() => null}
       assets={
         <View style={{ flexDirection: "row" }}>
@@ -63,7 +61,6 @@ storiesOf("Cards", module).add("Small card", () => (
       header="Diner"
       subHeader="From €89,- per person"
       size="small"
-      onPressParam="1"
       onPress={() => null}
     />
   </CenteredView>
@@ -77,7 +74,6 @@ storiesOf("Cards", module).add("Tiny card", () => (
       header="Diner"
       subHeader="From €89,- per person"
       size="tiny"
-      onPressParam="1"
       onPress={() => null}
     />
   </CenteredView>
@@ -90,7 +86,6 @@ storiesOf("Cards", module).add("Single card", () => (
       }}
       imageHeader="Diner"
       size="single"
-      onPressParam="1"
       onPress={() => null}
     />
   </CenteredView>
@@ -100,10 +95,9 @@ storiesOf("Cards", module).add("Card list", () => (
     <CardList
       direction="horizontal"
       size="large"
-      onPress={() => null}
+      onItemPress={() => null}
       data={[
         {
-          onPressParam: "1",
           image: {
             uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
@@ -112,7 +106,6 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Available for 37 hotels",
         },
         {
-          onPressParam: "2",
           image: {
             uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
@@ -121,7 +114,6 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Available for 37 hotels",
         },
         {
-          onPressParam: "3",
           image: {
             uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
@@ -130,7 +122,7 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Available for 37 hotels",
         },
       ]}
-      style={{ paddingTop: 24 }}
+      containerStyle={{ paddingTop: 24 }}
     />
   </CenteredView>
 ));
@@ -139,6 +131,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#F5FCFF",
   },
 });
