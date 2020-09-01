@@ -15,6 +15,7 @@ import Button from "./Button";
 import spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "react-native-linear-gradient";
+import { Spacing } from "..";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
 
@@ -88,9 +89,10 @@ const Card: React.FC<CardProps> = ({
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
   let width = useWindowDimensions().width;
 
-  // default size is full width minus the defualt 24 spacing.
+  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp4).
   // Not needed for a single (Header image)
-  if (size !== "single") width -= 48;
+  if (size !== "single") width -= Spacing.sp8;
+
   return (
     <TouchableOpacity
       style={[styles.card, { width }, wrapperStyle]}
