@@ -15,7 +15,7 @@ import Button from "./Button";
 import spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "react-native-linear-gradient";
-import { Spacing } from "..";
+import Spacing from "../style/spacing";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
 
