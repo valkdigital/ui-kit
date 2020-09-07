@@ -89,7 +89,7 @@ const Card: React.FC<CardProps> = ({
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
 
   // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp4).
-  const width = (useWindowDimensions().width -= Spacing.sp6);
+  const width = useWindowDimensions().width - Spacing.sp6;
 
   return (
     <TouchableOpacity
