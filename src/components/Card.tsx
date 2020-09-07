@@ -87,11 +87,9 @@ const Card: React.FC<CardProps> = ({
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
-  let width = useWindowDimensions().width;
 
   // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp4).
-  // Not needed for a single (Header image)
-  if (size !== "single") width -= Spacing.sp8;
+  const width = (useWindowDimensions().width -= Spacing.sp6);
 
   return (
     <TouchableOpacity
@@ -161,6 +159,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: "#ffffff",
+    borderRadius: spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
