@@ -4,14 +4,14 @@ import Typography, { TypographyLiterals } from "../style/typography";
 import ThemeContext from "../style/ThemeContext";
 
 interface TextProps extends RNTextProps {
-  type: TypographyLiterals;
+  type?: TypographyLiterals;
   textAlign?: "left" | "center" | "right";
   color?: string;
 }
 
 const Text: React.FC<TextProps> = ({
   children,
-  type,
+  type = "bodyRegular",
   textAlign,
   style,
   color,
