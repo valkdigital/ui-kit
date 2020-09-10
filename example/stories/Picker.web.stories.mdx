@@ -1,0 +1,58 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Text, Picker, Spacing } from "@valkdigital/ui-kit";
+import { View } from "react-native";
+import { WithFigma } from "storybook-addon-figma";
+
+<Meta title="Picker" />
+
+With `MDX` we can define a story for `stories`
+
+# Preview
+
+<Preview>
+  <Story
+    name="Picker"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=3007%3A0",
+      },
+    }}
+  >
+    <View>
+      <Picker
+        label="Large picker"
+        placeholder="Select an option"
+        options={[
+          "option1",
+          "option2",
+          "option3",
+          "option4",
+          "option5",
+          "option6",
+          "option7",
+          "option8",
+        ]}
+        value={undefined}
+        title="Title"
+        onValueChange={() => null}
+        size="large"
+        containerStyle={{ marginVertical: Spacing.sp2 }}
+      />
+      <Picker
+        label="Small picker"
+        placeholder="Select an option"
+        options={["option1", "option2", "option3", "option4"]}
+        value={undefined}
+        title="Title"
+        onValueChange={() => null}
+        size="small"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Picker} />

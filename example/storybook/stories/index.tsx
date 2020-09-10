@@ -1,7 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { View, StyleSheet } from "react-native";
-import { Card, CardList, Text } from "@valkdigital/ui-kit";
+import { Card, CardList, Text, Picker, Spacing } from "@valkdigital/ui-kit";
+
+const action = (event: any) => (params: any) => {
+  console.log(event, params);
+};
 
 const CenteredView: React.FC = ({ children }) => {
   return <View style={styles.container}>{children}</View>;
@@ -41,10 +45,10 @@ storiesOf("Cards", module).add("Medium card", () => (
       onPress={() => null}
       assets={
         <View style={{ flexDirection: "row" }}>
-          <Text type="subtextRegular" style={{ marginRight: 24 }}>
+          <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
             2 persons
           </Text>
-          <Text type="subtextRegular" style={{ marginLeft: 8 }}>
+          <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
             18:00
           </Text>
         </View>
@@ -122,7 +126,39 @@ storiesOf("Cards", module).add("Card list", () => (
           subHeader: "Available for 37 hotels",
         },
       ]}
-      containerStyle={{ paddingTop: 24 }}
+      containerStyle={{ paddingTop: Spacing.sp3 }}
+    />
+  </CenteredView>
+));
+storiesOf("Form elements", module).add("Picker", () => (
+  <CenteredView>
+    <Picker
+      label="Large picker"
+      placeholder="Select an option"
+      options={[
+        "option1",
+        "option2",
+        "option3",
+        "option4",
+        "option5",
+        "option6",
+        "option7",
+        "option8",
+      ]}
+      value={undefined}
+      title="Title"
+      onValueChange={action("onValueChange")}
+      size="large"
+      containerStyle={{ marginVertical: Spacing.sp2 }}
+    />
+    <Picker
+      label="Small picker"
+      placeholder="Select an option"
+      options={["option1", "option2", "option3", "option4"]}
+      value={undefined}
+      title="Title"
+      onValueChange={action("onValueChange")}
+      size="small"
     />
   </CenteredView>
 ));
