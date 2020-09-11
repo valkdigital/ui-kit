@@ -1,10 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import { View, StyleSheet } from "react-native";
-import { Card, CardList, Text } from "@valkdigital/ui-kit";
+import { View, StyleSheet, ViewStyle } from "react-native";
+import { Card, CardList, Text, TextInput } from "@valkdigital/ui-kit";
 
-const CenteredView: React.FC = ({ children }) => {
-  return <View style={styles.container}>{children}</View>;
+const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
+  return <View style={[styles.container, style]}>{children}</View>;
 };
 
 storiesOf("Cards", module).add("Large card", () => (
@@ -127,10 +127,58 @@ storiesOf("Cards", module).add("Card list", () => (
   </CenteredView>
 ));
 
+const inputStories = storiesOf("InputFields", module);
+
+inputStories.add("Text Input", () => (
+  <CenteredView>
+    <View style={{ width: "100%", paddingHorizontal: 20 }}>
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        error="Invalid input"
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        disabled={true}
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        size="medium"
+        showCheckmark={true}
+      />
+
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        size="small"
+        helperText="Helper text"
+      />
+    </View>
+  </CenteredView>
+));
+
+inputStories.add("Password", () => (
+  <CenteredView style={{ paddingHorizontal: 32 }}>
+    <TextInput
+      label="Password"
+      placeholder="Placeholder"
+      secureTextEntry={true}
+      value="password 123"
+    />
+  </CenteredView>
+));
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+
     alignItems: "center",
     backgroundColor: "#F5FCFF",
   },

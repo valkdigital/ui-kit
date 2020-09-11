@@ -6,7 +6,8 @@ import ThemeContext from "./style/ThemeContext";
 import ThemeManager from "./style/themeManager";
 import Card from "./components/Card";
 import CardList from "./components/CardList";
+import TextInput from "./components/input/TextInput";
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
 // Component exports
-export { Text, Button, Card, CardList };
+export { Text, Button, Card, CardList, TextInput };
