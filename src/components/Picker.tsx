@@ -13,34 +13,21 @@ import spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import Modal from "./Modal";
 
-type Sizes = "large" | "small";
-
-const MODAL_STYLE: { [key in Sizes]: ViewStyle } = {
-  large: {
-    top: 64,
-    bottom: undefined,
-    height: Dimensions.get("screen").height - 64,
-  },
-  small: {
-    top: Dimensions.get("screen").height - 328,
-    paddingTop: spacing.sp4,
-    bottom: 0,
-    height: 328,
-  },
-};
-
 interface PickerProps {
+  ref?: React.MutableRefObject<View>;
   title: string;
   label: string;
   placeholder: string;
-  options?: string[];
+  options?: { label: string; value: string }[];
   value?: string;
   onValueChange: (value: string) => void;
   containerStyle?: ViewStyle;
-  size?: Sizes;
+  disabled?: boolean;
+  onSubmit?: () => void;
 }
 
 const Picker: React.FC<PickerProps> = ({
+  ref,
   title,
   label,
   placeholder,
@@ -48,11 +35,13 @@ const Picker: React.FC<PickerProps> = ({
   value,
   onValueChange,
   containerStyle,
-  size = "large",
+  disabled,
+  onSubmit,
 }: PickerProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
+    if (onSubmit && showModal) onSubmit();
     setShowModal(!showModal);
   };
 
@@ -63,12 +52,19 @@ const Picker: React.FC<PickerProps> = ({
 
   return (
     <>
-      <View style={[styles.container, containerStyle]}>
+      <View
+        ref={ref}
+        style={[styles.container, containerStyle, disabled && { opacity: 0.4 }]}
+      >
         <Text type="subtextSemiBold" style={styles.label}>
           {label}
         </Text>
         <View style={styles.selectContainer}>
-          <TouchableOpacity onPress={toggleModal} style={styles.select}>
+          <TouchableOpacity
+            onPress={toggleModal}
+            style={styles.select}
+            disabled={disabled}
+          >
             <Text
               type="bodyRegular"
               style={value === undefined ? styles.placeholder : undefined}
@@ -88,21 +84,20 @@ const Picker: React.FC<PickerProps> = ({
           onClose={toggleModal}
           backgroundColor="rgba(0,0,0,0.3)"
         >
-          <View style={[styles.modal, MODAL_STYLE[size]]}>
-            {size === "large" && (
-              <>
-                <View style={styles.handle} />
-                <View style={styles.header}>
-                  <View style={{ width: 16 }} />
-                  <Text type="h4" textAlign="center">
-                    {title}
-                  </Text>
-                  <TouchableOpacity onPress={toggleModal}>
-                    <Image source={require("../icons/close.png")} />
-                  </TouchableOpacity>
-                </View>
-              </>
-            )}
+          <View style={styles.modal}>
+            <View style={styles.handle} />
+            <View style={styles.header}>
+              <View style={{ width: 16 }} />
+              <Text type="h4" textAlign="center">
+                {title}
+              </Text>
+              <TouchableOpacity onPress={toggleModal}>
+                <Image
+                  source={require("../icons/close.png")}
+                  style={styles.close}
+                />
+              </TouchableOpacity>
+            </View>
 
             <FlatList
               data={options}
@@ -110,9 +105,9 @@ const Picker: React.FC<PickerProps> = ({
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.option}
-                  onPress={() => selectItem(item)}
+                  onPress={() => selectItem(item.value)}
                 >
-                  <Text type="bodyRegular">{item}</Text>
+                  <Text type="bodyRegular">{item.label}</Text>
                 </TouchableOpacity>
               )}
               style={styles.list}
@@ -128,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: spacing.sp2,
     width: "100%",
-    maxWidth: 328,
+    maxWidth: 400,
   },
   label: {
     marginBottom: spacing.sp1,
@@ -156,6 +151,9 @@ const styles = StyleSheet.create({
     width: 14,
     height: 8,
   },
+  disabled: {
+    color: "#C4C4C4",
+  },
   placeholder: {
     color: "#ACACAC",
   },
@@ -170,6 +168,8 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: "absolute",
+    top: spacing.sp8,
+    height: Dimensions.get("screen").height - spacing.sp8,
     left: 0,
     right: 0,
     flex: 1,
@@ -199,8 +199,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sp3,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     borderBottomColor: "#EFEFEF",
     borderBottomWidth: 1,
+  },
+  close: {
+    width: 16,
+    height: 16,
   },
 });
 

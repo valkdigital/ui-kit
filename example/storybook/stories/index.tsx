@@ -133,32 +133,22 @@ storiesOf("Cards", module).add("Card list", () => (
 storiesOf("Form elements", module).add("Picker", () => (
   <CenteredView>
     <Picker
-      label="Large picker"
+      label="Picker"
       placeholder="Select an option"
       options={[
-        "option1",
-        "option2",
-        "option3",
-        "option4",
-        "option5",
-        "option6",
-        "option7",
-        "option8",
+        { label: "option1", value: "1" },
+        { label: "option2", value: "2" },
+        { label: "option3", value: "3" },
+        { label: "option4", value: "4" },
+        { label: "option5", value: "5" },
+        { label: "option6", value: "6" },
+        { label: "option7", value: "7" },
+        { label: "option8", value: "8" },
       ]}
       value={undefined}
       title="Title"
       onValueChange={action("onValueChange")}
-      size="large"
       containerStyle={{ marginVertical: Spacing.sp2 }}
-    />
-    <Picker
-      label="Small picker"
-      placeholder="Select an option"
-      options={["option1", "option2", "option3", "option4"]}
-      value={undefined}
-      title="Title"
-      onValueChange={action("onValueChange")}
-      size="small"
     />
   </CenteredView>
 ));
