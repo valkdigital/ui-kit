@@ -64,7 +64,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
 
   const selectOption = (option: Option) => {
     onSelectChange(option);
-    toggleModal();
+    setShowModal(false);
   };
 
   return (
