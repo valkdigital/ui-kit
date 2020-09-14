@@ -14,7 +14,7 @@ import Text from "./Text";
 import Button from "./Button";
 import spacing from "../style/spacing";
 import shadow from "../style/shadow";
-import LinearGradient from "react-native-linear-gradient";
+import LinearGradient from "../alias/LinearGradient";
 import Spacing from "../style/spacing";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
