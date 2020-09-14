@@ -13,7 +13,7 @@ interface ModalProps {
 export default ({
   children,
   onClose,
-  animationType = "fade",
+  animationType = "none",
   backgroundColor = "transparent",
   style,
 }: ModalProps) => (
