@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -8,13 +8,17 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import Text from "./Text";
-import spacing from "../style/spacing";
-import shadow from "../style/shadow";
-import Modal from "./Modal";
+import Text from "../Text";
+import spacing from "../../style/spacing";
+import shadow from "../../style/shadow";
+import Modal from "../Modal";
+
+const BORDER_COLOR = "#C4C4C4";
+const ERROR_COLOR = "#DE0A12";
+const PLACEHOLDER_COLOR = "#ACACAC";
+const LIST_BORDER_COLOR = "#EFEFEF";
 
 interface PickerProps {
-  ref?: React.MutableRefObject<View>;
   title: string;
   label: string;
   placeholder: string;
@@ -24,21 +28,29 @@ interface PickerProps {
   containerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
+  error?: string;
 }
 
-const Picker: React.FC<PickerProps> = ({
-  ref,
-  title,
-  label,
-  placeholder,
-  options,
-  value,
-  onValueChange,
-  containerStyle,
-  disabled,
-  onSubmit,
-}: PickerProps) => {
+const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
   const [showModal, setShowModal] = useState(false);
+  const pickerRef = useRef<View>(null);
+  if (ref) {
+    ref = pickerRef;
+  }
+
+  const {
+    title,
+    label,
+    placeholder,
+    options,
+    value,
+    onValueChange,
+    containerStyle,
+    disabled,
+    onSubmit,
+    error,
+  } = props;
+  const hasError = !!error;
 
   const toggleModal = () => {
     if (onSubmit && showModal) onSubmit();
@@ -59,7 +71,12 @@ const Picker: React.FC<PickerProps> = ({
         <Text type="subtextSemiBold" style={styles.label}>
           {label}
         </Text>
-        <View style={styles.selectContainer}>
+        <View
+          style={[
+            styles.selectContainer,
+            hasError && { borderColor: ERROR_COLOR },
+          ]}
+        >
           <TouchableOpacity
             onPress={toggleModal}
             style={styles.select}
@@ -72,29 +89,34 @@ const Picker: React.FC<PickerProps> = ({
               {value === undefined ? placeholder : value}
             </Text>
             <Image
-              source={require("../icons/arrow_down.png")}
+              source={require("../../icons/arrow_down.png")}
               style={styles.chevron}
             />
           </TouchableOpacity>
         </View>
+        {hasError && (
+          <Text style={styles.error} type="subtextRegular" color={ERROR_COLOR}>
+            {error}
+          </Text>
+        )}
       </View>
       {showModal && (
         <Modal
           animationType="fade"
           onClose={toggleModal}
-          backgroundColor="rgba(0,0,0,0.3)"
+          backgroundColor="transparent"
         >
           <View style={styles.modal}>
             <View style={styles.handle} />
             <View style={styles.header}>
-              <View style={{ width: 16 }} />
+              <View style={styles.headerLeft} />
               <Text type="h4" textAlign="center">
                 {title}
               </Text>
               <TouchableOpacity onPress={toggleModal}>
                 <Image
-                  source={require("../icons/close.png")}
-                  style={styles.close}
+                  source={require("../../icons/close.png")}
+                  style={styles.headerRight}
                 />
               </TouchableOpacity>
             </View>
@@ -117,27 +139,20 @@ const Picker: React.FC<PickerProps> = ({
       )}
     </>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: spacing.sp2,
-    width: "100%",
-    maxWidth: 400,
+    alignSelf: "stretch",
   },
   label: {
-    marginBottom: spacing.sp1,
+    marginBottom: spacing["sp1/2"],
   },
   selectContainer: {
     backgroundColor: "#ffffff",
     borderWidth: 1,
-    borderColor: "#C4C4C4",
+    borderColor: BORDER_COLOR,
     borderRadius: spacing["sp1/2"],
-  },
-  focusedSelectContainer: {
-    borderColor: "#498FA7",
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
   },
   select: {
     paddingHorizontal: spacing.sp2,
@@ -152,11 +167,12 @@ const styles = StyleSheet.create({
     height: 8,
   },
   disabled: {
-    color: "#C4C4C4",
+    color: BORDER_COLOR,
   },
   placeholder: {
-    color: "#ACACAC",
+    color: PLACEHOLDER_COLOR,
   },
+  error: { marginTop: spacing["sp1/2"] },
   backdrop: {
     position: "absolute",
     top: 0,
@@ -182,7 +198,7 @@ const styles = StyleSheet.create({
     height: spacing.sp7,
     marginHorizontal: spacing.sp3,
     paddingVertical: spacing.sp2,
-    borderBottomColor: "#EFEFEF",
+    borderBottomColor: LIST_BORDER_COLOR,
     borderBottomWidth: 1,
   },
   list: { marginBottom: spacing.sp4 },
@@ -192,7 +208,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: spacing.sp2,
     backgroundColor: "#C4C4C4",
-    borderRadius: 16,
+    borderRadius: spacing.sp2,
   },
   header: {
     paddingVertical: spacing.sp2,
@@ -200,10 +216,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottomColor: "#EFEFEF",
+    borderBottomColor: LIST_BORDER_COLOR,
     borderBottomWidth: 1,
   },
-  close: {
+  headerLeft: {
+    width: 16,
+  },
+  headerRight: {
     width: 16,
     height: 16,
   },

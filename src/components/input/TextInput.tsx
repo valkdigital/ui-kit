@@ -35,7 +35,7 @@ interface TextInputProps extends TIP {
 const SIZE: { [key: string]: ViewStyle } = {
   small: { width: 160 },
   medium: { width: 287 },
-  large: { width: 328 },
+  large: {},
 };
 
 const INACTIVE_BORDER_COLOR = "#C4C4C4";
