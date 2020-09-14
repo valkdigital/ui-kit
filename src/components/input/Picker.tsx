@@ -109,42 +109,44 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
       </View>
       {showModal && (
         <Modal
-          animationType="fade"
+          animationType="slide"
           onClose={toggleModal}
           backgroundColor="transparent"
         >
-          <View style={styles.modal}>
-            <View style={styles.handle} />
-            <View style={styles.header}>
-              <View style={styles.headerLeft} />
-              <Text type="h4" textAlign="center">
-                {title}
-              </Text>
-              <TouchableOpacity onPress={toggleModal}>
-                <Image
-                  source={require("../../media/close.png")}
-                  style={styles.headerRight}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <FlatList
-              data={options}
-              keyExtractor={(_, index) => index.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.option}
-                  onPress={() => selectOption(item)}
-                >
-                  <Text type="bodyRegular">{item.label}</Text>
-                  {selectedOption?.value === item.value && (
-                    <Image source={require("../../media/checkmark.png")} />
-                  )}
+          {(closeModal: () => void) => (
+            <View style={styles.modal}>
+              <View style={styles.handle} />
+              <View style={styles.header}>
+                <View style={styles.headerLeft} />
+                <Text type="h4" textAlign="center">
+                  {title}
+                </Text>
+                <TouchableOpacity onPress={closeModal}>
+                  <Image
+                    source={require("../../media/close.png")}
+                    style={styles.headerRight}
+                  />
                 </TouchableOpacity>
-              )}
-              style={styles.list}
-            />
-          </View>
+              </View>
+
+              <FlatList
+                data={options}
+                keyExtractor={(_, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.option}
+                    onPress={() => selectOption(item)}
+                  >
+                    <Text type="bodyRegular">{item.label}</Text>
+                    {selectedOption?.value === item.value && (
+                      <Image source={require("../../media/checkmark.png")} />
+                    )}
+                  </TouchableOpacity>
+                )}
+                style={styles.list}
+              />
+            </View>
+          )}
         </Modal>
       )}
     </>
