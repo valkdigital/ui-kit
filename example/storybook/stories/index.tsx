@@ -137,28 +137,6 @@ storiesOf("Cards", module).add("Card list", () => (
     />
   </CenteredView>
 ));
-storiesOf("Form elements", module).add("Picker", () => (
-  <CenteredView>
-    <Picker
-      label="Picker"
-      placeholder="Select an option"
-      options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
-        { label: "option4", value: "4" },
-        { label: "option5", value: "5" },
-        { label: "option6", value: "6" },
-        { label: "option7", value: "7" },
-        { label: "option8", value: "8" },
-      ]}
-      value={undefined}
-      title="Title"
-      onValueChange={action("onValueChange")}
-      containerStyle={{ marginVertical: Spacing.sp2 }}
-    />
-  </CenteredView>
-));
 
 const inputStories = storiesOf("InputFields", module);
 
@@ -203,6 +181,29 @@ inputStories.add("Password", () => (
       placeholder="Placeholder"
       secureTextEntry={true}
       value="password 123"
+    />
+  </CenteredView>
+));
+
+inputStories.add("Picker", () => (
+  <CenteredView>
+    <Picker
+      label="Picker"
+      placeholder="Select an option"
+      options={[
+        { label: "option1", value: "1" },
+        { label: "option2", value: "2" },
+        { label: "option3", value: "3" },
+        { label: "option4", value: "4" },
+        { label: "option5", value: "5" },
+        { label: "option6", value: "6" },
+        { label: "option7", value: "7" },
+        { label: "option8", value: "8" },
+      ]}
+      selectedOption={undefined}
+      title="Title"
+      onSelectChange={action("onSelectChange")}
+      containerStyle={{ paddingHorizontal: 24 }}
     />
   </CenteredView>
 ));

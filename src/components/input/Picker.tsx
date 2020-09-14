@@ -18,13 +18,18 @@ const ERROR_COLOR = "#DE0A12";
 const PLACEHOLDER_COLOR = "#ACACAC";
 const LIST_BORDER_COLOR = "#EFEFEF";
 
+interface Option {
+  label: string;
+  value: string;
+}
+
 interface PickerProps {
   title: string;
   label: string;
   placeholder: string;
-  options?: { label: string; value: string }[];
-  value?: string;
-  onValueChange: (value: string) => void;
+  options?: Option[];
+  selectedOption?: Option;
+  onSelectChange: (option: Option) => void;
   containerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
@@ -43,8 +48,8 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
     label,
     placeholder,
     options,
-    value,
-    onValueChange,
+    selectedOption,
+    onSelectChange,
     containerStyle,
     disabled,
     onSubmit,
@@ -57,8 +62,8 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
     setShowModal(!showModal);
   };
 
-  const selectItem = (item: string) => {
-    onValueChange(item);
+  const selectOption = (option: Option) => {
+    onSelectChange(option);
     toggleModal();
   };
 
@@ -84,12 +89,14 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
           >
             <Text
               type="bodyRegular"
-              style={value === undefined ? styles.placeholder : undefined}
+              style={
+                selectedOption === undefined ? styles.placeholder : undefined
+              }
             >
-              {value === undefined ? placeholder : value}
+              {selectedOption?.label ?? placeholder}
             </Text>
             <Image
-              source={require("../../icons/arrow_down.png")}
+              source={require("../../media/arrow_down.png")}
               style={styles.chevron}
             />
           </TouchableOpacity>
@@ -115,7 +122,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
               </Text>
               <TouchableOpacity onPress={toggleModal}>
                 <Image
-                  source={require("../../icons/close.png")}
+                  source={require("../../media/close.png")}
                   style={styles.headerRight}
                 />
               </TouchableOpacity>
@@ -127,9 +134,12 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.option}
-                  onPress={() => selectItem(item.value)}
+                  onPress={() => selectOption(item)}
                 >
                   <Text type="bodyRegular">{item.label}</Text>
+                  {selectedOption?.value === item.value && (
+                    <Image source={require("../../media/checkmark.png")} />
+                  )}
                 </TouchableOpacity>
               )}
               style={styles.list}
@@ -173,15 +183,6 @@ const styles = StyleSheet.create({
     color: PLACEHOLDER_COLOR,
   },
   error: { marginTop: spacing["sp1/2"] },
-  backdrop: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 10,
-    backgroundColor: "rgba(0,0,0,0.3)",
-  },
   modal: {
     position: "absolute",
     top: spacing.sp8,
@@ -195,6 +196,9 @@ const styles = StyleSheet.create({
     ...shadow({ x: 0, y: 2, opacity: 0.32, blurRadius: 24 }),
   },
   option: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     height: spacing.sp7,
     marginHorizontal: spacing.sp3,
     paddingVertical: spacing.sp2,
