@@ -20,7 +20,7 @@ const LIST_BORDER_COLOR = "#EFEFEF";
 
 interface Option {
   label: string;
-  value: string;
+  value: any;
 }
 
 interface PickerProps {

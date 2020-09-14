@@ -29,10 +29,10 @@ storiesOf("Cards", module).add("Large card", () => (
       onPress={() => null}
       assets={
         <View style={{ flexDirection: "row" }}>
-          <Text type="subtextRegular" style={{ marginRight: 24 }}>
+          <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
             2 persons
           </Text>
-          <Text type="subtextRegular" style={{ marginLeft: 8 }}>
+          <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
             18:00
           </Text>
         </View>
@@ -142,22 +142,22 @@ const inputStories = storiesOf("InputFields", module);
 
 inputStories.add("Text Input", () => (
   <CenteredView>
-    <View style={{ width: "100%", paddingHorizontal: 20 }}>
+    <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         error="Invalid input"
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         disabled={true}
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="medium"
         showCheckmark={true}
@@ -165,7 +165,7 @@ inputStories.add("Text Input", () => (
 
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="small"
         helperText="Helper text"
@@ -175,7 +175,7 @@ inputStories.add("Text Input", () => (
 ));
 
 inputStories.add("Password", () => (
-  <CenteredView style={{ paddingHorizontal: 32 }}>
+  <CenteredView style={{ paddingHorizontal: Spacing.sp4 }}>
     <TextInput
       label="Password"
       placeholder="Placeholder"
@@ -203,7 +203,7 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{ paddingHorizontal: 24 }}
+      containerStyle={{ paddingHorizontal: Spacing.sp3 }}
     />
   </CenteredView>
 ));
