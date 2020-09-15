@@ -1,0 +1,68 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View } from "react-native";
+import { TextInput } from "@valkdigital/ui-kit";
+
+<Meta title="TextInput" />
+
+# Preview
+
+<Preview>
+  <Story
+    name="TextInput"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2451%3A0",
+      },
+    }}
+  >
+    <View
+      style={{ justifyContent: "space-evenly", alignItems: "center", flex: 1 }}
+    >
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        error="Invalid input"
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        disabled={true}
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        size="medium"
+        showCheckmark={true}
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: 16 }}
+        placeholder="Placeholder"
+        size="small"
+        helperText="Helper text"
+      />
+      <TextInput
+        label="Password"
+        placeholder="Placeholder"
+        secureTextEntry={true}
+        value="password 123"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={TextInput} />
