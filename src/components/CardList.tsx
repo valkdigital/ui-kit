@@ -48,6 +48,7 @@ const CardList: React.FC<CardListProps> = ({
       )}
       ItemSeparatorComponent={() => <View style={SEPARATOR_STYLE[direction]} />}
       showsHorizontalScrollIndicator={false}
+      style={{ flexGrow: 0 }}
       contentContainerStyle={[
         horizontal && { paddingBottom: sp1 },
         containerStyle,
