@@ -6,6 +6,7 @@ import {
   ImageStyle,
   ActivityIndicator,
 } from "react-native";
+import spacing from "../style/spacing";
 import ThemeContext from "../style/ThemeContext";
 import Text from "./Text";
 
@@ -104,8 +105,8 @@ export const Button: React.FC<TestProps> = ({
     if (size === "medium") return {};
     return {
       position: "absolute",
-      right: 16,
-      marginLeft: 16,
+      right: spacing.sp2,
+      marginLeft: spacing.sp2,
     };
   };
 

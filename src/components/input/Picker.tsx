@@ -12,11 +12,7 @@ import Text from "../Text";
 import spacing from "../../style/spacing";
 import shadow from "../../style/shadow";
 import Modal from "../Modal";
-
-const BORDER_COLOR = "#C4C4C4";
-const ERROR_COLOR = "#DE0A12";
-const PLACEHOLDER_COLOR = "#ACACAC";
-const LIST_BORDER_COLOR = "#EFEFEF";
+import colors from "../../style/colors";
 
 interface Option {
   label: string;
@@ -79,7 +75,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
         <View
           style={[
             styles.selectContainer,
-            hasError && { borderColor: ERROR_COLOR },
+            hasError && { borderColor: colors.redDark },
           ]}
         >
           <TouchableOpacity
@@ -102,7 +98,11 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
           </TouchableOpacity>
         </View>
         {hasError && (
-          <Text style={styles.error} type="subtextRegular" color={ERROR_COLOR}>
+          <Text
+            style={styles.error}
+            type="subtextRegular"
+            color={colors.redDark}
+          >
             {error}
           </Text>
         )}
@@ -161,9 +161,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing["sp1/2"],
   },
   selectContainer: {
-    backgroundColor: "#ffffff",
     borderWidth: 1,
-    borderColor: BORDER_COLOR,
+    borderColor: colors.greyMidDark,
     borderRadius: spacing["sp1/2"],
   },
   select: {
@@ -179,10 +178,10 @@ const styles = StyleSheet.create({
     height: 8,
   },
   disabled: {
-    color: BORDER_COLOR,
+    color: colors.greyMidDark,
   },
   placeholder: {
-    color: PLACEHOLDER_COLOR,
+    color: colors.greyDark,
   },
   error: { marginTop: spacing["sp1/2"] },
   modal: {
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
     height: spacing.sp7,
     marginHorizontal: spacing.sp3,
     paddingVertical: spacing.sp2,
-    borderBottomColor: LIST_BORDER_COLOR,
+    borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
   },
   list: { marginBottom: spacing.sp4 },
@@ -213,7 +212,7 @@ const styles = StyleSheet.create({
     height: spacing["sp1/2"],
     alignSelf: "center",
     marginTop: spacing.sp2,
-    backgroundColor: "#C4C4C4",
+    backgroundColor: colors.greyMidDark,
     borderRadius: spacing.sp2,
   },
   header: {
@@ -222,7 +221,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottomColor: LIST_BORDER_COLOR,
+    borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
   },
   headerLeft: {
