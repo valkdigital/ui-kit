@@ -14,7 +14,7 @@ import Text from "./Text";
 import Button from "./Button";
 import spacing from "../style/spacing";
 import shadow from "../style/shadow";
-import LinearGradient from "react-native-linear-gradient";
+import LinearGradient from "../alias/LinearGradient";
 import Spacing from "../style/spacing";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
@@ -88,7 +88,7 @@ const Card: React.FC<CardProps> = ({
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
 
-  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp4).
+  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
   const width = useWindowDimensions().width - Spacing.sp6;
 
   return (
@@ -184,11 +184,11 @@ const styles = StyleSheet.create({
   bodyContainer: {
     padding: spacing.sp2,
     minHeight: spacing.sp6,
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     overflow: "hidden",
   },
   subHeader: {
-    marginTop: 4,
+    marginTop: spacing["sp1/2"],
   },
   supportive: {
     marginTop: spacing["sp1/2"],

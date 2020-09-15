@@ -1,0 +1,46 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Text, Picker, Spacing } from "@valkdigital/ui-kit";
+import { View } from "react-native";
+import { WithFigma } from "storybook-addon-figma";
+
+<Meta title="Picker" />
+
+# Preview
+
+<Preview>
+  <Story
+    name="Picker"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=3007%3A0",
+      },
+    }}
+  >
+    <View>
+      <Picker
+        label="Picker"
+        placeholder="Select an option"
+        options={[
+          { label: "option1", value: "1" },
+          { label: "option2", value: "2" },
+          { label: "option3", value: "3" },
+          { label: "option4", value: "4" },
+          { label: "option5", value: "5" },
+          { label: "option6", value: "6" },
+          { label: "option7", value: "7" },
+          { label: "option8", value: "8" },
+        ]}
+        selectedOption={undefined}
+        title="Title"
+        onSelectChange={() => null}
+        containerStyle={{ marginVertical: Spacing.sp2 }}
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Picker} />
