@@ -141,7 +141,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
           )}
         </View>
       </TouchableOpacity>
-      {error && (
+      {!!error && (
         <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
           {error}
         </Text>
