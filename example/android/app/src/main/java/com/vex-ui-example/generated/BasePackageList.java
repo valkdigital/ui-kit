@@ -1,4 +1,4 @@
-package com.vex-ui-example.generated;
+package com.vex.ui.example.generated;
 
 import java.util.Arrays;
 import java.util.List;

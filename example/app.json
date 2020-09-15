@@ -1,9 +1,9 @@
 {
-  "name": "vex-ui-example",
+  "name": "vex.ui.example",
   "displayName": "VexUi Example",
   "expo": {
-    "name": "vex-ui-example",
-    "slug": "vex-ui-example",
+    "name": "vex.ui.example",
+    "slug": "vex.ui.example",
     "description": "Example app for vex-ui",
     "privacy": "public",
     "version": "1.0.0",

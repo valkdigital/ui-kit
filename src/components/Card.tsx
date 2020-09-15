@@ -155,6 +155,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
+    backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {

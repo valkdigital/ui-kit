@@ -35,6 +35,7 @@ example/.idea
 example/.gradle
 example/local.properties
 example/android.iml
+example/android/app/build
 
 # Cocoapods
 #
