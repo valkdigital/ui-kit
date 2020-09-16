@@ -31,9 +31,8 @@ example/project.xcworkspace
 
 # Android/IJ
 #
-example/.idea
-example/.gradle
-example/android/.gradle
+.gradle
+.idea
 example/local.properties
 example/android.iml
 example/android/app/build
