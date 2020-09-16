@@ -33,6 +33,7 @@ example/project.xcworkspace
 #
 example/.idea
 example/.gradle
+example/android/.gradle
 example/local.properties
 example/android.iml
 example/android/app/build
