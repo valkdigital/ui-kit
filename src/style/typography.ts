@@ -1,6 +1,6 @@
 export enum Fonts {
   Regular = "SourceSansPro-Regular",
-  SemiBold = "SourceSansPro-Semibold",
+  SemiBold = "SourceSansPro-SemiBold",
   Bold = "SourceSansPro-Bold",
   Italic = "SourceSansPro-Italic",
 }
@@ -64,14 +64,14 @@ const Typography = {
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.15,
-    fontWeight: "600",
+    fontFamily: Fonts.SemiBold,
   },
 
   bodyItalic: {
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.15,
-    fontStyle: "italic",
+    fontFamily: Fonts.Italic,
   },
 
   subtextRegular: {
@@ -84,14 +84,14 @@ const Typography = {
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.15,
-    fontWeight: "600",
+    fontFamily: Fonts.SemiBold,
   },
 
   subtextBold: {
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.15,
-    fontWeight: "bold",
+    fontFamily: Fonts.Bold,
   },
   label: {
     fontSize: 10,
