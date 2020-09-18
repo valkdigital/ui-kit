@@ -8,6 +8,7 @@ import {
   ViewStyle,
   ImageStyle,
   Dimensions,
+  TextStyle,
 } from "react-native";
 
 import Text from "./Text";
@@ -16,8 +17,25 @@ import spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "../alias/LinearGradient";
 import Spacing from "../style/spacing";
+import type { TypographyLiterals } from "lib/typescript/src/style/typography";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
+
+const BODY_HEADER_TYPE: { [key in Sizes]: TypographyLiterals | undefined } = {
+  large: "h5",
+  medium: "h5",
+  small: "bodySemiBold",
+  tiny: "bodySemiBold",
+  single: undefined,
+};
+
+const SUBHEADER_STYLE: { [key in Sizes]: TextStyle } = {
+  large: { marginTop: spacing["sp1/2"] },
+  medium: { marginTop: spacing["sp1/2"] },
+  small: {},
+  tiny: {},
+  single: {},
+};
 
 const IMAGE_STYLE: { [key in Sizes]: ImageStyle } = {
   large: {
@@ -124,9 +142,17 @@ const Card: React.FC<CardProps> = ({
 
         {showBody && (
           <View style={styles.bodyContainer}>
-            {header && <Text type="h5">{header}</Text>}
+            {header && (
+              <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
+                {header}
+              </Text>
+            )}
             {subHeader && (
-              <Text type="subtextRegular" style={styles.subHeader}>
+              <Text
+                type="subtextRegular"
+                style={[styles.subHeader, SUBHEADER_STYLE[size]]}
+                numberOfLines={1}
+              >
                 {subHeader}
               </Text>
             )}
@@ -185,12 +211,14 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     padding: spacing.sp2,
+    paddingBottom: spacing.sp3,
     minHeight: spacing.sp6,
     backgroundColor: "#ffffff",
     overflow: "hidden",
+    flex: 1,
   },
   subHeader: {
-    marginTop: spacing["sp1/2"],
+    opacity: 0.4,
   },
   supportive: {
     marginTop: spacing["sp1/2"],
