@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React, { ReactChild, useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -109,16 +109,27 @@ const Card: React.FC<CardProps> = ({
   size = "large",
   wrapperStyle,
 }) => {
+  const [width, setWidth] = useState<number>(Dimensions.get("window").width);
+
+  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
+  const cardWidth = width - Spacing.sp3;
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
 
-  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
-  const width = Dimensions.get("window").width - Spacing.sp6;
+  useEffect(() => {
+    Dimensions.addEventListener("change", (event) => {
+      setWidth(event.window.width);
+    });
+    return () =>
+      Dimensions.removeEventListener("change", (event) => {
+        setWidth(event.window.width);
+      });
+  }, []);
 
   return (
     <TouchableOpacity
-      style={[styles.card, { width }, wrapperStyle]}
+      style={[styles.card, { width: cardWidth }, wrapperStyle]}
       onPress={onPress}
       disabled={showButton}
     >
