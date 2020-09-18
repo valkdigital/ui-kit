@@ -1,5 +1,5 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { CardList } from "@valkdigital/ui-kit";
+import { CardList, Spacing } from "@valkdigital/ui-kit";
 import { View } from "react-native";
 import { WithFigma } from "storybook-addon-figma";
 
@@ -19,7 +19,7 @@ import { WithFigma } from "storybook-addon-figma";
     }}
   >
     <View>
-      <View style={{ marginTop: 24 }}>
+      <View style={{ marginTop: Spacing.sp3 }}>
         <CardList
           direction="horizontal"
           size="large"
@@ -30,7 +30,7 @@ import { WithFigma } from "storybook-addon-figma";
                   "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
               },
               imageHeader: "Header text",
-              header: "Sprightly Spring",
+              header: "Longer text triggers ellipsis mode",
               subHeader: "Available for 37 hotels",
             },
             {
@@ -54,7 +54,7 @@ import { WithFigma } from "storybook-addon-figma";
           ]}
         />
       </View>
-      <View style={{ marginTop: 24 }}>
+      <View style={{ marginTop: Spacing.sp3 }}>
         <CardList
           direction="vertical"
           size="small"
@@ -73,7 +73,8 @@ import { WithFigma } from "storybook-addon-figma";
                 uri:
                   "https://mediabank.valkenhorst.nl/imagebank/images/263/image86596/c789x2500.png",
               },
-              header: "Sprightly Spring",
+              header:
+                "Ellipsis mode for text that no longer fits on the screen",
               onPressParam: "5",
               subHeader: "Available for 37 hotels",
             },
@@ -89,7 +90,7 @@ import { WithFigma } from "storybook-addon-figma";
           ]}
         />
       </View>
-      <View style={{ marginTop: 24 }}>
+      <View style={{ marginTop: Spacing.sp3 }}>
         <CardList
           direction="vertical"
           size="tiny"
@@ -104,10 +105,10 @@ import { WithFigma } from "storybook-addon-figma";
               subHeader: "Beschikbaar voor 37 hotels",
             },
           ]}
-          style={{ paddingVertical: 80 }}
+          style={{ paddingVertical: Spacing.sp10 }}
         />
       </View>
-      <View style={{ marginTop: 24 }}>
+      <View style={{ marginTop: Spacing.sp3 }}>
         <CardList
           direction="vertical"
           size="medium"

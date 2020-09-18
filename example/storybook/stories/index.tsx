@@ -113,7 +113,7 @@ storiesOf("Cards", module).add("Card list", () => (
             uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
           },
           imageHeader: "Header text",
-          header: "Sprightly Spring",
+          header: "Ellipsis mode for text that no longer fits on the screen",
           subHeader: "Available for 37 hotels",
         },
         {

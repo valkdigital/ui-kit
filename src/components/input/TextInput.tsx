@@ -53,7 +53,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     helperText,
   } = props;
   //   remove custom props or overrided props
-  const passInputPros = omit(
+  const passInputProps = omit(
     props,
     "containerStyle",
     "label",
@@ -113,7 +113,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
             ref={inputRef}
             textAlignVertical="center"
             style={styles.input}
-            {...passInputPros}
+            {...passInputProps}
             onFocus={_onFocus}
             onBlur={_onBlur}
             secureTextEntry={hideText}

@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React, { ReactChild, useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -8,16 +8,41 @@ import {
   ViewStyle,
   ImageStyle,
   Dimensions,
+  TextStyle,
 } from "react-native";
 
 import Text from "./Text";
 import Button from "./Button";
-import spacing from "../style/spacing";
+import Spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "../alias/LinearGradient";
-import Spacing from "../style/spacing";
+import type { TypographyLiterals } from "../style/typography";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
+
+const BODY_CONTAINER_STYLE: { [key in Sizes]: ViewStyle | undefined } = {
+  large: undefined,
+  medium: undefined,
+  small: { flex: 1 },
+  tiny: { flex: 1 },
+  single: undefined,
+};
+
+const BODY_HEADER_TYPE: { [key in Sizes]: TypographyLiterals | undefined } = {
+  large: "h5",
+  medium: "h5",
+  small: "bodySemiBold",
+  tiny: "bodySemiBold",
+  single: undefined,
+};
+
+const SUBHEADER_STYLE: { [key in Sizes]: TextStyle } = {
+  large: { marginTop: Spacing["sp1/2"] },
+  medium: { marginTop: Spacing["sp1/2"] },
+  small: {},
+  tiny: {},
+  single: {},
+};
 
 const IMAGE_STYLE: { [key in Sizes]: ImageStyle } = {
   large: {
@@ -84,16 +109,27 @@ const Card: React.FC<CardProps> = ({
   size = "large",
   wrapperStyle,
 }) => {
+  const [width, setWidth] = useState<number>(Dimensions.get("window").width);
+
+  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
+  const cardWidth = width - Spacing.sp3;
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
 
-  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
-  const width = Dimensions.get("window").width - Spacing.sp6;
+  useEffect(() => {
+    Dimensions.addEventListener("change", (event) => {
+      setWidth(event.window.width);
+    });
+    return () =>
+      Dimensions.removeEventListener("change", (event) => {
+        setWidth(event.window.width);
+      });
+  }, []);
 
   return (
     <TouchableOpacity
-      style={[styles.card, { width }, wrapperStyle]}
+      style={[styles.card, { width: cardWidth }, wrapperStyle]}
       onPress={onPress}
       disabled={showButton}
     >
@@ -123,10 +159,18 @@ const Card: React.FC<CardProps> = ({
         </View>
 
         {showBody && (
-          <View style={styles.bodyContainer}>
-            {header && <Text type="h5">{header}</Text>}
+          <View style={[styles.bodyContainer, BODY_CONTAINER_STYLE[size]]}>
+            {header && (
+              <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
+                {header}
+              </Text>
+            )}
             {subHeader && (
-              <Text type="subtextRegular" style={styles.subHeader}>
+              <Text
+                type="subtextRegular"
+                style={[styles.subHeader, SUBHEADER_STYLE[size]]}
+                numberOfLines={1}
+              >
                 {subHeader}
               </Text>
             )}
@@ -156,12 +200,12 @@ export default Card;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#ffffff",
-    borderRadius: spacing["sp1/2"],
+    borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {
     backgroundColor: "#ffffff",
-    borderRadius: spacing["sp1/2"],
+    borderRadius: Spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
@@ -170,7 +214,7 @@ const styles = StyleSheet.create({
     left: 0,
     flex: 1,
     justifyContent: "flex-end",
-    padding: spacing.sp2,
+    padding: Spacing.sp2,
     zIndex: 10,
   },
   imageOverlay: {
@@ -184,19 +228,20 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   bodyContainer: {
-    padding: spacing.sp2,
-    minHeight: spacing.sp6,
+    padding: Spacing.sp2,
+    paddingBottom: Spacing.sp3,
+    minHeight: Spacing.sp6,
     backgroundColor: "#ffffff",
     overflow: "hidden",
   },
   subHeader: {
-    marginTop: spacing["sp1/2"],
+    opacity: 0.4,
   },
   supportive: {
-    marginTop: spacing["sp1/2"],
+    marginTop: Spacing["sp1/2"],
   },
   button: {
-    marginTop: spacing.sp3,
+    marginTop: Spacing.sp3,
     borderRadius: 0,
   },
   gradient: {
