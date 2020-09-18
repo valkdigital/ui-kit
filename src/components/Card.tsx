@@ -112,7 +112,7 @@ const Card: React.FC<CardProps> = ({
   const [width, setWidth] = useState<number>(Dimensions.get("window").width);
 
   // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
-  const cardWidth = width - Spacing.sp3;
+  const cardWidth = width - Spacing.sp6;
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);

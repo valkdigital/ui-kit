@@ -101,7 +101,7 @@ storiesOf("Cards", module).add("Single card", () => (
     />
   </CenteredView>
 ));
-storiesOf("Cards", module).add("Card list", () => (
+storiesOf("Cards", module).add("Card list horizontal", () => (
   <CenteredView>
     <CardList
       direction="horizontal"
@@ -134,6 +134,43 @@ storiesOf("Cards", module).add("Card list", () => (
         },
       ]}
       containerStyle={{ paddingTop: Spacing.sp3 }}
+    />
+  </CenteredView>
+));
+
+storiesOf("Cards", module).add("Card vertical list", () => (
+  <CenteredView>
+    <CardList
+      direction="vertical"
+      size="small"
+      onItemPress={() => null}
+      data={[
+        {
+          image: {
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          },
+          imageHeader: "Header text",
+          header: "Ellipsis mode for text that no longer fits on the screen",
+          subHeader: "Available for 37 hotels",
+        },
+        {
+          image: {
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          },
+          imageHeader: "Header text",
+          header: "Sprightly Spring",
+          subHeader: "Available for 37 hotels",
+        },
+        {
+          image: {
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          },
+          imageHeader: "Header text",
+          header: "Sprightly Spring",
+          subHeader: "Available for 37 hotels",
+        },
+      ]}
+      containerStyle={{ paddingTop: Spacing.sp3, paddingHorizontal: 16 }}
     />
   </CenteredView>
 ));
