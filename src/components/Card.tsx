@@ -13,13 +13,20 @@ import {
 
 import Text from "./Text";
 import Button from "./Button";
-import spacing from "../style/spacing";
+import Spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "../alias/LinearGradient";
-import Spacing from "../style/spacing";
-import type { TypographyLiterals } from "lib/typescript/src/style/typography";
+import type { TypographyLiterals } from "../style/typography";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
+
+const BODY_CONTAINER_STYLE: { [key in Sizes]: ViewStyle | undefined } = {
+  large: undefined,
+  medium: undefined,
+  small: { flex: 1 },
+  tiny: { flex: 1 },
+  single: undefined,
+};
 
 const BODY_HEADER_TYPE: { [key in Sizes]: TypographyLiterals | undefined } = {
   large: "h5",
@@ -30,8 +37,8 @@ const BODY_HEADER_TYPE: { [key in Sizes]: TypographyLiterals | undefined } = {
 };
 
 const SUBHEADER_STYLE: { [key in Sizes]: TextStyle } = {
-  large: { marginTop: spacing["sp1/2"] },
-  medium: { marginTop: spacing["sp1/2"] },
+  large: { marginTop: Spacing["sp1/2"] },
+  medium: { marginTop: Spacing["sp1/2"] },
   small: {},
   tiny: {},
   single: {},
@@ -141,7 +148,7 @@ const Card: React.FC<CardProps> = ({
         </View>
 
         {showBody && (
-          <View style={styles.bodyContainer}>
+          <View style={[styles.bodyContainer, BODY_CONTAINER_STYLE[size]]}>
             {header && (
               <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
                 {header}
@@ -182,12 +189,12 @@ export default Card;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#ffffff",
-    borderRadius: spacing["sp1/2"],
+    borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {
     backgroundColor: "#ffffff",
-    borderRadius: spacing["sp1/2"],
+    borderRadius: Spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
@@ -196,7 +203,7 @@ const styles = StyleSheet.create({
     left: 0,
     flex: 1,
     justifyContent: "flex-end",
-    padding: spacing.sp2,
+    padding: Spacing.sp2,
     zIndex: 10,
   },
   imageOverlay: {
@@ -210,21 +217,20 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   bodyContainer: {
-    padding: spacing.sp2,
-    paddingBottom: spacing.sp3,
-    minHeight: spacing.sp6,
+    padding: Spacing.sp2,
+    paddingBottom: Spacing.sp3,
+    minHeight: Spacing.sp6,
     backgroundColor: "#ffffff",
     overflow: "hidden",
-    flex: 1,
   },
   subHeader: {
     opacity: 0.4,
   },
   supportive: {
-    marginTop: spacing["sp1/2"],
+    marginTop: Spacing["sp1/2"],
   },
   button: {
-    marginTop: spacing.sp3,
+    marginTop: Spacing.sp3,
     borderRadius: 0,
   },
   gradient: {
