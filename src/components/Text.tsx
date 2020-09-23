@@ -20,7 +20,7 @@ const Text: React.FC<TextProps> = (props) => {
   const { typography } = useContext(ThemeContext);
 
   const { type = "bodyRegular", textAlign, color, style, children } = props;
-  const passInputProps = omit(
+  const passTextProps = omit(
     props,
     "type",
     "textAlign",
@@ -32,7 +32,7 @@ const Text: React.FC<TextProps> = (props) => {
 
   return (
     <RNText
-      {...passInputProps}
+      {...passTextProps}
       style={[Typography[type], { color: textColor, textAlign }, style]}
     >
       {children}

@@ -10,7 +10,6 @@ import {
   Dimensions,
   TextStyle,
 } from "react-native";
-
 import Text from "./Text";
 import Button from "./Button";
 import Spacing from "../style/spacing";
@@ -116,6 +115,8 @@ const Card: React.FC<CardProps> = ({
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
+  const imageHeaderTextType =
+    imageHeader && imageHeader.length <= 24 ? "h4" : "h5";
 
   useEffect(() => {
     Dimensions.addEventListener("change", (event) => {
@@ -143,7 +144,12 @@ const Card: React.FC<CardProps> = ({
               </View>
               <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
                 {imageHeader && (
-                  <Text type="h4" color="#ffffff" style={styles.imageHeader}>
+                  <Text
+                    type={imageHeaderTextType}
+                    color="#ffffff"
+                    style={styles.imageHeader}
+                    numberOfLines={2}
+                  >
                     {imageHeader}
                   </Text>
                 )}
