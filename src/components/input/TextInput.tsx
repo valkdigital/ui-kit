@@ -51,7 +51,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     onBlur,
     secureTextEntry,
     showCheckmark = false,
-    editable,
+    editable = true,
     disabled,
     helperText,
   } = props;
