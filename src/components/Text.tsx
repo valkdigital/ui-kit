@@ -13,21 +13,13 @@ interface TextProps extends RNTextProps {
   textAlign?: "left" | "center" | "right";
   color?: string;
   style?: TextStyle | TextStyle[];
-  children?: ReactChild;
 }
 
 const Text: React.FC<TextProps> = (props) => {
   const { typography } = useContext(ThemeContext);
 
   const { type = "bodyRegular", textAlign, color, style, children } = props;
-  const passTextProps = omit(
-    props,
-    "type",
-    "textAlign",
-    "color",
-    "style",
-    "children"
-  );
+  const passTextProps = omit(props, "type", "textAlign", "color", "style");
   const textColor = color ? color : typography.color;
 
   return (
