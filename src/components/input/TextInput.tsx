@@ -51,6 +51,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     onBlur,
     secureTextEntry,
     showCheckmark = false,
+    editable = true,
     disabled,
     helperText,
   } = props;
@@ -120,7 +121,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
             onFocus={_onFocus}
             onBlur={_onBlur}
             secureTextEntry={hideText}
-            editable={!disabled}
+            editable={!disabled && editable}
           />
           {showIcons && (
             <View style={styles.iconContainer}>
