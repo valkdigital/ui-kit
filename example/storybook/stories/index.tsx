@@ -202,6 +202,7 @@ inputStories.add("Text Input", () => (
 
       <TextInput
         label="Label"
+        editable={false}
         containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="small"
