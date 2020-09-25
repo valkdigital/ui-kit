@@ -17,12 +17,7 @@ export default ({
   backgroundColor = "transparent",
   style,
 }: ModalProps) => (
-  <Modal
-    visible={true}
-    transparent={true}
-    onDismiss={onClose}
-    animationType={animationType}
-  >
+  <Modal visible={true} transparent={true} animationType={animationType}>
     <TouchableWithoutFeedback onPress={onClose}>
       <View
         style={[
