@@ -9,10 +9,22 @@ import {
   Dimensions,
 } from "react-native";
 import Text from "../Text";
-import spacing from "../../style/spacing";
+import Spacing from "../../style/spacing";
 import shadow from "../../style/shadow";
 import Modal from "../Modal";
 import colors from "../../style/colors";
+import TextInput from "./TextInput";
+
+type Sizes = "responsive" | "full";
+
+const MODAL_STYLE: { [key in Sizes]: ViewStyle } = {
+  responsive: {
+    maxHeight: Dimensions.get("window").height - Spacing.sp8,
+  },
+  full: {
+    top: Spacing.sp8,
+  },
+};
 
 interface Option {
   label: string;
@@ -30,6 +42,7 @@ interface PickerProps {
   disabled?: boolean;
   onSubmit?: () => void;
   error?: string;
+  size: Sizes;
 }
 
 const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
@@ -50,6 +63,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
     disabled,
     onSubmit,
     error,
+    size,
   } = props;
   const hasError = !!error;
 
@@ -114,7 +128,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
           backgroundColor="transparent"
         >
           {(closeModal: () => void) => (
-            <View style={styles.modal}>
+            <View style={[styles.modal, MODAL_STYLE[size]]}>
               <View style={styles.handle} />
               <View style={styles.header}>
                 <View style={styles.headerLeft} />
@@ -129,22 +143,32 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
                 </TouchableOpacity>
               </View>
 
-              <FlatList
-                data={options}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={styles.option}
-                    onPress={() => selectOption(item)}
-                  >
-                    <Text type="bodyRegular">{item.label}</Text>
-                    {selectedOption?.value === item.value && (
-                      <Image source={require("../../media/checkmark.png")} />
-                    )}
-                  </TouchableOpacity>
+              <View style={styles.content}>
+                {size === "full" && (
+                  <TextInput
+                    label="none"
+                    containerStyle={styles.input}
+                    placeholder="Zoeken"
+                  />
                 )}
-                style={styles.list}
-              />
+
+                <FlatList
+                  data={options}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={styles.option}
+                      onPress={() => selectOption(item)}
+                    >
+                      <Text type="bodyRegular">{item.label}</Text>
+                      {selectedOption?.value === item.value && (
+                        <Image source={require("../../media/checkmark.png")} />
+                      )}
+                    </TouchableOpacity>
+                  )}
+                  contentContainerStyle={styles.list}
+                />
+              </View>
             </View>
           )}
         </Modal>
@@ -158,22 +182,22 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   label: {
-    marginBottom: spacing["sp1/2"],
+    marginBottom: Spacing["sp1/2"],
   },
   selectContainer: {
     borderWidth: 1,
     borderColor: colors.greyMidDark,
-    borderRadius: spacing["sp1/2"],
+    borderRadius: Spacing["sp1/2"],
   },
   select: {
-    paddingHorizontal: spacing.sp2,
-    paddingVertical: spacing.sp1,
+    paddingHorizontal: Spacing.sp2,
+    paddingVertical: Spacing.sp1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   chevron: {
-    marginLeft: spacing.sp2,
+    marginLeft: Spacing.sp2,
     width: 14,
     height: 8,
   },
@@ -183,16 +207,14 @@ const styles = StyleSheet.create({
   placeholder: {
     color: colors.greyDark,
   },
-  error: { marginTop: spacing["sp1/2"] },
+  error: { marginTop: Spacing["sp1/2"] },
   modal: {
     position: "absolute",
-    top: spacing.sp8,
-    height: Dimensions.get("screen").height - spacing.sp8,
+    bottom: 0,
     left: 0,
     right: 0,
-    flex: 1,
-    borderTopLeftRadius: spacing.sp3,
-    borderTopRightRadius: spacing.sp3,
+    borderTopLeftRadius: Spacing.sp3,
+    borderTopRightRadius: Spacing.sp3,
     backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.32, blurRadius: 24 }),
   },
@@ -200,24 +222,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: spacing.sp7,
-    marginHorizontal: spacing.sp3,
-    paddingVertical: spacing.sp2,
+    height: Spacing.sp7,
+    paddingVertical: Spacing.sp2,
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
   },
-  list: { marginBottom: spacing.sp4 },
+  content: { padding: Spacing.sp3 },
+  list: { marginTop: -Spacing.sp2 },
+  input: { marginBottom: Spacing.sp3 },
   handle: {
-    width: spacing.sp4,
-    height: spacing["sp1/2"],
+    width: Spacing.sp4,
+    height: Spacing["sp1/2"],
     alignSelf: "center",
-    marginTop: spacing.sp2,
+    marginTop: Spacing.sp2,
     backgroundColor: colors.greyMidDark,
-    borderRadius: spacing.sp2,
+    borderRadius: Spacing.sp2,
   },
   header: {
-    paddingVertical: spacing.sp2,
-    paddingHorizontal: spacing.sp3,
+    paddingVertical: Spacing.sp2,
+    paddingHorizontal: Spacing.sp3,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
