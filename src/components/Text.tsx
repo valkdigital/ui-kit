@@ -1,4 +1,4 @@
-import React, { ReactChild, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Text as RNText,
   TextProps as RNTextProps,
