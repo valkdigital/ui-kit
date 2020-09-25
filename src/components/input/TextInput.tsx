@@ -20,6 +20,7 @@ interface TextInputProps extends TIP {
   label: string;
   containerStyle?: ViewStyle;
   size?: "small" | "medium" | "large";
+  useFullHeight?: boolean;
 
   /**
    * If error is set, the border will be red and the message will be shown below the inputfield.
@@ -32,7 +33,7 @@ interface TextInputProps extends TIP {
    */
   helperText?: string;
 }
-
+const MAX_HEIGHT = 160;
 const SIZE: { [key: string]: ViewStyle } = {
   small: { width: 160 },
   medium: { width: 287 },
@@ -44,6 +45,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     containerStyle,
     label,
     size = "large",
+    useFullHeight = false,
     error,
     onFocus,
     onBlur,
@@ -64,7 +66,8 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     "secureTextEntry",
     "showCheckmark",
     "disabled",
-    "helperText"
+    "helperText",
+    "useFullHeight"
   );
 
   const [hideText, setHideText] = useState(secureTextEntry);
@@ -112,7 +115,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
           <RNTI
             ref={inputRef}
             textAlignVertical="center"
-            style={styles.input}
+            style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
             {...passInputProps}
             onFocus={_onFocus}
             onBlur={_onBlur}
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
   input: {
     textAlignVertical: "center",
     minHeight: 40,
-    maxHeight: 160,
+    maxHeight: MAX_HEIGHT,
     flex: 1,
     paddingLeft: Spacing.sp1,
     fontSize: 16,
