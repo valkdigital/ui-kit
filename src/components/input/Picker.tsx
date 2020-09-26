@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,6 +7,10 @@ import {
   ViewStyle,
   Image,
   Dimensions,
+  Animated,
+  PanResponder,
+  LayoutChangeEvent,
+  Keyboard,
 } from "react-native";
 import Text from "../Text";
 import Spacing from "../../style/spacing";
@@ -35,7 +39,7 @@ interface PickerProps {
   title: string;
   label: string;
   placeholder: string;
-  options?: Option[];
+  options: Option[];
   selectedOption?: Option;
   onSelectChange: (option: Option) => void;
   containerStyle?: ViewStyle;
@@ -46,12 +50,6 @@ interface PickerProps {
 }
 
 const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
-  const [showModal, setShowModal] = useState(false);
-  const pickerRef = useRef<View>(null);
-  if (ref) {
-    ref = pickerRef;
-  }
-
   const {
     title,
     label,
@@ -65,17 +63,83 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
     error,
     size,
   } = props;
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalHeight, setModalHeight] = useState(0);
+  const [search, setSearch] = useState("");
+  const [filteredOptions, setFilteredOptions] = useState(options);
+  const translateY = useRef(new Animated.Value(0)).current;
+  const pickerRef = useRef<View>(null);
+  if (ref) {
+    ref = pickerRef;
+  }
+
   const hasError = !!error;
 
-  const toggleModal = () => {
-    if (onSubmit && showModal) onSubmit();
-    setShowModal(!showModal);
+  const panResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => {
+          return true;
+        },
+        onPanResponderMove: (_, gestureState) => {
+          translateY.setValue(Math.max(0, 0 + gestureState.dy));
+        },
+        onPanResponderRelease: (_, gestureState) => {
+          const shouldOpen = gestureState.vy <= 0;
+          toggleModal(shouldOpen, true);
+        },
+      }),
+    [modalHeight]
+  );
+
+  const toggleModal = (shouldOpen: boolean, isSwipeGesture?: boolean) => {
+    if (shouldOpen) {
+      if (!isSwipeGesture) {
+        // set animation start to bottom
+        translateY.setValue(modalHeight);
+      }
+      setShowModal(true);
+    } else {
+      Keyboard.dismiss();
+    }
+
+    Animated.spring(translateY, {
+      toValue: shouldOpen ? 0 : modalHeight,
+      velocity: 3,
+      tension: 2,
+      friction: 8,
+      useNativeDriver: true,
+    }).start(() => {
+      if (!shouldOpen) {
+        if (onSubmit) onSubmit();
+        setShowModal(false);
+        setFilteredOptions(options);
+      }
+    });
+  };
+
+  const getModalHeight = (event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout;
+    // + 50 to hide the dropshadow
+    setModalHeight(height + 50);
   };
 
   const selectOption = (option: Option) => {
     onSelectChange(option);
-    setShowModal(false);
+    toggleModal(false);
   };
+
+  const onSearchChange = (text: string) => {
+    setSearch(text);
+  };
+
+  useEffect(() => {
+    const result = options.filter((option) =>
+      option.label.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredOptions(result);
+  }, [search]);
 
   return (
     <>
@@ -93,7 +157,7 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
           ]}
         >
           <TouchableOpacity
-            onPress={toggleModal}
+            onPress={() => toggleModal(true)}
             style={styles.select}
             disabled={disabled}
           >
@@ -123,54 +187,63 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
       </View>
       {showModal && (
         <Modal
-          animationType="slide"
-          onClose={toggleModal}
+          animationType="none"
+          onClose={() => toggleModal(false)}
           backgroundColor="transparent"
+          style={{ overflow: "hidden" }}
         >
-          {(closeModal: () => void) => (
-            <View style={[styles.modal, MODAL_STYLE[size]]}>
+          <Animated.View
+            onLayout={getModalHeight}
+            style={[
+              styles.modal,
+              MODAL_STYLE[size],
+              { transform: [{ translateY }] },
+            ]}
+          >
+            <View {...panResponder.panHandlers}>
               <View style={styles.handle} />
               <View style={styles.header}>
                 <View style={styles.headerLeft} />
                 <Text type="h4" textAlign="center">
                   {title}
                 </Text>
-                <TouchableOpacity onPress={closeModal}>
+                <TouchableOpacity onPress={() => toggleModal(false)}>
                   <Image
                     source={require("../../media/close.png")}
                     style={styles.headerRight}
                   />
                 </TouchableOpacity>
               </View>
-
-              <View style={styles.content}>
-                {size === "full" && (
-                  <TextInput
-                    label="none"
-                    containerStyle={styles.input}
-                    placeholder="Zoeken"
-                  />
-                )}
-
-                <FlatList
-                  data={options}
-                  keyExtractor={(_, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      style={styles.option}
-                      onPress={() => selectOption(item)}
-                    >
-                      <Text type="bodyRegular">{item.label}</Text>
-                      {selectedOption?.value === item.value && (
-                        <Image source={require("../../media/checkmark.png")} />
-                      )}
-                    </TouchableOpacity>
-                  )}
-                  contentContainerStyle={styles.list}
-                />
-              </View>
             </View>
-          )}
+
+            <View style={styles.content}>
+              {size === "full" && (
+                <TextInput
+                  label="none"
+                  containerStyle={styles.input}
+                  placeholder="Search"
+                  onChangeText={onSearchChange}
+                />
+              )}
+
+              <FlatList
+                data={filteredOptions}
+                keyExtractor={(_, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.option}
+                    onPress={() => selectOption(item)}
+                  >
+                    <Text type="bodyRegular">{item.label}</Text>
+                    {selectedOption?.value === item.value && (
+                      <Image source={require("../../media/checkmark.png")} />
+                    )}
+                  </TouchableOpacity>
+                )}
+                contentContainerStyle={styles.list}
+              />
+            </View>
+          </Animated.View>
         </Modal>
       )}
     </>
@@ -227,9 +300,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
   },
-  content: { padding: Spacing.sp3 },
-  list: { marginTop: -Spacing.sp2 },
-  input: { marginBottom: Spacing.sp3 },
+  content: { paddingVertical: Spacing.sp3 },
+  list: { marginTop: -Spacing.sp2, marginHorizontal: Spacing.sp3 },
+  input: { marginBottom: Spacing.sp3, marginHorizontal: Spacing.sp3 },
   handle: {
     width: Spacing.sp4,
     height: Spacing["sp1/2"],

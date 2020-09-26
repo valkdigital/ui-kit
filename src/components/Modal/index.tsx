@@ -2,10 +2,12 @@ import React, { ReactNode } from "react";
 import { View, Modal, ViewStyle } from "react-native";
 import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 
+type AnimationTypes = "none" | "slide" | "fade";
+
 interface ModalProps {
   children: ReactNode;
   onClose?: () => void;
-  animationType?: "none" | "slide" | "fade";
+  animationType?: AnimationTypes;
   backgroundColor?: string;
   style?: ViewStyle | ViewStyle[];
 }

@@ -274,7 +274,7 @@ inputStories.add("Picker", () => (
         { label: "option4", value: "4" },
         { label: "option5", value: "5" },
       ]}
-      selectedOption={undefined}
+      selectedOption={{ label: "option3", value: "3" }}
       title="Title"
       onSelectChange={action("onSelectChange")}
       containerStyle={{ paddingHorizontal: Spacing.sp3 }}
