@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import {
@@ -177,40 +177,52 @@ storiesOf("Cards", module).add("Card vertical list", () => (
 
 const inputStories = storiesOf("InputFields", module);
 
-inputStories.add("Text Input", () => (
-  <CenteredView>
-    <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        error="Invalid input"
-      />
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        disabled={true}
-      />
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        size="medium"
-        showCheckmark={true}
-      />
+const Fields: React.FC = () => {
+  const ref = useRef(null);
+  return (
+    <CenteredView>
+      <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          error="Invalid input"
+          onSubmitEditing={() => {
+            console.log(ref?.current);
+            ref?.current?.focus();
+          }}
+        />
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          disabled={true}
+        />
+        <TextInput
+          ref={ref}
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          size="medium"
+          showCheckmark={true}
+        />
 
-      <TextInput
-        label="Label"
-        editable={false}
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        size="small"
-        helperText="Helper text"
-      />
-    </View>
-  </CenteredView>
-));
+        <TextInput
+          label="Label"
+          editable={false}
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          size="small"
+          helperText="Helper text"
+        />
+      </View>
+    </CenteredView>
+  );
+};
+
+inputStories.add("Text Input", () => {
+  return <Fields />;
+});
 
 inputStories.add("Password", () => (
   <CenteredView style={{ paddingHorizontal: Spacing.sp4 }}>
