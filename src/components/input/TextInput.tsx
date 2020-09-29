@@ -15,6 +15,7 @@ import { omit } from "lodash";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import colors from "../../style/colors";
+import useMergedRef from "../../hooks/useMergedRef";
 
 interface TextInputProps extends TIP {
   label?: string;
@@ -76,9 +77,8 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
   const [borderColor, setBorderColor] = useState(colors.greyMidDark);
 
   const inputRef = useRef<RNTI>(null);
-  if (ref) {
-    ref = inputRef;
-  }
+  const mergedRef = useMergedRef<RNTI>(ref, inputRef);
+
   const _onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     if (disabled) return;
     if (!error) setBorderColor(colors.brandBluePrimary);
@@ -125,7 +125,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
               />
             )}
             <RNTI
-              ref={inputRef}
+              ref={mergedRef}
               textAlignVertical="center"
               style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
               {...passInputProps}
