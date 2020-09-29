@@ -9,8 +9,10 @@ import {
   Dimensions,
   Animated,
   PanResponder,
-  LayoutChangeEvent,
   Keyboard,
+  ImageSourcePropType,
+  SectionList,
+  LayoutAnimation,
 } from "react-native";
 import Text from "../Text";
 import Spacing from "../../style/spacing";
@@ -18,8 +20,10 @@ import shadow from "../../style/shadow";
 import Modal from "../Modal";
 import colors from "../../style/colors";
 import TextInput from "./TextInput";
+import AlphabetScroll from "./AlphabetScroll";
+import PickerRow from "./PickerRow";
 
-type Sizes = "responsive" | "full";
+export type Sizes = "responsive" | "full";
 
 const MODAL_STYLE: { [key in Sizes]: ViewStyle } = {
   responsive: {
@@ -30,9 +34,15 @@ const MODAL_STYLE: { [key in Sizes]: ViewStyle } = {
   },
 };
 
-interface Option {
+export interface Option {
   label: string;
   value: any;
+  image?: ImageSourcePropType;
+}
+
+interface Section {
+  title: string;
+  data: Option[];
 }
 
 interface PickerProps {
@@ -45,36 +55,35 @@ interface PickerProps {
   containerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
+  searchPlaceholder?: string;
+  listEmptyText?: string;
   error?: string;
   size: Sizes;
 }
 
-const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
-  const {
-    title,
-    label,
-    placeholder,
-    options,
-    selectedOption,
-    onSelectChange,
-    containerStyle,
-    disabled,
-    onSubmit,
-    error,
-    size,
-  } = props;
-
+const Picker: React.FC<PickerProps> = ({
+  title,
+  label,
+  placeholder,
+  options,
+  selectedOption,
+  onSelectChange,
+  containerStyle,
+  disabled,
+  onSubmit,
+  searchPlaceholder,
+  listEmptyText,
+  error,
+  size,
+}) => {
   const [showModal, setShowModal] = useState(false);
-  const [modalHeight, setModalHeight] = useState(0);
   const [search, setSearch] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [sections, setSections] = useState<Section[]>([]);
   const translateY = useRef(new Animated.Value(0)).current;
-  const pickerRef = useRef<View>(null);
-  if (ref) {
-    ref = pickerRef;
-  }
+  const sectionRef = useRef<SectionList>(null);
 
   const hasError = !!error;
+  const modalHeight = Dimensions.get("window").height;
 
   const panResponder = useMemo(
     () =>
@@ -114,18 +123,12 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
       if (!shouldOpen) {
         if (onSubmit) onSubmit();
         setShowModal(false);
-        setFilteredOptions(options);
+        setSearch("");
       }
     });
   };
 
-  const getModalHeight = (event: LayoutChangeEvent) => {
-    const { height } = event.nativeEvent.layout;
-    // + 50 to hide the dropshadow
-    setModalHeight(height + 50);
-  };
-
-  const selectOption = (option: Option) => {
+  const onSelectOption = (option: Option) => {
     onSelectChange(option);
     toggleModal(false);
   };
@@ -134,17 +137,103 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
     setSearch(text);
   };
 
-  useEffect(() => {
-    const result = options.filter((option) =>
-      option.label.toLowerCase().includes(search.toLowerCase())
+  const onLetterChange = (letter: string) => {
+    const sectionIndex = sections?.findIndex(
+      (section) => section.title === letter
     );
-    setFilteredOptions(result);
+    if (sectionIndex < 0) return;
+    sectionRef.current?.scrollToLocation({
+      sectionIndex,
+      itemIndex: 0,
+      viewOffset: 0,
+      viewPosition: 0,
+      animated: true,
+    });
+  };
+
+  const removeAccents = (text: string) => {
+    const removedAccents = text
+      .replace(/[áàãâäÅ]/gi, "a")
+      .replace(/[éè¨ê]/gi, "e")
+      .replace(/[íìïî]/gi, "i")
+      .replace(/[óòöôõ]/gi, "o")
+      .replace(/[úùüû]/gi, "u")
+      .replace(/[ç]/gi, "c")
+      .replace(/[ñ]/gi, "n")
+      .replace(/[^a-zA-Z0-9]/g, " ");
+    return removedAccents[0].toUpperCase() + removedAccents.slice(1);
+  };
+
+  useEffect(() => {
+    const sections = Object.values(options)
+      .sort((a, b) =>
+        removeAccents(a.label) < removeAccents(b.label) ? -1 : 1
+      )
+      .filter((option) =>
+        option.label.toLowerCase().includes(search.toLowerCase())
+      )
+      .reduce((result: Section[], option) => {
+        const firstLetter = removeAccents(option.label[0]);
+        const index = result.findIndex((item) => item.title === firstLetter);
+        if (index >= 0) {
+          result[index]?.data.push(option);
+        } else {
+          result.push({ title: firstLetter, data: [option] });
+        }
+        return result;
+      }, []);
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setSections(sections);
   }, [search]);
+
+  const onScrollToIndexFailed = () => {
+    sectionRef.current?.scrollToLocation({
+      sectionIndex: 0,
+      itemIndex: 0,
+      viewOffset: 0,
+      viewPosition: 0,
+      animated: true,
+    });
+  };
+
+  useEffect(() => {
+    if (
+      size !== "full" ||
+      !showModal ||
+      !selectedOption?.label ||
+      !sections?.length
+    ) {
+      return;
+    }
+
+    let timeout = setTimeout(() => {
+      const { label } = selectedOption;
+      const sectionIndex = sections.findIndex(
+        (section) => section.title === label[0].toUpperCase()
+      );
+      if (sectionIndex < 0) return;
+      const itemIndex = sections[sectionIndex].data.findIndex(
+        (data) => data.label === label
+      );
+      if (itemIndex < 0) return;
+      sectionRef.current?.scrollToLocation({
+        sectionIndex,
+        itemIndex,
+        viewOffset: 0,
+        viewPosition: 0,
+        animated: true,
+      });
+    }, 1500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [showModal]);
 
   return (
     <>
       <View
-        ref={ref}
         style={[styles.container, containerStyle, disabled && { opacity: 0.4 }]}
       >
         <Text type="subtextSemiBold" style={styles.label}>
@@ -190,10 +279,8 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
           animationType="none"
           onClose={() => toggleModal(false)}
           backgroundColor="transparent"
-          style={{ overflow: "hidden" }}
         >
           <Animated.View
-            onLayout={getModalHeight}
             style={[
               styles.modal,
               MODAL_STYLE[size],
@@ -219,36 +306,88 @@ const Picker = React.forwardRef<View, PickerProps>((props, ref) => {
             <View style={styles.content}>
               {size === "full" && (
                 <TextInput
-                  label="none"
                   containerStyle={styles.input}
-                  placeholder="Search"
+                  placeholder={searchPlaceholder}
                   onChangeText={onSearchChange}
+                  type="search"
                 />
               )}
 
-              <FlatList
-                data={filteredOptions}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={styles.option}
-                    onPress={() => selectOption(item)}
-                  >
-                    <Text type="bodyRegular">{item.label}</Text>
-                    {selectedOption?.value === item.value && (
-                      <Image source={require("../../media/checkmark.png")} />
+              {size === "responsive" && (
+                <FlatList
+                  data={options}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <PickerRow
+                      option={item}
+                      selectedOption={selectedOption}
+                      onSelectOption={onSelectOption}
+                      size={size}
+                    />
+                  )}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.itemSeparator} />
+                  )}
+                  ListHeaderComponent={() => <View style={styles.listHeader} />}
+                  ListFooterComponent={() => <View style={styles.listFooter} />}
+                  contentContainerStyle={styles.list}
+                />
+              )}
+
+              {size === "full" && (
+                <>
+                  <SectionList
+                    ref={sectionRef}
+                    sections={sections}
+                    keyExtractor={(_, index) => index.toString()}
+                    renderItem={({ item }) => (
+                      <PickerRow
+                        option={item}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        size={size}
+                      />
                     )}
-                  </TouchableOpacity>
-                )}
-                contentContainerStyle={styles.list}
-              />
+                    renderSectionHeader={({ section: { title } }) => (
+                      <View style={styles.sectionHeader}>
+                        <Text type="h6" textAlign="left">
+                          {title}
+                        </Text>
+                      </View>
+                    )}
+                    ItemSeparatorComponent={() => (
+                      <View
+                        style={[styles.itemSeparator, styles.alphabetOffset]}
+                      />
+                    )}
+                    ListEmptyComponent={() => (
+                      <Text
+                        type="subtextRegular"
+                        color={colors.greyDark}
+                        style={styles.listEmpty}
+                      >
+                        {listEmptyText}
+                      </Text>
+                    )}
+                    ListHeaderComponent={() => (
+                      <View style={styles.listHeader} />
+                    )}
+                    ListFooterComponent={() => (
+                      <View style={styles.listFooter} />
+                    )}
+                    stickySectionHeadersEnabled={true}
+                    onScrollToIndexFailed={onScrollToIndexFailed}
+                  />
+                  <AlphabetScroll onLetterChange={onLetterChange} />
+                </>
+              )}
             </View>
           </Animated.View>
         </Modal>
       )}
     </>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -289,19 +428,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: Spacing.sp3,
     borderTopRightRadius: Spacing.sp3,
     backgroundColor: "#ffffff",
-    ...shadow({ x: 0, y: 2, opacity: 0.32, blurRadius: 24 }),
+    ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
   },
-  option: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: Spacing.sp7,
-    paddingVertical: Spacing.sp2,
-    borderBottomColor: colors.greyLight,
-    borderBottomWidth: 1,
-  },
-  content: { paddingVertical: Spacing.sp3 },
-  list: { marginTop: -Spacing.sp2, marginHorizontal: Spacing.sp3 },
+  content: { flex: 1 },
+  list: { marginTop: -Spacing.sp2 },
   input: { marginBottom: Spacing.sp3, marginHorizontal: Spacing.sp3 },
   handle: {
     width: Spacing.sp4,
@@ -319,6 +449,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
+  },
+  sectionHeader: {
+    justifyContent: "center",
+    height: Spacing.sp3,
+    backgroundColor: colors.greyLight,
+    paddingHorizontal: Spacing.sp3,
+  },
+  itemSeparator: {
+    marginHorizontal: Spacing.sp3,
+    borderBottomColor: colors.greyLight,
+    borderBottomWidth: 1,
+  },
+  listEmpty: {
+    paddingHorizontal: Spacing.sp3,
+  },
+  listHeader: {
+    paddingTop: Spacing.sp3,
+  },
+  listFooter: {
+    paddingBottom: Spacing.sp3,
+  },
+  alphabetOffset: {
+    marginRight: Spacing.sp5,
   },
   headerLeft: {
     width: 16,

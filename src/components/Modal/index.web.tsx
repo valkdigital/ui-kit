@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: Dimensions.get("screen").height,
     justifyContent: "center",
+    overflow: "hidden",
     zIndex: 10,
   },
 });

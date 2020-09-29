@@ -17,7 +17,7 @@ import Text from "../Text";
 import colors from "../../style/colors";
 
 interface TextInputProps extends TIP {
-  label: string;
+  label?: string;
   containerStyle?: ViewStyle;
   size?: "small" | "medium" | "large";
   useFullHeight?: boolean;
@@ -32,6 +32,7 @@ interface TextInputProps extends TIP {
    * won't be shown when there is an error.
    */
   helperText?: string;
+  type?: "password" | "search";
 }
 const MAX_HEIGHT = 160;
 const SIZE: { [key: string]: ViewStyle } = {
@@ -49,11 +50,11 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     error,
     onFocus,
     onBlur,
-    secureTextEntry,
     showCheckmark = false,
     editable = true,
     disabled,
     helperText,
+    type,
   } = props;
   //   remove custom props or overrided props
   const passInputProps = omit(
@@ -71,7 +72,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     "useFullHeight"
   );
 
-  const [hideText, setHideText] = useState(secureTextEntry);
+  const [hideText, setHideText] = useState(type === "password");
   const [borderColor, setBorderColor] = useState(colors.greyMidDark);
 
   const inputRef = useRef<RNTI>(null);
@@ -79,6 +80,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     ref = inputRef;
   }
   const _onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (disabled) return;
     if (!error) setBorderColor(colors.brandBluePrimary);
     onFocus && onFocus(e);
   };
@@ -95,8 +97,8 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
   const toggleHideText = () => {
     setHideText(!hideText);
   };
-  const showIcons = secureTextEntry || showCheckmark;
 
+  const showRightIcons = type === "password" || showCheckmark;
   const focusInputField = () => inputRef?.current?.focus();
 
   return (
@@ -109,23 +111,34 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
       ]}
     >
       <TouchableOpacity disabled={disabled} onPress={focusInputField}>
-        <Text style={styles.label} type="subtextSemiBold">
-          {label}
-        </Text>
+        {type !== "search" && (
+          <Text style={styles.label} type="subtextSemiBold">
+            {label}
+          </Text>
+        )}
         <View style={[styles.inputWrapper, { borderColor }]}>
-          <RNTI
-            ref={inputRef}
-            textAlignVertical="center"
-            style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
-            {...passInputProps}
-            onFocus={_onFocus}
-            onBlur={_onBlur}
-            secureTextEntry={hideText}
-            editable={!disabled && editable}
-          />
-          {showIcons && (
+          <View style={styles.iconContainer}>
+            {type === "search" && (
+              <Image
+                source={require("../../media/search.png")}
+                style={styles.searchImage}
+              />
+            )}
+            <RNTI
+              ref={inputRef}
+              textAlignVertical="center"
+              style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
+              {...passInputProps}
+              onFocus={_onFocus}
+              onBlur={_onBlur}
+              secureTextEntry={hideText}
+              editable={!disabled && editable}
+            />
+          </View>
+
+          {showRightIcons && (
             <View style={styles.iconContainer}>
-              {secureTextEntry && (
+              {type === "password" && (
                 <TouchableOpacity onPress={toggleHideText}>
                   <Image
                     style={styles.icon}
@@ -189,6 +202,11 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: "row",
     paddingHorizontal: Spacing["sp1/2"],
+  },
+  searchImage: {
+    width: 12.8,
+    height: 12.16,
+    alignSelf: "center",
   },
 });
 

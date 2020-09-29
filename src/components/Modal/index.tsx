@@ -19,7 +19,12 @@ export default ({
   backgroundColor = "transparent",
   style,
 }: ModalProps) => (
-  <Modal visible={true} transparent={true} animationType={animationType}>
+  <Modal
+    visible={true}
+    transparent={true}
+    animationType={animationType}
+    supportedOrientations={["landscape", "portrait"]}
+  >
     <TouchableWithoutFeedback onPress={onClose}>
       <View
         style={[
