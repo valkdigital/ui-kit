@@ -100,7 +100,6 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
 
   const showRightIcons = type === "password" || showCheckmark;
   const focusInputField = () => inputRef?.current?.focus();
-
   return (
     <View
       style={[
@@ -116,48 +115,50 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
             {label}
           </Text>
         )}
-        <View style={[styles.inputWrapper, { borderColor }]}>
+      </TouchableOpacity>
+
+      <View style={[styles.inputWrapper, { borderColor }]}>
+        {type === "search" && (
           <View style={styles.iconContainer}>
-            {type === "search" && (
-              <Image
-                source={require("../../media/search.png")}
-                style={styles.searchImage}
-              />
-            )}
-            <RNTI
-              ref={mergedRef}
-              textAlignVertical="center"
-              style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
-              {...passInputProps}
-              onFocus={_onFocus}
-              onBlur={_onBlur}
-              secureTextEntry={hideText}
-              editable={!disabled && editable}
+            <Image
+              source={require("../../media/search.png")}
+              style={styles.searchImage}
             />
           </View>
+        )}
 
-          {showRightIcons && (
-            <View style={styles.iconContainer}>
-              {type === "password" && (
-                <TouchableOpacity onPress={toggleHideText}>
-                  <Image
-                    style={styles.icon}
-                    source={require("../../media/eye.png")}
-                  />
-                </TouchableOpacity>
-              )}
-              {showCheckmark && (
-                <TouchableOpacity onPress={toggleHideText}>
-                  <Image
-                    style={styles.icon}
-                    source={require("../../media/checkmark.png")}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-          )}
-        </View>
-      </TouchableOpacity>
+        <RNTI
+          ref={mergedRef}
+          textAlignVertical="center"
+          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
+          {...passInputProps}
+          onFocus={_onFocus}
+          onBlur={_onBlur}
+          secureTextEntry={hideText}
+          editable={!disabled && editable}
+        />
+
+        {showRightIcons && (
+          <View style={styles.iconContainer}>
+            {type === "password" && (
+              <TouchableOpacity onPress={toggleHideText}>
+                <Image
+                  style={styles.iconRightSide}
+                  source={require("../../media/eye.png")}
+                />
+              </TouchableOpacity>
+            )}
+            {showCheckmark && (
+              <TouchableOpacity onPress={toggleHideText}>
+                <Image
+                  style={styles.iconRightSide}
+                  source={require("../../media/checkmark.png")}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+      </View>
       {!!error && (
         <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
           {error}
@@ -180,10 +181,11 @@ const styles = StyleSheet.create({
     minHeight: 40,
     maxHeight: MAX_HEIGHT,
     flex: 1,
-    paddingLeft: Spacing.sp1,
+    minWidth: 100,
     fontSize: 16,
     borderWidth: 0,
     ...Platform.select({ web: { outlineWidth: 0 } }),
+    backgroundColor: "red",
   },
   inputWrapper: {
     borderRadius: 4,
@@ -191,22 +193,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal: Spacing.sp2,
   },
   label: {
     marginBottom: Spacing["sp1/2"],
   },
   error: { marginTop: Spacing["sp1/2"] },
-  icon: {
-    marginHorizontal: Spacing["sp1/2"],
-  },
+  iconRightSide: { marginLeft: Spacing.sp1 },
   iconContainer: {
     flexDirection: "row",
-    paddingHorizontal: Spacing["sp1/2"],
   },
   searchImage: {
     width: 12.8,
     height: 12.16,
     alignSelf: "center",
+    marginRight: Spacing.sp1,
   },
 });
 

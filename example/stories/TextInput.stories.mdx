@@ -7,7 +7,7 @@ import {
   ColorItem,
 } from "@storybook/addon-docs/blocks";
 import { View } from "react-native";
-import { TextInput } from "@valkdigital/ui-kit";
+import { TextInput, Spacing } from "@valkdigital/ui-kit";
 
 <Meta title="TextInput" />
 
@@ -25,7 +25,12 @@ import { TextInput } from "@valkdigital/ui-kit";
     }}
   >
     <View
-      style={{ justifyContent: "space-evenly", alignItems: "center", flex: 1 }}
+      style={{
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flex: 1,
+        paddingHorizontal: Spacing.sp2,
+      }}
     >
       <TextInput
         label="Label"
