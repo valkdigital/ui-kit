@@ -239,6 +239,23 @@ inputStories.add("Password", () => (
 inputStories.add("Picker", () => (
   <CenteredView>
     <Picker
+      label="Salutation"
+      placeholder="Select an option"
+      size="small"
+      options={[
+        { label: "Sir", value: "Dhr." },
+        { label: "Madame", value: "Mevr." },
+      ]}
+      selectedOption={undefined}
+      title="Salutation"
+      onSelectChange={action("onSelectChange")}
+      containerStyle={{
+        paddingHorizontal: Spacing.sp3,
+        marginBottom: Spacing.sp2,
+      }}
+      modalSize="responsive"
+    />
+    <Picker
       label="Picker (responsive size)"
       placeholder="Select an option"
       options={[
@@ -281,32 +298,11 @@ inputStories.add("Picker", () => (
       label="Picker (full size)"
       placeholder="Select an option"
       options={data.countries}
-      selectedOption={{
-        label: "Netherlands",
-        value: "nl",
-        image: { uri: "https://www.countryflags.io/nl/flat/64.png" },
-      }}
+      selectedOption={data.countries[9]}
       favoriteOptions={[
-        {
-          label: "Belgium",
-          value: "be",
-          image: { uri: "https://www.countryflags.io/be/flat/64.png" },
-        },
-        {
-          label: "Netherlands",
-          value: "nl",
-          image: { uri: "https://www.countryflags.io/nl/flat/64.png" },
-        },
-        {
-          label: "United Kingdom",
-          value: "gb",
-          image: { uri: "https://www.countryflags.io/gb/flat/64.png" },
-        },
-        {
-          label: "Germany",
-          value: "de",
-          image: { uri: "https://www.countryflags.io/de/flat/64.png" },
-        },
+        data.countries[0],
+        data.countries[11],
+        data.countries[9],
       ]}
       title="Country"
       onSelectChange={action("onSelectChange")}

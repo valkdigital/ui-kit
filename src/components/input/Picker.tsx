@@ -13,6 +13,7 @@ import {
   ImageSourcePropType,
   SectionList,
   LayoutAnimation,
+  Platform,
 } from "react-native";
 import Text from "../Text";
 import Spacing from "../../style/spacing";
@@ -24,6 +25,7 @@ import AlphabetScroll from "./AlphabetScroll";
 import PickerRow from "./PickerRow";
 
 export type ModalSizes = "responsive" | "full";
+type Sizes = "small" | "medium" | "large";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -32,6 +34,12 @@ const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   full: {
     top: Spacing.sp8,
   },
+};
+
+const SELECT_STYLE: { [key in Sizes]: ViewStyle } = {
+  small: { width: 160 },
+  medium: { width: 287 },
+  large: {},
 };
 
 export interface Option {
@@ -49,6 +57,7 @@ interface PickerProps {
   title: string;
   label: string;
   placeholder: string;
+  size?: Sizes;
   options: Option[];
   favoriteOptions?: Option[];
   selectedOption?: Option;
@@ -66,6 +75,7 @@ const Picker: React.FC<PickerProps> = ({
   title,
   label,
   placeholder,
+  size = "large",
   options,
   favoriteOptions,
   selectedOption,
@@ -146,7 +156,7 @@ const Picker: React.FC<PickerProps> = ({
     if (sectionIndex < 0) return;
     sectionRef.current?.scrollToLocation({
       sectionIndex,
-      itemIndex: 0,
+      itemIndex: Platform.OS === "web" ? 1 : 0,
       viewOffset: 0,
       viewPosition: 0,
       animated: true,
@@ -220,10 +230,11 @@ const Picker: React.FC<PickerProps> = ({
         (section) => section.title === label[0].toUpperCase()
       );
       if (sectionIndex < 0) return;
-      const itemIndex = sections[sectionIndex].data.findIndex(
+      let itemIndex = sections[sectionIndex].data.findIndex(
         (data) => data.label === label
       );
       if (itemIndex < 0) return;
+      itemIndex += Platform.OS === "web" ? 1 : 0;
       sectionRef.current?.scrollToLocation({
         sectionIndex,
         itemIndex,
@@ -250,6 +261,7 @@ const Picker: React.FC<PickerProps> = ({
           style={[
             styles.selectContainer,
             hasError && { borderColor: colors.redDark },
+            SELECT_STYLE[size],
           ]}
         >
           <TouchableOpacity
@@ -259,6 +271,7 @@ const Picker: React.FC<PickerProps> = ({
           >
             <Text
               type="bodyRegular"
+              numberOfLines={1}
               style={
                 selectedOption === undefined ? styles.placeholder : undefined
               }
@@ -421,6 +434,7 @@ const styles = StyleSheet.create({
     color: colors.greyMidDark,
   },
   placeholder: {
+    flex: 1,
     color: colors.greyDark,
   },
   error: { marginTop: Spacing["sp1/2"] },

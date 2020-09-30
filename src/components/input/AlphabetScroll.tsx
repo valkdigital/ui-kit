@@ -10,7 +10,6 @@ import Spacing from "../../style/spacing";
 import Text from "../Text";
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
-const TOP_OFFSET = 140;
 
 interface AlphabetScrollProps {
   onLetterChange: (letter: string) => void;
@@ -18,33 +17,30 @@ interface AlphabetScrollProps {
 
 const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
   const [height, setHeight] = useState<number>(0);
-  const [yOffset, setYOffset] = useState<number>(0);
 
   const panResponder = useMemo(
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onMoveShouldSetPanResponder: () => true,
-        onPanResponderGrant: (_, gestureState) => {
-          getTouchedLetter(gestureState.y0);
+        onPanResponderGrant: (event) => {
+          getTouchedLetter(event.nativeEvent.locationY);
         },
-        onPanResponderMove: (_, gestureState) => {
-          getTouchedLetter(gestureState.moveY);
+        onPanResponderMove: (event) => {
+          getTouchedLetter(event.nativeEvent.locationY);
         },
       }),
-    [height, yOffset]
+    [height]
   );
 
   const getTouchedLetter = (y: number) => {
-    const scrollY = y - yOffset - TOP_OFFSET;
-    let index = Math.floor((scrollY / height) * ALPHABET.length);
+    let index = Math.floor((y / height) * ALPHABET.length);
     if (index > ALPHABET.length || index < 0) return;
     onLetterChange(ALPHABET[index]);
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
-    const { y, height } = event.nativeEvent.layout;
-    setYOffset(y);
+    const { height } = event.nativeEvent.layout;
     setHeight(height);
   };
 
@@ -52,14 +48,16 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
     <View style={styles.container}>
       <View {...panResponder.panHandlers} onLayout={onLayout}>
         {ALPHABET.map((letter) => (
-          <Text
-            key={letter}
-            type="subtextRegular"
-            color={colors.brandBluePrimary}
-            textAlign="center"
-          >
-            {letter}
-          </Text>
+          <View pointerEvents="none">
+            <Text
+              key={letter}
+              type="subtextRegular"
+              color={colors.brandBluePrimary}
+              textAlign="center"
+            >
+              {letter}
+            </Text>
+          </View>
         ))}
       </View>
     </View>
