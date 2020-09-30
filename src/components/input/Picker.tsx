@@ -23,9 +23,9 @@ import TextInput from "./TextInput";
 import AlphabetScroll from "./AlphabetScroll";
 import PickerRow from "./PickerRow";
 
-export type Sizes = "responsive" | "full";
+export type ModalSizes = "responsive" | "full";
 
-const MODAL_STYLE: { [key in Sizes]: ViewStyle } = {
+const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
     maxHeight: Dimensions.get("window").height - Spacing.sp8,
   },
@@ -41,7 +41,7 @@ export interface Option {
 }
 
 interface Section {
-  title: string;
+  title?: string;
   data: Option[];
 }
 
@@ -50,6 +50,7 @@ interface PickerProps {
   label: string;
   placeholder: string;
   options: Option[];
+  favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectChange: (option: Option) => void;
   containerStyle?: ViewStyle;
@@ -58,7 +59,7 @@ interface PickerProps {
   searchPlaceholder?: string;
   listEmptyText?: string;
   error?: string;
-  size: Sizes;
+  modalSize: ModalSizes;
 }
 
 const Picker: React.FC<PickerProps> = ({
@@ -66,6 +67,7 @@ const Picker: React.FC<PickerProps> = ({
   label,
   placeholder,
   options,
+  favoriteOptions,
   selectedOption,
   onSelectChange,
   containerStyle,
@@ -74,7 +76,7 @@ const Picker: React.FC<PickerProps> = ({
   searchPlaceholder,
   listEmptyText,
   error,
-  size,
+  modalSize,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
@@ -165,6 +167,11 @@ const Picker: React.FC<PickerProps> = ({
   };
 
   useEffect(() => {
+    const initialSections =
+      favoriteOptions && !search
+        ? [{ title: undefined, data: favoriteOptions }]
+        : [];
+
     const sections = Object.values(options)
       .sort((a, b) =>
         removeAccents(a.label) < removeAccents(b.label) ? -1 : 1
@@ -181,7 +188,7 @@ const Picker: React.FC<PickerProps> = ({
           result.push({ title: firstLetter, data: [option] });
         }
         return result;
-      }, []);
+      }, initialSections);
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setSections(sections);
@@ -199,7 +206,7 @@ const Picker: React.FC<PickerProps> = ({
 
   useEffect(() => {
     if (
-      size !== "full" ||
+      modalSize !== "full" ||
       !showModal ||
       !selectedOption?.label ||
       !sections?.length
@@ -283,7 +290,7 @@ const Picker: React.FC<PickerProps> = ({
           <Animated.View
             style={[
               styles.modal,
-              MODAL_STYLE[size],
+              MODAL_STYLE[modalSize],
               { transform: [{ translateY }] },
             ]}
           >
@@ -304,16 +311,7 @@ const Picker: React.FC<PickerProps> = ({
             </View>
 
             <View style={styles.content}>
-              {size === "full" && (
-                <TextInput
-                  containerStyle={styles.input}
-                  placeholder={searchPlaceholder}
-                  onChangeText={onSearchChange}
-                  type="search"
-                />
-              )}
-
-              {size === "responsive" && (
+              {modalSize === "responsive" && (
                 <FlatList
                   data={options}
                   keyExtractor={(_, index) => index.toString()}
@@ -322,7 +320,7 @@ const Picker: React.FC<PickerProps> = ({
                       option={item}
                       selectedOption={selectedOption}
                       onSelectOption={onSelectOption}
-                      size={size}
+                      size={modalSize}
                     />
                   )}
                   ItemSeparatorComponent={() => (
@@ -334,8 +332,14 @@ const Picker: React.FC<PickerProps> = ({
                 />
               )}
 
-              {size === "full" && (
+              {modalSize === "full" && (
                 <>
+                  <TextInput
+                    containerStyle={styles.input}
+                    placeholder={searchPlaceholder}
+                    onChangeText={onSearchChange}
+                    type="search"
+                  />
                   <SectionList
                     ref={sectionRef}
                     sections={sections}
@@ -345,16 +349,19 @@ const Picker: React.FC<PickerProps> = ({
                         option={item}
                         selectedOption={selectedOption}
                         onSelectOption={onSelectOption}
-                        size={size}
+                        size={modalSize}
                       />
                     )}
-                    renderSectionHeader={({ section: { title } }) => (
-                      <View style={styles.sectionHeader}>
-                        <Text type="h6" textAlign="left">
-                          {title}
-                        </Text>
-                      </View>
-                    )}
+                    renderSectionHeader={({ section: { title } }) => {
+                      if (!title) return null;
+                      return (
+                        <View style={styles.sectionHeader}>
+                          <Text type="h6" textAlign="left">
+                            {title}
+                          </Text>
+                        </View>
+                      );
+                    }}
                     ItemSeparatorComponent={() => (
                       <View
                         style={[styles.itemSeparator, styles.alphabetOffset]}
@@ -368,9 +375,6 @@ const Picker: React.FC<PickerProps> = ({
                       >
                         {listEmptyText}
                       </Text>
-                    )}
-                    ListHeaderComponent={() => (
-                      <View style={styles.listHeader} />
                     )}
                     ListFooterComponent={() => (
                       <View style={styles.listFooter} />
@@ -432,7 +436,7 @@ const styles = StyleSheet.create({
   },
   content: { flex: 1 },
   list: { marginTop: -Spacing.sp2 },
-  input: { marginBottom: Spacing.sp3, marginHorizontal: Spacing.sp3 },
+  input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
   handle: {
     width: Spacing.sp4,
     height: Spacing["sp1/2"],

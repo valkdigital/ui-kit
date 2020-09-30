@@ -2,13 +2,13 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
-import type { Option, Sizes } from "./Picker";
+import type { Option, ModalSizes } from "./Picker";
 
 interface PickerRowProps {
   option: Option;
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
-  size: Sizes;
+  size: ModalSizes;
 }
 
 const PickerRow: React.FC<PickerRowProps> = ({
