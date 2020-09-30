@@ -122,7 +122,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
           <View style={styles.iconContainer}>
             <Image
               source={require("../../media/search.png")}
-              style={styles.searchImage}
+              style={styles.search}
             />
           </View>
         )}
@@ -143,7 +143,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
             {type === "password" && (
               <TouchableOpacity onPress={toggleHideText}>
                 <Image
-                  style={styles.iconRightSide}
+                  style={styles.eye}
                   source={require("../../media/eye.png")}
                 />
               </TouchableOpacity>
@@ -151,7 +151,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
             {showCheckmark && (
               <TouchableOpacity onPress={toggleHideText}>
                 <Image
-                  style={styles.iconRightSide}
+                  style={styles.checkmark}
                   source={require("../../media/checkmark.png")}
                 />
               </TouchableOpacity>
@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderWidth: 0,
     ...Platform.select({ web: { outlineWidth: 0 } }),
-    backgroundColor: "red",
   },
   inputWrapper: {
     borderRadius: 4,
@@ -199,15 +198,24 @@ const styles = StyleSheet.create({
     marginBottom: Spacing["sp1/2"],
   },
   error: { marginTop: Spacing["sp1/2"] },
-  iconRightSide: { marginLeft: Spacing.sp1 },
   iconContainer: {
     flexDirection: "row",
   },
-  searchImage: {
-    width: 12.8,
-    height: 12.16,
+  search: {
+    width: 13,
+    height: 13,
     alignSelf: "center",
     marginRight: Spacing.sp1,
+  },
+  checkmark: {
+    marginLeft: Spacing.sp1,
+    width: 16,
+    height: 12,
+  },
+  eye: {
+    marginLeft: Spacing.sp1,
+    width: 16,
+    height: 16,
   },
 });
 
