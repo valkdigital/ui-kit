@@ -48,9 +48,8 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
     <View style={styles.container}>
       <View {...panResponder.panHandlers} onLayout={onLayout}>
         {ALPHABET.map((letter) => (
-          <View pointerEvents="none">
+          <View pointerEvents="none" key={letter}>
             <Text
-              key={letter}
               type="subtextRegular"
               color={colors.brandBluePrimary}
               textAlign="center"
@@ -71,8 +70,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     paddingHorizontal: Spacing.sp1,
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
   },
 });
