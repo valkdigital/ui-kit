@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -18,6 +18,7 @@ interface AlphabetScrollProps {
 
 const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
   const [height, setHeight] = useState<number>(0);
+  let prevIndex = useRef<number>(-1).current;
 
   const screenHeight = Dimensions.get("window").height;
 
@@ -38,8 +39,9 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
 
   const getTouchedLetter = (y: number) => {
     let index = Math.floor((y / height) * ALPHABET.length);
-    if (index > ALPHABET.length || index < 0) return;
+    if (prevIndex === index || index > ALPHABET.length || index < 0) return;
     onLetterChange(ALPHABET[index]);
+    prevIndex = index;
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -68,11 +70,11 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: Spacing.sp5,
     position: "absolute",
-    right: Spacing.sp1,
+    right: 0,
     top: 0,
     bottom: 0,
-    paddingHorizontal: Spacing.sp1,
   },
 });
 

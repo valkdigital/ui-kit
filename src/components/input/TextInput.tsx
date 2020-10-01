@@ -119,12 +119,10 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
 
       <View style={[styles.inputWrapper, { borderColor }]}>
         {type === "search" && (
-          <View style={styles.iconContainer}>
-            <Image
-              source={require("../../media/search.png")}
-              style={styles.search}
-            />
-          </View>
+          <Image
+            source={require("../../media/search.png")}
+            style={styles.search}
+          />
         )}
 
         <RNTI

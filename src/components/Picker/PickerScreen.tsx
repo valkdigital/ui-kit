@@ -12,6 +12,7 @@ import {
 import colors from "../../style/colors";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
+import hitSlop from "../../style/hitSlop";
 import Modal from "../Modal";
 import Text from "../Text";
 import type { ModalSizes, Sizes, Option, PickerContainerProps } from ".";
@@ -127,7 +128,10 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
               <Text type="h6" textAlign="center">
                 {title}
               </Text>
-              <TouchableOpacity onPress={() => toggleModal(false)}>
+              <TouchableOpacity
+                onPress={() => toggleModal(false)}
+                hitSlop={hitSlop}
+              >
                 <Image
                   source={require("../../media/close.png")}
                   style={styles.headerRight}
