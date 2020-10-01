@@ -5,28 +5,18 @@ import {
   TouchableOpacity,
   Image,
   Animated,
-  FlatList,
-  SectionList,
   ViewStyle,
   Dimensions,
   PanResponderInstance,
-  SectionListData,
 } from "react-native";
 import colors from "../../style/colors";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
-import TextInput from "../input/TextInput";
 import Modal from "../Modal";
 import Text from "../Text";
-import AlphabetScroll from "./AlphabetScroll";
-import PickerRow from "./PickerRow";
-import type {
-  ModalSizes,
-  Sizes,
-  Option,
-  Section,
-  PickerContainerProps,
-} from "./index";
+import type { ModalSizes, Sizes, Option, PickerContainerProps } from ".";
+import ResponsiveList from "./ResponsiveList";
+import FullScreenList from "./FullScreenList";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -45,29 +35,16 @@ const SELECT_STYLE: { [key in Sizes]: ViewStyle } = {
 
 type InheritedProps = Omit<
   PickerContainerProps,
-  "onSubmit" | "onSelectChange" | "favoriteOptions" | "size"
+  "onSubmit" | "onSelectChange" | "size"
 >;
 
 interface PickerScreenProps extends InheritedProps {
   size: Sizes;
-  hasError: boolean;
   showModal: boolean;
   toggleModal: (show: boolean) => void;
   translateY: Animated.Value;
   panResponder: PanResponderInstance;
   onSelectOption: (option: Option) => void;
-  onSearchChange: (text: string) => void;
-  sectionRef: React.RefObject<SectionList<any>>;
-  sections: Section[];
-  onLetterChange: (letter: string) => void;
-  getItemLayout: (
-    data: SectionListData<any>[] | null,
-    index: number
-  ) => {
-    length: number;
-    offset: number;
-    index: number;
-  };
 }
 
 const PickerScreen: React.FC<PickerScreenProps> = ({
@@ -76,6 +53,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   placeholder,
   size,
   options,
+  favoriteOptions,
   selectedOption,
   containerStyle,
   disabled,
@@ -83,17 +61,11 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   listEmptyText,
   error,
   modalSize,
-  hasError,
   showModal,
   toggleModal,
   translateY,
   panResponder,
   onSelectOption,
-  onSearchChange,
-  sectionRef,
-  sections,
-  onLetterChange,
-  getItemLayout,
 }) => (
   <>
     <View
@@ -105,7 +77,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
       <View
         style={[
           styles.selectContainer,
-          hasError && { borderColor: colors.redDark },
+          !!error && { borderColor: colors.redDark },
           SELECT_STYLE[size],
         ]}
       >
@@ -129,7 +101,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           />
         </TouchableOpacity>
       </View>
-      {hasError && (
+      {!!error && (
         <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
           {error}
         </Text>
@@ -164,83 +136,26 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
             </View>
           </View>
 
-          <View style={styles.flex}>
+          <View style={styles.content}>
             {modalSize === "responsive" && (
-              <FlatList
-                data={options}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <PickerRow
-                    option={item}
-                    selectedOption={selectedOption}
-                    onSelectOption={onSelectOption}
-                    size={modalSize}
-                  />
-                )}
-                ItemSeparatorComponent={() => (
-                  <View style={styles.itemSeparator} />
-                )}
-                ListHeaderComponent={() => <View style={styles.listHeader} />}
-                ListFooterComponent={() => <View style={styles.listFooter} />}
-                contentContainerStyle={styles.list}
+              <ResponsiveList
+                options={options}
+                selectedOption={selectedOption}
+                onSelectOption={onSelectOption}
+                modalSize={modalSize}
               />
             )}
 
             {modalSize === "full" && (
-              <>
-                <TextInput
-                  containerStyle={styles.input}
-                  placeholder={searchPlaceholder}
-                  onChangeText={onSearchChange}
-                  type="search"
-                />
-                <View style={styles.flex}>
-                  <SectionList
-                    ref={sectionRef}
-                    sections={sections}
-                    keyExtractor={(_, index) => index.toString()}
-                    renderItem={({ item }) => (
-                      <PickerRow
-                        option={item}
-                        selectedOption={selectedOption}
-                        onSelectOption={onSelectOption}
-                        size={modalSize}
-                      />
-                    )}
-                    renderSectionHeader={({ section: { title } }) => {
-                      if (!title) return null;
-                      return (
-                        <View style={styles.sectionHeader}>
-                          <Text type="h6" textAlign="left">
-                            {title}
-                          </Text>
-                        </View>
-                      );
-                    }}
-                    ItemSeparatorComponent={() => (
-                      <View
-                        style={[styles.itemSeparator, styles.alphabetOffset]}
-                      />
-                    )}
-                    ListEmptyComponent={() => (
-                      <Text
-                        type="subtextRegular"
-                        color={colors.greyDark}
-                        style={styles.listEmpty}
-                      >
-                        {listEmptyText}
-                      </Text>
-                    )}
-                    ListFooterComponent={() => (
-                      <View style={styles.listFooter} />
-                    )}
-                    stickySectionHeadersEnabled={true}
-                    getItemLayout={getItemLayout}
-                    onScrollToIndexFailed={() => console.log("FAIL")}
-                  />
-                  <AlphabetScroll onLetterChange={onLetterChange} />
-                </View>
-              </>
+              <FullScreenList
+                options={options}
+                favoriteOptions={favoriteOptions}
+                selectedOption={selectedOption}
+                onSelectOption={onSelectOption}
+                modalSize={modalSize}
+                searchPlaceholder={searchPlaceholder}
+                listEmptyText={listEmptyText}
+              />
             )}
           </View>
         </Animated.View>
@@ -291,9 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
   },
-  flex: { flex: 1 },
-  list: { marginTop: -Spacing.sp2 },
-  input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
+  content: { flex: 1 },
   handle: {
     width: Spacing.sp4,
     height: Spacing["sp1/2"],
@@ -310,29 +223,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
-  },
-  sectionHeader: {
-    justifyContent: "center",
-    height: Spacing.sp3,
-    backgroundColor: colors.greyLight,
-    paddingHorizontal: Spacing.sp3,
-  },
-  itemSeparator: {
-    marginHorizontal: Spacing.sp3,
-    borderBottomColor: colors.greyLight,
-    borderBottomWidth: 1,
-  },
-  listEmpty: {
-    paddingHorizontal: Spacing.sp3,
-  },
-  listHeader: {
-    paddingTop: Spacing.sp3,
-  },
-  listFooter: {
-    paddingBottom: Spacing.sp3,
-  },
-  alphabetOffset: {
-    marginRight: Spacing.sp5,
   },
   headerLeft: {
     width: 16,

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   PanResponder,
   LayoutChangeEvent,
+  Dimensions,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -17,6 +18,8 @@ interface AlphabetScrollProps {
 
 const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
   const [height, setHeight] = useState<number>(0);
+
+  const screenHeight = Dimensions.get("window").height;
 
   const panResponder = useMemo(
     () =>
@@ -50,7 +53,7 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
         {ALPHABET.map((letter) => (
           <View pointerEvents="none" key={letter}>
             <Text
-              type="subtextRegular"
+              type={screenHeight < 667 ? "label" : "subtextRegular"}
               color={colors.brandBluePrimary}
               textAlign="center"
             >
