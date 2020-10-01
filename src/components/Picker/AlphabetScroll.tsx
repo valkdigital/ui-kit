@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     paddingHorizontal: Spacing.sp1,
-    alignItems: "center",
   },
 });
 

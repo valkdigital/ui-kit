@@ -212,7 +212,7 @@ const PickerContainer: React.FC<PickerContainerProps> = ({
         viewPosition: 0,
         animated: true,
       });
-    }, 0);
+    }, 300);
 
     return () => {
       clearTimeout(timeout);

@@ -152,7 +152,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
             <View style={styles.handle} />
             <View style={styles.header}>
               <View style={styles.headerLeft} />
-              <Text type="h4" textAlign="center">
+              <Text type="h6" textAlign="center">
                 {title}
               </Text>
               <TouchableOpacity onPress={() => toggleModal(false)}>
@@ -164,7 +164,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
             </View>
           </View>
 
-          <View style={styles.content}>
+          <View style={styles.flex}>
             {modalSize === "responsive" && (
               <FlatList
                 data={options}
@@ -194,7 +194,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                   onChangeText={onSearchChange}
                   type="search"
                 />
-                <View>
+                <View style={styles.flex}>
                   <SectionList
                     ref={sectionRef}
                     sections={sections}
@@ -236,6 +236,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                     )}
                     stickySectionHeadersEnabled={true}
                     getItemLayout={getItemLayout}
+                    onScrollToIndexFailed={() => console.log("FAIL")}
                   />
                   <AlphabetScroll onLetterChange={onLetterChange} />
                 </View>
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
   },
-  content: { flex: 1 },
+  flex: { flex: 1 },
   list: { marginTop: -Spacing.sp2 },
   input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
   handle: {
@@ -337,8 +338,8 @@ const styles = StyleSheet.create({
     width: 16,
   },
   headerRight: {
-    width: 16,
-    height: 16,
+    width: 12,
+    height: 12,
   },
 });
 
