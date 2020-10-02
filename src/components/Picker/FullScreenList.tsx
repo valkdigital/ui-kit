@@ -44,7 +44,8 @@ const FullScreenList: React.FC<FullScreenListProps> = ({
   };
 
   const onLetterChange = (letter: string) => {
-    const sectionIndex = sections?.findIndex(
+    if (!sections.length) return;
+    const sectionIndex = sections.findIndex(
       (section) => section.title === letter
     );
     if (sectionIndex < 0) return;

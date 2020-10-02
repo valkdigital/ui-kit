@@ -62,6 +62,7 @@ const PickerContainer: React.FC<PickerContainerProps> = ({
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: () => {
+          Keyboard.dismiss();
           return true;
         },
         onPanResponderMove: (_, gestureState) => {

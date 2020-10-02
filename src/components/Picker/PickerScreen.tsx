@@ -18,6 +18,7 @@ import Text from "../Text";
 import type { ModalSizes, Sizes, Option, PickerContainerProps } from ".";
 import ResponsiveList from "./ResponsiveList";
 import FullScreenList from "./FullScreenList";
+import DismissKeyboard from "./DismissKeyboard";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -87,15 +88,24 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           style={styles.select}
           disabled={disabled}
         >
-          <Text
-            type="bodyRegular"
-            numberOfLines={1}
-            style={
-              selectedOption === undefined ? styles.placeholder : undefined
-            }
-          >
-            {selectedOption?.label ?? placeholder}
-          </Text>
+          <View style={styles.row}>
+            {selectedOption?.image && (
+              <Image
+                source={selectedOption?.image}
+                style={styles.optionImage}
+                resizeMode="contain"
+              />
+            )}
+            <Text
+              type="bodyRegular"
+              numberOfLines={1}
+              style={
+                selectedOption === undefined ? styles.placeholder : undefined
+              }
+            >
+              {selectedOption?.label ?? placeholder}
+            </Text>
+          </View>
           <Image
             source={require("../../media/arrow_down.png")}
             style={styles.chevron}
@@ -140,28 +150,30 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
             </View>
           </View>
 
-          <View style={styles.content}>
-            {modalSize === "responsive" && (
-              <ResponsiveList
-                options={options}
-                selectedOption={selectedOption}
-                onSelectOption={onSelectOption}
-                modalSize={modalSize}
-              />
-            )}
+          <DismissKeyboard>
+            <View style={styles.content}>
+              {modalSize === "responsive" && (
+                <ResponsiveList
+                  options={options}
+                  selectedOption={selectedOption}
+                  onSelectOption={onSelectOption}
+                  modalSize={modalSize}
+                />
+              )}
 
-            {modalSize === "full" && (
-              <FullScreenList
-                options={options}
-                favoriteOptions={favoriteOptions}
-                selectedOption={selectedOption}
-                onSelectOption={onSelectOption}
-                modalSize={modalSize}
-                searchPlaceholder={searchPlaceholder}
-                listEmptyText={listEmptyText}
-              />
-            )}
-          </View>
+              {modalSize === "full" && (
+                <FullScreenList
+                  options={options}
+                  favoriteOptions={favoriteOptions}
+                  selectedOption={selectedOption}
+                  onSelectOption={onSelectOption}
+                  modalSize={modalSize}
+                  searchPlaceholder={searchPlaceholder}
+                  listEmptyText={listEmptyText}
+                />
+              )}
+            </View>
+          </DismissKeyboard>
         </Animated.View>
       </Modal>
     )}
@@ -186,6 +198,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  row: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  optionImage: {
+    width: Spacing.sp3,
+    height: Spacing.sp3,
+    alignSelf: "center",
+    marginRight: Spacing.sp1,
   },
   chevron: {
     marginLeft: Spacing.sp2,

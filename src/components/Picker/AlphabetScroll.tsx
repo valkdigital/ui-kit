@@ -5,6 +5,7 @@ import {
   PanResponder,
   LayoutChangeEvent,
   Dimensions,
+  Keyboard,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -25,7 +26,10 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
   const panResponder = useMemo(
     () =>
       PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
+        onStartShouldSetPanResponder: () => {
+          Keyboard.dismiss();
+          return true;
+        },
         onMoveShouldSetPanResponder: () => true,
         onPanResponderGrant: (event) => {
           getTouchedLetter(event.nativeEvent.locationY);
