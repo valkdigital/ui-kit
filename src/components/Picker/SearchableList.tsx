@@ -39,6 +39,8 @@ const SearchableList: React.FC<SearchableListProps> = ({
   const [sections, setSections] = useState<Section[]>([]);
   const sectionRef = useRef<SectionList>(null);
 
+  const showAlphabet = !search;
+
   const onSearchChange = (text: string) => {
     setSearch(text);
   };
@@ -180,7 +182,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
           stickySectionHeadersEnabled={true}
           getItemLayout={getItemLayout}
         />
-        <AlphabetScroll onLetterChange={onLetterChange} />
+        {showAlphabet && <AlphabetScroll onLetterChange={onLetterChange} />}
       </View>
     </>
   );
