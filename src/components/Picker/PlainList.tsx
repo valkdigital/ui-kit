@@ -3,21 +3,21 @@ import { View, StyleSheet, FlatList } from "react-native";
 import PickerRow from "./PickerRow";
 import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
-import type { ModalSizes, Option } from ".";
+import type { ListTypes, Option } from ".";
 import Spacing from "../../style/spacing";
 
-interface ResponsiveListProps {
+interface PlainListProps {
   options: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
-  modalSize: ModalSizes;
+  listType: ListTypes;
 }
 
-const ResponsiveList: React.FC<ResponsiveListProps> = ({
+const PlainList: React.FC<PlainListProps> = ({
   options,
   selectedOption,
   onSelectOption,
-  modalSize,
+  listType,
 }) => {
   return (
     <FlatList
@@ -28,10 +28,10 @@ const ResponsiveList: React.FC<ResponsiveListProps> = ({
           option={item}
           selectedOption={selectedOption}
           onSelectOption={onSelectOption}
-          modalSize={modalSize}
+          listType={listType}
         />
       )}
-      ItemSeparatorComponent={() => <ItemSeparator modalSize={modalSize} />}
+      ItemSeparatorComponent={() => <ItemSeparator listType={listType} />}
       ListHeaderComponent={() => <View style={styles.listHeader} />}
       ListFooterComponent={() => <ListFooter />}
       contentContainerStyle={styles.list}
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ResponsiveList;
+export default PlainList;

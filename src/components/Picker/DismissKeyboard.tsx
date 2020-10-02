@@ -1,10 +1,13 @@
 import React from "react";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
 
-const DismissKeyboard: React.FC = ({ children }) => (
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    {children}
-  </TouchableWithoutFeedback>
-);
+const DismissKeyboard: React.FC = ({ children }) => {
+  if (Platform.OS === "web") return <>{children}</>;
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default DismissKeyboard;

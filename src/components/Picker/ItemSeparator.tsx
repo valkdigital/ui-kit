@@ -2,17 +2,17 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
-import type { ModalSizes } from ".";
+import type { ListTypes } from ".";
 
 interface ItemSeparatorProps {
-  modalSize: ModalSizes;
+  listType: ListTypes;
 }
 
-export default ({ modalSize }: ItemSeparatorProps) => (
+export default ({ listType }: ItemSeparatorProps) => (
   <View
     style={[
       styles.itemSeparator,
-      modalSize === "full" && styles.alphabetOffset,
+      listType === "searchable" && styles.alphabetOffset,
     ]}
   />
 );

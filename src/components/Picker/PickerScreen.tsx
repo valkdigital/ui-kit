@@ -15,16 +15,16 @@ import Spacing from "../../style/spacing";
 import hitSlop from "../../style/hitSlop";
 import Modal from "../Modal";
 import Text from "../Text";
-import type { ModalSizes, Sizes, Option, PickerContainerProps } from ".";
-import ResponsiveList from "./ResponsiveList";
-import FullScreenList from "./FullScreenList";
+import type { ListTypes, Sizes, Option, PickerProps } from ".";
+import PlainList from "./PlainList";
+import SearchableList from "./SearchableList";
 import DismissKeyboard from "./DismissKeyboard";
 
-const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
-  responsive: {
+const MODAL_STYLE: { [key in ListTypes]: ViewStyle } = {
+  plain: {
     maxHeight: Dimensions.get("window").height - Spacing.sp8,
   },
-  full: {
+  searchable: {
     top: Spacing.sp8,
   },
 };
@@ -35,10 +35,7 @@ const SELECT_STYLE: { [key in Sizes]: ViewStyle } = {
   large: {},
 };
 
-type InheritedProps = Omit<
-  PickerContainerProps,
-  "onSubmit" | "onSelectChange" | "size"
->;
+type InheritedProps = Omit<PickerProps, "onSubmit" | "onSelectChange" | "size">;
 
 interface PickerScreenProps extends InheritedProps {
   size: Sizes;
@@ -57,12 +54,12 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   options,
   favoriteOptions,
   selectedOption,
-  containerStyle,
+  inputContainerStyle,
   disabled,
   searchPlaceholder,
   listEmptyText,
   error,
-  modalSize,
+  listType,
   showModal,
   toggleModal,
   translateY,
@@ -71,7 +68,11 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
 }) => (
   <>
     <View
-      style={[styles.container, containerStyle, disabled && { opacity: 0.4 }]}
+      style={[
+        styles.container,
+        inputContainerStyle,
+        disabled && { opacity: 0.4 },
+      ]}
     >
       <Text type="subtextSemiBold" style={styles.label}>
         {label}
@@ -127,7 +128,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
         <Animated.View
           style={[
             styles.modal,
-            MODAL_STYLE[modalSize],
+            MODAL_STYLE[listType],
             { transform: [{ translateY }] },
           ]}
         >
@@ -152,22 +153,22 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
 
           <DismissKeyboard>
             <View style={styles.content}>
-              {modalSize === "responsive" && (
-                <ResponsiveList
+              {listType === "plain" && (
+                <PlainList
                   options={options}
                   selectedOption={selectedOption}
                   onSelectOption={onSelectOption}
-                  modalSize={modalSize}
+                  listType={listType}
                 />
               )}
 
-              {modalSize === "full" && (
-                <FullScreenList
+              {listType === "searchable" && (
+                <SearchableList
                   options={options}
                   favoriteOptions={favoriteOptions}
                   selectedOption={selectedOption}
                   onSelectOption={onSelectOption}
-                  modalSize={modalSize}
+                  listType={listType}
                   searchPlaceholder={searchPlaceholder}
                   listEmptyText={listEmptyText}
                 />

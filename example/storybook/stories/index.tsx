@@ -179,7 +179,7 @@ storiesOf("Cards", module).add("Card vertical list", () => (
 const inputStories = storiesOf("InputFields", module);
 
 const Fields: React.FC = () => {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   return (
     <CenteredView>
       <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
@@ -249,14 +249,14 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Salutation"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      inputContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      modalSize="responsive"
+      listType="plain"
     />
     <Picker
-      label="Picker (responsive size)"
+      label="Picker (plain list)"
       placeholder="Select an option"
       options={[
         { label: "option1", value: "1" },
@@ -266,14 +266,14 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      inputContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      modalSize="responsive"
+      listType="plain"
     />
     <Picker
-      label="Picker (responsive size)"
+      label="Picker (plain list)"
       placeholder="Select an option"
       options={[
         { label: "option1", value: "1" },
@@ -288,14 +288,14 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      inputContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      modalSize="responsive"
+      listType="plain"
     />
     <Picker
-      label="Picker (full size)"
+      label="Picker (searchable list)"
       placeholder="Select an option"
       options={data.countries}
       selectedOption={data.countries[9]}
@@ -308,8 +308,8 @@ inputStories.add("Picker", () => (
       onSelectChange={action("onSelectChange")}
       searchPlaceholder="Search"
       listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-      modalSize="full"
+      inputContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+      listType="searchable"
     />
   </CenteredView>
 ));

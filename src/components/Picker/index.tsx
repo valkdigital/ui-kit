@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import PickerScreen from "./PickerScreen";
 
-export type ModalSizes = "responsive" | "full";
+export type ListTypes = "plain" | "searchable";
 export type Sizes = "small" | "medium" | "large";
 
 export interface Option {
@@ -18,7 +18,7 @@ export interface Option {
   image?: ImageSourcePropType;
 }
 
-export interface PickerContainerProps {
+export interface PickerProps {
   title: string;
   label: string;
   placeholder: string;
@@ -27,16 +27,16 @@ export interface PickerContainerProps {
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectChange: (option: Option) => void;
-  containerStyle?: ViewStyle;
+  inputContainerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
   searchPlaceholder?: string;
   listEmptyText?: string;
   error?: string;
-  modalSize: ModalSizes;
+  listType: ListTypes;
 }
 
-const PickerContainer: React.FC<PickerContainerProps> = ({
+const Picker: React.FC<PickerProps> = ({
   title,
   label,
   placeholder,
@@ -45,13 +45,13 @@ const PickerContainer: React.FC<PickerContainerProps> = ({
   favoriteOptions,
   selectedOption,
   onSelectChange,
-  containerStyle,
+  inputContainerStyle,
   disabled,
   onSubmit,
   searchPlaceholder,
   listEmptyText,
   error,
-  modalSize,
+  listType,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const translateY = useRef(new Animated.Value(0)).current;
@@ -117,11 +117,11 @@ const PickerContainer: React.FC<PickerContainerProps> = ({
       favoriteOptions={favoriteOptions}
       onSelectOption={onSelectOption}
       disabled={disabled}
-      containerStyle={containerStyle}
+      inputContainerStyle={inputContainerStyle}
       searchPlaceholder={searchPlaceholder}
       listEmptyText={listEmptyText}
       error={error}
-      modalSize={modalSize}
+      listType={listType}
       showModal={showModal}
       toggleModal={toggleModal}
       translateY={translateY}
@@ -130,4 +130,4 @@ const PickerContainer: React.FC<PickerContainerProps> = ({
   );
 };
 
-export default PickerContainer;
+export default Picker;

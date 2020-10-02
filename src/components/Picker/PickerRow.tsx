@@ -2,25 +2,28 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
-import type { Option, ModalSizes } from ".";
+import type { Option, ListTypes } from ".";
 
 interface PickerRowProps {
   option: Option;
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
-  modalSize: ModalSizes;
+  listType: ListTypes;
 }
 
 const PickerRow: React.FC<PickerRowProps> = ({
   option,
   selectedOption,
   onSelectOption,
-  modalSize,
+  listType,
 }) => {
   const { label, value, image } = option;
   return (
     <TouchableOpacity
-      style={[styles.option, modalSize === "full" && styles.alphabetOffset]}
+      style={[
+        styles.option,
+        listType === "searchable" && styles.alphabetOffset,
+      ]}
       onPress={() => onSelectOption(option)}
     >
       <View style={styles.row}>

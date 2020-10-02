@@ -8,7 +8,7 @@ import AlphabetScroll from "./AlphabetScroll";
 import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
 import PickerRow from "./PickerRow";
-import type { ModalSizes, Option } from ".";
+import type { ListTypes, Option } from ".";
 import getSectionItemLayout from "./getSectionItemLayout";
 
 interface Section {
@@ -16,24 +16,24 @@ interface Section {
   data: Option[];
 }
 
-interface FullScreenListProps {
+interface SearchableListProps {
   options: Option[];
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
   searchPlaceholder?: string;
   listEmptyText?: string;
-  modalSize: ModalSizes;
+  listType: ListTypes;
 }
 
-const FullScreenList: React.FC<FullScreenListProps> = ({
+const SearchableList: React.FC<SearchableListProps> = ({
   options,
   favoriteOptions,
   selectedOption,
   onSelectOption,
   searchPlaceholder,
   listEmptyText,
-  modalSize,
+  listType,
 }) => {
   const [search, setSearch] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
@@ -153,7 +153,7 @@ const FullScreenList: React.FC<FullScreenListProps> = ({
               option={item}
               selectedOption={selectedOption}
               onSelectOption={onSelectOption}
-              modalSize={modalSize}
+              listType={listType}
             />
           )}
           renderSectionHeader={({ section: { title } }) => {
@@ -166,7 +166,7 @@ const FullScreenList: React.FC<FullScreenListProps> = ({
               </View>
             );
           }}
-          ItemSeparatorComponent={() => <ItemSeparator modalSize={modalSize} />}
+          ItemSeparatorComponent={() => <ItemSeparator listType={listType} />}
           ListEmptyComponent={() => (
             <Text
               type="subtextRegular"
@@ -200,4 +200,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FullScreenList;
+export default SearchableList;

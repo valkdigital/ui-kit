@@ -31,14 +31,14 @@ import data from "../storybook/data";
         selectedOption={{ label: "Sir", value: "Dhr." }}
         title="Salutation"
         onSelectChange={() => null}
-        containerStyle={{
+        inputContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        modalSize="responsive"
+        listType="plain"
       />
       <Picker
-        label="Picker (responsive size)"
+        label="Picker (plain list)"
         placeholder="Select an option"
         options={[
           { label: "option1", value: "1" },
@@ -48,14 +48,14 @@ import data from "../storybook/data";
         selectedOption={undefined}
         title="Title"
         onSelectChange={() => null}
-        containerStyle={{
+        inputContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        modalSize="responsive"
+        listType="plain"
       />
       <Picker
-        label="Picker (responsive size)"
+        label="Picker (plain list)"
         placeholder="Select an option"
         options={[
           { label: "option1", value: "1" },
@@ -70,14 +70,14 @@ import data from "../storybook/data";
         selectedOption={undefined}
         title="Title"
         onSelectChange={() => null}
-        containerStyle={{
+        inputContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        modalSize="responsive"
+        listType="plain"
       />
       <Picker
-        label="Picker (full size)"
+        label="Picker (searchable list)"
         placeholder="Select an option"
         options={data.countries}
         selectedOption={data.countries[9]}
@@ -90,8 +90,8 @@ import data from "../storybook/data";
         onSelectChange={() => null}
         searchPlaceholder="Search"
         listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-        containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-        modalSize="full"
+        inputContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+        listType="searchable"
       />
     </View>
   </Story>
