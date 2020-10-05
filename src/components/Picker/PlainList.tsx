@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import PickerRow from "./PickerRow";
 import ItemSeparator from "./ItemSeparator";
@@ -19,8 +19,43 @@ const PlainList: React.FC<PlainListProps> = ({
   onSelectOption,
   listType,
 }) => {
+  const flatListRef = useRef<FlatList>(null);
+
+  const getItemLayout = (_: any, index: number) => {
+    const itemHeight = Spacing.sp7 + 1;
+    const listHeaderHeight = Spacing.sp1;
+    return {
+      length: itemHeight,
+      offset: itemHeight * index + listHeaderHeight,
+      index,
+    };
+  };
+
+  useEffect(() => {
+    if (!selectedOption?.label) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      const { label } = selectedOption;
+      const index = options.findIndex((option) => option.label === label);
+      if (index < 0) return;
+      flatListRef.current?.scrollToIndex({
+        index,
+        viewOffset: 0,
+        viewPosition: 0,
+        animated: true,
+      });
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <FlatList
+      ref={flatListRef}
       data={options}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => (
@@ -34,15 +69,14 @@ const PlainList: React.FC<PlainListProps> = ({
       ItemSeparatorComponent={() => <ItemSeparator listType={listType} />}
       ListHeaderComponent={() => <View style={styles.listHeader} />}
       ListFooterComponent={() => <ListFooter />}
-      contentContainerStyle={styles.list}
+      getItemLayout={getItemLayout}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  list: { marginTop: -Spacing.sp2 },
   listHeader: {
-    paddingTop: Spacing.sp3,
+    paddingTop: Spacing.sp1,
   },
 });
 

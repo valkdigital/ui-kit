@@ -54,7 +54,8 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   options,
   favoriteOptions,
   selectedOption,
-  inputContainerStyle,
+  SelectComponent,
+  containerStyle,
   disabled,
   searchPlaceholder,
   listEmptyText,
@@ -67,58 +68,68 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   onSelectOption,
 }) => (
   <>
-    <View
-      style={[
-        styles.container,
-        inputContainerStyle,
-        disabled && { opacity: 0.4 },
-      ]}
-    >
-      <Text type="subtextSemiBold" style={styles.label}>
-        {label}
-      </Text>
+    {SelectComponent ? (
+      SelectComponent({
+        label,
+        placeholder,
+        selectedOption,
+        toggleModal,
+        disabled,
+      })
+    ) : (
       <View
-        style={[
-          styles.selectContainer,
-          !!error && { borderColor: colors.redDark },
-          SELECT_STYLE[size],
-        ]}
+        style={[styles.container, containerStyle, disabled && { opacity: 0.4 }]}
       >
-        <TouchableOpacity
-          onPress={() => toggleModal(true)}
-          style={styles.select}
-          disabled={disabled}
-        >
-          <View style={styles.row}>
-            {selectedOption?.image && (
-              <Image
-                source={selectedOption?.image}
-                style={styles.optionImage}
-                resizeMode="contain"
-              />
-            )}
-            <Text
-              type="bodyRegular"
-              numberOfLines={1}
-              style={
-                selectedOption === undefined ? styles.placeholder : undefined
-              }
-            >
-              {selectedOption?.label ?? placeholder}
-            </Text>
-          </View>
-          <Image
-            source={require("../../media/arrow_down.png")}
-            style={styles.chevron}
-          />
-        </TouchableOpacity>
-      </View>
-      {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
-          {error}
+        <Text type="subtextSemiBold" style={styles.label}>
+          {label}
         </Text>
-      )}
-    </View>
+        <View
+          style={[
+            styles.selectContainer,
+            !!error && { borderColor: colors.redDark },
+            SELECT_STYLE[size],
+          ]}
+        >
+          <TouchableOpacity
+            onPress={() => toggleModal(true)}
+            style={styles.select}
+            disabled={disabled}
+          >
+            <View style={styles.row}>
+              {selectedOption?.image && (
+                <Image
+                  source={selectedOption?.image}
+                  style={styles.optionImage}
+                  resizeMode="contain"
+                />
+              )}
+              <Text
+                type="bodyRegular"
+                numberOfLines={1}
+                style={
+                  selectedOption === undefined ? styles.placeholder : undefined
+                }
+              >
+                {selectedOption?.label ?? placeholder}
+              </Text>
+            </View>
+            <Image
+              source={require("../../media/arrow_down.png")}
+              style={styles.chevron}
+            />
+          </TouchableOpacity>
+        </View>
+        {!!error && (
+          <Text
+            style={styles.error}
+            type="subtextRegular"
+            color={colors.redDark}
+          >
+            {error}
+          </Text>
+        )}
+      </View>
+    )}
     {showModal && (
       <Modal
         animationType="none"
@@ -194,6 +205,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing["sp1/2"],
   },
   select: {
+    height: 40,
     paddingHorizontal: Spacing.sp2,
     paddingVertical: Spacing.sp1,
     flexDirection: "row",

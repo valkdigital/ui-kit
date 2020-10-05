@@ -50,6 +50,8 @@ export default ({
     switch (elementPointer.type) {
       case "SECTION_HEADER": {
         const sectionData = data[sectionIndex].data;
+        // Skip the section header height when title is undefined,
+        // because the render will also be skipped for an undefined title
         if (data[sectionIndex].title !== undefined) {
           offset += getSectionHeaderHeight(sectionIndex);
         }

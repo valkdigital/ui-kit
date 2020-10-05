@@ -31,7 +31,7 @@ import data from "../storybook/data";
         selectedOption={{ label: "Sir", value: "Dhr." }}
         title="Salutation"
         onSelectChange={() => null}
-        inputContainerStyle={{
+        containerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
@@ -40,15 +40,14 @@ import data from "../storybook/data";
       <Picker
         label="Picker (plain list)"
         placeholder="Select an option"
-        options={[
-          { label: "option1", value: "1" },
-          { label: "option2", value: "2" },
-          { label: "option3", value: "3" },
-        ]}
+        options={[...Array(3).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
         selectedOption={undefined}
         title="Title"
         onSelectChange={() => null}
-        inputContainerStyle={{
+        containerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
@@ -57,20 +56,14 @@ import data from "../storybook/data";
       <Picker
         label="Picker (plain list)"
         placeholder="Select an option"
-        options={[
-          { label: "option1", value: "1" },
-          { label: "option2", value: "2" },
-          { label: "option3", value: "3" },
-          { label: "option4", value: "4" },
-          { label: "option5", value: "5" },
-          { label: "option6", value: "6" },
-          { label: "option7", value: "7" },
-          { label: "option8", value: "8" },
-        ]}
-        selectedOption={undefined}
+        options={[...Array(30).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
+        selectedOption={{ label: "option 15", value: "15" }}
         title="Title"
         onSelectChange={() => null}
-        inputContainerStyle={{
+        containerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
@@ -90,7 +83,7 @@ import data from "../storybook/data";
         onSelectChange={() => null}
         searchPlaceholder="Search"
         listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-        inputContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+        containerStyle={{ paddingHorizontal: Spacing.sp3 }}
         listType="searchable"
       />
     </View>

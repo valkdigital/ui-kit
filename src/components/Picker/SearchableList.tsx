@@ -9,7 +9,7 @@ import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
 import PickerRow from "./PickerRow";
 import type { ListTypes, Option } from ".";
-import getSectionItemLayout from "./getSectionItemLayout";
+import getSectionListItemLayout from "./getSectionListItemLayout";
 
 interface Section {
   title?: string;
@@ -37,7 +37,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
 }) => {
   const [search, setSearch] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
-  const sectionRef = useRef<SectionList>(null);
+  const sectionListRef = useRef<SectionList>(null);
 
   const showAlphabet = !search;
 
@@ -51,7 +51,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
       (section) => section.title === letter
     );
     if (sectionIndex < 0) return;
-    sectionRef.current?.scrollToLocation({
+    sectionListRef.current?.scrollToLocation({
       sectionIndex,
       itemIndex: 1,
       viewOffset: 0,
@@ -60,7 +60,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
     });
   };
 
-  const getItemLayout = getSectionItemLayout({
+  const getItemLayout = getSectionListItemLayout({
     getItemHeight: () => Spacing.sp7,
     getSeparatorHeight: () => 1,
     getSectionHeaderHeight: () => Spacing.sp3,
@@ -112,7 +112,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
       return;
     }
 
-    let timeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       const { label } = selectedOption;
       const sectionIndex = sections.findIndex(
         (section) => section.title === label[0].toUpperCase()
@@ -122,7 +122,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
         (data) => data.label === label
       );
       if (itemIndex < 0) return;
-      sectionRef.current?.scrollToLocation({
+      sectionListRef.current?.scrollToLocation({
         sectionIndex,
         // itemIndex + 1 because ListHeaderComponent counts as an index too
         itemIndex: itemIndex + 1,
@@ -147,7 +147,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
       />
       <View style={styles.flex}>
         <SectionList
-          ref={sectionRef}
+          ref={sectionListRef}
           sections={sections}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (

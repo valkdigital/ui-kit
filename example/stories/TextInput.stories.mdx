@@ -34,38 +34,49 @@ import { TextInput, Spacing } from "@valkdigital/ui-kit";
     >
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         error="Invalid input"
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         disabled={true}
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="medium"
         showCheckmark={true}
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="small"
         helperText="Helper text"
       />
       <TextInput
         label="Password"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         value="password 123"
         type="password"
       />
-      <TextInput label="Search" placeholder="Search" type="search" />
+      <TextInput
+        label="Search"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Search"
+        type="search"
+      />
+      <TextInput
+        label="Phone"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="+31 610101010"
+        type="phone"
+      />
     </View>
   </Story>
 </Preview>

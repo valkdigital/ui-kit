@@ -18,16 +18,25 @@ export interface Option {
   image?: ImageSourcePropType;
 }
 
+interface SelectComponentProps {
+  label?: string;
+  placeholder?: string;
+  selectedOption?: Option;
+  disabled?: boolean;
+  toggleModal: (show: boolean) => void;
+}
+
 export interface PickerProps {
   title: string;
-  label: string;
-  placeholder: string;
+  label?: string;
+  placeholder?: string;
   size?: Sizes;
   options: Option[];
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectChange: (option: Option) => void;
-  inputContainerStyle?: ViewStyle;
+  SelectComponent?: React.FC<SelectComponentProps>;
+  containerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
   searchPlaceholder?: string;
@@ -45,7 +54,8 @@ const Picker: React.FC<PickerProps> = ({
   favoriteOptions,
   selectedOption,
   onSelectChange,
-  inputContainerStyle,
+  SelectComponent,
+  containerStyle,
   disabled,
   onSubmit,
   searchPlaceholder,
@@ -116,8 +126,9 @@ const Picker: React.FC<PickerProps> = ({
       selectedOption={selectedOption}
       favoriteOptions={favoriteOptions}
       onSelectOption={onSelectOption}
+      SelectComponent={SelectComponent}
       disabled={disabled}
-      inputContainerStyle={inputContainerStyle}
+      containerStyle={containerStyle}
       searchPlaceholder={searchPlaceholder}
       listEmptyText={listEmptyText}
       error={error}

@@ -200,7 +200,6 @@ const Fields: React.FC = () => {
           disabled={true}
         />
         <TextInput
-          ref={ref}
           label="Label"
           containerStyle={{ marginBottom: Spacing.sp2 }}
           placeholder="Placeholder"
@@ -215,6 +214,13 @@ const Fields: React.FC = () => {
           placeholder="Placeholder"
           size="small"
           helperText="Helper text"
+        />
+        <TextInput
+          ref={ref}
+          label="Phone"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="+31 610101010"
+          type="phone"
         />
       </View>
     </CenteredView>
@@ -249,7 +255,7 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Salutation"
       onSelectChange={action("onSelectChange")}
-      inputContainerStyle={{
+      containerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
@@ -258,15 +264,14 @@ inputStories.add("Picker", () => (
     <Picker
       label="Picker (plain list)"
       placeholder="Select an option"
-      options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
-      ]}
+      options={[...Array(3).keys()].map((_, i) => {
+        const value = (i + 1).toString();
+        return { label: `option ${value}`, value };
+      })}
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      inputContainerStyle={{
+      containerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
@@ -275,20 +280,14 @@ inputStories.add("Picker", () => (
     <Picker
       label="Picker (plain list)"
       placeholder="Select an option"
-      options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
-        { label: "option4", value: "4" },
-        { label: "option5", value: "5" },
-        { label: "option6", value: "6" },
-        { label: "option7", value: "7" },
-        { label: "option8", value: "8" },
-      ]}
-      selectedOption={undefined}
+      options={[...Array(30).keys()].map((_, i) => {
+        const value = (i + 1).toString();
+        return { label: `option ${value}`, value };
+      })}
+      selectedOption={{ label: "option 15", value: "15" }}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      inputContainerStyle={{
+      containerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
@@ -308,7 +307,7 @@ inputStories.add("Picker", () => (
       onSelectChange={action("onSelectChange")}
       searchPlaceholder="Search"
       listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      inputContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+      containerStyle={{ paddingHorizontal: Spacing.sp3 }}
       listType="searchable"
     />
   </CenteredView>

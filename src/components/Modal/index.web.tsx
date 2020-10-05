@@ -99,7 +99,8 @@ export default ({
 
 const styles = StyleSheet.create({
   overlay: {
-    position: "absolute",
+    // @ts-ignore
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
