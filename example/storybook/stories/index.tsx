@@ -230,7 +230,7 @@ inputStories.add("Password", () => (
     <TextInput
       label="Password"
       placeholder="Placeholder"
-      secureTextEntry={true}
+      type="password"
       value="password 123"
     />
   </CenteredView>
