@@ -1,5 +1,5 @@
 import { getStorybookUI, configure } from "@storybook/react-native";
-import { AsyncStorage } from "react-native";
+// import { AsyncStorage } from "react-native";
 
 // import stories
 configure(() => {
@@ -11,7 +11,7 @@ configure(() => {
 
 const StorybookUIRoot = getStorybookUI({
   // @ts-ignore
-  asyncStorage: AsyncStorage,
+  // asyncStorage: AsyncStorage,
 });
 
 export default StorybookUIRoot;

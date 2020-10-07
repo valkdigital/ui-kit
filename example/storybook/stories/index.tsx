@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import {
@@ -9,6 +9,7 @@ import {
   Picker,
   Spacing,
 } from "@valkdigital/ui-kit";
+import data from "../data";
 
 const action = (event: any) => (params: any) => {
   console.log(event, params);
@@ -177,40 +178,52 @@ storiesOf("Cards", module).add("Card vertical list", () => (
 
 const inputStories = storiesOf("InputFields", module);
 
-inputStories.add("Text Input", () => (
-  <CenteredView>
-    <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        error="Invalid input"
-      />
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        disabled={true}
-      />
-      <TextInput
-        label="Label"
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        size="medium"
-        showCheckmark={true}
-      />
+const Fields: React.FC = () => {
+  const ref = useRef<any>(null);
+  return (
+    <CenteredView>
+      <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          error="Invalid input"
+          onSubmitEditing={() => {
+            console.log(ref?.current);
+            ref?.current?.focus();
+          }}
+        />
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          disabled={true}
+        />
+        <TextInput
+          ref={ref}
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          size="medium"
+          showCheckmark={true}
+        />
 
-      <TextInput
-        label="Label"
-        editable={false}
-        containerStyle={{ marginBottom: Spacing.sp2 }}
-        placeholder="Placeholder"
-        size="small"
-        helperText="Helper text"
-      />
-    </View>
-  </CenteredView>
-));
+        <TextInput
+          label="Label"
+          editable={false}
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          size="small"
+          helperText="Helper text"
+        />
+      </View>
+    </CenteredView>
+  );
+};
+
+inputStories.add("Text Input", () => {
+  return <Fields />;
+});
 
 inputStories.add("Password", () => (
   <CenteredView style={{ paddingHorizontal: Spacing.sp4 }}>
@@ -226,13 +239,29 @@ inputStories.add("Password", () => (
 inputStories.add("Picker", () => (
   <CenteredView>
     <Picker
-      label="Picker (responsive size)"
+      label="Salutation"
       placeholder="Select an option"
+      size="small"
       options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
+        { label: "Sir", value: "Dhr." },
+        { label: "Madame", value: "Mevr." },
       ]}
+      selectedOption={undefined}
+      title="Salutation"
+      onSelectChange={action("onSelectChange")}
+      containerStyle={{
+        paddingHorizontal: Spacing.sp3,
+        marginBottom: Spacing.sp2,
+      }}
+      listType="plain"
+    />
+    <Picker
+      label="Picker (plain list)"
+      placeholder="Select an option"
+      options={[...Array(3).keys()].map((_, i) => {
+        const value = (i + 1).toString();
+        return { label: `option ${value}`, value };
+      })}
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
@@ -240,45 +269,40 @@ inputStories.add("Picker", () => (
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      size="responsive"
+      listType="plain"
     />
     <Picker
-      label="Picker (responsive size)"
+      label="Picker (plain list)"
       placeholder="Select an option"
-      options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
-        { label: "option4", value: "4" },
-        { label: "option5", value: "5" },
-        { label: "option6", value: "6" },
-        { label: "option7", value: "7" },
-        { label: "option8", value: "8" },
-      ]}
-      selectedOption={undefined}
+      options={[...Array(30).keys()].map((_, i) => {
+        const value = (i + 1).toString();
+        return { label: `option ${value}`, value };
+      })}
+      selectedOption={{ label: "option 15", value: "15" }}
       title="Title"
       onSelectChange={action("onSelectChange")}
       containerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      size="responsive"
+      listType="plain"
     />
     <Picker
-      label="Picker (full size)"
+      label="Picker (searchable list)"
       placeholder="Select an option"
-      options={[
-        { label: "option1", value: "1" },
-        { label: "option2", value: "2" },
-        { label: "option3", value: "3" },
-        { label: "option4", value: "4" },
-        { label: "option5", value: "5" },
+      options={data.countries}
+      selectedOption={data.countries[9]}
+      favoriteOptions={[
+        data.countries[0],
+        data.countries[11],
+        data.countries[9],
       ]}
-      selectedOption={undefined}
-      title="Title"
+      title="Country"
       onSelectChange={action("onSelectChange")}
+      searchPlaceholder="Search"
+      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
       containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-      size="full"
+      listType="searchable"
     />
   </CenteredView>
 ));

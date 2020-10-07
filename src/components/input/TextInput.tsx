@@ -15,9 +15,10 @@ import { omit } from "lodash";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import colors from "../../style/colors";
+import useMergedRef from "../../hooks/useMergedRef";
 
 interface TextInputProps extends TIP {
-  label: string;
+  label?: string;
   containerStyle?: ViewStyle;
   size?: "small" | "medium" | "large";
   useFullHeight?: boolean;
@@ -32,6 +33,7 @@ interface TextInputProps extends TIP {
    * won't be shown when there is an error.
    */
   helperText?: string;
+  type?: "password" | "search";
 }
 const MAX_HEIGHT = 160;
 const SIZE: { [key: string]: ViewStyle } = {
@@ -49,11 +51,11 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     error,
     onFocus,
     onBlur,
-    secureTextEntry,
     showCheckmark = false,
     editable = true,
     disabled,
     helperText,
+    type,
   } = props;
   //   remove custom props or overrided props
   const passInputProps = omit(
@@ -71,14 +73,14 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     "useFullHeight"
   );
 
-  const [hideText, setHideText] = useState(secureTextEntry);
+  const [hideText, setHideText] = useState(type === "password");
   const [borderColor, setBorderColor] = useState(colors.greyMidDark);
 
   const inputRef = useRef<RNTI>(null);
-  if (ref) {
-    ref = inputRef;
-  }
+  const mergedRef = useMergedRef<RNTI>(ref, inputRef);
+
   const _onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (disabled) return;
     if (!error) setBorderColor(colors.brandBluePrimary);
     onFocus && onFocus(e);
   };
@@ -88,17 +90,17 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     onBlur && onBlur(e);
   };
 
+  const toggleHideText = () => {
+    setHideText(!hideText);
+  };
+
+  const focusInputField = () => inputRef?.current?.focus();
+
   useEffect(() => {
     if (error) setBorderColor(colors.redDark);
   }, [error]);
 
-  const toggleHideText = () => {
-    setHideText(!hideText);
-  };
-  const showIcons = secureTextEntry || showCheckmark;
-
-  const focusInputField = () => inputRef?.current?.focus();
-
+  const showRightIcons = type === "password" || showCheckmark;
   return (
     <View
       style={[
@@ -109,42 +111,53 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
       ]}
     >
       <TouchableOpacity disabled={disabled} onPress={focusInputField}>
-        <Text style={styles.label} type="subtextSemiBold">
-          {label}
-        </Text>
-        <View style={[styles.inputWrapper, { borderColor }]}>
-          <RNTI
-            ref={inputRef}
-            textAlignVertical="center"
-            style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
-            {...passInputProps}
-            onFocus={_onFocus}
-            onBlur={_onBlur}
-            secureTextEntry={hideText}
-            editable={!disabled && editable}
-          />
-          {showIcons && (
-            <View style={styles.iconContainer}>
-              {secureTextEntry && (
-                <TouchableOpacity onPress={toggleHideText}>
-                  <Image
-                    style={styles.icon}
-                    source={require("../../media/eye.png")}
-                  />
-                </TouchableOpacity>
-              )}
-              {showCheckmark && (
-                <TouchableOpacity onPress={toggleHideText}>
-                  <Image
-                    style={styles.icon}
-                    source={require("../../media/checkmark.png")}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-          )}
-        </View>
+        {type !== "search" && (
+          <Text style={styles.label} type="subtextSemiBold">
+            {label}
+          </Text>
+        )}
       </TouchableOpacity>
+
+      <View style={[styles.inputWrapper, { borderColor }]}>
+        {type === "search" && (
+          <Image
+            source={require("../../media/search.png")}
+            style={styles.search}
+          />
+        )}
+
+        <RNTI
+          ref={mergedRef}
+          textAlignVertical="center"
+          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
+          {...passInputProps}
+          onFocus={_onFocus}
+          onBlur={_onBlur}
+          secureTextEntry={hideText}
+          editable={!disabled && editable}
+        />
+
+        {showRightIcons && (
+          <View style={styles.iconContainer}>
+            {type === "password" && (
+              <TouchableOpacity onPress={toggleHideText}>
+                <Image
+                  style={styles.eye}
+                  source={require("../../media/eye.png")}
+                />
+              </TouchableOpacity>
+            )}
+            {showCheckmark && (
+              <TouchableOpacity onPress={toggleHideText}>
+                <Image
+                  style={styles.checkmark}
+                  source={require("../../media/checkmark.png")}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+      </View>
       {!!error && (
         <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
           {error}
@@ -167,7 +180,7 @@ const styles = StyleSheet.create({
     minHeight: 40,
     maxHeight: MAX_HEIGHT,
     flex: 1,
-    paddingLeft: Spacing.sp1,
+    minWidth: 100,
     fontSize: 16,
     borderWidth: 0,
     ...Platform.select({ web: { outlineWidth: 0 } }),
@@ -178,17 +191,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal: Spacing.sp2,
   },
   label: {
     marginBottom: Spacing["sp1/2"],
   },
   error: { marginTop: Spacing["sp1/2"] },
-  icon: {
-    marginHorizontal: Spacing["sp1/2"],
-  },
   iconContainer: {
     flexDirection: "row",
-    paddingHorizontal: Spacing["sp1/2"],
+  },
+  search: {
+    width: 13,
+    height: 13,
+    alignSelf: "center",
+    marginRight: Spacing.sp1,
+  },
+  checkmark: {
+    marginLeft: Spacing.sp1,
+    width: 16,
+    height: 12,
+  },
+  eye: {
+    marginLeft: Spacing.sp1,
+    width: 16,
+    height: 16,
   },
 });
 

@@ -1,10 +1,10 @@
 {
-  "name": "vex.ui.example",
-  "displayName": "VexUi Example",
+  "name": "vex-ui-example",
+  "displayName": "vex-ui-example",
   "expo": {
-    "name": "vex.ui.example",
-    "slug": "vex.ui.example",
-    "description": "Example app for vex-ui",
+    "name": "Valk Digital UI-kit",
+    "slug": "vex-ui-example",
+    "description": "Example app for @valkdigital/ui-kit",
     "privacy": "public",
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],

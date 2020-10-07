@@ -7,7 +7,7 @@ import {
   ColorItem,
 } from "@storybook/addon-docs/blocks";
 import { View } from "react-native";
-import { TextInput } from "@valkdigital/ui-kit";
+import { TextInput, Spacing } from "@valkdigital/ui-kit";
 
 <Meta title="TextInput" />
 
@@ -25,39 +25,51 @@ import { TextInput } from "@valkdigital/ui-kit";
     }}
   >
     <View
-      style={{ justifyContent: "space-evenly", alignItems: "center", flex: 1 }}
+      style={{
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flex: 1,
+        paddingHorizontal: Spacing.sp2,
+      }}
     >
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         error="Invalid input"
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         disabled={true}
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="medium"
         showCheckmark={true}
       />
       <TextInput
         label="Label"
-        containerStyle={{ marginBottom: 16 }}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
         size="small"
         helperText="Helper text"
       />
       <TextInput
         label="Password"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Placeholder"
-        secureTextEntry={true}
         value="password 123"
+        type="password"
+      />
+      <TextInput
+        label="Search"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Search"
+        type="search"
       />
     </View>
   </Story>

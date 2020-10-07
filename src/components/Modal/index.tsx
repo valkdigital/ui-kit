@@ -2,10 +2,12 @@ import React, { ReactNode } from "react";
 import { View, Modal, ViewStyle } from "react-native";
 import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 
+type AnimationTypes = "none" | "slide" | "fade";
+
 interface ModalProps {
   children: ReactNode;
   onClose?: () => void;
-  animationType?: "none" | "slide" | "fade";
+  animationType?: AnimationTypes;
   backgroundColor?: string;
   style?: ViewStyle | ViewStyle[];
 }
@@ -17,7 +19,12 @@ export default ({
   backgroundColor = "transparent",
   style,
 }: ModalProps) => (
-  <Modal visible={true} transparent={true} animationType={animationType}>
+  <Modal
+    visible={true}
+    transparent={true}
+    animationType={animationType}
+    supportedOrientations={["landscape", "portrait"]}
+  >
     <TouchableWithoutFeedback onPress={onClose}>
       <View
         style={[

@@ -2,9 +2,15 @@ import React, { useState, useEffect, ReactNode } from "react";
 import { View, Animated, ViewStyle, Dimensions } from "react-native";
 import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 
+type AnimationTypes = "none" | "slide" | "fade";
+
 const animSwitch: {
-  [key: string]: { start: number; end: number };
+  [key in AnimationTypes]: { start: number; end: number };
 } = {
+  none: {
+    start: 0,
+    end: 0,
+  },
   fade: {
     start: 0,
     end: 1,
@@ -18,7 +24,7 @@ const animSwitch: {
 interface ModalProps {
   children: ReactNode;
   onClose?: () => void;
-  animationType?: "none" | "slide" | "fade";
+  animationType?: AnimationTypes;
   backgroundColor?: string;
   style?: ViewStyle | ViewStyle[];
 }
@@ -63,7 +69,7 @@ export default ({
     return (
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={[styles.overlay, { backgroundColor }, style]}>
-          <TouchableWithoutFeedback onPress={() => {}}>
+          <TouchableWithoutFeedback>
             {typeof children === "function" ? children(closeModal) : children}
           </TouchableWithoutFeedback>
         </View>
@@ -93,7 +99,8 @@ export default ({
 
 const styles = StyleSheet.create({
   overlay: {
-    position: "absolute",
+    // @ts-ignore
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
@@ -101,6 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: Dimensions.get("screen").height,
     justifyContent: "center",
+    overflow: "hidden",
     zIndex: 10,
   },
 });

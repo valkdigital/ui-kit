@@ -2,6 +2,7 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { Text, Picker, Spacing } from "@valkdigital/ui-kit";
 import { View } from "react-native";
 import { WithFigma } from "storybook-addon-figma";
+import data from "../storybook/data";
 
 <Meta title="Picker" />
 
@@ -20,13 +21,29 @@ import { WithFigma } from "storybook-addon-figma";
   >
     <View>
       <Picker
-        label="Picker (responsive size)"
+        label="Salutation"
         placeholder="Select an option"
+        size="small"
         options={[
-          { label: "option1", value: "1" },
-          { label: "option2", value: "2" },
-          { label: "option3", value: "3" },
+          { label: "Sir", value: "Dhr." },
+          { label: "Madame", value: "Mevr." },
         ]}
+        selectedOption={{ label: "Sir", value: "Dhr." }}
+        title="Salutation"
+        onSelectChange={() => null}
+        containerStyle={{
+          paddingHorizontal: Spacing.sp3,
+          marginBottom: Spacing.sp2,
+        }}
+        listType="plain"
+      />
+      <Picker
+        label="Picker (plain list)"
+        placeholder="Select an option"
+        options={[...Array(3).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
         selectedOption={undefined}
         title="Title"
         onSelectChange={() => null}
@@ -34,45 +51,40 @@ import { WithFigma } from "storybook-addon-figma";
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        size="responsive"
+        listType="plain"
       />
       <Picker
-        label="Picker (responsive size)"
+        label="Picker (plain list)"
         placeholder="Select an option"
-        options={[
-          { label: "option1", value: "1" },
-          { label: "option2", value: "2" },
-          { label: "option3", value: "3" },
-          { label: "option4", value: "4" },
-          { label: "option5", value: "5" },
-          { label: "option6", value: "6" },
-          { label: "option7", value: "7" },
-          { label: "option8", value: "8" },
-        ]}
-        selectedOption={undefined}
+        options={[...Array(30).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
+        selectedOption={{ label: "option 15", value: "15" }}
         title="Title"
         onSelectChange={() => null}
         containerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        size="responsive"
+        listType="plain"
       />
       <Picker
-        label="Picker (full size)"
+        label="Picker (searchable list)"
         placeholder="Select an option"
-        options={[
-          { label: "option1", value: "1" },
-          { label: "option2", value: "2" },
-          { label: "option3", value: "3" },
-          { label: "option4", value: "4" },
-          { label: "option5", value: "5" },
+        options={data.countries}
+        selectedOption={data.countries[9]}
+        favoriteOptions={[
+          data.countries[0],
+          data.countries[11],
+          data.countries[9],
         ]}
-        selectedOption={undefined}
-        title="Title"
+        title="Country"
         onSelectChange={() => null}
+        searchPlaceholder="Search"
+        listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
         containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-        size="full"
+        listType="searchable"
       />
     </View>
   </Story>
