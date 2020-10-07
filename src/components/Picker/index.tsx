@@ -23,7 +23,7 @@ interface SelectComponentProps {
   placeholder?: string;
   selectedOption?: Option;
   disabled?: boolean;
-  toggleModal: (show: boolean) => void;
+  showOptions: () => void;
 }
 
 export interface PickerProps {
@@ -31,18 +31,47 @@ export interface PickerProps {
   label?: string;
   placeholder?: string;
   size?: Sizes;
+  /**
+   * Option type is:
+   *
+   * `{
+   * label: string;
+   * value: any;
+   * image?: ImageSourcePropType;
+   * }`
+   */
   options: Option[];
+  /**
+   * This prop is only available when listType equals `"searchable"`.
+   */
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectChange: (option: Option) => void;
-  SelectComponent?: React.FC<SelectComponentProps>;
+  listType?: ListTypes;
   containerStyle?: ViewStyle;
   disabled?: boolean;
   onSubmit?: () => void;
+  /**
+   * This prop is only available when listType equals `"searchable"`.
+   */
   searchPlaceholder?: string;
+  /**
+   * This prop is only available when listType equals `"searchable"`.
+   */
   listEmptyText?: string;
   error?: string;
-  listType: ListTypes;
+  /**
+   * Override internal select component with a custom component.
+   *
+   * SelectComponentProps type is:
+   * `{
+   *  label?: string;
+   *  placeholder?: string;
+   *  selectedOption?: Option;
+   *  disabled?: boolean;
+   *  showOptions: () => void;}`
+   */
+  SelectComponent?: React.FC<SelectComponentProps>;
 }
 
 const Picker: React.FC<PickerProps> = ({
@@ -54,14 +83,14 @@ const Picker: React.FC<PickerProps> = ({
   favoriteOptions,
   selectedOption,
   onSelectChange,
-  SelectComponent,
+  listType = "plain",
   containerStyle,
   disabled,
   onSubmit,
   searchPlaceholder,
   listEmptyText,
   error,
-  listType,
+  SelectComponent,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const translateY = useRef(new Animated.Value(0)).current;
@@ -80,13 +109,13 @@ const Picker: React.FC<PickerProps> = ({
         },
         onPanResponderRelease: (_, gestureState) => {
           const shouldOpen = gestureState.vy <= 0;
-          toggleModal(shouldOpen, true);
+          animateModal(shouldOpen, true);
         },
       }),
     [modalHeight]
   );
 
-  const toggleModal = (shouldOpen: boolean, isSwipeGesture?: boolean) => {
+  const animateModal = (shouldOpen: boolean, isSwipeGesture?: boolean) => {
     if (shouldOpen) {
       if (!isSwipeGesture) {
         // set animation start to bottom
@@ -113,7 +142,15 @@ const Picker: React.FC<PickerProps> = ({
 
   const onSelectOption = (option: Option) => {
     onSelectChange(option);
-    toggleModal(false);
+    animateModal(false);
+  };
+
+  const showOptions = () => {
+    animateModal(true);
+  };
+
+  const hideOptions = () => {
+    animateModal(false);
   };
 
   return (
@@ -134,7 +171,8 @@ const Picker: React.FC<PickerProps> = ({
       error={error}
       listType={listType}
       showModal={showModal}
-      toggleModal={toggleModal}
+      showOptions={showOptions}
+      hideOptions={hideOptions}
       translateY={translateY}
       panResponder={panResponder}
     />

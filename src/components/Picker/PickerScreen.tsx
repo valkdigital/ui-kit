@@ -35,12 +35,17 @@ const SELECT_STYLE: { [key in Sizes]: ViewStyle } = {
   large: {},
 };
 
-type InheritedProps = Omit<PickerProps, "onSubmit" | "onSelectChange" | "size">;
+type InheritedProps = Omit<
+  PickerProps,
+  "onSubmit" | "onSelectChange" | "size" | "listType"
+>;
 
 interface PickerScreenProps extends InheritedProps {
   size: Sizes;
+  listType: ListTypes;
   showModal: boolean;
-  toggleModal: (show: boolean) => void;
+  showOptions: () => void;
+  hideOptions: () => void;
   translateY: Animated.Value;
   panResponder: PanResponderInstance;
   onSelectOption: (option: Option) => void;
@@ -62,7 +67,8 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   error,
   listType,
   showModal,
-  toggleModal,
+  showOptions,
+  hideOptions,
   translateY,
   panResponder,
   onSelectOption,
@@ -73,7 +79,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
         label,
         placeholder,
         selectedOption,
-        toggleModal,
+        showOptions,
         disabled,
       })
     ) : (
@@ -91,7 +97,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           ]}
         >
           <TouchableOpacity
-            onPress={() => toggleModal(true)}
+            onPress={showOptions}
             style={styles.select}
             disabled={disabled}
           >
@@ -133,7 +139,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
     {showModal && (
       <Modal
         animationType="none"
-        onClose={() => toggleModal(false)}
+        onClose={hideOptions}
         backgroundColor="transparent"
       >
         <Animated.View
@@ -150,10 +156,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
               <Text type="h6" textAlign="center">
                 {title}
               </Text>
-              <TouchableOpacity
-                onPress={() => toggleModal(false)}
-                hitSlop={hitSlop}
-              >
+              <TouchableOpacity onPress={hideOptions} hitSlop={hitSlop}>
                 <Image
                   source={require("../../media/close.png")}
                   style={styles.headerRight}

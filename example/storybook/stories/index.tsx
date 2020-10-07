@@ -215,13 +215,6 @@ const Fields: React.FC = () => {
           size="small"
           helperText="Helper text"
         />
-        <TextInput
-          ref={ref}
-          label="Phone"
-          containerStyle={{ marginBottom: Spacing.sp2 }}
-          placeholder="+31 610101010"
-          type="phone"
-        />
       </View>
     </CenteredView>
   );

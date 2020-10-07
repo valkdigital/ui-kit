@@ -108,7 +108,7 @@ const SearchableList: React.FC<SearchableListProps> = ({
   }, [search]);
 
   useEffect(() => {
-    if (!selectedOption?.label || !sections?.length) {
+    if (search || !selectedOption?.label || !sections?.length) {
       return;
     }
 

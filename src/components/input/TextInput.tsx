@@ -16,8 +16,6 @@ import Spacing from "../../style/spacing";
 import Text from "../Text";
 import colors from "../../style/colors";
 import useMergedRef from "../../hooks/useMergedRef";
-import Picker, { Option } from "../Picker";
-import data from "../../../example/storybook/data";
 
 interface TextInputProps extends TIP {
   label?: string;
@@ -35,7 +33,7 @@ interface TextInputProps extends TIP {
    * won't be shown when there is an error.
    */
   helperText?: string;
-  type?: "password" | "search" | "phone";
+  type?: "password" | "search";
 }
 const MAX_HEIGHT = 160;
 const SIZE: { [key: string]: ViewStyle } = {
@@ -77,9 +75,6 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
 
   const [hideText, setHideText] = useState(type === "password");
   const [borderColor, setBorderColor] = useState(colors.greyMidDark);
-  const [selectedCountry, setSelectedCountry] = useState<Option>(
-    data.countries[9]
-  );
 
   const inputRef = useRef<RNTI>(null);
   const mergedRef = useMergedRef<RNTI>(ref, inputRef);
@@ -128,44 +123,6 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
           <Image
             source={require("../../media/search.png")}
             style={styles.search}
-          />
-        )}
-
-        {type === "phone" && (
-          <Picker
-            options={data.countries}
-            selectedOption={selectedCountry}
-            favoriteOptions={[
-              data.countries[0],
-              data.countries[11],
-              data.countries[9],
-            ]}
-            disabled={disabled}
-            title="Phone"
-            onSelectChange={(option) => setSelectedCountry(option)}
-            searchPlaceholder="Search"
-            listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-            containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-            listType="searchable"
-            SelectComponent={({ selectedOption, toggleModal, disabled }) => (
-              <TouchableOpacity
-                style={styles.selectContainer}
-                onPress={() => toggleModal(true)}
-                disabled={disabled}
-              >
-                {selectedOption?.image && (
-                  <Image
-                    source={selectedOption?.image}
-                    style={styles.countryFlag}
-                    resizeMode="contain"
-                  />
-                )}
-                <Image
-                  source={require("../../media/arrow_down.png")}
-                  style={styles.chevron}
-                />
-              </TouchableOpacity>
-            )}
           />
         )}
 
@@ -258,24 +215,6 @@ const styles = StyleSheet.create({
     marginLeft: Spacing.sp1,
     width: 16,
     height: 16,
-  },
-  selectContainer: {
-    alignSelf: "stretch",
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: Spacing.sp1,
-    borderRightColor: colors.greyMidDark,
-    borderRightWidth: 1,
-  },
-  countryFlag: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    marginRight: Spacing.sp1,
-  },
-  chevron: {
-    width: 14,
-    height: 8,
-    marginRight: Spacing.sp1,
   },
 });
 
