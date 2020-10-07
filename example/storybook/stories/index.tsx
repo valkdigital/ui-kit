@@ -200,6 +200,7 @@ const Fields: React.FC = () => {
           disabled={true}
         />
         <TextInput
+          ref={ref}
           label="Label"
           containerStyle={{ marginBottom: Spacing.sp2 }}
           placeholder="Placeholder"
