@@ -37,10 +37,7 @@ const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   },
 };
 
-type InheritedProps = Omit<
-  PickerProps,
-  "onSubmit" | "onSelectChange" | "size" | "listType"
->;
+type InheritedProps = Omit<PickerProps, "onClose" | "onSelectChange">;
 
 interface PickerScreenProps extends InheritedProps {
   size: SelectSizes;

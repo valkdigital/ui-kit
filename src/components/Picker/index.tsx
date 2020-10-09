@@ -57,7 +57,7 @@ export interface PickerProps {
   listType?: ListTypes;
   selectContainerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
-  onSubmit?: () => void;
+  onClose?: () => void;
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
    */
@@ -99,7 +99,7 @@ const Picker: React.FC<PickerProps> = ({
   listType = "sectionList",
   selectContainerStyle,
   disabled,
-  onSubmit,
+  onClose,
   alphabeticScrollEnabled = true,
   searchPlaceholder,
   listEmptyText,
@@ -151,7 +151,7 @@ const Picker: React.FC<PickerProps> = ({
       useNativeDriver: true,
     }).start(() => {
       if (!shouldOpen) {
-        if (onSubmit) onSubmit();
+        if (onClose) onClose();
         setSearch("");
         setShowModal(false);
       }
