@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: Spacing.sp7,
+    height: Spacing.sp5,
     marginHorizontal: Spacing.sp3,
-    paddingVertical: Spacing.sp2,
+    paddingBottom: Spacing.sp2,
   },
   optionImage: {
     width: Spacing.sp3,

@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
     height: Spacing.sp3,
     backgroundColor: colors.greyLight,
     paddingHorizontal: Spacing.sp3,
+    marginBottom: Spacing.sp2,
   },
   listEmpty: {
     paddingHorizontal: Spacing.sp3,

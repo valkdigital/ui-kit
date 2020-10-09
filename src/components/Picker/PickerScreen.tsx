@@ -142,6 +142,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                   onSelectOption={onSelectOption}
                   listEmptyText={listEmptyText}
                   search={search}
+                  needsPaddingTop={true}
                 />
               )}
               {modalSize === "fullscreen" && (

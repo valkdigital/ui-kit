@@ -14,6 +14,7 @@ interface FlatListProps {
   onSelectOption: (option: Option) => void;
   search: string;
   listEmptyText?: string;
+  needsPaddingTop?: boolean;
 }
 
 const FlatList: React.FC<FlatListProps> = ({
@@ -22,16 +23,16 @@ const FlatList: React.FC<FlatListProps> = ({
   onSelectOption,
   search,
   listEmptyText,
+  needsPaddingTop,
 }) => {
   const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
   const flatListRef = useRef<RNFLatList>(null);
 
   const getItemLayout = (_: any, index: number) => {
     const itemHeight = Spacing.sp7 + 1;
-    const listHeaderHeight = Spacing.sp1;
     return {
       length: itemHeight,
-      offset: itemHeight * index + listHeaderHeight,
+      offset: itemHeight * index,
       index,
     };
   };
@@ -91,16 +92,16 @@ const FlatList: React.FC<FlatListProps> = ({
           {listEmptyText}
         </Text>
       )}
-      ListHeaderComponent={() => <View style={styles.listHeader} />}
       ListFooterComponent={() => <ListFooter />}
       getItemLayout={getItemLayout}
+      style={needsPaddingTop && styles.container}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  listHeader: {
-    paddingTop: Spacing.sp1,
+  container: {
+    paddingTop: Spacing.sp3,
   },
   listEmpty: {
     paddingHorizontal: Spacing.sp3,
