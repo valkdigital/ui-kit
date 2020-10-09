@@ -67,7 +67,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   SelectComponent,
   selectContainerStyle,
   disabled,
-  enableAlphabeticScroll,
+  alphabeticScrollEnabled,
   searchPlaceholder,
   listEmptyText,
   error,
@@ -171,7 +171,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                         onSelectOption={onSelectOption}
                         listEmptyText={listEmptyText}
                         search={search}
-                        enableAlphabeticScroll={enableAlphabeticScroll}
+                        alphabeticScrollEnabled={alphabeticScrollEnabled}
                       />
                     )}
                   </View>

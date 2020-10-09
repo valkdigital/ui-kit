@@ -27,7 +27,7 @@ interface SectionListProps {
   onSelectOption: (option: Option) => void;
   search: string;
   listEmptyText?: string;
-  enableAlphabeticScroll?: boolean;
+  alphabeticScrollEnabled?: boolean;
 }
 
 const SectionList: React.FC<SectionListProps> = ({
@@ -37,12 +37,12 @@ const SectionList: React.FC<SectionListProps> = ({
   onSelectOption,
   search,
   listEmptyText,
-  enableAlphabeticScroll,
+  alphabeticScrollEnabled,
 }) => {
   const [sections, setSections] = useState<Section[]>([]);
   const sectionListRef = useRef<RNSectionList>(null);
 
-  const showAlphabet = enableAlphabeticScroll && !search;
+  const showAlphabet = alphabeticScrollEnabled && !search;
 
   const onLetterChange = (letter: string) => {
     if (!sections.length) return;

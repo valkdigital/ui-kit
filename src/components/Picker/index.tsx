@@ -61,7 +61,7 @@ export interface PickerProps {
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
    */
-  enableAlphabeticScroll?: boolean;
+  alphabeticScrollEnabled?: boolean;
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
    */
@@ -100,7 +100,7 @@ const Picker: React.FC<PickerProps> = ({
   selectContainerStyle,
   disabled,
   onSubmit,
-  enableAlphabeticScroll = true,
+  alphabeticScrollEnabled = true,
   searchPlaceholder,
   listEmptyText,
   error,
@@ -191,7 +191,7 @@ const Picker: React.FC<PickerProps> = ({
       disabled={disabled}
       selectContainerStyle={selectContainerStyle}
       searchPlaceholder={searchPlaceholder}
-      enableAlphabeticScroll={enableAlphabeticScroll}
+      alphabeticScrollEnabled={alphabeticScrollEnabled}
       listEmptyText={listEmptyText}
       error={error}
       modalSize={modalSize}
