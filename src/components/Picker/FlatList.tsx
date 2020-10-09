@@ -30,9 +30,10 @@ const FlatList: React.FC<FlatListProps> = ({
 
   const getItemLayout = (_: any, index: number) => {
     const itemHeight = Spacing.sp7 + 1;
+    const extraPadding = needsPaddingTop ? Spacing.sp1 : 0;
     return {
       length: itemHeight,
-      offset: itemHeight * index,
+      offset: itemHeight * index + extraPadding,
       index,
     };
   };
@@ -94,13 +95,15 @@ const FlatList: React.FC<FlatListProps> = ({
       )}
       ListFooterComponent={() => <ListFooter />}
       getItemLayout={getItemLayout}
-      style={needsPaddingTop && styles.container}
+      ListHeaderComponent={() =>
+        needsPaddingTop ? <View style={styles.listHeader} /> : null
+      }
     />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  listHeader: {
     paddingTop: Spacing.sp3,
   },
   listEmpty: {
