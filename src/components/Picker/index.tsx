@@ -49,7 +49,7 @@ export interface PickerProps {
    */
   favoriteOptions?: Option[];
   selectedOption?: Option;
-  onSelectChange: (option?: Option) => void;
+  onSelectChange: (option: Option) => void;
   modalSize?: ModalSizes;
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
@@ -152,6 +152,7 @@ const Picker: React.FC<PickerProps> = ({
     }).start(() => {
       if (!shouldOpen) {
         if (onSubmit) onSubmit();
+        setSearch("");
         setShowModal(false);
       }
     });
@@ -160,7 +161,6 @@ const Picker: React.FC<PickerProps> = ({
   const onSelectOption = (option: Option) => {
     onSelectChange(option);
     animateModal(false);
-    setSearch("");
   };
 
   const showOptions = () => {
@@ -169,8 +169,6 @@ const Picker: React.FC<PickerProps> = ({
 
   const hideOptions = () => {
     animateModal(false);
-    setSearch("");
-    onSelectChange(undefined);
   };
 
   const onSearchChange = (text: string) => {
