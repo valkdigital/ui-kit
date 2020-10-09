@@ -57,10 +57,12 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
     disabled,
     helperText,
     type,
+    style,
   } = props;
   //   remove custom props or overrided props
   const passInputProps = omit(
     props,
+    "style",
     "containerStyle",
     "label",
     "size",
@@ -130,7 +132,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
         <RNTI
           ref={mergedRef}
           textAlignVertical="center"
-          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }]}
+          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }, style]}
           {...passInputProps}
           onFocus={_onFocus}
           onBlur={_onBlur}
@@ -177,7 +179,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   input: {
-    textAlignVertical: "center",
     minHeight: 40,
     maxHeight: MAX_HEIGHT,
     flex: 1,

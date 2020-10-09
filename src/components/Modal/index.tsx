@@ -1,6 +1,12 @@
 import React, { ReactNode } from "react";
-import { View, Modal, ViewStyle } from "react-native";
-import { StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Modal,
+  ViewStyle,
+  StyleProp,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 type AnimationTypes = "none" | "slide" | "fade";
 
