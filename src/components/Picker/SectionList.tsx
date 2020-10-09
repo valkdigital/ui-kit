@@ -60,9 +60,9 @@ const SectionList: React.FC<SectionListProps> = ({
   };
 
   const getItemLayout = getSectionListItemLayout({
-    getItemHeight: () => Spacing.sp7,
-    getSeparatorHeight: () => 1,
-    getSectionHeaderHeight: () => Spacing.sp3,
+    getItemHeight: () => Spacing.sp5,
+    getSeparatorHeight: () => Spacing.sp2 + 1,
+    getSectionHeaderHeight: () => Spacing.sp5,
   });
 
   const removeAccents = (text: string) => {
