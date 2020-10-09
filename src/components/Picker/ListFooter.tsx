@@ -6,6 +6,6 @@ export default () => <View style={styles.listFooter} />;
 
 const styles = StyleSheet.create({
   listFooter: {
-    paddingBottom: Spacing.sp3,
+    paddingBottom: Spacing.sp2,
   },
 });

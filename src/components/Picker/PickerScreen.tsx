@@ -220,7 +220,12 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
   },
-  input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
+  input: {
+    paddingVertical: Spacing.sp3,
+    paddingHorizontal: Spacing.sp3,
+    backgroundColor: "#ffffff",
+    zIndex: 10,
+  },
   flex: { flex: 1 },
 });
 

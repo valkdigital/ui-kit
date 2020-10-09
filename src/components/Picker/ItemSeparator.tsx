@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     marginHorizontal: Spacing.sp3,
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
-    marginBottom: Spacing.sp2,
   },
   alphabetOffset: {
     marginRight: Spacing.sp5,

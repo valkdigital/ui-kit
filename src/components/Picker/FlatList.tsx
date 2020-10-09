@@ -95,9 +95,10 @@ const FlatList: React.FC<FlatListProps> = ({
       )}
       ListFooterComponent={() => <ListFooter />}
       getItemLayout={getItemLayout}
-      ListHeaderComponent={() =>
-        needsPaddingTop ? <View style={styles.listHeader} /> : null
-      }
+      ListHeaderComponent={() => (
+        <View style={needsPaddingTop && { paddingTop: Spacing.sp3 }} />
+      )}
+      style={{ marginTop: -Spacing.sp2 }}
     />
   );
 };
