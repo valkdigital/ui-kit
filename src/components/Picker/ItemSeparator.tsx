@@ -2,17 +2,16 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
-import type { ListTypes } from ".";
 
 interface ItemSeparatorProps {
-  listType: ListTypes;
+  needsSpaceForAlphabet?: boolean;
 }
 
-export default ({ listType }: ItemSeparatorProps) => (
+export default ({ needsSpaceForAlphabet }: ItemSeparatorProps) => (
   <View
     style={[
       styles.itemSeparator,
-      listType === "searchable" && styles.alphabetOffset,
+      needsSpaceForAlphabet && styles.alphabetOffset,
     ]}
   />
 );

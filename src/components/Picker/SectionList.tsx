@@ -1,14 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, SectionList, LayoutAnimation } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SectionList as RNSectionList,
+  LayoutAnimation,
+} from "react-native";
 import Spacing from "../../style/spacing";
 import colors from "../../style/colors";
-import TextInput from "../input/TextInput";
 import Text from "../Text";
 import AlphabetScroll from "./AlphabetScroll";
 import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
 import PickerRow from "./PickerRow";
-import type { ListTypes, Option } from ".";
+import type { Option } from ".";
 import getSectionListItemLayout from "./getSectionListItemLayout";
 
 interface Section {
@@ -16,34 +20,29 @@ interface Section {
   data: Option[];
 }
 
-interface SearchableListProps {
+interface SectionListProps {
   options: Option[];
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
-  searchPlaceholder?: string;
+  search: string;
   listEmptyText?: string;
-  listType: ListTypes;
+  enableAlphabeticScroll?: boolean;
 }
 
-const SearchableList: React.FC<SearchableListProps> = ({
+const SectionList: React.FC<SectionListProps> = ({
   options,
   favoriteOptions,
   selectedOption,
   onSelectOption,
-  searchPlaceholder,
+  search,
   listEmptyText,
-  listType,
+  enableAlphabeticScroll,
 }) => {
-  const [search, setSearch] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
-  const sectionListRef = useRef<SectionList>(null);
+  const sectionListRef = useRef<RNSectionList>(null);
 
-  const showAlphabet = !search;
-
-  const onSearchChange = (text: string) => {
-    setSearch(text);
-  };
+  const showAlphabet = enableAlphabeticScroll && !search;
 
   const onLetterChange = (letter: string) => {
     if (!sections.length) return;
@@ -139,58 +138,50 @@ const SearchableList: React.FC<SearchableListProps> = ({
 
   return (
     <>
-      <TextInput
-        containerStyle={styles.input}
-        placeholder={searchPlaceholder}
-        onChangeText={onSearchChange}
-        type="search"
+      <RNSectionList
+        ref={sectionListRef}
+        sections={sections}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => (
+          <PickerRow
+            option={item}
+            selectedOption={selectedOption}
+            onSelectOption={onSelectOption}
+            needsSpaceForAlphabet={showAlphabet}
+          />
+        )}
+        renderSectionHeader={({ section: { title } }) => {
+          if (!title) return null;
+          return (
+            <View style={styles.sectionHeader}>
+              <Text type="h6" textAlign="left">
+                {title}
+              </Text>
+            </View>
+          );
+        }}
+        ItemSeparatorComponent={() => (
+          <ItemSeparator needsSpaceForAlphabet={showAlphabet} />
+        )}
+        ListEmptyComponent={() => (
+          <Text
+            type="subtextRegular"
+            color={colors.greyDark}
+            style={styles.listEmpty}
+          >
+            {listEmptyText}
+          </Text>
+        )}
+        ListFooterComponent={<ListFooter />}
+        stickySectionHeadersEnabled={true}
+        getItemLayout={getItemLayout}
       />
-      <View style={styles.flex}>
-        <SectionList
-          ref={sectionListRef}
-          sections={sections}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => (
-            <PickerRow
-              option={item}
-              selectedOption={selectedOption}
-              onSelectOption={onSelectOption}
-              listType={listType}
-            />
-          )}
-          renderSectionHeader={({ section: { title } }) => {
-            if (!title) return null;
-            return (
-              <View style={styles.sectionHeader}>
-                <Text type="h6" textAlign="left">
-                  {title}
-                </Text>
-              </View>
-            );
-          }}
-          ItemSeparatorComponent={() => <ItemSeparator listType={listType} />}
-          ListEmptyComponent={() => (
-            <Text
-              type="subtextRegular"
-              color={colors.greyDark}
-              style={styles.listEmpty}
-            >
-              {listEmptyText}
-            </Text>
-          )}
-          ListFooterComponent={<ListFooter />}
-          stickySectionHeadersEnabled={true}
-          getItemLayout={getItemLayout}
-        />
-        {showAlphabet && <AlphabetScroll onLetterChange={onLetterChange} />}
-      </View>
+      {showAlphabet && <AlphabetScroll onLetterChange={onLetterChange} />}
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
-  flex: { flex: 1 },
   sectionHeader: {
     justifyContent: "center",
     height: Spacing.sp3,
@@ -202,4 +193,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchableList;
+export default SectionList;

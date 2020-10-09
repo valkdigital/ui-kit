@@ -9,6 +9,7 @@ import {
   ImageStyle,
   Dimensions,
   TextStyle,
+  StyleProp,
 } from "react-native";
 import Text from "./Text";
 import Button from "./Button";
@@ -93,7 +94,7 @@ export interface CardProps {
   buttonText?: string;
   onPress: () => void;
   size?: Sizes;
-  wrapperStyle?: ViewStyle;
+  wrapperStyle?: StyleProp<ViewStyle>;
 }
 const Card: React.FC<CardProps> = ({
   image,

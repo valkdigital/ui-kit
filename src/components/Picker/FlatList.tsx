@@ -1,25 +1,30 @@
-import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, StyleSheet, FlatList as RNFLatList } from "react-native";
 import PickerRow from "./PickerRow";
 import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
-import type { ListTypes, Option } from ".";
+import type { Option } from ".";
 import Spacing from "../../style/spacing";
+import Text from "../Text";
+import colors from "../../style/colors";
 
-interface PlainListProps {
+interface FlatListProps {
   options: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
-  listType: ListTypes;
+  search: string;
+  listEmptyText?: string;
 }
 
-const PlainList: React.FC<PlainListProps> = ({
+const FlatList: React.FC<FlatListProps> = ({
   options,
   selectedOption,
   onSelectOption,
-  listType,
+  search,
+  listEmptyText,
 }) => {
-  const flatListRef = useRef<FlatList>(null);
+  const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+  const flatListRef = useRef<RNFLatList>(null);
 
   const getItemLayout = (_: any, index: number) => {
     const itemHeight = Spacing.sp7 + 1;
@@ -32,13 +37,15 @@ const PlainList: React.FC<PlainListProps> = ({
   };
 
   useEffect(() => {
-    if (!selectedOption?.label) {
+    if (search || !selectedOption?.label || !filteredOptions?.length) {
       return;
     }
 
     const timeout = setTimeout(() => {
       const { label } = selectedOption;
-      const index = options.findIndex((option) => option.label === label);
+      const index = filteredOptions.findIndex(
+        (option) => option.label === label
+      );
       if (index < 0) return;
       flatListRef.current?.scrollToIndex({
         index,
@@ -53,20 +60,37 @@ const PlainList: React.FC<PlainListProps> = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (!search) return;
+    setFilteredOptions(
+      options.filter((option) =>
+        option.label.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search]);
+
   return (
-    <FlatList
+    <RNFLatList
       ref={flatListRef}
-      data={options}
+      data={filteredOptions}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => (
         <PickerRow
           option={item}
           selectedOption={selectedOption}
           onSelectOption={onSelectOption}
-          listType={listType}
         />
       )}
-      ItemSeparatorComponent={() => <ItemSeparator listType={listType} />}
+      ItemSeparatorComponent={() => <ItemSeparator />}
+      ListEmptyComponent={() => (
+        <Text
+          type="subtextRegular"
+          color={colors.greyDark}
+          style={styles.listEmpty}
+        >
+          {listEmptyText}
+        </Text>
+      )}
       ListHeaderComponent={() => <View style={styles.listHeader} />}
       ListFooterComponent={() => <ListFooter />}
       getItemLayout={getItemLayout}
@@ -78,6 +102,9 @@ const styles = StyleSheet.create({
   listHeader: {
     paddingTop: Spacing.sp1,
   },
+  listEmpty: {
+    paddingHorizontal: Spacing.sp3,
+  },
 });
 
-export default PlainList;
+export default FlatList;

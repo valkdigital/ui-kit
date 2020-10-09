@@ -31,14 +31,14 @@ import data from "../storybook/data";
         selectedOption={{ label: "Sir", value: "Dhr." }}
         title="Salutation"
         onSelectChange={() => null}
-        containerStyle={{
+        selectContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        listType="plain"
+        modalSize="responsive"
       />
       <Picker
-        label="Picker (plain list)"
+        label="Picker (responsive)"
         placeholder="Select an option"
         options={[...Array(3).keys()].map((_, i) => {
           const value = (i + 1).toString();
@@ -47,14 +47,14 @@ import data from "../storybook/data";
         selectedOption={undefined}
         title="Title"
         onSelectChange={() => null}
-        containerStyle={{
+        selectContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        listType="plain"
+        modalSize="responsive"
       />
       <Picker
-        label="Picker (plain list)"
+        label="Picker (fullscreen flatList)"
         placeholder="Select an option"
         options={[...Array(30).keys()].map((_, i) => {
           const value = (i + 1).toString();
@@ -63,14 +63,17 @@ import data from "../storybook/data";
         selectedOption={{ label: "option 15", value: "15" }}
         title="Title"
         onSelectChange={() => null}
-        containerStyle={{
+        selectContainerStyle={{
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
-        listType="plain"
+        searchPlaceholder="Search"
+        listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
+        listType="flatList"
+        modalSize="fullscreen"
       />
       <Picker
-        label="Picker (searchable list)"
+        label="Picker (fullscreen sectionList)"
         placeholder="Select an option"
         options={data.countries}
         selectedOption={data.countries[9]}
@@ -83,8 +86,9 @@ import data from "../storybook/data";
         onSelectChange={() => null}
         searchPlaceholder="Search"
         listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-        containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-        listType="searchable"
+        selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+        listType="sectionList"
+        modalSize="fullscreen"
       />
     </View>
   </Story>

@@ -15,24 +15,26 @@ import Spacing from "../../style/spacing";
 import hitSlop from "../../style/hitSlop";
 import Modal from "../Modal";
 import Text from "../Text";
-import type { ListTypes, Sizes, Option, PickerProps } from ".";
-import PlainList from "./PlainList";
-import SearchableList from "./SearchableList";
+import type {
+  ListTypes,
+  SelectSizes,
+  Option,
+  PickerProps,
+  ModalSizes,
+} from ".";
+import FlatList from "./FlatList";
+import SectionList from "./SectionList";
 import DismissKeyboard from "./DismissKeyboard";
+import TextInput from "../input/TextInput";
+import Select from "./Select";
 
-const MODAL_STYLE: { [key in ListTypes]: ViewStyle } = {
-  plain: {
+const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
+  responsive: {
     maxHeight: Dimensions.get("window").height - Spacing.sp8,
   },
-  searchable: {
+  fullscreen: {
     top: Spacing.sp8,
   },
-};
-
-const SELECT_STYLE: { [key in Sizes]: ViewStyle } = {
-  small: { width: 160 },
-  medium: { width: 287 },
-  large: {},
 };
 
 type InheritedProps = Omit<
@@ -41,7 +43,8 @@ type InheritedProps = Omit<
 >;
 
 interface PickerScreenProps extends InheritedProps {
-  size: Sizes;
+  size: SelectSizes;
+  modalSize: ModalSizes;
   listType: ListTypes;
   showModal: boolean;
   showOptions: () => void;
@@ -49,6 +52,8 @@ interface PickerScreenProps extends InheritedProps {
   translateY: Animated.Value;
   panResponder: PanResponderInstance;
   onSelectOption: (option: Option) => void;
+  search: string;
+  onSearchChange: (search: string) => void;
 }
 
 const PickerScreen: React.FC<PickerScreenProps> = ({
@@ -60,11 +65,13 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   favoriteOptions,
   selectedOption,
   SelectComponent,
-  containerStyle,
+  selectContainerStyle,
   disabled,
+  enableAlphabeticScroll,
   searchPlaceholder,
   listEmptyText,
   error,
+  modalSize,
   listType,
   showModal,
   showOptions,
@@ -72,6 +79,8 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   translateY,
   panResponder,
   onSelectOption,
+  search,
+  onSearchChange,
 }) => (
   <>
     {SelectComponent ? (
@@ -81,60 +90,19 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
         selectedOption,
         showOptions,
         disabled,
+        error,
       })
     ) : (
-      <View
-        style={[styles.container, containerStyle, disabled && { opacity: 0.4 }]}
-      >
-        <Text type="subtextSemiBold" style={styles.label}>
-          {label}
-        </Text>
-        <View
-          style={[
-            styles.selectContainer,
-            !!error && { borderColor: colors.redDark },
-            SELECT_STYLE[size],
-          ]}
-        >
-          <TouchableOpacity
-            onPress={showOptions}
-            style={styles.select}
-            disabled={disabled}
-          >
-            <View style={styles.row}>
-              {selectedOption?.image && (
-                <Image
-                  source={selectedOption?.image}
-                  style={styles.optionImage}
-                  resizeMode="contain"
-                />
-              )}
-              <Text
-                type="bodyRegular"
-                numberOfLines={1}
-                style={
-                  selectedOption === undefined ? styles.placeholder : undefined
-                }
-              >
-                {selectedOption?.label ?? placeholder}
-              </Text>
-            </View>
-            <Image
-              source={require("../../media/arrow_down.png")}
-              style={styles.chevron}
-            />
-          </TouchableOpacity>
-        </View>
-        {!!error && (
-          <Text
-            style={styles.error}
-            type="subtextRegular"
-            color={colors.redDark}
-          >
-            {error}
-          </Text>
-        )}
-      </View>
+      <Select
+        label={label}
+        placeholder={placeholder}
+        selectContainerStyle={selectContainerStyle}
+        disabled={disabled}
+        error={error}
+        size={size}
+        showOptions={showOptions}
+        selectedOption={selectedOption}
+      />
     )}
     {showModal && (
       <Modal
@@ -145,7 +113,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
         <Animated.View
           style={[
             styles.modal,
-            MODAL_STYLE[listType],
+            MODAL_STYLE[modalSize],
             { transform: [{ translateY }] },
           ]}
         >
@@ -166,28 +134,49 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           </View>
 
           <DismissKeyboard>
-            <View style={styles.content}>
-              {listType === "plain" && (
-                <PlainList
+            <>
+              {modalSize === "responsive" && (
+                <FlatList
                   options={options}
                   selectedOption={selectedOption}
                   onSelectOption={onSelectOption}
-                  listType={listType}
-                />
-              )}
-
-              {listType === "searchable" && (
-                <SearchableList
-                  options={options}
-                  favoriteOptions={favoriteOptions}
-                  selectedOption={selectedOption}
-                  onSelectOption={onSelectOption}
-                  listType={listType}
-                  searchPlaceholder={searchPlaceholder}
                   listEmptyText={listEmptyText}
+                  search={search}
                 />
               )}
-            </View>
+              {modalSize === "fullscreen" && (
+                <View style={styles.flex}>
+                  <TextInput
+                    containerStyle={styles.input}
+                    placeholder={searchPlaceholder}
+                    onChangeText={onSearchChange}
+                    type="search"
+                  />
+                  <View style={styles.flex}>
+                    {listType === "flatList" && (
+                      <FlatList
+                        options={options}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
+                      />
+                    )}
+                    {listType === "sectionList" && (
+                      <SectionList
+                        options={options}
+                        favoriteOptions={favoriteOptions}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
+                        enableAlphabeticScroll={enableAlphabeticScroll}
+                      />
+                    )}
+                  </View>
+                </View>
+              )}
+            </>
           </DismissKeyboard>
         </Animated.View>
       </Modal>
@@ -196,48 +185,6 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
 );
 
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: "stretch",
-  },
-  label: {
-    marginBottom: Spacing["sp1/2"],
-  },
-  selectContainer: {
-    borderWidth: 1,
-    borderColor: colors.greyMidDark,
-    borderRadius: Spacing["sp1/2"],
-  },
-  select: {
-    height: 40,
-    paddingHorizontal: Spacing.sp2,
-    paddingVertical: Spacing.sp1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-  },
-  optionImage: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    alignSelf: "center",
-    marginRight: Spacing.sp1,
-  },
-  chevron: {
-    marginLeft: Spacing.sp2,
-    width: 14,
-    height: 8,
-  },
-  disabled: {
-    color: colors.greyMidDark,
-  },
-  placeholder: {
-    flex: 1,
-    color: colors.greyDark,
-  },
-  error: { marginTop: Spacing["sp1/2"] },
   modal: {
     position: "absolute",
     bottom: 0,
@@ -248,7 +195,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
   },
-  content: { flex: 1 },
   handle: {
     width: Spacing.sp4,
     height: Spacing["sp1/2"],
@@ -273,6 +219,8 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
   },
+  input: { marginVertical: Spacing.sp3, marginHorizontal: Spacing.sp3 },
+  flex: { flex: 1 },
 });
 
 export default PickerScreen;

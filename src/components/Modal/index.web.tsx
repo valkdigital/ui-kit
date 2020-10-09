@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactNode } from "react";
-import { View, Animated, ViewStyle, Dimensions } from "react-native";
+import { View, Animated, ViewStyle, Dimensions, StyleProp } from "react-native";
 import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 
 type AnimationTypes = "none" | "slide" | "fade";
@@ -26,7 +26,7 @@ interface ModalProps {
   onClose?: () => void;
   animationType?: AnimationTypes;
   backgroundColor?: string;
-  style?: ViewStyle | ViewStyle[];
+  style?: StyleProp<ViewStyle>;
 }
 
 export default ({

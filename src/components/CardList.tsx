@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FlatList, View, ViewStyle } from "react-native";
+import { FlatList, StyleProp, View, ViewStyle } from "react-native";
 import Card, { CardProps } from "./Card";
 import spacing from "../style/spacing";
 import ThemeContext from "../style/ThemeContext";
@@ -13,7 +13,7 @@ interface CardListProps {
   direction: Directions;
   size: CardProps["size"];
   onItemPress: (item: CardItem) => void;
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const SEPARATOR_STYLE: { [key in Directions]: ViewStyle } = {

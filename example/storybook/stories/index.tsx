@@ -246,17 +246,17 @@ inputStories.add("Picker", () => (
         { label: "Sir", value: "Dhr." },
         { label: "Madame", value: "Mevr." },
       ]}
-      selectedOption={undefined}
+      selectedOption={{ label: "Sir", value: "Dhr." }}
       title="Salutation"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      selectContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      listType="plain"
+      modalSize="responsive"
     />
     <Picker
-      label="Picker (plain list)"
+      label="Picker (responsive)"
       placeholder="Select an option"
       options={[...Array(3).keys()].map((_, i) => {
         const value = (i + 1).toString();
@@ -265,14 +265,14 @@ inputStories.add("Picker", () => (
       selectedOption={undefined}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      selectContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      listType="plain"
+      modalSize="responsive"
     />
     <Picker
-      label="Picker (plain list)"
+      label="Picker (fullscreen flatList)"
       placeholder="Select an option"
       options={[...Array(30).keys()].map((_, i) => {
         const value = (i + 1).toString();
@@ -281,14 +281,17 @@ inputStories.add("Picker", () => (
       selectedOption={{ label: "option 15", value: "15" }}
       title="Title"
       onSelectChange={action("onSelectChange")}
-      containerStyle={{
+      selectContainerStyle={{
         paddingHorizontal: Spacing.sp3,
         marginBottom: Spacing.sp2,
       }}
-      listType="plain"
+      searchPlaceholder="Search"
+      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
+      listType="flatList"
+      modalSize="fullscreen"
     />
     <Picker
-      label="Picker (searchable list)"
+      label="Picker (fullscreen sectionList)"
       placeholder="Select an option"
       options={data.countries}
       selectedOption={data.countries[9]}
@@ -301,8 +304,9 @@ inputStories.add("Picker", () => (
       onSelectChange={action("onSelectChange")}
       searchPlaceholder="Search"
       listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      containerStyle={{ paddingHorizontal: Spacing.sp3 }}
-      listType="searchable"
+      selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+      listType="sectionList"
+      modalSize="fullscreen"
     />
   </CenteredView>
 ));

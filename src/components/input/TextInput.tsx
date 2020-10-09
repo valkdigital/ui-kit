@@ -10,6 +10,7 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  StyleProp,
 } from "react-native";
 import { omit } from "lodash";
 import Spacing from "../../style/spacing";
@@ -19,7 +20,7 @@ import useMergedRef from "../../hooks/useMergedRef";
 
 interface TextInputProps extends TIP {
   label?: string;
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
   size?: "small" | "medium" | "large";
   useFullHeight?: boolean;
 

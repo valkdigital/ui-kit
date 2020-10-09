@@ -6,11 +6,13 @@ import {
   PanResponder,
   Keyboard,
   ImageSourcePropType,
+  StyleProp,
 } from "react-native";
 import PickerScreen from "./PickerScreen";
 
-export type ListTypes = "plain" | "searchable";
-export type Sizes = "small" | "medium" | "large";
+export type ListTypes = "flatList" | "sectionList";
+export type ModalSizes = "responsive" | "fullscreen";
+export type SelectSizes = "small" | "medium" | "large";
 
 export interface Option {
   label: string;
@@ -24,13 +26,14 @@ interface SelectComponentProps {
   selectedOption?: Option;
   disabled?: boolean;
   showOptions: () => void;
+  error?: string;
 }
 
 export interface PickerProps {
   title: string;
   label?: string;
   placeholder?: string;
-  size?: Sizes;
+  size?: SelectSizes;
   /**
    * Option type is:
    *
@@ -42,21 +45,29 @@ export interface PickerProps {
    */
   options: Option[];
   /**
-   * This prop is only available when listType equals `"searchable"`.
+   * This prop is only active if listType equals `"sectionList"`.
    */
   favoriteOptions?: Option[];
   selectedOption?: Option;
-  onSelectChange: (option: Option) => void;
+  onSelectChange: (option?: Option) => void;
+  modalSize?: ModalSizes;
+  /**
+   * This prop is only active if modalSize equals `"fullscreen"`.
+   */
   listType?: ListTypes;
-  containerStyle?: ViewStyle;
+  selectContainerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
   onSubmit?: () => void;
   /**
-   * This prop is only available when listType equals `"searchable"`.
+   * This prop is only active if modalSize equals `"fullscreen"`.
+   */
+  enableAlphabeticScroll?: boolean;
+  /**
+   * This prop is only active if modalSize equals `"fullscreen"`.
    */
   searchPlaceholder?: string;
   /**
-   * This prop is only available when listType equals `"searchable"`.
+   * This prop is only active if modalSize equals `"fullscreen"`.
    */
   listEmptyText?: string;
   error?: string;
@@ -69,7 +80,8 @@ export interface PickerProps {
    *  placeholder?: string;
    *  selectedOption?: Option;
    *  disabled?: boolean;
-   *  showOptions: () => void;}`
+   *  showOptions: () => void;
+   *  error?: boolean;}`
    */
   SelectComponent?: React.FC<SelectComponentProps>;
 }
@@ -83,10 +95,12 @@ const Picker: React.FC<PickerProps> = ({
   favoriteOptions,
   selectedOption,
   onSelectChange,
-  listType = "plain",
-  containerStyle,
+  modalSize = "fullscreen",
+  listType = "sectionList",
+  selectContainerStyle,
   disabled,
   onSubmit,
+  enableAlphabeticScroll = true,
   searchPlaceholder,
   listEmptyText,
   error,
@@ -94,8 +108,11 @@ const Picker: React.FC<PickerProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const translateY = useRef(new Animated.Value(0)).current;
+  const [search, setSearch] = useState("");
 
   const modalHeight = Dimensions.get("window").height;
+  const overriddenListType: ListTypes =
+    modalSize === "responsive" ? "flatList" : listType;
 
   const panResponder = useMemo(
     () =>
@@ -143,6 +160,7 @@ const Picker: React.FC<PickerProps> = ({
   const onSelectOption = (option: Option) => {
     onSelectChange(option);
     animateModal(false);
+    setSearch("");
   };
 
   const showOptions = () => {
@@ -151,6 +169,12 @@ const Picker: React.FC<PickerProps> = ({
 
   const hideOptions = () => {
     animateModal(false);
+    setSearch("");
+    onSelectChange(undefined);
+  };
+
+  const onSearchChange = (text: string) => {
+    setSearch(text);
   };
 
   return (
@@ -165,16 +189,20 @@ const Picker: React.FC<PickerProps> = ({
       onSelectOption={onSelectOption}
       SelectComponent={SelectComponent}
       disabled={disabled}
-      containerStyle={containerStyle}
+      selectContainerStyle={selectContainerStyle}
       searchPlaceholder={searchPlaceholder}
+      enableAlphabeticScroll={enableAlphabeticScroll}
       listEmptyText={listEmptyText}
       error={error}
-      listType={listType}
+      modalSize={modalSize}
+      listType={overriddenListType}
       showModal={showModal}
       showOptions={showOptions}
       hideOptions={hideOptions}
       translateY={translateY}
       panResponder={panResponder}
+      search={search}
+      onSearchChange={onSearchChange}
     />
   );
 };

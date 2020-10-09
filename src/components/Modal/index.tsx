@@ -9,7 +9,7 @@ interface ModalProps {
   onClose?: () => void;
   animationType?: AnimationTypes;
   backgroundColor?: string;
-  style?: ViewStyle | ViewStyle[];
+  style?: StyleProp<ViewStyle>;
 }
 
 export default ({

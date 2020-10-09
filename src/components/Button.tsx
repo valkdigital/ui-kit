@@ -5,6 +5,7 @@ import {
   ViewStyle,
   ImageStyle,
   ActivityIndicator,
+  StyleProp,
 } from "react-native";
 import spacing from "../style/spacing";
 import ThemeContext from "../style/ThemeContext";
@@ -49,7 +50,7 @@ interface TestProps {
   disabled?: boolean;
   iconSource?: object | number | Function;
   iconStyle?: ImageStyle;
-  style?: ViewStyle | ViewStyle[];
+  style?: StyleProp<ViewStyle>;
 }
 
 export const Button: React.FC<TestProps> = ({

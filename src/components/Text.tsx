@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import {
+  StyleProp,
   Text as RNText,
   TextProps as RNTextProps,
   TextStyle,
@@ -12,7 +13,7 @@ interface TextProps extends RNTextProps {
   type?: TypographyLiterals;
   textAlign?: "left" | "center" | "right";
   color?: string;
-  style?: TextStyle | TextStyle[];
+  style?: StyleProp<TextStyle>;
 }
 
 const Text: React.FC<TextProps> = (props) => {
