@@ -27,6 +27,7 @@ import SectionList from "./SectionList";
 import DismissKeyboard from "./DismissKeyboard";
 import TextInput from "../input/TextInput";
 import Select from "./Select";
+import AddOption from "./AddOption";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -37,7 +38,10 @@ const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   },
 };
 
-type InheritedProps = Omit<PickerProps, "onClose" | "onSelectChange">;
+type InheritedProps = Omit<
+  PickerProps,
+  "onClose" | "onSelectChange" | "onAddOptionPress"
+>;
 
 interface PickerScreenProps extends InheritedProps {
   size: SelectSizes;
@@ -51,6 +55,7 @@ interface PickerScreenProps extends InheritedProps {
   onSelectOption: (option: Option) => void;
   search: string;
   onSearchChange: (search: string) => void;
+  onAddOption: () => void;
 }
 
 const PickerScreen: React.FC<PickerScreenProps> = ({
@@ -64,6 +69,9 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   SelectComponent,
   selectContainerStyle,
   disabled,
+  addOptionEnabled,
+  addOptionTitle,
+  onAddOption,
   alphabeticScrollEnabled,
   searchPlaceholder,
   listEmptyText,
@@ -150,6 +158,12 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                     onChangeText={onSearchChange}
                     type="search"
                   />
+                  {addOptionEnabled && !!search && (
+                    <AddOption
+                      onAddOptionPress={onAddOption}
+                      addOptionTitle={addOptionTitle}
+                    />
+                  )}
                   <View style={styles.flex}>
                     {listType === "flatList" && (
                       <FlatList

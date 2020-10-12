@@ -61,6 +61,18 @@ export interface PickerProps {
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
    */
+  addOptionEnabled?: boolean;
+  /**
+   * This prop is only active if modalSize equals `"fullscreen"`.
+   */
+  addOptionTitle?: string;
+  /**
+   * This prop is only active if modalSize equals `"fullscreen"`.
+   */
+  onAddOptionPress?: (searchInput: string) => void;
+  /**
+   * This prop is only active if modalSize equals `"fullscreen"`.
+   */
   alphabeticScrollEnabled?: boolean;
   /**
    * This prop is only active if modalSize equals `"fullscreen"`.
@@ -100,6 +112,9 @@ const Picker: React.FC<PickerProps> = ({
   selectContainerStyle,
   disabled,
   onClose,
+  addOptionEnabled = false,
+  addOptionTitle,
+  onAddOptionPress,
   alphabeticScrollEnabled = true,
   searchPlaceholder,
   listEmptyText,
@@ -175,6 +190,11 @@ const Picker: React.FC<PickerProps> = ({
     setSearch(text);
   };
 
+  const onAddOption = () => {
+    onAddOptionPress && onAddOptionPress(search);
+    animateModal(false);
+  };
+
   return (
     <PickerScreen
       title={title}
@@ -189,6 +209,9 @@ const Picker: React.FC<PickerProps> = ({
       disabled={disabled}
       selectContainerStyle={selectContainerStyle}
       searchPlaceholder={searchPlaceholder}
+      addOptionEnabled={addOptionEnabled}
+      addOptionTitle={addOptionTitle}
+      onAddOption={onAddOption}
       alphabeticScrollEnabled={alphabeticScrollEnabled}
       listEmptyText={listEmptyText}
       error={error}
