@@ -1,6 +1,6 @@
 {
   "name": "@valkdigital/ui-kit",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "ui kit for Valk Digital",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
