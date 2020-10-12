@@ -7,6 +7,7 @@ import type { Option } from ".";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import colors from "../../style/colors";
+import ListEmpty from "./ListEmpty";
 
 interface FlatListProps {
   options: Option[];
@@ -39,7 +40,7 @@ const FlatList: React.FC<FlatListProps> = ({
   };
 
   useEffect(() => {
-    if (search || !selectedOption?.label || !filteredOptions?.length) {
+    if (!selectedOption?.label || !filteredOptions?.length) {
       return;
     }
 
@@ -63,7 +64,6 @@ const FlatList: React.FC<FlatListProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!search) return;
     setFilteredOptions(
       options.filter((option) =>
         option.label.toLowerCase().includes(search.toLowerCase())
@@ -85,20 +85,12 @@ const FlatList: React.FC<FlatListProps> = ({
         />
       )}
       ItemSeparatorComponent={() => <ItemSeparator />}
-      ListEmptyComponent={() => (
-        <Text
-          type="subtextRegular"
-          color={colors.greyDark}
-          style={styles.listEmpty}
-        >
-          {listEmptyText}
-        </Text>
-      )}
-      ListFooterComponent={() => <ListFooter />}
+      ListEmptyComponent={<ListEmpty listEmptyText={listEmptyText} />}
+      ListFooterComponent={<ListFooter />}
       getItemLayout={getItemLayout}
-      ListHeaderComponent={() => (
+      ListHeaderComponent={
         <View style={needsPaddingTop && styles.listHeader} />
-      )}
+      }
     />
   );
 };
@@ -106,9 +98,6 @@ const FlatList: React.FC<FlatListProps> = ({
 const styles = StyleSheet.create({
   listHeader: {
     paddingTop: Spacing.sp1,
-  },
-  listEmpty: {
-    paddingHorizontal: Spacing.sp3,
   },
 });
 

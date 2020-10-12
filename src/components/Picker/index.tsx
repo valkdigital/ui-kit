@@ -7,6 +7,7 @@ import {
   Keyboard,
   ImageSourcePropType,
   StyleProp,
+  LayoutAnimation,
 } from "react-native";
 import PickerScreen from "./PickerScreen";
 
@@ -187,6 +188,7 @@ const Picker: React.FC<PickerProps> = ({
   };
 
   const onSearchChange = (text: string) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setSearch(text);
   };
 

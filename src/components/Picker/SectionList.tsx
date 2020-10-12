@@ -14,6 +14,7 @@ import ListFooter from "./ListFooter";
 import PickerRow from "./PickerRow";
 import type { Option } from ".";
 import getSectionListItemLayout from "./getSectionListItemLayout";
+import ListEmpty from "./ListEmpty";
 
 interface Section {
   title?: string;
@@ -119,7 +120,7 @@ const SectionList: React.FC<SectionListProps> = ({
   }, [search]);
 
   useEffect(() => {
-    if (search || !selectedOption?.label || !sections?.length) {
+    if (!selectedOption?.label || !sections?.length) {
       return;
     }
 
@@ -179,15 +180,7 @@ const SectionList: React.FC<SectionListProps> = ({
         ItemSeparatorComponent={() => (
           <ItemSeparator needsSpaceForAlphabet={showAlphabet} />
         )}
-        ListEmptyComponent={() => (
-          <Text
-            type="subtextRegular"
-            color={colors.greyDark}
-            style={styles.listEmpty}
-          >
-            {listEmptyText}
-          </Text>
-        )}
+        ListEmptyComponent={<ListEmpty listEmptyText={listEmptyText} />}
         ListFooterComponent={<ListFooter />}
         stickySectionHeadersEnabled={true}
         getItemLayout={getItemLayout}
@@ -202,9 +195,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: Spacing.sp3,
     backgroundColor: colors.greyLight,
-    paddingHorizontal: Spacing.sp3,
-  },
-  listEmpty: {
     paddingHorizontal: Spacing.sp3,
   },
 });
