@@ -63,6 +63,7 @@ const SectionList: React.FC<SectionListProps> = ({
     getItemHeight: () => Spacing.sp7,
     getSeparatorHeight: () => 1,
     getSectionHeaderHeight: () => Spacing.sp3,
+    extraOffset: favoriteOptions?.length && -Spacing.sp5,
   });
 
   const removeAccents = (text: string) => {
@@ -85,14 +86,25 @@ const SectionList: React.FC<SectionListProps> = ({
         : [];
 
     const sections = Object.values(options)
-      .sort((a, b) =>
-        removeAccents(a.label) < removeAccents(b.label) ? -1 : 1
-      )
+      .sort((a, b) => {
+        const stringA = removeAccents(a.label);
+        const stringB = removeAccents(b.label);
+        // place non-alphabetic characters at the back
+        if (!stringA.match(/^[a-zA-Z]/g) && !!stringB.match(/^[a-zA-Z]/g)) {
+          return 1;
+        }
+        return stringA.localeCompare(stringB, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        });
+      })
       .filter((option) =>
         option.label.toLowerCase().includes(search.toLowerCase())
       )
       .reduce((result: Section[], option) => {
-        const firstLetter = removeAccents(option.label[0]);
+        let firstLetter = removeAccents(option.label[0]);
+        if (!firstLetter.match(/^[a-zA-Z]/g)) firstLetter = "#";
+
         const index = result.findIndex((item) => item.title === firstLetter);
         if (index >= 0) {
           result[index]?.data.push(option);
@@ -142,18 +154,22 @@ const SectionList: React.FC<SectionListProps> = ({
         ref={sectionListRef}
         sections={sections}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => (
+        renderItem={({ item, index, section }) => (
           <PickerRow
             option={item}
             selectedOption={selectedOption}
             onSelectOption={onSelectOption}
             needsSpaceForAlphabet={showAlphabet}
+            isFirstOption={index === 0 && !section.title}
           />
         )}
         renderSectionHeader={({ section: { title } }) => {
           if (!title) return null;
           return (
-            <View style={styles.sectionHeader}>
+            <View
+              style={styles.sectionHeader}
+              onStartShouldSetResponder={() => true}
+            >
               <Text type="h6" textAlign="left">
                 {title}
               </Text>

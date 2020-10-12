@@ -25,6 +25,7 @@ export interface Parameters {
   getSectionHeaderHeight?: (sectionIndex: number) => number;
   getSectionFooterHeight?: (sectionIndex: number) => number;
   listHeaderHeight?: number | (() => number);
+  extraOffset?: number;
 }
 
 export default ({
@@ -33,14 +34,15 @@ export default ({
   getSectionHeaderHeight = () => 0,
   getSectionFooterHeight = () => 0,
   listHeaderHeight = 0,
+  extraOffset = 0,
 }: Parameters) => (data: SectionListData<any>[] | null, index: number) => {
   let i = 0;
   let sectionIndex = 0;
   let elementPointer: ListElement = { type: "SECTION_HEADER" };
   let offset =
     typeof listHeaderHeight === "function"
-      ? listHeaderHeight()
-      : listHeaderHeight;
+      ? listHeaderHeight() + extraOffset
+      : listHeaderHeight + extraOffset;
 
   if (!data) {
     return { length: 0, offset, index };
@@ -50,11 +52,8 @@ export default ({
     switch (elementPointer.type) {
       case "SECTION_HEADER": {
         const sectionData = data[sectionIndex].data;
-        // Skip the section header height when title is undefined,
-        // because the render will also be skipped for an undefined title
-        if (data[sectionIndex].title !== undefined) {
-          offset += getSectionHeaderHeight(sectionIndex);
-        }
+
+        offset += getSectionHeaderHeight(sectionIndex);
 
         // If this section is empty, we go right to the footer...
         if (sectionData.length === 0) {

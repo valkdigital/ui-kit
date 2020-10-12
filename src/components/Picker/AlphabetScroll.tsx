@@ -43,7 +43,7 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
 
   const getTouchedLetter = (y: number) => {
     let index = Math.floor((y / height) * ALPHABET.length);
-    if (prevIndex === index || index > ALPHABET.length || index < 0) return;
+    if (prevIndex === index || index > ALPHABET.length - 1 || index < 0) return;
     onLetterChange(ALPHABET[index]);
     prevIndex = index;
   };

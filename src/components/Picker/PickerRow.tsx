@@ -9,6 +9,7 @@ interface PickerRowProps {
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
   needsSpaceForAlphabet?: boolean;
+  isFirstOption?: boolean;
 }
 
 const PickerRow: React.FC<PickerRowProps> = ({
@@ -16,11 +17,16 @@ const PickerRow: React.FC<PickerRowProps> = ({
   selectedOption,
   onSelectOption,
   needsSpaceForAlphabet,
+  isFirstOption,
 }) => {
   const { label, value, image } = option;
   return (
     <TouchableOpacity
-      style={[styles.option, needsSpaceForAlphabet && styles.alphabetOffset]}
+      style={[
+        styles.option,
+        needsSpaceForAlphabet && styles.alphabetOffset,
+        isFirstOption && { height: Spacing.sp5, paddingTop: 0 },
+      ]}
       onPress={() => onSelectOption(option)}
     >
       <View style={styles.row}>

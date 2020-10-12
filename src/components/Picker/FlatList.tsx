@@ -30,10 +30,10 @@ const FlatList: React.FC<FlatListProps> = ({
 
   const getItemLayout = (_: any, index: number) => {
     const itemHeight = Spacing.sp7 + 1;
-    const extraPadding = needsPaddingTop ? Spacing.sp1 : 0;
+    const extraOffset = needsPaddingTop ? Spacing.sp1 : 0;
     return {
       length: itemHeight,
-      offset: itemHeight * index + extraPadding,
+      offset: itemHeight * index + extraOffset,
       index,
     };
   };
@@ -76,11 +76,12 @@ const FlatList: React.FC<FlatListProps> = ({
       ref={flatListRef}
       data={filteredOptions}
       keyExtractor={(_, index) => index.toString()}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <PickerRow
           option={item}
           selectedOption={selectedOption}
           onSelectOption={onSelectOption}
+          isFirstOption={index === 0 && !needsPaddingTop}
         />
       )}
       ItemSeparatorComponent={() => <ItemSeparator />}
@@ -96,16 +97,15 @@ const FlatList: React.FC<FlatListProps> = ({
       ListFooterComponent={() => <ListFooter />}
       getItemLayout={getItemLayout}
       ListHeaderComponent={() => (
-        <View style={needsPaddingTop && { paddingTop: Spacing.sp3 }} />
+        <View style={needsPaddingTop && styles.listHeader} />
       )}
-      style={{ marginTop: -Spacing.sp2 }}
     />
   );
 };
 
 const styles = StyleSheet.create({
   listHeader: {
-    paddingTop: Spacing.sp3,
+    paddingTop: Spacing.sp1,
   },
   listEmpty: {
     paddingHorizontal: Spacing.sp3,
