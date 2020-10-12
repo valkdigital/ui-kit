@@ -5,8 +5,6 @@ import ItemSeparator from "./ItemSeparator";
 import ListFooter from "./ListFooter";
 import type { Option } from ".";
 import Spacing from "../../style/spacing";
-import Text from "../Text";
-import colors from "../../style/colors";
 import ListEmpty from "./ListEmpty";
 
 interface FlatListProps {
