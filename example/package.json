@@ -10,6 +10,7 @@
     "start": "react-native start",
     "test": "jest",
     "storybook": "start-storybook -p 7007",
+    "deploy-storybook": "storybook-to-ghpages -o public",
     "postinstall": "jetify"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.19",
     "@storybook/react-native": "^5.3.19",
+    "@storybook/storybook-deployer": "^2.8.7",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "babel-jest": "~25.2.6",

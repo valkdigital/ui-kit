@@ -16,7 +16,7 @@ const animSwitch: {
     end: 1,
   },
   slide: {
-    start: Dimensions.get("screen").height,
+    start: Dimensions.get("window").height,
     end: 0,
   },
 };
@@ -105,8 +105,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    flex: 1,
-    height: Dimensions.get("screen").height,
+    height: Dimensions.get("window").height,
     justifyContent: "center",
     overflow: "hidden",
     zIndex: 10,

@@ -12,9 +12,10 @@ const ThemeWrapper = ({ children }) => {
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
-        "source-sans-bold": require("../assets/fonts/SourceSansPro-Bold.ttf"),
-        "source-sans-regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
-        "source-sans-semibold": require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
+        "SourceSansPro-Bold": require("../assets/fonts/SourceSansPro-Bold.ttf"),
+        "SourceSansPro-Regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
+        "SourceSansPro-SemiBold": require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
+        "SourceSansPro-Italic": require("../assets/fonts/SourceSansPro-Italic.ttf"),
       });
     };
 

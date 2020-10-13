@@ -1,0 +1,24 @@
+name: Release & Deploy storybook
+
+on:
+  push:
+    branches: [master]
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+      - name: Release
+        run: |
+          yarn
+          yarn release
+      - name: Deploy storybook
+        run: |
+          cd example
+          yarn
+          yarn deploy-storybook
