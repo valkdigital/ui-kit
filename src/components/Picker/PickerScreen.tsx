@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: Spacing.sp3,
     backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
+    zIndex: 1,
   },
   handle: {
     width: Spacing.sp4,

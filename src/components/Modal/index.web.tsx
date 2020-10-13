@@ -65,6 +65,25 @@ export default ({
     }).start();
   }, []);
 
+  useEffect(() => {
+    const { style } = document.body;
+    let scrollPosition = 0;
+
+    scrollPosition = window.pageYOffset;
+    style.overflow = "hidden";
+    style.position = "fixed";
+    style.top = `-${scrollPosition}px`;
+    style.width = "100%";
+
+    return () => {
+      style.removeProperty("overflow");
+      style.removeProperty("position");
+      style.removeProperty("top");
+      style.removeProperty("width");
+      window.scrollTo(0, scrollPosition);
+    };
+  }, []);
+
   if (animationType === "none") {
     return (
       <TouchableWithoutFeedback onPress={onClose}>

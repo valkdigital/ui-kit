@@ -20,26 +20,29 @@ With `MDX` we can define a story for `stories`
       },
     }}
   >
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-      }}
-      imageHeader="Diner"
-      size="single"
-      imageOverlay={
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignSelf: "flex-end",
-            paddingRight: Spacing.sp2,
-          }}
-        >
-          <Text type="h4">1 2 3 </Text>
-        </View>
-      }
-      onPress={() => null}
-    />
+    <View>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        imageHeader="Diner"
+        size="single"
+        imageOverlay={
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              alignSelf: "flex-end",
+              paddingRight: Spacing.sp2,
+            }}
+          >
+            <Text type="h4">1 2 3 </Text>
+          </View>
+        }
+        onPress={() => null}
+        wrapperStyle={{ margin: Spacing.sp3 }}
+      />
+    </View>
   </Story>
 </Preview>
 

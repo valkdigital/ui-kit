@@ -18,8 +18,8 @@ import { WithFigma } from "storybook-addon-figma";
       },
     }}
   >
-    <View>
-      <View style={{ marginTop: Spacing.sp3 }}>
+    <View style={{ overflow: "hidden", width: "100%" }}>
+      <View>
         <CardList
           direction="horizontal"
           size="large"
@@ -52,9 +52,10 @@ import { WithFigma } from "storybook-addon-figma";
               subHeader: "Available for 37 hotels",
             },
           ]}
+          containerStyle={{ padding: Spacing.sp3 }}
         />
       </View>
-      <View style={{ marginTop: Spacing.sp3 }}>
+      <View>
         <CardList
           direction="vertical"
           size="small"
@@ -85,9 +86,10 @@ import { WithFigma } from "storybook-addon-figma";
               subHeader: "Available for 37 hotels",
             },
           ]}
+          containerStyle={{ padding: Spacing.sp3 }}
         />
       </View>
-      <View style={{ marginTop: Spacing.sp3 }}>
+      <View>
         <CardList
           direction="vertical"
           size="tiny"
@@ -101,10 +103,10 @@ import { WithFigma } from "storybook-addon-figma";
               subHeader: "Beschikbaar voor 37 hotels",
             },
           ]}
-          style={{ paddingVertical: Spacing.sp10 }}
+          containerStyle={{ padding: Spacing.sp3 }}
         />
       </View>
-      <View style={{ marginTop: Spacing.sp3 }}>
+      <View>
         <CardList
           direction="vertical"
           size="medium"
@@ -120,6 +122,7 @@ import { WithFigma } from "storybook-addon-figma";
               buttonText: "Proceed",
             },
           ]}
+          containerStyle={{ padding: Spacing.sp3 }}
         />
       </View>
     </View>
