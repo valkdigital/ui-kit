@@ -6253,10 +6253,10 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libphonenumber-js@^1.8.4:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.4.tgz#e84eaa25b96bfebb2ac1a5c847b7f7f17da5bd59"
-  integrity sha512-s0fTPZRB4hcsfDL9p6wUNOLngVh4y3fBPhH33dL7OfkHA2RirI8p3rlR+4f4SMxdcng9jPNOweS2Z47BivHMYw==
+libphonenumber-js@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.8.5.tgz#8d11ac37c2088986d34f6e5aa0ef13f3ead0b3db"
+  integrity sha512-oYRkg5ghcNLSesLvoUKaoGGTym2genpgfgUmMY/fLSnb22I9FmOwLxefGx73XgbAPzeqoqiLmGnsByhb7N4+/w==
   dependencies:
     minimist "^1.2.5"
     xml2js "^0.4.17"
