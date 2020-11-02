@@ -70,13 +70,13 @@ const SectionList: React.FC<SectionListProps> = ({
   const removeAccents = (text: string) => {
     const removedAccents = text
       .replace(/[áàãâäÅ]/gi, "a")
-      .replace(/[éè¨ê]/gi, "e")
+      .replace(/[éèëê]/gi, "e")
       .replace(/[íìïî]/gi, "i")
       .replace(/[óòöôõ]/gi, "o")
       .replace(/[úùüû]/gi, "u")
-      .replace(/[ç]/gi, "c")
+      .replace(/[çč]/gi, "c")
       .replace(/[ñ]/gi, "n")
-      .replace(/[^a-zA-Z0-9]/g, " ");
+      .replace(/[^a-zA-Z]/g, " ");
     return removedAccents[0].toUpperCase() + removedAccents.slice(1);
   };
 
@@ -91,20 +91,28 @@ const SectionList: React.FC<SectionListProps> = ({
         const stringA = removeAccents(a.label);
         const stringB = removeAccents(b.label);
         // place non-alphabetic characters at the back
-        if (!stringA.match(/^[a-zA-Z]/g) && !!stringB.match(/^[a-zA-Z]/g)) {
-          return 1;
+        if (stringA[0] === " " || stringB[0] === " ") {
+          if (stringA[0] === stringB[0]) {
+            return stringA.localeCompare(stringB, undefined, {
+              numeric: true,
+              sensitivity: "base",
+            });
+          }
+          return stringA[0] === " " ? 1 : -1;
         }
         return stringA.localeCompare(stringB, undefined, {
           numeric: true,
           sensitivity: "base",
         });
       })
-      .filter((option) =>
-        option.label.toLowerCase().includes(search.toLowerCase())
-      )
+      .filter((option) => {
+        return removeAccents(option.label)
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase());
+      })
       .reduce((result: Section[], option) => {
         let firstLetter = removeAccents(option.label[0]);
-        if (!firstLetter.match(/^[a-zA-Z]/g)) firstLetter = "#";
+        if (firstLetter === " ") firstLetter = "#";
 
         const index = result.findIndex((item) => item.title === firstLetter);
         if (index >= 0) {

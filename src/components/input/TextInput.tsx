@@ -1,217 +1,61 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  View,
   StyleSheet,
-  ViewStyle,
-  TextInput as RNTI,
-  TextInputProps as TIP,
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
   Image,
   TouchableOpacity,
-  Platform,
-  StyleProp,
+  TextInput as RNTI,
 } from "react-native";
+import BaseInput from "./BaseInput";
+import type { BaseInputProps } from "./BaseInput";
 import { omit } from "lodash";
-import Spacing from "../../style/spacing";
-import Text from "../Text";
-import colors from "../../style/colors";
-import useMergedRef from "../../hooks/useMergedRef";
+import { Spacing } from "@valkdigital/ui-kit";
 
-interface TextInputProps extends TIP {
-  label?: string;
-  containerStyle?: StyleProp<ViewStyle>;
-  size?: "small" | "medium" | "large";
-  useFullHeight?: boolean;
-
-  /**
-   * If error is set, the border will be red and the message will be shown below the inputfield.
-   */
-  error?: string;
-  showCheckmark?: boolean;
-  disabled?: boolean;
-  /**
-   * won't be shown when there is an error.
-   */
-  helperText?: string;
+interface TextInputProps
+  extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
   type?: "password" | "search";
 }
-const MAX_HEIGHT = 160;
-const SIZE: { [key: string]: ViewStyle } = {
-  small: { width: 160 },
-  medium: { width: 287 },
-  large: {},
-};
 
 const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
-  const {
-    containerStyle,
-    label,
-    size = "large",
-    useFullHeight = false,
-    error,
-    onFocus,
-    onBlur,
-    showCheckmark = false,
-    editable = true,
-    disabled,
-    helperText,
-    type,
-    style,
-  } = props;
-  //   remove custom props or overrided props
-  const passInputProps = omit(
-    props,
-    "style",
-    "containerStyle",
-    "label",
-    "size",
-    "error",
-    "onFocus",
-    "onBlur",
-    "secureTextEntry",
-    "showCheckmark",
-    "disabled",
-    "helperText",
-    "useFullHeight"
-  );
+  const { type } = props;
 
   const [hideText, setHideText] = useState(type === "password");
-  const [borderColor, setBorderColor] = useState(colors.greyMidDark);
 
-  const inputRef = useRef<RNTI>(null);
-  const mergedRef = useMergedRef<RNTI>(ref, inputRef);
-
-  const _onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    if (disabled) return;
-    if (!error) setBorderColor(colors.brandBluePrimary);
-    onFocus && onFocus(e);
-  };
-
-  const _onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    if (!error) setBorderColor(colors.greyMidDark);
-    onBlur && onBlur(e);
-  };
+  const passInputProps = omit(props, "type", "secureTextEntry");
 
   const toggleHideText = () => {
     setHideText(!hideText);
   };
 
-  const focusInputField = () => inputRef?.current?.focus();
-
-  useEffect(() => {
-    if (error) setBorderColor(colors.redDark);
-  }, [error]);
-
-  const showRightIcons = type === "password" || showCheckmark;
   return (
-    <View
-      style={[
-        styles.container,
-        { ...SIZE[size] },
-        disabled && { opacity: 0.4 },
-        containerStyle,
-      ]}
-    >
-      <TouchableOpacity disabled={disabled} onPress={focusInputField}>
-        {type !== "search" && (
-          <Text style={styles.label} type="subtextSemiBold">
-            {label}
-          </Text>
-        )}
-      </TouchableOpacity>
-
-      <View style={[styles.inputWrapper, { borderColor }]}>
-        {type === "search" && (
+    <BaseInput
+      ref={ref}
+      {...passInputProps}
+      secureTextEntry={hideText}
+      LeftIconComponent={
+        type === "search" && (
           <Image
             source={require("../../media/search.png")}
             style={styles.search}
           />
-        )}
-
-        <RNTI
-          ref={mergedRef}
-          textAlignVertical="center"
-          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }, style]}
-          {...passInputProps}
-          onFocus={_onFocus}
-          onBlur={_onBlur}
-          secureTextEntry={hideText}
-          editable={!disabled && editable}
-        />
-
-        {showRightIcons && (
-          <View style={styles.iconContainer}>
-            {type === "password" && (
-              <TouchableOpacity onPress={toggleHideText}>
-                <Image
-                  style={styles.eye}
-                  source={require("../../media/eye.png")}
-                />
-              </TouchableOpacity>
-            )}
-            {showCheckmark && (
-              <TouchableOpacity onPress={toggleHideText}>
-                <Image
-                  style={styles.checkmark}
-                  source={require("../../media/checkmark.png")}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-      </View>
-      {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
-          {error}
-        </Text>
-      )}
-      {!error && helperText && (
-        <Text type="subtextRegular" color={colors.greyDark}>
-          {helperText}
-        </Text>
-      )}
-    </View>
+        )
+      }
+      RightIconComponent={
+        type === "password" && (
+          <TouchableOpacity onPress={toggleHideText}>
+            <Image style={styles.eye} source={require("../../media/eye.png")} />
+          </TouchableOpacity>
+        )
+      }
+    />
   );
 });
+
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: "stretch",
-  },
-  input: {
-    minHeight: 40,
-    maxHeight: MAX_HEIGHT,
-    flex: 1,
-    minWidth: 100,
-    fontSize: 16,
-    borderWidth: 0,
-    ...Platform.select({ web: { outlineWidth: 0 } }),
-  },
-  inputWrapper: {
-    borderRadius: 4,
-    borderWidth: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: Spacing.sp2,
-  },
-  label: {
-    marginBottom: Spacing["sp1/2"],
-  },
-  error: { marginTop: Spacing["sp1/2"] },
-  iconContainer: {
-    flexDirection: "row",
-  },
   search: {
     width: 13,
     height: 13,
     alignSelf: "center",
     marginRight: Spacing.sp1,
-  },
-  checkmark: {
-    marginLeft: Spacing.sp1,
-    width: 16,
-    height: 12,
   },
   eye: {
     marginLeft: Spacing.sp1,

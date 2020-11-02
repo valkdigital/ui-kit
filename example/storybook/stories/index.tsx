@@ -8,6 +8,8 @@ import {
   TextInput,
   Picker,
   Spacing,
+  PhoneInput,
+  countries,
 } from "@valkdigital/ui-kit";
 import data from "../data";
 
@@ -279,6 +281,8 @@ inputStories.add("Picker", () => (
         return { label: `option ${value}`, value };
       })}
       selectedOption={{ label: "option 15", value: "15" }}
+      addOptionEnabled={true}
+      addOptionTitle="Add search input as option"
       title="Title"
       onSelectChange={action("onSelectChange")}
       selectContainerStyle={{
@@ -307,6 +311,23 @@ inputStories.add("Picker", () => (
       selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
       listType="sectionList"
       modalSize="fullscreen"
+    />
+  </CenteredView>
+));
+
+inputStories.add("PhoneInput", () => (
+  <CenteredView style={{ paddingHorizontal: Spacing.sp2 }}>
+    <PhoneInput
+      label="Phone"
+      containerStyle={{ marginBottom: Spacing.sp2 }}
+      countries={countries["en"]}
+      favoriteCountries={["NL", "BE", "DE", "GB"]}
+      defaultCountry="NL"
+      listTitle="Phone"
+      listEmptyText="No results found"
+      listSearchPlaceholder="Search"
+      onChangeText={action("onChangeText")}
+      errorMessage="Invalid phone number"
     />
   </CenteredView>
 ));

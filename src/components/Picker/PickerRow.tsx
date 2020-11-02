@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import type { Option } from ".";
@@ -29,18 +29,12 @@ const PickerRow: React.FC<PickerRowProps> = ({
       ]}
       onPress={() => onSelectOption(option)}
     >
-      <View style={styles.row}>
-        {image && (
-          <Image
-            source={image}
-            style={styles.optionImage}
-            resizeMode="contain"
-          />
-        )}
-        <Text type="bodyRegular" numberOfLines={1}>
-          {label}
-        </Text>
-      </View>
+      {image && (
+        <Image source={image} style={styles.optionImage} resizeMode="contain" />
+      )}
+      <Text type="bodyRegular" numberOfLines={1} style={styles.label}>
+        {label}
+      </Text>
       {selectedOption?.value === value && (
         <Image
           source={require("../../media/checkmark.png")}
@@ -69,13 +63,12 @@ const styles = StyleSheet.create({
   checkmark: {
     width: 16,
     height: 11.61,
-  },
-  row: {
-    flexDirection: "row",
+    marginLeft: Spacing.sp2,
   },
   alphabetOffset: {
     marginRight: Spacing.sp5,
   },
+  label: { flex: 1 },
 });
 
 export default PickerRow;

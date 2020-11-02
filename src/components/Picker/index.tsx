@@ -123,10 +123,10 @@ const Picker: React.FC<PickerProps> = ({
   SelectComponent,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const translateY = useRef(new Animated.Value(0)).current;
+  const modalHeight = Dimensions.get("window").height;
+  const translateY = useRef(new Animated.Value(modalHeight)).current;
   const [search, setSearch] = useState("");
 
-  const modalHeight = Dimensions.get("window").height;
   const overriddenListType: ListTypes =
     modalSize === "responsive" ? "flatList" : listType;
 
@@ -159,17 +159,15 @@ const Picker: React.FC<PickerProps> = ({
       Keyboard.dismiss();
     }
 
-    Animated.spring(translateY, {
+    Animated.timing(translateY, {
       toValue: shouldOpen ? 0 : modalHeight,
-      velocity: 3,
-      tension: 2,
-      friction: 8,
+      duration: 300,
       useNativeDriver: true,
     }).start(() => {
       if (!shouldOpen) {
-        if (onClose) onClose();
         setSearch("");
         setShowModal(false);
+        if (onClose) onClose();
       }
     });
   };

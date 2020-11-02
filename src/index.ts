@@ -8,7 +8,18 @@ import Card from "./components/Card";
 import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
 import Picker from "./components/Picker";
+import PhoneInput from "./components/input/PhoneInput";
+import countries from "./components/input/countries";
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
 // Component exports
-export { Text, Button, Card, CardList, Picker, TextInput };
+export {
+  Text,
+  Button,
+  Card,
+  CardList,
+  Picker,
+  TextInput,
+  PhoneInput,
+  countries,
+};
