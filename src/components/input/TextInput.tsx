@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -9,7 +9,6 @@ import BaseInput from "./BaseInput";
 import type { BaseInputProps } from "./BaseInput";
 import { omit } from "lodash";
 import { Spacing } from "@valkdigital/ui-kit";
-import useMergedRef from "../../hooks/useMergedRef";
 import hitSlop from "../../style/hitSlop";
 
 interface TextInputProps
@@ -22,19 +21,15 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
 
   const [hideText, setHideText] = useState(type === "password");
 
-  const inputRef = useRef<RNTI>(null);
-  const mergedRef = useMergedRef<RNTI>(ref, inputRef);
-
   const passInputProps = omit(props, "type", "secureTextEntry");
 
   const toggleHideText = () => {
     setHideText(!hideText);
-    inputRef.current?.focus();
   };
 
   return (
     <BaseInput
-      ref={mergedRef}
+      ref={ref}
       {...passInputProps}
       secureTextEntry={hideText}
       LeftIconComponent={
