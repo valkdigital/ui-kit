@@ -78,26 +78,35 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
   );
 
   const [borderColor, setBorderColor] = useState(colors.greyMidDark);
+  const [isFocused, setIsFocused] = useState(false);
 
   const inputRef = useRef<RNTI>(null);
   const mergedRef = useMergedRef<RNTI>(ref, inputRef);
 
   const _onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     if (disabled) return;
-    if (!error) setBorderColor(colors.brandBluePrimary);
+    setIsFocused(true);
     onFocus && onFocus(e);
   };
 
   const _onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    if (!error) setBorderColor(colors.greyMidDark);
+    setIsFocused(false);
     onBlur && onBlur(e);
   };
 
   const focusInputField = () => inputRef?.current?.focus();
 
   useEffect(() => {
-    error ? setBorderColor(colors.redDark) : setBorderColor(colors.greyMidDark);
-  }, [error]);
+    if (error) {
+      setBorderColor(colors.redDark);
+      return;
+    }
+    if (isFocused) {
+      setBorderColor(colors.brandBluePrimary);
+      return;
+    }
+    setBorderColor(colors.greyMidDark);
+  }, [error, isFocused]);
 
   const showRightIcons = RightIconComponent || showCheckmark;
 
