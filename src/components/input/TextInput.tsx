@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -9,6 +9,8 @@ import BaseInput from "./BaseInput";
 import type { BaseInputProps } from "./BaseInput";
 import { omit } from "lodash";
 import { Spacing } from "@valkdigital/ui-kit";
+import useMergedRef from "../../hooks/useMergedRef";
+import hitSlop from "../../style/hitSlop";
 
 interface TextInputProps
   extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
@@ -20,15 +22,19 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
 
   const [hideText, setHideText] = useState(type === "password");
 
+  const inputRef = useRef<RNTI>(null);
+  const mergedRef = useMergedRef<RNTI>(ref, inputRef);
+
   const passInputProps = omit(props, "type", "secureTextEntry");
 
   const toggleHideText = () => {
     setHideText(!hideText);
+    inputRef.current?.focus();
   };
 
   return (
     <BaseInput
-      ref={ref}
+      ref={mergedRef}
       {...passInputProps}
       secureTextEntry={hideText}
       LeftIconComponent={
@@ -41,7 +47,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
       }
       RightIconComponent={
         type === "password" && (
-          <TouchableOpacity onPress={toggleHideText}>
+          <TouchableOpacity onPress={toggleHideText} hitSlop={hitSlop}>
             <Image style={styles.eye} source={require("../../media/eye.png")} />
           </TouchableOpacity>
         )

@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
   error: { marginTop: Spacing["sp1/2"] },
   iconContainer: {
     flexDirection: "row",
+    alignItems: "center",
   },
   checkmark: {
     marginLeft: Spacing.sp1,
