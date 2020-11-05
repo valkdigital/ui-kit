@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import type { Option } from ".";
+import colors from "../../style/colors";
 
 interface PickerRowProps {
   option: Option;
@@ -19,7 +20,7 @@ const PickerRow: React.FC<PickerRowProps> = ({
   needsSpaceForAlphabet,
   isFirstOption,
 }) => {
-  const { label, value, image } = option;
+  const { label, extraLabel, value, image } = option;
   return (
     <TouchableOpacity
       style={[
@@ -32,9 +33,20 @@ const PickerRow: React.FC<PickerRowProps> = ({
       {image && (
         <Image source={image} style={styles.optionImage} resizeMode="contain" />
       )}
-      <Text type="bodyRegular" numberOfLines={1} style={styles.label}>
+
+      <Text type="bodyRegular" numberOfLines={2} style={styles.label}>
         {label}
+        {extraLabel && (
+          <Text
+            type="bodyRegular"
+            color={colors.greyDark}
+            style={styles.extraLabel}
+          >
+            {extraLabel}
+          </Text>
+        )}
       </Text>
+
       {selectedOption?.value === value && (
         <Image
           source={require("../../media/checkmark.png")}
@@ -69,6 +81,9 @@ const styles = StyleSheet.create({
     marginRight: Spacing.sp5,
   },
   label: { flex: 1 },
+  extraLabel: {
+    marginLeft: Spacing["sp1/2"],
+  },
 });
 
 export default PickerRow;

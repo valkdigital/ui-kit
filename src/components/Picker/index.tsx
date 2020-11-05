@@ -17,6 +17,7 @@ export type SelectSizes = "small" | "medium" | "large";
 
 export interface Option {
   label: string;
+  extraLabel?: string;
   value: any;
   image?: ImageSourcePropType;
 }
@@ -40,6 +41,7 @@ export interface PickerProps {
    *
    * `{
    * label: string;
+   * extraLabel?: string;
    * value: any;
    * image?: ImageSourcePropType;
    * }`

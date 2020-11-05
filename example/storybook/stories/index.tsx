@@ -320,7 +320,7 @@ inputStories.add("PhoneInput", () => (
     <PhoneInput
       label="Phone"
       containerStyle={{ marginBottom: Spacing.sp2 }}
-      countries={countries["en"]}
+      countries={countries.en}
       favoriteCountries={["NL", "BE", "DE", "GB"]}
       defaultCountry="NL"
       listTitle="Phone"
