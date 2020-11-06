@@ -1,25 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
-import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
+import ThemeContext from "../../style/ThemeContext";
 
 interface ItemSeparatorProps {
   needsSpaceForAlphabet?: boolean;
 }
 
-export default ({ needsSpaceForAlphabet }: ItemSeparatorProps) => (
-  <View
-    style={[
-      styles.itemSeparator,
-      needsSpaceForAlphabet && styles.alphabetOffset,
-    ]}
-  />
-);
+export default ({ needsSpaceForAlphabet }: ItemSeparatorProps) => {
+  const { border } = useContext(ThemeContext);
+  return (
+    <View
+      style={[
+        styles.itemSeparator,
+        { borderColor: border },
+        needsSpaceForAlphabet && styles.alphabetOffset,
+      ]}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   itemSeparator: {
     marginHorizontal: Spacing.sp3,
-    borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
   },
   alphabetOffset: {

@@ -65,7 +65,8 @@ export const Button: React.FC<TestProps> = ({
   loading,
 }) => {
   const {
-    cta: { primary, secondary, primaryLabel },
+    cta: { primary },
+    typography,
   } = useContext(ThemeContext);
 
   const getFilledStyle = (): ViewStyle => {
@@ -80,7 +81,7 @@ export const Button: React.FC<TestProps> = ({
     if (type !== "skeleton") return {};
 
     const backgroundColor = "transparent";
-    const borderColor = color ? color : secondary;
+    const borderColor = color ? color : primary;
 
     return {
       backgroundColor,
@@ -92,7 +93,7 @@ export const Button: React.FC<TestProps> = ({
   const getTitleColor = () => {
     if (titleColor) return titleColor;
     if (color && type === "skeleton") return color;
-    return type === "filled" ? primaryLabel : secondary;
+    return type === "filled" ? typography.color : "white";
   };
 
   const getContainerStyle = (): ViewStyle => {

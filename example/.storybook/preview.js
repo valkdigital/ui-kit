@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 
 // your theme provider
 import { ThemeContext, ThemeManager, Spacing, Text } from "@valkdigital/ui-kit";
+
 // create a component that uses the dark mode hook
 const ThemeWrapper = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -19,23 +20,6 @@ const ThemeWrapper = ({ children }) => {
       });
     };
 
-    const setupTheme = () => {
-      ThemeManager.setTheme({
-        light: {
-          cta: {
-            primaryColor: "rgba(248, 148, 6, 1)",
-            secondaryColor: "blue",
-          },
-        },
-        dark: {
-          cta: {
-            primaryColor: "coral",
-            secondaryColor: "purple",
-          },
-        },
-      });
-    };
-    setupTheme();
     loadFonts();
     setLoading(false);
   }, []);

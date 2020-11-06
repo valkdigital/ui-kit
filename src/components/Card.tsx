@@ -1,4 +1,4 @@
-import React, { ReactChild, useEffect, useState } from "react";
+import React, { ReactChild, useContext, useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -17,6 +17,7 @@ import Spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "../alias/LinearGradient";
 import type { TypographyLiterals } from "../style/typography";
+import ThemeContext from "../style/ThemeContext";
 
 type Sizes = "large" | "medium" | "small" | "tiny" | "single";
 
@@ -109,6 +110,7 @@ const Card: React.FC<CardProps> = ({
   size = "large",
   wrapperStyle,
 }) => {
+  const { onBackground } = useContext(ThemeContext);
   const [width, setWidth] = useState<number>(Dimensions.get("window").width);
 
   // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
@@ -135,7 +137,13 @@ const Card: React.FC<CardProps> = ({
       onPress={onPress}
       disabled={showButton}
     >
-      <View style={[styles.container, CONTAINER_STYLE[size]]}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: onBackground },
+          CONTAINER_STYLE[size],
+        ]}
+      >
         <View>
           <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
           {showElementsOnTopOfImage && (
@@ -166,7 +174,13 @@ const Card: React.FC<CardProps> = ({
         </View>
 
         {showBody && (
-          <View style={[styles.bodyContainer, BODY_CONTAINER_STYLE[size]]}>
+          <View
+            style={[
+              styles.bodyContainer,
+              BODY_CONTAINER_STYLE[size],
+              { backgroundColor: onBackground },
+            ]}
+          >
             {header && (
               <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
                 {header}
@@ -206,12 +220,10 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#ffffff",
     borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
   container: {
-    backgroundColor: "#ffffff",
     borderRadius: Spacing["sp1/2"],
     overflow: "hidden",
   },
@@ -238,8 +250,8 @@ const styles = StyleSheet.create({
     padding: Spacing.sp2,
     paddingBottom: Spacing.sp3,
     minHeight: Spacing.sp6,
-    backgroundColor: "#ffffff",
     overflow: "hidden",
+    borderBottomLeftRadius: Spacing["sp1/2"],
   },
   subHeader: {
     opacity: 0.4,

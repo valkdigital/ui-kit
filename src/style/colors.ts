@@ -27,4 +27,15 @@ export default {
   septemPrimary: "#BA5C4A",
   septemLight: "#D97E6D",
   visualBrand: "#2A6A7F",
+
+  // Grayscale
+  grey1: "#E0E0E0",
+  grey2: "#D6D6D6",
+  grey3: "#C2C2C2",
+  grey4: "#999999",
+  grey5: "#666666",
+  grey6: "#3D3D3D",
+  grey7: "#292929",
+  grey8: "#1F1F1F",
+  black: "#000000",
 };

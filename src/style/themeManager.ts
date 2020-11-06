@@ -1,17 +1,7 @@
 import themes from "./appThemes";
 import { merge, Dictionary } from "lodash";
 
-interface Theme {
-  background?: string;
-  typography?: {
-    color: string;
-  };
-  cta: {
-    primary?: string;
-    primaryLabel?: string;
-    secondary?: string;
-  };
-}
+interface Theme {}
 class ThemeManager {
   private theme: Dictionary<Theme> = {
     ...themes,

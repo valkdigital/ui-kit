@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,7 +7,8 @@ import {
   Dimensions,
   Keyboard,
 } from "react-native";
-import colors from "../../style/colors";
+import ThemeContext from "../../style/ThemeContext";
+
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 
@@ -52,7 +53,7 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
     const { height } = event.nativeEvent.layout;
     setHeight(height);
   };
-
+  const { info } = useContext(ThemeContext);
   return (
     <View style={styles.container}>
       <View {...panResponder.panHandlers} onLayout={onLayout}>
@@ -60,7 +61,7 @@ const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
           <View pointerEvents="none" key={letter}>
             <Text
               type={screenHeight < 667 ? "label" : "subtextRegular"}
-              color={colors.brandBluePrimary}
+              color={info.midDark}
               textAlign="center"
             >
               {letter}
