@@ -5,7 +5,10 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from "react-native";
-import Typography, { TypographyLiterals } from "../style/typography";
+import Typography, {
+  MaxFontSizeMultiplier,
+  TypographyLiterals,
+} from "../style/typography";
 import ThemeContext from "../style/ThemeContext";
 import { omit } from "lodash";
 
@@ -27,6 +30,7 @@ const Text: React.FC<TextProps> = (props) => {
     <RNText
       {...passTextProps}
       style={[Typography[type], { color: textColor, textAlign }, style]}
+      maxFontSizeMultiplier={MaxFontSizeMultiplier[type]}
     >
       {children}
     </RNText>

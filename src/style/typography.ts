@@ -93,11 +93,29 @@ const Typography = {
     letterSpacing: 0.15,
     fontFamily: Fonts.Bold,
   },
+
   label: {
     fontSize: 10,
     lineHeight: 12,
     letterSpacing: 0.25,
   },
+};
+
+export const MaxFontSizeMultiplier: { [key in TypographyLiterals]: number } = {
+  h1: 1.15,
+  h2: 1.25,
+  h3: 1.15,
+  h4: 1.15,
+  h5: 1.2,
+  h6: 1.45,
+  subHeading: 1.2,
+  bodyRegular: 1.45,
+  bodySemiBold: 1.45,
+  bodyItalic: 1.45,
+  subtextRegular: 1.5,
+  subtextSemiBold: 1.5,
+  subtextBold: 1.5,
+  label: 1.6,
 };
 
 export type TypographyLiterals = keyof typeof Typography;
