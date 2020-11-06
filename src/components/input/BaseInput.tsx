@@ -17,6 +17,7 @@ import Spacing from "../../style/spacing";
 import Text from "../Text";
 import colors from "../../style/colors";
 import useMergedRef from "../../hooks/useMergedRef";
+import { MaxFontSizeMultiplier } from "../../style/typography";
 
 export interface BaseInputProps extends TIP {
   label?: string;
@@ -139,6 +140,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           onFocus={_onFocus}
           onBlur={_onBlur}
           editable={!disabled && editable}
+          maxFontSizeMultiplier={MaxFontSizeMultiplier.bodyRegular}
         />
 
         {showRightIcons && (
