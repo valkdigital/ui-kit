@@ -10,6 +10,7 @@ import TextInput from "./components/input/TextInput";
 import Picker from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
+import Dropdown from "./components/Dropdown";
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
 // Component exports
@@ -22,4 +23,5 @@ export {
   TextInput,
   PhoneInput,
   countries,
+  Dropdown,
 };

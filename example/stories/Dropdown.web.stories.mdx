@@ -1,0 +1,99 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Text, Dropdown, Spacing } from "@valkdigital/ui-kit";
+import { View } from "react-native";
+import { WithFigma } from "storybook-addon-figma";
+import data from "../storybook/data";
+
+<Meta title="Dropdown" />
+
+# Preview
+
+<Preview>
+  <Story
+    name="Dropdown"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=3007%3A0",
+      },
+    }}
+  >
+    <View style={{ flex: 1 }}>
+      <Dropdown
+        label="Salutation"
+        placeholder="Select an option"
+        size="small"
+        options={[
+          { label: "Sir", value: "Dhr." },
+          { label: "Madame", value: "Mevr." },
+        ]}
+        selectedOption={{ label: "Sir", value: "Dhr." }}
+        title="Salutation"
+        onSelectChange={() => null}
+        selectContainerStyle={{
+          paddingHorizontal: Spacing.sp3,
+          marginBottom: Spacing.sp2,
+        }}
+        modalSize="responsive"
+      />
+      <Dropdown
+        label="Dropdown (responsive)"
+        placeholder="Select an option"
+        options={[...Array(3).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
+        selectedOption={undefined}
+        title="Title"
+        onSelectChange={() => null}
+        selectContainerStyle={{
+          paddingHorizontal: Spacing.sp3,
+          marginBottom: Spacing.sp2,
+        }}
+        modalSize="responsive"
+      />
+      <Dropdown
+        label="Dropdown (fullscreen flatList)"
+        placeholder="Select an option"
+        options={[...Array(30).keys()].map((_, i) => {
+          const value = (i + 1).toString();
+          return { label: `option ${value}`, value };
+        })}
+        selectedOption={{ label: "option 15", value: "15" }}
+        title="Title"
+        onSelectChange={() => null}
+        selectContainerStyle={{
+          paddingHorizontal: Spacing.sp3,
+          marginBottom: Spacing.sp2,
+        }}
+        searchPlaceholder="Search"
+        listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
+        listType="flatList"
+        modalSize="fullscreen"
+      />
+      <Dropdown
+        label="Dropdown (fullscreen sectionList)"
+        placeholder="Select an option"
+        options={data.countries}
+        selectedOption={data.countries[9]}
+        favoriteOptions={[
+          data.countries[0],
+          data.countries[11],
+          data.countries[9],
+        ]}
+        title="Country"
+        onSelectChange={() => null}
+        searchPlaceholder="Search"
+        listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
+        selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
+        listType="sectionList"
+        modalSize="fullscreen"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Dropdown} />
