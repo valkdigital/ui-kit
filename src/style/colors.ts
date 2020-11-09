@@ -29,6 +29,7 @@ export default {
   visualBrand: "#2A6A7F",
 
   // Grayscale
+  grey0: "#EFEFEF",
   grey1: "#E0E0E0",
   grey2: "#D6D6D6",
   grey3: "#C2C2C2",

@@ -5,6 +5,9 @@ export default {
     background: colors.white,
     onBackground: colors.white,
     border: colors.grey2,
+    list: {
+      sectionBackground: colors.grey0,
+    },
     typography: {
       color: colors.black,
       heading: colors.black,
@@ -31,7 +34,7 @@ export default {
       primary: "#F24851",
       dark: "#BA071F",
       midDark: "#E82637",
-      midLight: "#F09T9A",
+      midLight: "#F0979A",
       light: "#FFEAEE",
     },
     info: {
@@ -60,6 +63,10 @@ export default {
       inverted: colors.grey8,
       disabled: colors.grey4,
       placeholder: colors.grey4,
+    },
+
+    list: {
+      sectionBackground: colors.grey8,
     },
 
     cta: {

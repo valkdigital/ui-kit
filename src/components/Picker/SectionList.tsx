@@ -158,7 +158,10 @@ const SectionList: React.FC<SectionListProps> = ({
     };
   }, [sections]);
 
-  const { onBackground, background } = useContext(ThemeContext);
+  const {
+    list: { sectionBackground },
+    background,
+  } = useContext(ThemeContext);
   return (
     <>
       <RNSectionList
@@ -179,7 +182,10 @@ const SectionList: React.FC<SectionListProps> = ({
           if (!title) return null;
           return (
             <View
-              style={[styles.sectionHeader, { backgroundColor: onBackground }]}
+              style={[
+                styles.sectionHeader,
+                { backgroundColor: sectionBackground },
+              ]}
               onStartShouldSetResponder={() => true}
             >
               <Text type="h6" textAlign="left">
