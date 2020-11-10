@@ -15,6 +15,9 @@ import { omit } from "lodash";
 interface TextProps extends RNTextProps {
   type?: TypographyLiterals;
   textAlign?: "left" | "center" | "right";
+  /**
+   * Color overrides theme color, so it will break dark/light mode color change.
+   */
   color?: string;
   style?: StyleProp<TextStyle>;
 }
