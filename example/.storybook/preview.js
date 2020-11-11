@@ -30,8 +30,7 @@ const ThemeWrapper = ({ children }) => {
   return (
     <ThemeContext.Provider
       value={{
-        ...ThemeManager.getTheme(darkmodeOn ? "dark" : "light"),
-        spacing: Spacing,
+        ...ThemeManager.getTheme(darkmodeOn ? "dark" : "light")
       }}
     >
       {children}
