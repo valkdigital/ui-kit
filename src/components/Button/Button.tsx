@@ -21,7 +21,6 @@ enum ButtonTypes {
 enum ButtonSizes {
   small = "small",
   medium = "medium",
-  mediumCard = "medium-card",
   full = "full",
 }
 
@@ -30,8 +29,8 @@ interface BaseButtonProps {
   label: string;
   labelColor?: string;
   color?: string;
-  type?: ButtonTypes;
-  size?: ButtonSizes;
+  type?: keyof typeof ButtonTypes;
+  size?: keyof typeof ButtonSizes;
   buttonStyle?: ViewStyle;
   containerStyle?: ViewStyle;
   helperText?: string;
@@ -58,11 +57,6 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
     width: 156,
   },
   [ButtonSizes.medium]: {
-    alignSelf: "stretch",
-  },
-  [ButtonSizes.mediumCard]: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
     alignSelf: "stretch",
   },
   [ButtonSizes.full]: {},
@@ -108,7 +102,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       onPress={onPressButton}
       style={({ pressed }) => [
         showFullWidthContainer && styles.fullWidthContainer,
-        size === ButtonSizes.full && { backgroundColor: onBackground },
+        showFullWidthContainer && { backgroundColor: onBackground },
         containerStyle,
         (pressed || disabled) && { opacity: 0.4 },
       ]}
@@ -160,14 +154,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.sp2,
     paddingBottom: isIphoneX ? Spacing.sp2 + Spacing["sp1/2"] : Spacing.sp2,
   },
+
   helperText: {
     marginBottom: Spacing["sp1/2"],
   },
+
   progressbarContainer: {
     alignSelf: "stretch",
     height: 4,
     backgroundColor: colors.grey0,
   },
+
   progress: {
     height: 4,
   },

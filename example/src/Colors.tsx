@@ -46,7 +46,6 @@ const Colors: React.FC = () => {
   };
 
   const { groupedColors, generalColors } = getColors(theme);
-  console.log(groupedColors, generalColors);
   return (
     <View
       style={{ backgroundColor: theme.background, flex: 1, paddingLeft: 32 }}

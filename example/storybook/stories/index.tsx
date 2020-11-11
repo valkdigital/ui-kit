@@ -12,6 +12,7 @@ import {
   countries,
 } from "@valkdigital/ui-kit";
 import data from "../data";
+import Buttons from "./Buttons";
 
 const action = (event: any) => (params: any) => {
   console.log(event, params);
@@ -354,6 +355,9 @@ storiesOf("Text", module).add("All Text", () => (
     <Text type="label">Label</Text>
   </CenteredView>
 ));
+
+const buttonStories = storiesOf("Buttons", module);
+buttonStories.add("CTA", () => <Buttons />);
 
 const styles = StyleSheet.create({
   container: {
