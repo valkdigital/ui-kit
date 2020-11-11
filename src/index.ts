@@ -1,5 +1,4 @@
 import Text from "./components/Text";
-import Button from "./components/Button";
 import { Fonts, TypographyLiterals } from "./style/typography";
 import Spacing from "./style/spacing";
 import ThemeContext from "./style/ThemeContext";
@@ -10,18 +9,20 @@ import TextInput from "./components/input/TextInput";
 import Picker from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
+import Button from "./components/Button/Button";
+
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
 // Component exports
 export {
   Text,
-  Button,
   Card,
   CardList,
   Picker,
   TextInput,
   PhoneInput,
   countries,
+  Button,
 };
 
 // Types

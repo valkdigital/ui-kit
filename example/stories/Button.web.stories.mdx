@@ -28,10 +28,9 @@ import { WithFigma } from "storybook-addon-figma";
     <View style={{ alignItems: "center" }}>
       <View
         style={{
-          justifyContent: "space-evenly",
-          alignItems: "center",
           height: 600,
           marginBottom: 200,
+          justifyContent: "space-evenly",
           width: 900,
           borderWidth: 2,
           borderColor: "grey",
@@ -39,15 +38,34 @@ import { WithFigma } from "storybook-addon-figma";
         }}
       >
         <Button
-          title="CTA primary"
-          type="filled"
-          size="medium"
-          loading={true}
+          onPress={() => console.log("pressed")}
+          size="full"
+          helperText="Helper text"
+          label="Full button"
         />
-        <Button title="CTA primary" type="skeleton" size="medium" />
-        <Button title="CTA secundairy" type="skeleton" />
-        <Button title="CTA primary" type="filled" size="large" loading={true} />
-        <Button title="CTA primary" type="filled" size="full" />
+        <Button
+          onPress={() => console.log("pressed")}
+          type="progressbar"
+          currentProgress="50"
+          label="Full button progressbar"
+        />
+        <Button onPress={() => console.log("pressed")} label="Medium button" />
+        <Button
+          onPress={() => console.log("pressed")}
+          label="Medium card button"
+          size="medium-card"
+          style={{ marginHorizontal: 8 }}
+        />
+        <Button
+          onPress={() => console.log("pressed")}
+          label="Small button"
+          type="ghost"
+        />
+        <Button
+          onPress={() => console.log("pressed")}
+          label="Small button"
+          size="small"
+        />
       </View>
     </View>
   </Story>

@@ -332,7 +332,7 @@ inputStories.add("PhoneInput", () => (
   </CenteredView>
 ));
 
-storiesOf("Text").add("All Text", () => (
+storiesOf("Text", module).add("All Text", () => (
   <CenteredView>
     <Text type="h1">Heading 1</Text>
     <Text type="h2">Heading 2</Text>
