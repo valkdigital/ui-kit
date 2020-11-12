@@ -65,7 +65,7 @@ const Colors: React.FC = () => {
             </View>
             {colors.length > 1 && (
               <View style={styles.colorsContainer}>
-                {colors.slice(1).map(({ code, label }, i) => (
+                {colors.slice(1).map(({ code, label }) => (
                   <Color code={code} label={label} key={`${label} ${code}`} />
                 ))}
               </View>
@@ -73,14 +73,15 @@ const Colors: React.FC = () => {
           </View>
         </View>
       ))}
-      <View style={styles.colorsContainer}>
-        <Text type="h2" style={styles.topic}>
-          others
-        </Text>
-        {generalColors.map((c) => (
-          <Color {...c} key={c.label} />
-        ))}
-      </View>
+
+      <Text type="h2" style={styles.topic}>
+        others
+      </Text>
+      {generalColors.map((c) => (
+        <View style={[styles.colorsContainer, { height: 100 }]}>
+          <Color {...c} key={c.label} labelPosition="flex-end" />
+        </View>
+      ))}
     </View>
   );
 };
