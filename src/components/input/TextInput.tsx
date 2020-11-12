@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -10,6 +10,7 @@ import type { BaseInputProps } from "./BaseInput";
 import { omit } from "lodash";
 import { Spacing } from "@valkdigital/ui-kit";
 import hitSlop from "../../style/hitSlop";
+import ThemeContext from "../../style/ThemeContext";
 
 interface TextInputProps
   extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
@@ -18,7 +19,7 @@ interface TextInputProps
 
 const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
   const { type } = props;
-
+  const { typography } = useContext(ThemeContext);
   const [hideText, setHideText] = useState(type === "password");
 
   const passInputProps = omit(props, "type", "secureTextEntry");
@@ -36,7 +37,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
         type === "search" && (
           <Image
             source={require("../../media/search.png")}
-            style={styles.search}
+            style={[styles.search, { tintColor: typography.color }]}
           />
         )
       }

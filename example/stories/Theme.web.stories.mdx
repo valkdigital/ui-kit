@@ -4,25 +4,22 @@ import {
   ColorPalette,
   ColorItem,
 } from "@storybook/addon-docs/blocks";
+import { ThemeManager } from "@valkdigital/ui-kit";
+import Colors from "../src/Colors";
 
 <Meta title="Theme" />
 
-# ValkPay
-
-<ColorPalette>
-  <ColorItem
-    title="primary"
-    subtitle="Coral"
-    colors={["", "#F8F8F8", "#F2F2F2"]}
-  />
-  <ColorItem
-    title="primary"
-    subtitle="Coral"
-    colors={["#F2F2F2", "#F8F8F8", "#F2F2F2"]}
-  />
-  <ColorItem
-    title="primary"
-    subtitle="Coral"
-    colors={["#F2F2F2", "#F8F8F8", "#F2F2F2"]}
-  />
-</ColorPalette>
+<Preview>
+  <Story
+    name="App colors"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2690%3A217",
+      },
+    }}
+  >
+    <Colors />
+  </Story>
+</Preview>

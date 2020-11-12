@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -15,6 +15,7 @@ import PickerRow from "./PickerRow";
 import type { Option } from ".";
 import getSectionListItemLayout from "./getSectionListItemLayout";
 import ListEmpty from "./ListEmpty";
+import ThemeContext from "../../style/ThemeContext";
 
 interface Section {
   title?: string;
@@ -157,12 +158,17 @@ const SectionList: React.FC<SectionListProps> = ({
     };
   }, [sections]);
 
+  const {
+    list: { sectionBackground },
+    background,
+  } = useContext(ThemeContext);
   return (
     <>
       <RNSectionList
         ref={sectionListRef}
         sections={sections}
         keyExtractor={(_, index) => index.toString()}
+        contentContainerStyle={{ backgroundColor: background }}
         renderItem={({ item, index, section }) => (
           <PickerRow
             option={item}
@@ -176,7 +182,10 @@ const SectionList: React.FC<SectionListProps> = ({
           if (!title) return null;
           return (
             <View
-              style={styles.sectionHeader}
+              style={[
+                styles.sectionHeader,
+                { backgroundColor: sectionBackground },
+              ]}
               onStartShouldSetResponder={() => true}
             >
               <Text type="h6" textAlign="left">

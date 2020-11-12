@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
 import type { Option, SelectSizes } from ".";
 import Text from "../Text";
+import ThemeContext from "../../style/ThemeContext";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -39,6 +40,11 @@ const Select: React.FC<SelectProps> = ({
   showOptions,
   selectedOption,
 }) => {
+  const {
+    border,
+    error: { midDark },
+    typography,
+  } = useContext(ThemeContext);
   return (
     <View
       style={[
@@ -53,7 +59,8 @@ const Select: React.FC<SelectProps> = ({
       <View
         style={[
           styles.selectContainer,
-          !!error && { borderColor: colors.redDark },
+          { borderColor: border },
+          !!error && { borderColor: midDark },
           SELECT_STYLE[size],
         ]}
       >
@@ -82,7 +89,7 @@ const Select: React.FC<SelectProps> = ({
           </View>
           <Image
             source={require("../../media/arrow_down.png")}
-            style={styles.chevron}
+            style={[styles.chevron, { tintColor: typography.color }]}
           />
         </TouchableOpacity>
       </View>
@@ -104,7 +111,6 @@ const styles = StyleSheet.create({
   },
   selectContainer: {
     borderWidth: 1,
-    borderColor: colors.greyMidDark,
     borderRadius: Spacing["sp1/2"],
   },
   select: {
@@ -129,9 +135,6 @@ const styles = StyleSheet.create({
     marginLeft: Spacing.sp2,
     width: 14,
     height: 8,
-  },
-  disabled: {
-    color: colors.greyMidDark,
   },
   placeholder: {
     flex: 1,

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
-import colors from "../../style/colors";
+import ThemeContext from "../../style/ThemeContext";
+
 import Spacing from "../../style/spacing";
 import Picker, { Option } from "../Picker";
 
@@ -25,6 +26,7 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
   searchPlaceholder,
   onModalClose,
 }) => {
+  const { border, typography } = useContext(ThemeContext);
   return (
     <Picker
       title={title}
@@ -38,7 +40,7 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
       SelectComponent={({ selectedOption, disabled, showOptions }) => (
         <TouchableOpacity
           onPress={showOptions}
-          style={styles.selectContainer}
+          style={[styles.selectContainer, { borderColor: border }]}
           disabled={disabled}
         >
           {selectedOption?.image && (
@@ -50,7 +52,7 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
           )}
           <Image
             source={require("../../media/arrow_down.png")}
-            style={styles.arrow}
+            style={[styles.arrow, { tintColor: typography.color }]}
           />
         </TouchableOpacity>
       )}
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     alignItems: "center",
-    borderRightColor: colors.greyMidDark,
     borderRightWidth: 1,
     marginRight: Spacing.sp1,
   },

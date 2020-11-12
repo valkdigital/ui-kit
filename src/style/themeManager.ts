@@ -1,17 +1,13 @@
 import themes from "./appThemes";
 import { merge, Dictionary } from "lodash";
 
-interface Theme {
-  background?: string;
-  typography?: {
-    color: string;
-  };
-  cta: {
-    primary?: string;
-    primaryLabel?: string;
-    secondary?: string;
-  };
-}
+// Makes all (nested) keys optional
+type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
+
+export type Theme = DeepPartial<typeof themes["light"]>;
+
 class ThemeManager {
   private theme: Dictionary<Theme> = {
     ...themes,

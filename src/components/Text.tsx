@@ -15,16 +15,26 @@ import { omit } from "lodash";
 interface TextProps extends RNTextProps {
   type?: TypographyLiterals;
   textAlign?: "left" | "center" | "right";
+  /**
+   * Color overrides theme color, so it will break dark/light mode color change.
+   */
   color?: string;
   style?: StyleProp<TextStyle>;
 }
 
 const Text: React.FC<TextProps> = (props) => {
+  const { type = "bodyRegular", textAlign, color, style, children } = props;
   const { typography } = useContext(ThemeContext);
 
-  const { type = "bodyRegular", textAlign, color, style, children } = props;
+  const colorByType = (type: TypographyLiterals) => {
+    if (type.includes.length === 2 || type === "subHeading")
+      return typography.heading;
+    if (type.includes("body")) return typography.body;
+    return typography.color;
+  };
+
   const passTextProps = omit(props, "type", "textAlign", "color", "style");
-  const textColor = color ? color : typography.color;
+  const textColor = color ? color : colorByType(type);
 
   return (
     <RNText

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -15,9 +15,9 @@ import {
 import { omit } from "lodash";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
-import colors from "../../style/colors";
 import useMergedRef from "../../hooks/useMergedRef";
 import { MaxFontSizeMultiplier } from "../../style/typography";
+import ThemeContext from "../../style/ThemeContext";
 
 export interface BaseInputProps extends TIP {
   label?: string;
@@ -77,8 +77,13 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     "helperText",
     "useFullHeight"
   );
-
-  const [borderColor, setBorderColor] = useState(colors.greyMidDark);
+  const {
+    error: { primary },
+    info,
+    border,
+    typography,
+  } = useContext(ThemeContext);
+  const [borderColor, setBorderColor] = useState(border);
   const [isFocused, setIsFocused] = useState(false);
 
   const inputRef = useRef<RNTI>(null);
@@ -99,14 +104,14 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
 
   useEffect(() => {
     if (error) {
-      setBorderColor(colors.redDark);
+      setBorderColor(primary);
       return;
     }
     if (isFocused) {
-      setBorderColor(colors.brandBluePrimary);
+      setBorderColor(info.midDark);
       return;
     }
-    setBorderColor(colors.greyMidDark);
+    setBorderColor(border);
   }, [error, isFocused]);
 
   const showRightIcons = RightIconComponent || showCheckmark;
@@ -135,10 +140,16 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           key="baseInput"
           ref={mergedRef}
           textAlignVertical="center"
-          style={[styles.input, useFullHeight && { height: MAX_HEIGHT }, style]}
+          style={[
+            styles.input,
+            { color: typography.color },
+            useFullHeight && { height: MAX_HEIGHT },
+            style,
+          ]}
           {...passInputProps}
           onFocus={_onFocus}
           onBlur={_onBlur}
+          placeholderTextColor={typography.placeholder}
           editable={!disabled && editable}
           maxFontSizeMultiplier={MaxFontSizeMultiplier.bodyRegular}
         />
@@ -158,12 +169,12 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
         )}
       </View>
       {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
+        <Text style={styles.error} type="subtextRegular" color={primary}>
           {error}
         </Text>
       )}
       {!error && helperText && (
-        <Text type="subtextRegular" color={colors.greyDark}>
+        <Text type="subtextRegular" color={typography.placeholder}>
           {helperText}
         </Text>
       )}
