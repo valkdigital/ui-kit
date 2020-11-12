@@ -10,6 +10,7 @@ import Picker from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
 import Button from "./components/Button/Button";
+import FAB from "./components/Button/FAB";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
@@ -23,6 +24,7 @@ export {
   PhoneInput,
   countries,
   Button,
+  FAB,
 };
 
 // Types
