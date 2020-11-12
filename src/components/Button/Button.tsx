@@ -98,13 +98,11 @@ const BaseButton: React.FC<BaseButtonProps> = ({
     size === ButtonSizes.full || type === ButtonTypes.progressbar;
 
   return (
-    <Pressable
-      onPress={onPressButton}
-      style={({ pressed }) => [
+    <View
+      style={[
         showFullWidthContainer && styles.fullWidthContainer,
         showFullWidthContainer && { backgroundColor: onBackground },
         containerStyle,
-        (pressed || disabled) && { opacity: 0.4 },
       ]}
     >
       {helperText && (
@@ -115,7 +113,14 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       {currentProgress && type === ButtonTypes.progressbar && (
         <Progressbar currentProgress={currentProgress} />
       )}
-      <View style={[defaultStyle, buttonStyle]}>
+      <Pressable
+        onPress={onPressButton}
+        style={({ pressed }) => [
+          defaultStyle,
+          buttonStyle,
+          (pressed || disabled) && { opacity: 0.4 },
+        ]}
+      >
         {loading ? (
           <ActivityIndicator size="large" color={buttonLabelColor} />
         ) : (
@@ -123,8 +128,8 @@ const BaseButton: React.FC<BaseButtonProps> = ({
             {label}
           </Text>
         )}
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
