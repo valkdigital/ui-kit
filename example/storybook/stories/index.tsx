@@ -10,13 +10,17 @@ import {
   Spacing,
   PhoneInput,
   countries,
+  MultipleButtons,
 } from "@valkdigital/ui-kit";
 import data from "../data";
 import Buttons from "./Buttons";
+import { boolean, withKnobs, color } from "@storybook/addon-knobs";
 
-const action = (event: any) => (params: any) => {
-  console.log(event, params);
-};
+// the action function has one argument which is the name of the action,
+// this will be displayed in the actions tab in the addons panel
+// action("name here")
+import { action } from "@storybook/addon-actions";
+import AllFAB from "./FAB";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -357,7 +361,33 @@ storiesOf("Text", module).add("All Text", () => (
 ));
 
 const buttonStories = storiesOf("Buttons", module);
-buttonStories.add("CTA", () => <Buttons />);
+buttonStories.addDecorator(withKnobs);
+buttonStories.add("CTA", () => (
+  <Buttons
+    loading={boolean("loading", false, "cta")}
+    disabled={boolean("disabled", false, "cta")}
+    color={color("color", undefined, "cta")}
+    labelColor={color("label color", undefined, "cta")}
+  />
+));
+buttonStories.add("FAB", () => (
+  <AllFAB
+    color={color("color", "#1AA0E2", "fab")}
+    backgroundColor={color("background color", "#2BB9F5", "fab")}
+    iconColor={color("icon color", "#FFFFFF", "fab")}
+  />
+));
+
+buttonStories.add("Multiple Buttons", () => (
+  <View style={{ marginTop: 16 }}>
+    <MultipleButtons
+      activeColor={color("active color", "#2BB9F5", "multiple buttons")}
+      inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
+      onPress={(i) => console.log(i)}
+      labels={["btn 1", "button", "button 12"]}
+    />
+  </View>
+));
 
 const styles = StyleSheet.create({
   container: {

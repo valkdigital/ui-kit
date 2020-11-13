@@ -32,9 +32,14 @@ const Colors: React.FC = () => {
     entries.forEach((entry) => {
       const label = entry[0];
       if (typeof entry[1] === "object") {
+        // @ts-ignore
         const colorGroup = Object.keys(theme[label]).map((k) => {
+          // @ts-ignore
           const color: string = theme[label][k];
-          return { label: k, code: color };
+          return {
+            label: k,
+            code: color,
+          };
         });
         groupedColors.push({ label, colors: colorGroup });
         return;

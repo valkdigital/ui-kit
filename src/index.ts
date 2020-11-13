@@ -10,7 +10,8 @@ import Picker from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
 import Button from "./components/Button/Button";
-import FAB from "./components/Button/FAB";
+import Fab from "./components/Button/FAB";
+import MultipleButtons from "./components/Button/MultipleButtons";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
@@ -24,8 +25,8 @@ export {
   PhoneInput,
   countries,
   Button,
-  FAB,
+  Fab,
+  MultipleButtons,
 };
-
 // Types
 export type { TypographyLiterals, Theme };

@@ -19,34 +19,36 @@ interface FABProps {
   source: ImageProps["source"];
   imgStyle?: ImageStyle;
   style?: ViewStyle;
+  onPress: () => void;
 }
 
-const FAB: React.FC<FABProps> = ({
+const Fab: React.FC<FABProps> = ({
   label,
   color,
   backgroundColor,
   source,
   style,
   imgStyle,
-}) => {
-  return (
-    <Pressable
-      style={({ pressed }) => [
-        styles.container,
-        { backgroundColor },
-        style,
-        pressed && { opacity: 0.4 },
-      ]}
-    >
-      <Text type="h5" color="white" style={styles.label}>
-        {label}
-      </Text>
-      <View style={[styles.iconContainer, { backgroundColor: color }]}>
-        <Image source={source} style={[styles.img, imgStyle]} />
-      </View>
-    </Pressable>
-  );
-};
+  onPress,
+}) => (
+  <Pressable
+    onPress={onPress}
+    style={({ pressed }) => [
+      styles.container,
+      { backgroundColor },
+      style,
+      pressed && { opacity: 0.4 },
+    ]}
+  >
+    <Text type="h6" color="white" style={styles.label}>
+      {label}
+    </Text>
+    <View style={[styles.iconContainer, { backgroundColor: color }]}>
+      <Image source={source} style={[styles.img, imgStyle]} />
+    </View>
+  </Pressable>
+);
+
 const styles = StyleSheet.create({
   container: {
     height: 48,
@@ -55,8 +57,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     ...shadow({ x: 0, y: 4, blurRadius: 14, opacity: 0.24 }),
   },
+
   label: {
     marginHorizontal: spacing.sp2,
+    textAlignVertical: "bottom",
   },
 
   iconContainer: {
@@ -72,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FAB;
+export default Fab;

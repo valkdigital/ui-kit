@@ -5,6 +5,10 @@ import {
   ViewStyle,
   View,
   ActivityIndicator,
+  ImageProps,
+  Image,
+  ImageStyle,
+  Platform,
 } from "react-native";
 import shadow from "../../style/shadow";
 import colors from "../../style/colors";
@@ -24,7 +28,7 @@ enum ButtonSizes {
   full = "full",
 }
 
-interface BaseButtonProps {
+interface ButtonProps {
   onPress: () => void;
   label: string;
   labelColor?: string;
@@ -36,7 +40,9 @@ interface BaseButtonProps {
   helperText?: string;
   loading?: boolean;
   disabled?: boolean;
-  currentProgress?: string;
+  currentProgress?: string | number;
+  image?: ImageProps["source"];
+  imageStyle?: ImageStyle;
 }
 
 const styleByType: { [key in ButtonTypes]: ViewStyle } = {
@@ -50,6 +56,7 @@ const styleByType: { [key in ButtonTypes]: ViewStyle } = {
     borderTopRightRadius: 0,
     width: "auto",
     alignSelf: "stretch",
+    marginHorizontal: Spacing.sp2,
   },
 };
 const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
@@ -59,10 +66,12 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   [ButtonSizes.medium]: {
     alignSelf: "stretch",
   },
-  [ButtonSizes.full]: {},
+  [ButtonSizes.full]: {
+    marginHorizontal: Spacing.sp2,
+  },
 };
 
-const BaseButton: React.FC<BaseButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   color = colors.orangePrimary,
   label,
   labelColor = "white",
@@ -71,10 +80,12 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   onPress,
   buttonStyle,
   containerStyle,
-  helperText,
+  children,
   disabled,
   loading,
   currentProgress,
+  image,
+  imageStyle,
 }) => {
   const { onBackground } = useContext(ThemeContext);
 
@@ -87,7 +98,9 @@ const BaseButton: React.FC<BaseButtonProps> = ({
     backgroundColor: color,
     borderColor: color,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent:
+      image && type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
+    flexDirection: "row",
     borderRadius: 4,
     height: 48,
     ...styleBySize[size],
@@ -105,11 +118,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
         containerStyle,
       ]}
     >
-      {helperText && (
-        <Text color={colors.grey3} style={styles.helperText}>
-          {helperText}
-        </Text>
-      )}
+      {children}
       {currentProgress && type === ButtonTypes.progressbar && (
         <Progressbar currentProgress={currentProgress} />
       )}
@@ -124,16 +133,24 @@ const BaseButton: React.FC<BaseButtonProps> = ({
         {loading ? (
           <ActivityIndicator size="large" color={buttonLabelColor} />
         ) : (
-          <Text type="h6" color={buttonLabelColor}>
-            {label}
-          </Text>
+          <>
+            {image && (
+              <Image
+                style={[styles.img, { tintColor: color }, imageStyle]}
+                source={image}
+              />
+            )}
+            <Text type="h6" color={buttonLabelColor}>
+              {label}
+            </Text>
+          </>
         )}
       </Pressable>
     </View>
   );
 };
 
-const Progressbar: React.FC<{ currentProgress: string }> = ({
+const Progressbar: React.FC<{ currentProgress: string | number }> = ({
   currentProgress,
 }) => {
   const {
@@ -154,12 +171,21 @@ const Progressbar: React.FC<{ currentProgress: string }> = ({
 
 const styles = StyleSheet.create({
   fullWidthContainer: {
-    ...shadow({ x: 0, y: -2, opacity: 0.4, blurRadius: 16 }),
+    ...shadow({
+      x: 0,
+      y: Platform.OS === "android" ? 2 : -2,
+      opacity: 0.4,
+      blurRadius: 16,
+    }),
     paddingTop: Spacing.sp2,
-    paddingHorizontal: Spacing.sp2,
-    paddingBottom: isIphoneX ? Spacing.sp2 + Spacing["sp1/2"] : Spacing.sp2,
+    paddingBottom: isIphoneX ? Spacing.sp2 - Spacing["sp1/2"] : Spacing.sp2,
   },
-
+  img: {
+    marginLeft: Spacing.sp2,
+    marginRight: Spacing.sp1,
+    width: 24,
+    height: 24,
+  },
   helperText: {
     marginBottom: Spacing["sp1/2"],
   },
@@ -168,6 +194,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     height: 4,
     backgroundColor: colors.grey0,
+    marginHorizontal: Spacing.sp2,
   },
 
   progress: {
@@ -175,4 +202,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BaseButton;
+export default Button;
