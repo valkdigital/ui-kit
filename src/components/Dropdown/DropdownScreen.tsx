@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  Dimensions,
-  LayoutChangeEvent,
-} from "react-native";
+import React, { useLayoutEffect, useRef, useState } from "react";
+import { View, StyleSheet, ViewStyle, Dimensions } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import Modal from "../Modal";
@@ -16,12 +10,12 @@ import type {
   DropdownProps,
   ModalSizes,
 } from ".";
-import FlatList from "./FlatList";
-import SectionList from "./SectionList";
-import DismissKeyboard from "./DismissKeyboard";
+import FlatList from "../Picker/FlatList";
+import SectionList from "../Picker/SectionList";
+import DismissKeyboard from "../Picker/DismissKeyboard";
 import TextInput from "../input/TextInput";
-import Select from "./Select";
-import AddOption from "./AddOption";
+import Select from "../Picker/Select";
+import AddOption from "../Picker/AddOption";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -34,7 +28,7 @@ type InheritedProps = Omit<
   "onClose" | "onSelectChange" | "onAddOptionPress"
 >;
 
-interface PickerScreenProps extends InheritedProps {
+interface DropdownScreenProps extends InheritedProps {
   size: SelectSizes;
   modalSize: ModalSizes;
   listType: ListTypes;
@@ -47,7 +41,7 @@ interface PickerScreenProps extends InheritedProps {
   onAddOption: () => void;
 }
 
-const PickerScreen: React.FC<PickerScreenProps> = ({
+const DropdownScreen: React.FC<DropdownScreenProps> = ({
   label,
   placeholder,
   size,
@@ -73,12 +67,28 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   search,
   onSearchChange,
 }) => {
-  const [top, setTop] = useState(0);
+  const [position, setPosition] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    pageX: number;
+    pageY: number;
+  }>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    pageX: 0,
+    pageY: 0,
+  });
+  const selectRef = useRef<View>(null);
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { y, height } = event.nativeEvent.layout;
-    setTop(y + height);
-  };
+  useLayoutEffect(() => {
+    selectRef.current?.measure((x, y, width, height, pageX, pageY) => {
+      setPosition({ x, y, width, height, pageX, pageY });
+    });
+  }, []);
 
   return (
     <>
@@ -90,18 +100,19 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           showOptions,
           disabled,
           error,
+          ref: selectRef,
         })
       ) : (
         <Select
           label={label}
           placeholder={placeholder}
-          selectContainerStyle={selectContainerStyle}
           disabled={disabled}
           error={error}
           size={size}
           showOptions={showOptions}
           selectedOption={selectedOption}
-          onLayout={onLayout}
+          selectContainerStyle={selectContainerStyle}
+          ref={selectRef}
         />
       )}
 
@@ -114,8 +125,16 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           <View
             style={[
               styles.modal,
-              { top, maxHeight: Dimensions.get("window").height - top },
+              {
+                top: position.pageY + position.height,
+                left: position.pageX,
+                maxHeight:
+                  Dimensions.get("window").height -
+                  position.pageY -
+                  position.height,
+              },
               SELECT_STYLE[size],
+              size === "large" && { width: position.width },
             ]}
           >
             <DismissKeyboard>
@@ -180,8 +199,6 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
 const styles = StyleSheet.create({
   modal: {
     position: "absolute",
-    left: Spacing.sp3,
-    right: Spacing.sp3,
     alignSelf: "center",
     borderRadius: 4,
     backgroundColor: "#ffffff",
@@ -198,4 +215,4 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
 });
 
-export default PickerScreen;
+export default DropdownScreen;

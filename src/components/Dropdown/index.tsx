@@ -4,8 +4,9 @@ import {
   ImageSourcePropType,
   StyleProp,
   LayoutAnimation,
+  View,
 } from "react-native";
-import PickerScreen from "./PickerScreen";
+import DropdownScreen from "./DropdownScreen";
 
 export type ListTypes = "flatList" | "sectionList";
 export type ModalSizes = "responsive" | "fullscreen";
@@ -91,9 +92,11 @@ export interface DropdownProps {
    *  selectedOption?: Option;
    *  disabled?: boolean;
    *  showOptions: () => void;
-   *  error?: boolean;}`
+   *  error?: boolean;`
    */
-  SelectComponent?: React.FC<SelectComponentProps>;
+  SelectComponent?: React.ForwardRefExoticComponent<
+    SelectComponentProps & React.RefAttributes<View>
+  >;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -149,7 +152,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <PickerScreen
+    <DropdownScreen
       label={label}
       placeholder={placeholder}
       size={size}

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import ThemeContext from "../../style/ThemeContext";
-
 import Spacing from "../../style/spacing";
 import Picker, { Option } from "../Picker";
 
@@ -37,24 +36,28 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
       onClose={onModalClose}
       modalSize="fullscreen"
       listType="sectionList"
-      SelectComponent={({ selectedOption, disabled, showOptions }) => (
-        <TouchableOpacity
-          onPress={showOptions}
-          style={[styles.selectContainer, { borderColor: border }]}
-          disabled={disabled}
-        >
-          {selectedOption?.image && (
-            <Image
-              source={selectedOption?.image}
-              style={styles.optionImage}
-              resizeMode="contain"
-            />
-          )}
-          <Image
-            source={require("../../media/arrow_down.png")}
-            style={[styles.arrow, { tintColor: typography.color }]}
-          />
-        </TouchableOpacity>
+      SelectComponent={React.forwardRef(
+        ({ selectedOption, disabled, showOptions }) => {
+          return (
+            <TouchableOpacity
+              onPress={showOptions}
+              style={[styles.selectContainer, { borderColor: border }]}
+              disabled={disabled}
+            >
+              {selectedOption?.image && (
+                <Image
+                  source={selectedOption?.image}
+                  style={styles.optionImage}
+                  resizeMode="contain"
+                />
+              )}
+              <Image
+                source={require("../../media/arrow_down.png")}
+                style={[styles.arrow, { tintColor: typography.color }]}
+              />
+            </TouchableOpacity>
+          );
+        }
       )}
       listEmptyText={listEmptyText}
       searchPlaceholder={searchPlaceholder}

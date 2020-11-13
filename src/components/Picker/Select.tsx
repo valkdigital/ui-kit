@@ -30,77 +30,87 @@ interface SelectProps {
   selectedOption?: Option;
 }
 
-const Select: React.FC<SelectProps> = ({
-  label,
-  placeholder,
-  selectContainerStyle,
-  disabled,
-  error,
-  size,
-  showOptions,
-  selectedOption,
-}) => {
-  const {
-    border,
-    error: { midDark },
-    typography,
-  } = useContext(ThemeContext);
-  return (
-    <View
-      style={[
-        styles.container,
-        selectContainerStyle,
-        disabled && { opacity: 0.4 },
-      ]}
-    >
-      <Text type="subtextSemiBold" style={styles.label}>
-        {label}
-      </Text>
+const Select = React.forwardRef<View, SelectProps>(
+  (
+    {
+      label,
+      placeholder,
+      selectContainerStyle,
+      disabled,
+      error,
+      size,
+      showOptions,
+      selectedOption,
+    },
+    ref
+  ) => {
+    const {
+      border,
+      error: { midDark },
+      typography,
+    } = useContext(ThemeContext);
+    return (
       <View
         style={[
-          styles.selectContainer,
-          { borderColor: border },
-          !!error && { borderColor: midDark },
-          SELECT_STYLE[size],
+          styles.container,
+          selectContainerStyle,
+          disabled && { opacity: 0.4 },
         ]}
       >
-        <TouchableOpacity
-          onPress={showOptions}
-          style={styles.select}
-          disabled={disabled}
-        >
-          <View style={styles.row}>
-            {selectedOption?.image && (
-              <Image
-                source={selectedOption?.image}
-                style={styles.optionImage}
-                resizeMode="contain"
-              />
-            )}
-            <Text
-              type="bodyRegular"
-              numberOfLines={1}
-              style={
-                selectedOption === undefined ? styles.placeholder : undefined
-              }
-            >
-              {selectedOption?.label ?? placeholder}
-            </Text>
-          </View>
-          <Image
-            source={require("../../media/arrow_down.png")}
-            style={[styles.chevron, { tintColor: typography.color }]}
-          />
-        </TouchableOpacity>
-      </View>
-      {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
-          {error}
+        <Text type="subtextSemiBold" style={styles.label}>
+          {label}
         </Text>
-      )}
-    </View>
-  );
-};
+        <View
+          ref={ref}
+          style={[
+            styles.selectContainer,
+            { borderColor: border },
+            !!error && { borderColor: midDark },
+            SELECT_STYLE[size],
+          ]}
+        >
+          <TouchableOpacity
+            onPress={showOptions}
+            style={styles.select}
+            disabled={disabled}
+          >
+            <View style={styles.row}>
+              {selectedOption?.image && (
+                <Image
+                  source={selectedOption?.image}
+                  style={styles.optionImage}
+                  resizeMode="contain"
+                />
+              )}
+              <Text
+                type="bodyRegular"
+                numberOfLines={1}
+                style={
+                  selectedOption === undefined ? styles.placeholder : undefined
+                }
+              >
+                {selectedOption?.label ?? placeholder}
+              </Text>
+            </View>
+            <Image
+              source={require("../../media/arrow_down.png")}
+              style={[styles.chevron, { tintColor: typography.color }]}
+            />
+          </TouchableOpacity>
+        </View>
+        {!!error && (
+          <Text
+            style={styles.error}
+            type="subtextRegular"
+            color={colors.redDark}
+          >
+            {error}
+          </Text>
+        )}
+      </View>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
