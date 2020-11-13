@@ -12,6 +12,7 @@ import {
   countries,
   MultipleButtons,
   TextButton,
+  SegmentControl,
 } from "@valkdigital/ui-kit";
 import data from "../data";
 import Buttons from "./Buttons";
@@ -396,6 +397,22 @@ buttonStories.add("Text Button", () => (
       color={color("color", undefined, "text button")}
     />
   </CenteredView>
+));
+
+buttonStories.add("Segment control", () => (
+  <View style={{ marginHorizontal: Spacing.sp1 }}>
+    <SegmentControl
+      segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+      onPress={action("pressed")}
+      style={{ marginBottom: Spacing.sp2 }}
+    />
+    <SegmentControl
+      type="text"
+      segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+      onPress={action("pressed")}
+      style={{ marginBottom: Spacing.sp2 }}
+    />
+  </View>
 ));
 const styles = StyleSheet.create({
   container: {

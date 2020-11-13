@@ -14,6 +14,8 @@ import {
   MultipleButtons,
   Stepper,
   TextButton,
+  Spacing,
+  SegmentControl,
 } from "@valkdigital/ui-kit";
 import { WithFigma } from "storybook-addon-figma";
 import Buttons from "../storybook/stories/Buttons";
@@ -129,3 +131,37 @@ import { action } from "@storybook/addon-actions";
 ## Props
 
 <Props of={TextButton} />
+
+# Segment control
+
+<Preview>
+  <Story
+    name="Segment control"
+    decorators={[withKnobs]}
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/7Sh8nuwN3NqpwMCoOUPu9G/Styleguide-Test?node-id=104%3A525",
+      },
+    }}
+  >
+    <View style={{ marginHorizontal: Spacing.sp1, flex: 1 }}>
+      <SegmentControl
+        segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+      <SegmentControl
+        type="text"
+        segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={SegmentControl} />

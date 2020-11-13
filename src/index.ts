@@ -13,6 +13,7 @@ import Button from "./components/Button/Button";
 import Fab from "./components/Button/FAB";
 import MultipleButtons from "./components/Button/MultipleButtons";
 import TextButton from "./components/Button/TextButton";
+import SegmentControl from "./components/Button/SegmentControl";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
@@ -29,6 +30,7 @@ export {
   Fab,
   MultipleButtons,
   TextButton,
+  SegmentControl,
 };
 // Types
 export type { TypographyLiterals, Theme };
