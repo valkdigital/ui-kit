@@ -11,10 +11,11 @@ import {
   PhoneInput,
   countries,
   MultipleButtons,
+  TextButton,
 } from "@valkdigital/ui-kit";
 import data from "../data";
 import Buttons from "./Buttons";
-import { boolean, withKnobs, color } from "@storybook/addon-knobs";
+import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
 
 // the action function has one argument which is the name of the action,
 // this will be displayed in the actions tab in the addons panel
@@ -384,16 +385,22 @@ buttonStories.add("Multiple Buttons", () => (
       activeColor={color("active color", "#2BB9F5", "multiple buttons")}
       inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
       onPress={(i) => console.log(i)}
-      labels={["btn 1", "button", "button 12"]}
+      labels={array("buttons", ["btn 1", "button", "button 12"])}
     />
   </View>
 ));
-
+buttonStories.add("Text Button", () => (
+  <CenteredView>
+    <TextButton
+      label="text button"
+      color={color("color", undefined, "text button")}
+    />
+  </CenteredView>
+));
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-
     alignItems: "center",
     backgroundColor: "#F5FCFF",
   },

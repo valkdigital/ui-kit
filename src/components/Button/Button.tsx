@@ -108,7 +108,7 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const showFullWidthContainer =
-    size === ButtonSizes.full || type === ButtonTypes.progressbar;
+    size === (ButtonSizes.full || ButtonTypes.progressbar);
 
   return (
     <View

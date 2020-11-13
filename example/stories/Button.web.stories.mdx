@@ -13,11 +13,12 @@ import {
   Fab,
   MultipleButtons,
   Stepper,
+  TextButton,
 } from "@valkdigital/ui-kit";
 import { WithFigma } from "storybook-addon-figma";
 import Buttons from "../storybook/stories/Buttons";
 import AllFAB from "../storybook/stories/FAB";
-import { withKnobs, boolean, color } from "@storybook/addon-knobs";
+import { withKnobs, boolean, color, array } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 <Meta title="Buttons" />
@@ -93,8 +94,8 @@ import { action } from "@storybook/addon-actions";
       <MultipleButtons
         activeColor={color("active color", "#2BB9F5", "multiple buttons")}
         inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
-        onPress={(i) => console.log(i)}
-        labels={["btn 1", "button", "button 12"]}
+        onPress={(i) => action(i)}
+        labels={array("buttons", ["btn 1", "button", "button 12"])}
       />
     </View>
   </Story>
@@ -103,3 +104,28 @@ import { action } from "@storybook/addon-actions";
 ## Props
 
 <Props of={MultipleButtons} />
+
+<Preview>
+  <Story
+    name="Text Button"
+    decorators={[withKnobs]}
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/7Sh8nuwN3NqpwMCoOUPu9G/Styleguide-Test?node-id=104%3A525",
+      },
+    }}
+  >
+    <View style={{ marginTop: 16, marginLeft: 16, flex: 1 }}>
+      <TextButton
+        label="text button"
+        color={color("color", undefined, "text button")}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={TextButton} />

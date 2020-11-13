@@ -12,6 +12,7 @@ import countries from "./components/input/countries";
 import Button from "./components/Button/Button";
 import Fab from "./components/Button/FAB";
 import MultipleButtons from "./components/Button/MultipleButtons";
+import TextButton from "./components/Button/TextButton";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
@@ -27,6 +28,7 @@ export {
   Button,
   Fab,
   MultipleButtons,
+  TextButton,
 };
 // Types
 export type { TypographyLiterals, Theme };
