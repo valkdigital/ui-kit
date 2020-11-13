@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { View, StyleSheet, ViewStyle, Dimensions } from "react-native";
+import { View, StyleSheet, ViewStyle, useWindowDimensions } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import Modal from "../Modal";
@@ -68,27 +68,26 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   onSearchChange,
 }) => {
   const [position, setPosition] = useState<{
-    x: number;
-    y: number;
     width: number;
     height: number;
     pageX: number;
     pageY: number;
   }>({
-    x: 0,
-    y: 0,
     width: 0,
     height: 0,
     pageX: 0,
     pageY: 0,
   });
   const selectRef = useRef<View>(null);
+  const dimensions = useWindowDimensions();
+
+  const { width, height, pageX, pageY } = position;
 
   useLayoutEffect(() => {
-    selectRef.current?.measure((x, y, width, height, pageX, pageY) => {
-      setPosition({ x, y, width, height, pageX, pageY });
+    selectRef.current?.measure((_1, _2, width, height, pageX, pageY) => {
+      setPosition({ width, height, pageX, pageY });
     });
-  }, []);
+  }, [dimensions]);
 
   return (
     <>
@@ -126,15 +125,12 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
             style={[
               styles.modal,
               {
-                top: position.pageY + position.height,
-                left: position.pageX,
-                maxHeight:
-                  Dimensions.get("window").height -
-                  position.pageY -
-                  position.height,
+                top: pageY + height,
+                left: pageX,
+                maxHeight: dimensions.height - pageY - height,
               },
               SELECT_STYLE[size],
-              size === "large" && { width: position.width },
+              size === "large" && { width },
             ]}
           >
             <DismissKeyboard>
