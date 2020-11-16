@@ -7,52 +7,125 @@ import {
   ColorItem,
 } from "@storybook/addon-docs/blocks";
 import { View } from "react-native";
-import { Button, Text } from "@valkdigital/ui-kit";
+import {
+  Button,
+  Text,
+  Fab,
+  MultipleButtons,
+  Stepper,
+  TextButton,
+  Spacing,
+  SegmentControl,
+  NavigationTextButton,
+} from "@valkdigital/ui-kit";
 import { WithFigma } from "storybook-addon-figma";
+import Buttons from "../storybook/stories/Buttons";
+import AllFAB from "../storybook/stories/FAB";
+import NavigationTextStory from "../storybook/stories/NavigationTextStory";
+import { withKnobs, boolean, color, array } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
 
 <Meta title="Buttons" />
 
-# Preview
+# CTA
 
 <Preview>
-  <Story
-    name="CTA"
-    parameters={{
-      design: {
-        type: "figma",
-        url:
-          "https://www.figma.com/file/7Sh8nuwN3NqpwMCoOUPu9G/Styleguide-Test?node-id=104%3A525",
-      },
-    }}
-  >
-    <View style={{ alignItems: "center" }}>
-      <View
-        style={{
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          height: 600,
-          marginBottom: 200,
-          width: 900,
-          borderWidth: 2,
-          borderColor: "grey",
-          paddingHorizontal: 16,
-        }}
-      >
-        <Button
-          title="CTA primary"
-          type="filled"
-          size="medium"
-          loading={true}
-        />
-        <Button title="CTA primary" type="skeleton" size="medium" />
-        <Button title="CTA secundairy" type="skeleton" />
-        <Button title="CTA primary" type="filled" size="large" loading={true} />
-        <Button title="CTA primary" type="filled" size="full" />
-      </View>
+  <Story name="CTA" decorators={[withKnobs]}>
+    <Buttons
+      loading={boolean("loading", false, "cta")}
+      disabled={boolean("disabled", false, "cta")}
+      color={color("color", undefined, "cta")}
+      labelColor={color("label color", undefined, "cta")}
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Button} />
+
+# FAB
+
+<Preview>
+  <Story name="FAB" decorators={[withKnobs]}>
+    <AllFAB
+      color={color("color", "#1AA0E2", "fab")}
+      backgroundColor={color("background color", "#2BB9F5", "fab")}
+      iconColor={color("icon color", "#FFFFFF", "fab")}
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Fab} />
+
+# Multiple Buttons
+
+<Preview>
+  <Story name="Multiple Buttons" decorators={[withKnobs]}>
+    <View style={{ marginTop: 16 }}>
+      <MultipleButtons
+        activeColor={color("active color", "#2BB9F5", "multiple buttons")}
+        inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
+        onPress={(i) => action(i)}
+        labels={array("buttons", ["btn 1", "button", "button 12"])}
+      />
     </View>
   </Story>
 </Preview>
 
-# Props
+## Props
 
-<Props of={Button} />
+<Props of={MultipleButtons} />
+
+<Preview>
+  <Story name="Text Button" decorators={[withKnobs]}>
+    <View style={{ marginTop: 16, marginLeft: 16 }}>
+      <TextButton
+        label="text button"
+        color={color("color", undefined, "text button")}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={TextButton} />
+
+# Segment control
+
+<Preview>
+  <Story name="Segment control" decorators={[withKnobs]}>
+    <View style={{ marginHorizontal: Spacing.sp1, flex: 1 }}>
+      <SegmentControl
+        segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+      <SegmentControl
+        type="text"
+        segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={SegmentControl} />
+
+# Navigation Text Button
+
+<Preview>
+  <Story name="Navigation Text Button" decorators={[withKnobs]}>
+    <NavigationTextStory onPress={action("pressed")} />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={SegmentControl} />

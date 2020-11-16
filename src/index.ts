@@ -1,5 +1,4 @@
 import Text from "./components/Text";
-import Button from "./components/Button";
 import { Fonts, TypographyLiterals } from "./style/typography";
 import Spacing from "./style/spacing";
 import ThemeContext from "./style/ThemeContext";
@@ -11,12 +10,19 @@ import Picker from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
 import Dropdown from "./components/Dropdown";
+import Button from "./components/Button/Button";
+import Fab from "./components/Button/FAB";
+import MultipleButtons from "./components/Button/MultipleButtons";
+import TextButton from "./components/Button/TextButton";
+import SegmentControl from "./components/Button/SegmentControl";
+import NavigationTextButton from "./components/Button/NavigationTextButton";
+
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
-// Component exports
+
+// Text (Input) components exports
 export {
   Text,
-  Button,
   Card,
   CardList,
   Picker,
@@ -24,6 +30,16 @@ export {
   PhoneInput,
   countries,
   Dropdown,
+};
+
+// Button components exports
+export {
+  Button,
+  Fab,
+  MultipleButtons,
+  TextButton,
+  SegmentControl,
+  NavigationTextButton,
 };
 
 // Types

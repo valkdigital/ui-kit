@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDarkMode } from "storybook-dark-mode";
 import { addDecorator } from "@storybook/react";
+
+import { themes } from '@storybook/theming';
+
 import * as Font from "expo-font";
 
 // your theme provider
@@ -27,13 +30,22 @@ const ThemeWrapper = ({ children }) => {
   return (
     <ThemeContext.Provider
       value={{
-        ...ThemeManager.getTheme(darkmodeOn ? "dark" : "light"),
-        spacing: Spacing,
+        ...ThemeManager.getTheme(darkmodeOn ? "dark" : "light")
       }}
     >
       {children}
     </ThemeContext.Provider>
   );
 };
+
+import { addParameters } from '@storybook/react'; // or any other type of storybook
+ 
+addParameters({
+  darkMode: {
+    // Override the default dark theme
+    dark: { ...themes.dark,  appContentBg: 'black' },
+    // Override the default light theme
+  }
+});
 
 addDecorator((renderStory) => <ThemeWrapper>{renderStory()}</ThemeWrapper>);

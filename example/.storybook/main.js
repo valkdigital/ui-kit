@@ -35,6 +35,8 @@ module.exports = {
   },
   addons: [
     "@storybook/addon-docs",
+    "@storybook/addon-knobs",
+    '@storybook/addon-viewport',
     "storybook-addon-designs/register",
     "storybook-dark-mode/register",
   ],

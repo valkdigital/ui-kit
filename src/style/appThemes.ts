@@ -5,9 +5,7 @@ export default {
     background: colors.white,
     onBackground: colors.white,
     border: colors.grey2,
-    list: {
-      sectionBackground: colors.grey0,
-    },
+
     typography: {
       color: colors.black,
       heading: colors.black,
@@ -51,6 +49,9 @@ export default {
       midLight: "#FEF4AB",
       light: "#FFFDEB",
     },
+    list: {
+      sectionBackground: colors.grey0,
+    },
   },
   dark: {
     background: colors.black,
@@ -63,10 +64,6 @@ export default {
       inverted: colors.grey8,
       disabled: colors.grey4,
       placeholder: colors.grey4,
-    },
-
-    list: {
-      sectionBackground: colors.grey8,
     },
 
     cta: {
@@ -103,6 +100,10 @@ export default {
       midDark: "#B18E00",
       midLight: "#FEF4AB",
       light: "#FFFDEB",
+    },
+
+    list: {
+      sectionBackground: colors.grey8,
     },
   },
 };

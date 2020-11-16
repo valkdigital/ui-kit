@@ -10,12 +10,20 @@ import {
   Spacing,
   PhoneInput,
   countries,
+  MultipleButtons,
+  TextButton,
+  SegmentControl,
 } from "@valkdigital/ui-kit";
 import data from "../data";
+import Buttons from "./Buttons";
+import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
 
-const action = (event: any) => (params: any) => {
-  console.log(event, params);
-};
+// the action function has one argument which is the name of the action,
+// this will be displayed in the actions tab in the addons panel
+// action("name here")
+import { action } from "@storybook/addon-actions";
+import AllFAB from "./FAB";
+import NavigationTextStory from "./NavigationTextStory";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -332,7 +340,7 @@ inputStories.add("PhoneInput", () => (
   </CenteredView>
 ));
 
-storiesOf("Text").add("All Text", () => (
+storiesOf("Text", module).add("All Text", () => (
   <CenteredView>
     <Text type="h1">Heading 1</Text>
     <Text type="h2">Heading 2</Text>
@@ -355,11 +363,67 @@ storiesOf("Text").add("All Text", () => (
   </CenteredView>
 ));
 
+const buttonStories = storiesOf("Buttons", module);
+const orangePrimary = "#FF8100";
+buttonStories.addDecorator(withKnobs);
+buttonStories.add("CTA", () => (
+  <Buttons
+    loading={boolean("loading", false, "cta")}
+    disabled={boolean("disabled", false, "cta")}
+    color={color("color", orangePrimary, "cta")}
+    labelColor={color("label color", "white", "cta")}
+  />
+));
+buttonStories.add("FAB", () => (
+  <AllFAB
+    color={color("color", "#1AA0E2", "fab")}
+    backgroundColor={color("background color", "#2BB9F5", "fab")}
+    iconColor={color("icon color", "#FFFFFF", "fab")}
+  />
+));
+
+buttonStories.add("Multiple Buttons", () => (
+  <View style={{ marginTop: 16 }}>
+    <MultipleButtons
+      activeColor={color("active color", "#2BB9F5", "multiple buttons")}
+      inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
+      onPress={(i) => console.log(i)}
+      labels={array("buttons", ["btn 1", "button", "button 12"])}
+    />
+  </View>
+));
+buttonStories.add("Text Button", () => (
+  <CenteredView>
+    <TextButton
+      label="text button"
+      color={color("color", "black", "text button")}
+    />
+  </CenteredView>
+));
+
+buttonStories.add("Segment control", () => (
+  <View style={{ marginHorizontal: Spacing.sp1 }}>
+    <SegmentControl
+      segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+      onPress={action("pressed")}
+      style={{ marginBottom: Spacing.sp2 }}
+    />
+    <SegmentControl
+      type="text"
+      segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+      onPress={action("pressed")}
+      style={{ marginBottom: Spacing.sp2 }}
+    />
+  </View>
+));
+
+buttonStories.add("Navigation Text Button", () => (
+  <NavigationTextStory onPress={action("Pressed")} />
+));
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-
     alignItems: "center",
     backgroundColor: "#F5FCFF",
   },

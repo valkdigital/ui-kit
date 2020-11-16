@@ -9,35 +9,35 @@ const Typography = {
   h1: {
     fontFamily: Fonts.Bold,
     fontSize: 48,
-    lineHeight: 48,
+    lineHeight: 56,
     letterSpacing: 0,
   },
 
   h2: {
     fontFamily: Fonts.Bold,
     fontSize: 32,
-    lineHeight: 32,
+    lineHeight: 40,
     letterSpacing: 0,
   },
 
   h3: {
     fontFamily: Fonts.Bold,
     fontSize: 28,
-    lineHeight: 32,
+    lineHeight: 36,
     letterSpacing: 0.1,
   },
 
   h4: {
     fontFamily: Fonts.Bold,
     fontSize: 24,
-    lineHeight: 24,
+    lineHeight: 32,
     letterSpacing: 0.1,
   },
 
   h5: {
     fontFamily: Fonts.Bold,
     fontSize: 20,
-    lineHeight: 20,
+    lineHeight: 28,
     letterSpacing: 0.1,
   },
 
@@ -51,7 +51,7 @@ const Typography = {
   subHeading: {
     fontFamily: Fonts.Regular,
     fontSize: 20,
-    lineHeight: 24,
+    lineHeight: 28,
   },
 
   bodyRegular: {

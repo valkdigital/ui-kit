@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FlatList, StyleProp, View, ViewStyle } from "react-native";
 import Card, { CardProps } from "./Card";
 import spacing from "../style/spacing";
-import ThemeContext from "../style/ThemeContext";
 
 type Directions = "horizontal" | "vertical";
 
@@ -32,10 +31,6 @@ const CardList: React.FC<CardListProps> = ({
   onItemPress,
   containerStyle,
 }) => {
-  const {
-    spacing: { sp1 },
-  } = useContext(ThemeContext);
-
   const horizontal = direction === "horizontal";
 
   return (
@@ -50,7 +45,7 @@ const CardList: React.FC<CardListProps> = ({
       showsHorizontalScrollIndicator={false}
       style={{ flexGrow: 0 }}
       contentContainerStyle={[
-        horizontal && { paddingBottom: sp1 },
+        horizontal && { paddingBottom: spacing.sp1 },
         containerStyle,
       ]}
     />
