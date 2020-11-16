@@ -27,6 +27,7 @@ interface SelectProps {
   error?: string;
   size: SelectSizes;
   showOptions: () => void;
+  isFocused?: boolean;
   selectedOption?: Option;
 }
 
@@ -40,6 +41,7 @@ const Select = React.forwardRef<View, SelectProps>(
       error,
       size,
       showOptions,
+      isFocused,
       selectedOption,
     },
     ref
@@ -47,8 +49,12 @@ const Select = React.forwardRef<View, SelectProps>(
     const {
       border,
       error: { midDark },
+      info,
       typography,
     } = useContext(ThemeContext);
+
+    const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
+
     return (
       <View
         style={[
@@ -62,12 +68,7 @@ const Select = React.forwardRef<View, SelectProps>(
         </Text>
         <View
           ref={ref}
-          style={[
-            styles.selectContainer,
-            { borderColor: border },
-            !!error && { borderColor: midDark },
-            SELECT_STYLE[size],
-          ]}
+          style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
         >
           <TouchableOpacity
             onPress={showOptions}
@@ -93,7 +94,11 @@ const Select = React.forwardRef<View, SelectProps>(
               </Text>
             </View>
             <Image
-              source={require("../../media/arrow_down.png")}
+              source={
+                isFocused
+                  ? require("../../media/arrow_down.png")
+                  : require("../../media/arrow_up.png")
+              }
               style={[styles.chevron, { tintColor: typography.color }]}
             />
           </TouchableOpacity>

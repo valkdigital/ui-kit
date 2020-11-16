@@ -97,6 +97,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
           placeholder,
           selectedOption,
           showOptions,
+          isFocused: showDropdown,
           disabled,
           error,
           ref: selectRef,
@@ -109,6 +110,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
           error={error}
           size={size}
           showOptions={showOptions}
+          isFocused={showDropdown}
           selectedOption={selectedOption}
           selectContainerStyle={selectContainerStyle}
           ref={selectRef}

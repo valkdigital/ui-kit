@@ -97,6 +97,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           placeholder,
           selectedOption,
           showOptions,
+          isFocused: showModal,
           disabled,
           error,
         })
@@ -109,6 +110,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           error={error}
           size={size}
           showOptions={showOptions}
+          isFocused={showModal}
           selectedOption={selectedOption}
         />
       )}

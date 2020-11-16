@@ -29,6 +29,7 @@ interface SelectComponentProps {
   selectedOption?: Option;
   disabled?: boolean;
   showOptions: () => void;
+  isFocused?: boolean;
   error?: string;
 }
 
@@ -97,6 +98,7 @@ export interface PickerProps {
    *  selectedOption?: Option;
    *  disabled?: boolean;
    *  showOptions: () => void;
+   *  isFocused?: boolean;
    *  error?: boolean;}`
    */
   SelectComponent?: React.ForwardRefExoticComponent<
