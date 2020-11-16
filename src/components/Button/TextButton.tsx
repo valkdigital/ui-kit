@@ -29,6 +29,7 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
 
 const styles = StyleSheet.create({
   link: {
+    flexWrap: "wrap",
     textDecorationLine: "underline",
   },
 });
