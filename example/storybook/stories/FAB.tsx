@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { Fab, Spacing } from "@valkdigital/ui-kit";
 import React from "react";
 import { View } from "react-native";
@@ -21,6 +22,7 @@ const AllFAB: React.FC<FABProps> = ({
         color={color}
         source={require("../../src/media/plus.png")}
         imgStyle={{ tintColor: iconColor }}
+        onPress={action("pressed")}
       />
     </View>
   );

@@ -364,13 +364,14 @@ storiesOf("Text", module).add("All Text", () => (
 ));
 
 const buttonStories = storiesOf("Buttons", module);
+const orangePrimary = "#FF8100";
 buttonStories.addDecorator(withKnobs);
 buttonStories.add("CTA", () => (
   <Buttons
     loading={boolean("loading", false, "cta")}
     disabled={boolean("disabled", false, "cta")}
-    color={color("color", undefined, "cta")}
-    labelColor={color("label color", undefined, "cta")}
+    color={color("color", orangePrimary, "cta")}
+    labelColor={color("label color", "white", "cta")}
   />
 ));
 buttonStories.add("FAB", () => (
@@ -395,7 +396,7 @@ buttonStories.add("Text Button", () => (
   <CenteredView>
     <TextButton
       label="text button"
-      color={color("color", undefined, "text button")}
+      color={color("color", "black", "text button")}
     />
   </CenteredView>
 ));
