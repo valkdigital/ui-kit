@@ -14,23 +14,23 @@ import Fab from "./components/Button/FAB";
 import MultipleButtons from "./components/Button/MultipleButtons";
 import TextButton from "./components/Button/TextButton";
 import SegmentControl from "./components/Button/SegmentControl";
+import NavigationTextButton from "./components/Button/NavigationTextButton";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
-// Component exports
+
+// Text (Input) components exports
+export { Text, Card, CardList, Picker, TextInput, PhoneInput, countries };
+
+// Button components exports
 export {
-  Text,
-  Card,
-  CardList,
-  Picker,
-  TextInput,
-  PhoneInput,
-  countries,
   Button,
   Fab,
   MultipleButtons,
   TextButton,
   SegmentControl,
+  NavigationTextButton,
 };
+
 // Types
 export type { TypographyLiterals, Theme };

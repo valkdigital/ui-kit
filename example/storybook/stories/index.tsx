@@ -23,6 +23,7 @@ import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
 // action("name here")
 import { action } from "@storybook/addon-actions";
 import AllFAB from "./FAB";
+import NavigationTextStory from "./NavigationTextStory";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -413,6 +414,10 @@ buttonStories.add("Segment control", () => (
       style={{ marginBottom: Spacing.sp2 }}
     />
   </View>
+));
+
+buttonStories.add("Navigation Text Button", () => (
+  <NavigationTextStory onPress={action("Pressed")} />
 ));
 const styles = StyleSheet.create({
   container: {
