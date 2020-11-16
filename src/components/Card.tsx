@@ -12,7 +12,7 @@ import {
   StyleProp,
 } from "react-native";
 import Text from "./Text";
-import Button from "./Button";
+import Button from "./Button/Button";
 import Spacing from "../style/spacing";
 import shadow from "../style/shadow";
 import LinearGradient from "../alias/LinearGradient";
@@ -205,10 +205,11 @@ const Card: React.FC<CardProps> = ({
         )}
         {showButton && (
           <Button
-            title={buttonText!}
+            // @ts-ignore showButon checks  if buttomText isn't undefined
+            label={buttonText}
             onPress={onPress}
-            size="large"
-            style={styles.button}
+            size="medium"
+            buttonStyle={styles.button}
           />
         )}
       </View>
@@ -260,6 +261,8 @@ const styles = StyleSheet.create({
     marginTop: Spacing["sp1/2"],
   },
   button: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     marginTop: Spacing.sp3,
     borderRadius: 0,
   },
