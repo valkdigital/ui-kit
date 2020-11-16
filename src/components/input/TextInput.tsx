@@ -8,9 +8,9 @@ import {
 import BaseInput from "./BaseInput";
 import type { BaseInputProps } from "./BaseInput";
 import { omit } from "lodash";
-import { Spacing } from "@valkdigital/ui-kit";
 import hitSlop from "../../style/hitSlop";
 import ThemeContext from "../../style/ThemeContext";
+import spacing from "../../style/spacing";
 
 interface TextInputProps
   extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
     width: 13,
     height: 13,
     alignSelf: "center",
-    marginRight: Spacing.sp1,
+    marginRight: spacing.sp1,
   },
   eye: {
-    marginLeft: Spacing.sp1,
+    marginLeft: spacing.sp1,
     width: 16,
     height: 16,
   },

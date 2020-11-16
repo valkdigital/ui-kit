@@ -1,6 +1,6 @@
-import { Spacing } from "@valkdigital/ui-kit";
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, ViewStyle, Pressable } from "react-native";
+import spacing from "../../style/spacing";
 import Text from "../Text";
 
 interface MultipleButtonsProps {
@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 4,
-    paddingHorizontal: Spacing.sp2,
-    paddingVertical: Spacing.sp1,
-    marginRight: Spacing.sp1,
+    paddingHorizontal: spacing.sp2,
+    paddingVertical: spacing.sp1,
+    marginRight: spacing.sp1,
   },
 });
 
