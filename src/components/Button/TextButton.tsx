@@ -8,16 +8,18 @@ interface TextButtonProps {
   color?: string;
   label: string;
   style?: ViewStyle;
+  onPress: () => void;
 }
 
 const TextButton: React.FC<TextButtonProps> = (props) => {
   const {
     info: { midDark },
   } = useContext(ThemeContext);
-  const { color = midDark, style, label } = props;
+  const { color = midDark, style, label, onPress } = props;
   return (
     <Pressable
       style={({ pressed }) => [style, pressed && { opacity: 0.4 }]}
+      onPress={onPress}
       hitSlop={hitSlop}
     >
       <Text style={styles.link} color={color}>
