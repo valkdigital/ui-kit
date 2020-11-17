@@ -395,6 +395,7 @@ buttonStories.add("Multiple Buttons", () => (
 buttonStories.add("Text Button", () => (
   <CenteredView>
     <TextButton
+      onPress={() => console.log("pressed")}
       label="text button"
       color={color("color", "black", "text button")}
     />
