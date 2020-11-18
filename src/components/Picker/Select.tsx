@@ -7,6 +7,7 @@ import {
   Image,
   StyleProp,
   LayoutChangeEvent,
+  ImageStyle,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -31,7 +32,7 @@ interface SelectProps {
   isFocused?: boolean;
   selectedOption?: Option;
   onLayout?: (event: LayoutChangeEvent) => void;
-  DropdownComponent: React.FC;
+  DropdownComponent?: React.FC;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -80,7 +81,7 @@ const Select: React.FC<SelectProps> = ({
             {selectedOption?.image && (
               <Image
                 source={selectedOption?.image}
-                style={styles.optionImage}
+                style={styles.optionImage as StyleProp<ImageStyle>}
                 resizeMode="contain"
               />
             )}
@@ -88,7 +89,9 @@ const Select: React.FC<SelectProps> = ({
               type="bodyRegular"
               numberOfLines={1}
               style={
-                selectedOption === undefined ? styles.placeholder : undefined
+                selectedOption === undefined
+                  ? [styles.placeholder, { color: typography.placeholder }]
+                  : undefined
               }
             >
               {selectedOption?.label ?? placeholder}
@@ -100,7 +103,10 @@ const Select: React.FC<SelectProps> = ({
                 ? require("../../media/arrow_down.png")
                 : require("../../media/arrow_up.png")
             }
-            style={[styles.chevron, { tintColor: typography.color }]}
+            style={[
+              styles.chevron as StyleProp<ImageStyle>,
+              { tintColor: typography.color },
+            ]}
           />
         </TouchableOpacity>
       </View>
@@ -109,7 +115,7 @@ const Select: React.FC<SelectProps> = ({
           {error}
         </Text>
       )}
-      {DropdownComponent && <DropdownComponent />}
+      {DropdownComponent && isFocused && <DropdownComponent />}
     </View>
   );
 };
@@ -117,6 +123,8 @@ const Select: React.FC<SelectProps> = ({
 const styles = StyleSheet.create({
   container: {
     alignSelf: "stretch",
+    // @ts-ignore
+    zIndex: Platform.OS === "web" ? "unset" : 0,
   },
   label: {
     marginBottom: Spacing["sp1/2"],
@@ -150,7 +158,6 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     flex: 1,
-    color: colors.greyDark,
   },
   error: { marginTop: Spacing["sp1/2"] },
 });

@@ -36,29 +36,27 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
       onClose={onModalClose}
       modalSize="fullscreen"
       listType="sectionList"
-      SelectComponent={React.forwardRef(
-        ({ selectedOption, disabled, showOptions }) => {
-          return (
-            <TouchableOpacity
-              onPress={showOptions}
-              style={[styles.selectContainer, { borderColor: border }]}
-              disabled={disabled}
-            >
-              {selectedOption?.image && (
-                <Image
-                  source={selectedOption?.image}
-                  style={styles.optionImage}
-                  resizeMode="contain"
-                />
-              )}
+      SelectComponent={({ selectedOption, disabled, showOptions }) => {
+        return (
+          <TouchableOpacity
+            onPress={showOptions}
+            style={[styles.selectContainer, { borderColor: border }]}
+            disabled={disabled}
+          >
+            {selectedOption?.image && (
               <Image
-                source={require("../../media/arrow_down.png")}
-                style={[styles.arrow, { tintColor: typography.color }]}
+                source={selectedOption?.image}
+                style={styles.optionImage}
+                resizeMode="contain"
               />
-            </TouchableOpacity>
-          );
-        }
-      )}
+            )}
+            <Image
+              source={require("../../media/arrow_down.png")}
+              style={[styles.arrow, { tintColor: typography.color }]}
+            />
+          </TouchableOpacity>
+        );
+      }}
       listEmptyText={listEmptyText}
       searchPlaceholder={searchPlaceholder}
     />

@@ -1,15 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   ViewStyle,
-  Image,
-  TouchableOpacity,
   Pressable,
-  Platform,
   LayoutChangeEvent,
-  ImageStyle,
-  StyleProp,
 } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
@@ -25,8 +20,7 @@ import SectionList from "../Picker/SectionList";
 import DismissKeyboard from "../Picker/DismissKeyboard";
 import TextInput from "../input/TextInput";
 import AddOption from "../Picker/AddOption";
-import ThemeContext from "../../style/ThemeContext";
-import Text from "../Text";
+import Select from "../Picker/Select";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -89,15 +83,6 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
     height: 0,
   });
 
-  const {
-    border,
-    error: { midDark },
-    info,
-    typography,
-  } = useContext(ThemeContext);
-
-  const borderColor = !!error ? midDark : showDropdown ? info.midDark : border;
-
   const { x, y, width, height } = position;
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -107,130 +92,87 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
 
   return (
     <>
-      <View
-        style={[
-          styles.container,
-          selectContainerStyle,
-          disabled && { opacity: 0.4 },
-        ]}
-      >
-        <Text type="subtextSemiBold" style={styles.label}>
-          {label}
-        </Text>
-        <View
-          onLayout={onLayout}
-          style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
-        >
-          <TouchableOpacity
-            onPress={showOptions}
-            style={styles.select}
-            disabled={disabled}
-          >
-            <View style={styles.row}>
-              {selectedOption?.image && (
-                <Image
-                  source={selectedOption?.image}
-                  style={styles.optionImage as StyleProp<ImageStyle>}
-                  resizeMode="contain"
-                />
-              )}
-              <Text
-                type="bodyRegular"
-                numberOfLines={1}
-                style={
-                  selectedOption === undefined
-                    ? [styles.placeholder, { color: typography.placeholder }]
-                    : undefined
-                }
-              >
-                {selectedOption?.label ?? placeholder}
-              </Text>
-            </View>
-            <Image
-              source={
-                showDropdown
-                  ? require("../../media/arrow_down.png")
-                  : require("../../media/arrow_up.png")
-              }
+      <Select
+        label={label}
+        placeholder={placeholder}
+        selectContainerStyle={selectContainerStyle}
+        disabled={disabled}
+        error={error}
+        size={size}
+        showOptions={showOptions}
+        isFocused={showDropdown}
+        selectedOption={selectedOption}
+        onLayout={onLayout}
+        DropdownComponent={() => {
+          return (
+            <View
               style={[
-                styles.chevron as StyleProp<ImageStyle>,
-                { tintColor: typography.color },
+                styles.dropdown,
+                {
+                  top: height + y,
+                  left: x,
+                },
+                SELECT_STYLE[size],
+                size === "large" && { width },
               ]}
-            />
-          </TouchableOpacity>
-        </View>
-        {!!error && (
-          <Text style={styles.error} type="subtextRegular" color={midDark}>
-            {error}
-          </Text>
-        )}
-        {showDropdown && (
-          <View
-            style={[
-              styles.dropdown,
-              {
-                top: height + y,
-                left: x,
-              },
-              SELECT_STYLE[size],
-              size === "large" && { width },
-            ]}
-          >
-            <DismissKeyboard>
-              <>
-                {modalSize === "responsive" && (
-                  <FlatList
-                    options={options}
-                    selectedOption={selectedOption}
-                    onSelectOption={onSelectOption}
-                    listEmptyText={listEmptyText}
-                    search={search}
-                    needsPaddingTop={true}
-                  />
-                )}
-                {modalSize === "fullscreen" && (
-                  <View style={styles.flex}>
-                    <TextInput
-                      containerStyle={styles.input}
-                      placeholder={searchPlaceholder}
-                      onChangeText={onSearchChange}
-                      type="search"
+            >
+              <DismissKeyboard>
+                <>
+                  {modalSize === "responsive" && (
+                    <FlatList
+                      options={options}
+                      selectedOption={selectedOption}
+                      onSelectOption={onSelectOption}
+                      listEmptyText={listEmptyText}
+                      search={search}
+                      needsPaddingTop={true}
                     />
-                    {addOptionEnabled && !!search && (
-                      <AddOption
-                        onAddOptionPress={onAddOption}
-                        addOptionTitle={addOptionTitle}
-                      />
-                    )}
+                  )}
+                  {modalSize === "fullscreen" && (
                     <View style={styles.flex}>
-                      {listType === "flatList" && (
-                        <FlatList
-                          options={options}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
+                      <TextInput
+                        containerStyle={styles.input}
+                        placeholder={searchPlaceholder}
+                        onChangeText={onSearchChange}
+                        type="search"
+                      />
+                      {addOptionEnabled && !!search && (
+                        <AddOption
+                          onAddOptionPress={onAddOption}
+                          addOptionTitle={addOptionTitle}
                         />
                       )}
-                      {listType === "sectionList" && (
-                        <SectionList
-                          options={options}
-                          favoriteOptions={favoriteOptions}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
-                          alphabeticScrollEnabled={alphabeticScrollEnabled}
-                        />
-                      )}
+                      <View style={styles.flex}>
+                        {listType === "flatList" && (
+                          <FlatList
+                            options={options}
+                            selectedOption={selectedOption}
+                            onSelectOption={onSelectOption}
+                            listEmptyText={listEmptyText}
+                            search={search}
+                          />
+                        )}
+                        {listType === "sectionList" && (
+                          <SectionList
+                            options={options}
+                            favoriteOptions={favoriteOptions}
+                            selectedOption={selectedOption}
+                            onSelectOption={onSelectOption}
+                            listEmptyText={listEmptyText}
+                            search={search}
+                            alphabeticScrollEnabled={alphabeticScrollEnabled}
+                          />
+                        )}
+                      </View>
                     </View>
-                  </View>
-                )}
-              </>
-            </DismissKeyboard>
-          </View>
-        )}
-      </View>
+                  )}
+                </>
+              </DismissKeyboard>
+            </View>
+          );
+        }}
+      />
+
       {showDropdown && (
         <Pressable onPress={hideOptions} style={styles.overlay} />
       )}
@@ -264,45 +206,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   flex: { flex: 1 },
-  container: {
-    alignSelf: "stretch",
-    // @ts-ignore
-    zIndex: Platform.OS === "web" ? "unset" : 20,
-  },
-  label: {
-    marginBottom: Spacing["sp1/2"],
-  },
-  selectContainer: {
-    borderWidth: 1,
-    borderRadius: Spacing["sp1/2"],
-  },
-  select: {
-    height: 40,
-    paddingHorizontal: Spacing.sp2,
-    paddingVertical: Spacing.sp1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-  },
-  optionImage: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    alignSelf: "center",
-    marginRight: Spacing.sp1,
-  },
-  chevron: {
-    marginLeft: Spacing.sp2,
-    width: 14,
-    height: 8,
-  },
-  placeholder: {
-    flex: 1,
-  },
-  error: { marginTop: Spacing["sp1/2"] },
 });
 
 export default DropdownScreen;

@@ -5,6 +5,7 @@ import {
   StyleProp,
   LayoutAnimation,
   View,
+  LayoutChangeEvent,
 } from "react-native";
 import DropdownScreen from "./DropdownScreen";
 
@@ -27,6 +28,8 @@ interface SelectComponentProps {
   showOptions: () => void;
   isFocused?: boolean;
   error?: string;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  DropdownComponent?: React.FC;
 }
 
 export interface DropdownProps {
@@ -94,11 +97,11 @@ export interface DropdownProps {
    *  disabled?: boolean;
    *  showOptions: () => void;
    *  isFocused?: boolean;
-   *  error?: boolean;`
+   *  error?: boolean;
+   *  onLayout?: (event: LayoutChangeEvent) => void;
+   *  DropdownComponent?: React.FC;`
    */
-  SelectComponent?: React.ForwardRefExoticComponent<
-    SelectComponentProps & React.RefAttributes<View>
-  >;
+  SelectComponent?: React.FC<SelectComponentProps>;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({

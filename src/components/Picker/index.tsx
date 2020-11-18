@@ -8,7 +8,6 @@ import {
   ImageSourcePropType,
   StyleProp,
   LayoutAnimation,
-  View,
 } from "react-native";
 import PickerScreen from "./PickerScreen";
 
@@ -101,9 +100,7 @@ export interface PickerProps {
    *  isFocused?: boolean;
    *  error?: boolean;}`
    */
-  SelectComponent?: React.ForwardRefExoticComponent<
-    SelectComponentProps & React.RefAttributes<View>
-  >;
+  SelectComponent?: React.FC<SelectComponentProps>;
 }
 
 const Picker: React.FC<PickerProps> = ({
