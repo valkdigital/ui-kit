@@ -37,7 +37,6 @@ interface ButtonProps {
   size?: keyof typeof ButtonSizes;
   buttonStyle?: ViewStyle;
   containerStyle?: ViewStyle;
-  helperText?: string;
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
@@ -140,7 +139,7 @@ const Button: React.FC<ButtonProps> = ({
                 source={image}
               />
             )}
-            <Text type="h6" color={buttonLabelColor}>
+            <Text type="h6" color={buttonLabelColor} style={styles.label}>
               {label}
             </Text>
           </>
@@ -180,14 +179,14 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.sp2,
     paddingBottom: isIphoneX ? Spacing.sp2 - Spacing["sp1/2"] : Spacing.sp2,
   },
+  label: {
+    marginHorizontal: Spacing.sp2,
+  },
   img: {
     marginLeft: Spacing.sp2,
     marginRight: Spacing.sp1,
     width: 24,
     height: 24,
-  },
-  helperText: {
-    marginBottom: Spacing["sp1/2"],
   },
 
   progressbarContainer: {
