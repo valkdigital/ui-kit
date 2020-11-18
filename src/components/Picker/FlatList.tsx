@@ -8,7 +8,7 @@ import Spacing from "../../style/spacing";
 import ListEmpty from "./ListEmpty";
 
 interface FlatListProps {
-  options: Option[];
+  options?: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
   search: string;
@@ -17,7 +17,7 @@ interface FlatListProps {
 }
 
 const FlatList: React.FC<FlatListProps> = ({
-  options,
+  options = [],
   selectedOption,
   onSelectOption,
   search,

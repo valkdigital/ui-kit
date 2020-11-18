@@ -23,13 +23,14 @@ interface Section {
 }
 
 interface SectionListProps {
-  options: Option[];
+  options?: Option[];
   favoriteOptions?: Option[];
   selectedOption?: Option;
   onSelectOption: (option: Option) => void;
   search: string;
   listEmptyText?: string;
   alphabeticScrollEnabled?: boolean;
+  customSections?: Section[];
 }
 
 const SectionList: React.FC<SectionListProps> = ({
@@ -40,8 +41,9 @@ const SectionList: React.FC<SectionListProps> = ({
   search,
   listEmptyText,
   alphabeticScrollEnabled,
+  customSections,
 }) => {
-  const [sections, setSections] = useState<Section[]>([]);
+  const [sections, setSections] = useState<Section[]>(customSections ?? []);
   const sectionListRef = useRef<RNSectionList>(null);
 
   const showAlphabet = alphabeticScrollEnabled && !search;
@@ -76,12 +78,18 @@ const SectionList: React.FC<SectionListProps> = ({
       .replace(/[óòöôõ]/gi, "o")
       .replace(/[úùüû]/gi, "u")
       .replace(/[çč]/gi, "c")
-      .replace(/[ñ]/gi, "n")
-      .replace(/[^a-zA-Z]/g, " ");
+      .replace(/[ñ]/gi, "n");
+
     return removedAccents[0].toUpperCase() + removedAccents.slice(1);
   };
 
-  useEffect(() => {
+  const filterLabel = ({ label }: Option) =>
+    removeAccents(label)
+      .toLocaleLowerCase()
+      .includes(search.toLocaleLowerCase());
+
+  const generateSections = () => {
+    if (!options) return;
     const initialSections =
       favoriteOptions && !search
         ? [{ title: undefined, data: favoriteOptions }]
@@ -106,11 +114,7 @@ const SectionList: React.FC<SectionListProps> = ({
           sensitivity: "base",
         });
       })
-      .filter((option) => {
-        return removeAccents(option.label)
-          .toLocaleLowerCase()
-          .includes(search.toLocaleLowerCase());
-      })
+      .filter(filterLabel)
       .reduce((result: Section[], option) => {
         let firstLetter = removeAccents(option.label[0]);
         if (firstLetter === " ") firstLetter = "#";
@@ -126,6 +130,31 @@ const SectionList: React.FC<SectionListProps> = ({
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setSections(sections);
+  };
+
+  const fiterCustomSections = () => {
+    setSections(
+      customSections?.reduce<Section[]>((result, sectionData) => {
+        const { title, data } = sectionData;
+        const filteredData = data.filter(filterLabel);
+        if (filteredData.length !== 0) {
+          result.push({
+            title,
+            data: filteredData,
+          });
+        }
+
+        return result;
+      }, []) ?? []
+    );
+  };
+
+  useEffect(() => {
+    if (customSections) {
+      fiterCustomSections();
+      return;
+    }
+    generateSections();
   }, [search]);
 
   useEffect(() => {
