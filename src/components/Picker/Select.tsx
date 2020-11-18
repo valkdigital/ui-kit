@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StyleProp,
+  LayoutChangeEvent,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -29,93 +30,89 @@ interface SelectProps {
   showOptions: () => void;
   isFocused?: boolean;
   selectedOption?: Option;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  DropdownComponent: React.FC;
 }
 
-const Select = React.forwardRef<View, SelectProps>(
-  (
-    {
-      label,
-      placeholder,
-      selectContainerStyle,
-      disabled,
-      error,
-      size,
-      showOptions,
-      isFocused,
-      selectedOption,
-    },
-    ref
-  ) => {
-    const {
-      border,
-      error: { midDark },
-      info,
-      typography,
-    } = useContext(ThemeContext);
+const Select: React.FC<SelectProps> = ({
+  label,
+  placeholder,
+  selectContainerStyle,
+  disabled,
+  error,
+  size,
+  showOptions,
+  isFocused,
+  selectedOption,
+  onLayout,
+  DropdownComponent,
+}) => {
+  const {
+    border,
+    error: { midDark },
+    info,
+    typography,
+  } = useContext(ThemeContext);
 
-    const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
+  const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
 
-    return (
+  return (
+    <View
+      style={[
+        styles.container,
+        selectContainerStyle,
+        disabled && { opacity: 0.4 },
+      ]}
+    >
+      <Text type="subtextSemiBold" style={styles.label}>
+        {label}
+      </Text>
       <View
-        style={[
-          styles.container,
-          selectContainerStyle,
-          disabled && { opacity: 0.4 },
-        ]}
+        onLayout={onLayout}
+        style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
       >
-        <Text type="subtextSemiBold" style={styles.label}>
-          {label}
-        </Text>
-        <View
-          ref={ref}
-          style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
+        <TouchableOpacity
+          onPress={showOptions}
+          style={styles.select}
+          disabled={disabled}
         >
-          <TouchableOpacity
-            onPress={showOptions}
-            style={styles.select}
-            disabled={disabled}
-          >
-            <View style={styles.row}>
-              {selectedOption?.image && (
-                <Image
-                  source={selectedOption?.image}
-                  style={styles.optionImage}
-                  resizeMode="contain"
-                />
-              )}
-              <Text
-                type="bodyRegular"
-                numberOfLines={1}
-                style={
-                  selectedOption === undefined ? styles.placeholder : undefined
-                }
-              >
-                {selectedOption?.label ?? placeholder}
-              </Text>
-            </View>
-            <Image
-              source={
-                isFocused
-                  ? require("../../media/arrow_down.png")
-                  : require("../../media/arrow_up.png")
+          <View style={styles.row}>
+            {selectedOption?.image && (
+              <Image
+                source={selectedOption?.image}
+                style={styles.optionImage}
+                resizeMode="contain"
+              />
+            )}
+            <Text
+              type="bodyRegular"
+              numberOfLines={1}
+              style={
+                selectedOption === undefined ? styles.placeholder : undefined
               }
-              style={[styles.chevron, { tintColor: typography.color }]}
-            />
-          </TouchableOpacity>
-        </View>
-        {!!error && (
-          <Text
-            style={styles.error}
-            type="subtextRegular"
-            color={colors.redDark}
-          >
-            {error}
-          </Text>
-        )}
+            >
+              {selectedOption?.label ?? placeholder}
+            </Text>
+          </View>
+          <Image
+            source={
+              isFocused
+                ? require("../../media/arrow_down.png")
+                : require("../../media/arrow_up.png")
+            }
+            style={[styles.chevron, { tintColor: typography.color }]}
+          />
+        </TouchableOpacity>
       </View>
-    );
-  }
-);
+      {!!error && (
+        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
+          {error}
+        </Text>
+      )}
+      {DropdownComponent && <DropdownComponent />}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

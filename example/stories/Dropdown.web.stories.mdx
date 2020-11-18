@@ -36,7 +36,7 @@ import data from "../storybook/data";
             position: "absolute",
             top: "50%",
             left: "50%",
-            height: 400,
+            height: 200,
             overflowY: "scroll",
             backgroundColor: "#ffffff",
             transform: "translate(-50%, -50%)",
@@ -51,7 +51,6 @@ import data from "../storybook/data";
               { label: "Madame", value: "Mevr." },
             ]}
             selectedOption={{ label: "Sir", value: "Dhr." }}
-            title="Salutation"
             onSelectChange={() => null}
             selectContainerStyle={{
               paddingHorizontal: Spacing.sp3,
@@ -67,7 +66,6 @@ import data from "../storybook/data";
               return { label: `option ${value}`, value };
             })}
             selectedOption={undefined}
-            title="Title"
             onSelectChange={() => null}
             selectContainerStyle={{
               paddingHorizontal: Spacing.sp3,
@@ -83,7 +81,6 @@ import data from "../storybook/data";
               return { label: `option ${value}`, value };
             })}
             selectedOption={{ label: "option 15", value: "15" }}
-            title="Title"
             onSelectChange={() => null}
             selectContainerStyle={{
               paddingHorizontal: Spacing.sp3,
@@ -104,7 +101,6 @@ import data from "../storybook/data";
               data.countries[11],
               data.countries[9],
             ]}
-            title="Country"
             onSelectChange={() => null}
             searchPlaceholder="Search"
             listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
