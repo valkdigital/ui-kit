@@ -4,7 +4,6 @@ import {
   ImageSourcePropType,
   StyleProp,
   LayoutAnimation,
-  View,
   LayoutChangeEvent,
 } from "react-native";
 import DropdownScreen from "./DropdownScreen";

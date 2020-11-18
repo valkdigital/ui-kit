@@ -8,6 +8,7 @@ import {
   StyleProp,
   LayoutChangeEvent,
   ImageStyle,
+  Platform,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -63,6 +64,10 @@ const Select: React.FC<SelectProps> = ({
         styles.container,
         selectContainerStyle,
         disabled && { opacity: 0.4 },
+        // @ts-ignore
+        isFocused &&
+          DropdownComponent &&
+          Platform.OS === "web" && { zIndex: "unset" },
       ]}
     >
       <Text type="subtextSemiBold" style={styles.label}>
@@ -123,8 +128,6 @@ const Select: React.FC<SelectProps> = ({
 const styles = StyleSheet.create({
   container: {
     alignSelf: "stretch",
-    // @ts-ignore
-    zIndex: Platform.OS === "web" ? "unset" : 0,
   },
   label: {
     marginBottom: Spacing["sp1/2"],
