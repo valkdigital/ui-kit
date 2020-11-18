@@ -1,5 +1,13 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { View, StyleSheet, ViewStyle, useWindowDimensions } from "react-native";
+import React, { useContext, useLayoutEffect, useRef, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  useWindowDimensions,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import Modal from "../Modal";
@@ -14,8 +22,9 @@ import FlatList from "../Picker/FlatList";
 import SectionList from "../Picker/SectionList";
 import DismissKeyboard from "../Picker/DismissKeyboard";
 import TextInput from "../input/TextInput";
-import Select from "../Picker/Select";
 import AddOption from "../Picker/AddOption";
+import ThemeContext from "../../style/ThemeContext";
+import Text from "../Text";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -68,11 +77,15 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   onSearchChange,
 }) => {
   const [position, setPosition] = useState<{
+    x: number;
+    y: number;
     width: number;
     height: number;
     pageX: number;
     pageY: number;
   }>({
+    x: 0,
+    y: 0,
     width: 0,
     height: 0,
     pageX: 0,
@@ -80,117 +93,145 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   });
   const selectRef = useRef<View>(null);
   const dimensions = useWindowDimensions();
+  const {
+    border,
+    error: { midDark },
+    info,
+    typography,
+  } = useContext(ThemeContext);
 
-  const { width, height, pageX, pageY } = position;
+  const borderColor = !!error ? midDark : showDropdown ? info.midDark : border;
+
+  const { x, y, width, height, pageX, pageY } = position;
 
   useLayoutEffect(() => {
-    selectRef.current?.measure((_1, _2, width, height, pageX, pageY) => {
-      setPosition({ width, height, pageX, pageY });
+    selectRef.current?.measure((x, y, width, height, pageX, pageY) => {
+      setPosition({ x, y, width, height, pageX, pageY });
     });
   }, [dimensions]);
 
   return (
-    <>
-      {SelectComponent ? (
-        SelectComponent({
-          label,
-          placeholder,
-          selectedOption,
-          showOptions,
-          isFocused: showDropdown,
-          disabled,
-          error,
-          ref: selectRef,
-        })
-      ) : (
-        <Select
-          label={label}
-          placeholder={placeholder}
+    <View
+      style={[
+        styles.container,
+        selectContainerStyle,
+        disabled && { opacity: 0.4 },
+      ]}
+    >
+      <Text type="subtextSemiBold" style={styles.label}>
+        {label}
+      </Text>
+      <View
+        ref={selectRef}
+        style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
+      >
+        <TouchableOpacity
+          onPress={showOptions}
+          style={styles.select}
           disabled={disabled}
-          error={error}
-          size={size}
-          showOptions={showOptions}
-          isFocused={showDropdown}
-          selectedOption={selectedOption}
-          selectContainerStyle={selectContainerStyle}
-          ref={selectRef}
-        />
-      )}
-
-      {showDropdown && (
-        <Modal
-          animationType="none"
-          onClose={hideOptions}
-          backgroundColor="transparent"
         >
-          <View
-            style={[
-              styles.modal,
-              {
-                top: pageY + height,
-                left: pageX,
-                maxHeight: dimensions.height - pageY - height,
-              },
-              SELECT_STYLE[size],
-              size === "large" && { width },
-            ]}
-          >
-            <DismissKeyboard>
-              <>
-                {modalSize === "responsive" && (
-                  <FlatList
-                    options={options}
-                    selectedOption={selectedOption}
-                    onSelectOption={onSelectOption}
-                    listEmptyText={listEmptyText}
-                    search={search}
-                    needsPaddingTop={true}
+          <View style={styles.row}>
+            {selectedOption?.image && (
+              <Image
+                source={selectedOption?.image}
+                style={styles.optionImage}
+                resizeMode="contain"
+              />
+            )}
+            <Text
+              type="bodyRegular"
+              numberOfLines={1}
+              style={
+                selectedOption === undefined
+                  ? [styles.placeholder, { color: typography.placeholder }]
+                  : undefined
+              }
+            >
+              {selectedOption?.label ?? placeholder}
+            </Text>
+          </View>
+          <Image
+            source={
+              showDropdown
+                ? require("../../media/arrow_down.png")
+                : require("../../media/arrow_up.png")
+            }
+            style={[styles.chevron, { tintColor: typography.color }]}
+          />
+        </TouchableOpacity>
+      </View>
+      {!!error && (
+        <Text style={styles.error} type="subtextRegular" color={midDark}>
+          {error}
+        </Text>
+      )}
+      {showDropdown && (
+        <View
+          style={[
+            styles.modal,
+            {
+              top: height + y,
+              left: x,
+            },
+            SELECT_STYLE[size],
+            size === "large" && { width },
+          ]}
+        >
+          <DismissKeyboard>
+            <>
+              {modalSize === "responsive" && (
+                <FlatList
+                  options={options}
+                  selectedOption={selectedOption}
+                  onSelectOption={onSelectOption}
+                  listEmptyText={listEmptyText}
+                  search={search}
+                  needsPaddingTop={true}
+                />
+              )}
+              {modalSize === "fullscreen" && (
+                <View style={styles.flex}>
+                  <TextInput
+                    containerStyle={styles.input}
+                    placeholder={searchPlaceholder}
+                    onChangeText={onSearchChange}
+                    type="search"
                   />
-                )}
-                {modalSize === "fullscreen" && (
-                  <View style={styles.flex}>
-                    <TextInput
-                      containerStyle={styles.input}
-                      placeholder={searchPlaceholder}
-                      onChangeText={onSearchChange}
-                      type="search"
+                  {addOptionEnabled && !!search && (
+                    <AddOption
+                      onAddOptionPress={onAddOption}
+                      addOptionTitle={addOptionTitle}
                     />
-                    {addOptionEnabled && !!search && (
-                      <AddOption
-                        onAddOptionPress={onAddOption}
-                        addOptionTitle={addOptionTitle}
+                  )}
+                  <View style={styles.flex}>
+                    {listType === "flatList" && (
+                      <FlatList
+                        options={options}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
                       />
                     )}
-                    <View style={styles.flex}>
-                      {listType === "flatList" && (
-                        <FlatList
-                          options={options}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
-                        />
-                      )}
-                      {listType === "sectionList" && (
-                        <SectionList
-                          options={options}
-                          favoriteOptions={favoriteOptions}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
-                          alphabeticScrollEnabled={alphabeticScrollEnabled}
-                        />
-                      )}
-                    </View>
+                    {listType === "sectionList" && (
+                      <SectionList
+                        options={options}
+                        favoriteOptions={favoriteOptions}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
+                        alphabeticScrollEnabled={alphabeticScrollEnabled}
+                      />
+                    )}
                   </View>
-                )}
-              </>
-            </DismissKeyboard>
-          </View>
-        </Modal>
+                </View>
+              )}
+            </>
+          </DismissKeyboard>
+        </View>
       )}
-    </>
+    </View>
   );
 };
 
@@ -210,7 +251,44 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     zIndex: 10,
   },
-  flex: { flex: 1 },
+  flex: { flex: 1, backgroundColor: "#ffffff", zIndex: 20 },
+  container: {
+    alignSelf: "stretch",
+  },
+  label: {
+    marginBottom: Spacing["sp1/2"],
+  },
+  selectContainer: {
+    borderWidth: 1,
+    borderRadius: Spacing["sp1/2"],
+  },
+  select: {
+    height: 40,
+    paddingHorizontal: Spacing.sp2,
+    paddingVertical: Spacing.sp1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  row: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  optionImage: {
+    width: Spacing.sp3,
+    height: Spacing.sp3,
+    alignSelf: "center",
+    marginRight: Spacing.sp1,
+  },
+  chevron: {
+    marginLeft: Spacing.sp2,
+    width: 14,
+    height: 8,
+  },
+  placeholder: {
+    flex: 1,
+  },
+  error: { marginTop: Spacing["sp1/2"] },
 });
 
 export default DropdownScreen;
