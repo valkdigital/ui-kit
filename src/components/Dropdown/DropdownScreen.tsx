@@ -5,17 +5,14 @@ import {
   ViewStyle,
   Pressable,
   LayoutChangeEvent,
+  Platform,
 } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import type { ListTypes, SelectSizes, Option } from "../Picker";
 import type { DropdownProps } from ".";
-import FlatList from "../Picker/FlatList";
-import SectionList from "../Picker/SectionList";
-import DismissKeyboard from "../Picker/DismissKeyboard";
-import TextInput from "../input/TextInput";
-import AddOption from "../Picker/AddOption";
 import Select from "../Picker/Select";
+import PickerList from "../Picker/PickerList";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -63,6 +60,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   onSelectOption,
   search,
   onSearchChange,
+  customSections,
   maxListHeight,
 }) => {
   const [position, setPosition] = useState<{
@@ -111,44 +109,23 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
                 size === "large" && { width },
               ]}
             >
-              <DismissKeyboard>
-                <View style={styles.flex}>
-                  <TextInput
-                    containerStyle={styles.input}
-                    placeholder={searchPlaceholder}
-                    onChangeText={onSearchChange}
-                    type="search"
-                  />
-                  {addOptionEnabled && !!search && (
-                    <AddOption
-                      onAddOptionPress={onAddOption}
-                      addOptionTitle={addOptionTitle}
-                    />
-                  )}
-                  <View style={styles.flex}>
-                    {listType === "flatList" && (
-                      <FlatList
-                        options={options}
-                        selectedOption={selectedOption}
-                        onSelectOption={onSelectOption}
-                        listEmptyText={listEmptyText}
-                        search={search}
-                      />
-                    )}
-                    {listType === "sectionList" && (
-                      <SectionList
-                        options={options}
-                        favoriteOptions={favoriteOptions}
-                        selectedOption={selectedOption}
-                        onSelectOption={onSelectOption}
-                        listEmptyText={listEmptyText}
-                        search={search}
-                        alphabeticScrollEnabled={alphabeticScrollEnabled}
-                      />
-                    )}
-                  </View>
-                </View>
-              </DismissKeyboard>
+              <PickerList
+                options={options}
+                favoriteOptions={favoriteOptions}
+                selectedOption={selectedOption}
+                modalSize="fullscreen"
+                onSelectOption={onSelectOption}
+                listEmptyText={listEmptyText}
+                search={search}
+                searchPlaceholder={searchPlaceholder}
+                onSearchChange={onSearchChange}
+                addOptionEnabled={addOptionEnabled}
+                addOptionTitle={addOptionTitle}
+                onAddOption={onAddOption}
+                listType={listType}
+                alphabeticScrollEnabled={alphabeticScrollEnabled}
+                customSections={customSections}
+              />
             </View>
           );
         }}
@@ -163,8 +140,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
 
 const styles = StyleSheet.create({
   overlay: {
-    // @ts-ignore
-    position: "fixed",
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,

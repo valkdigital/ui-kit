@@ -37,6 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   searchPlaceholder,
   listEmptyText,
   error,
+  customSections,
   maxListHeight,
   SelectComponent,
 }) => {
@@ -92,6 +93,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       hideOptions={hideOptions}
       search={search}
       onSearchChange={onSearchChange}
+      customSections={customSections}
       maxListHeight={maxListHeight}
     />
   );

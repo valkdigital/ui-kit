@@ -16,6 +16,7 @@ import type { Option } from ".";
 import getSectionListItemLayout from "./getSectionListItemLayout";
 import ListEmpty from "./ListEmpty";
 import ThemeContext from "../../style/ThemeContext";
+import data from "example/storybook/data";
 
 interface Section {
   title?: string;
@@ -51,7 +52,7 @@ const SectionList: React.FC<SectionListProps> = ({
   const onLetterChange = (letter: string) => {
     if (!sections.length) return;
     const sectionIndex = sections.findIndex(
-      (section) => section.title === letter
+      (section) => section.title && section.title[0] === letter
     );
     if (sectionIndex < 0) return;
     sectionListRef.current?.scrollToLocation({
@@ -132,7 +133,7 @@ const SectionList: React.FC<SectionListProps> = ({
     setSections(sections);
   };
 
-  const fiterCustomSections = () => {
+  const filterCustomSections = () => {
     setSections(
       customSections?.reduce<Section[]>((result, sectionData) => {
         const { title, data } = sectionData;
@@ -151,7 +152,7 @@ const SectionList: React.FC<SectionListProps> = ({
 
   useEffect(() => {
     if (customSections) {
-      fiterCustomSections();
+      filterCustomSections();
       return;
     }
     generateSections();
@@ -164,14 +165,22 @@ const SectionList: React.FC<SectionListProps> = ({
 
     const timeout = setTimeout(() => {
       const { label } = selectedOption;
-      const sectionIndex = sections.findIndex(
-        (section) => section.title === label[0].toUpperCase()
-      );
-      if (sectionIndex < 0) return;
-      const itemIndex = sections[sectionIndex].data.findIndex(
-        (data) => data.label === label
-      );
-      if (itemIndex < 0) return;
+
+      let indices: any[] = [];
+      for (let i = 0; i < sections.length; i++) {
+        if (!sections[i].title) continue;
+        const itemIndex = sections[i].data?.findIndex((x) => {
+          return x.label === label;
+        });
+
+        if (itemIndex >= 0) {
+          indices = [i, itemIndex];
+          break;
+        }
+      }
+      if (indices.length === 0) return;
+      const [sectionIndex, itemIndex] = indices;
+
       sectionListRef.current?.scrollToLocation({
         sectionIndex,
         // itemIndex + 1 because ListHeaderComponent counts as an index too
