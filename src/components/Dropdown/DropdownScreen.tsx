@@ -50,6 +50,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   addOptionTitle,
   onAddOption,
   alphabeticScrollEnabled,
+  searchEnabled,
   searchPlaceholder,
   listEmptyText,
   error,
@@ -113,7 +114,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
                 options={options}
                 favoriteOptions={favoriteOptions}
                 selectedOption={selectedOption}
-                modalSize="fullscreen"
+                modalSize={searchEnabled ? "fullscreen" : "responsive"}
                 onSelectOption={onSelectOption}
                 listEmptyText={listEmptyText}
                 search={search}

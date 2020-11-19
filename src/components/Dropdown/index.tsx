@@ -14,6 +14,7 @@ interface SelectComponentProps extends PSelectComponentProps {
 
 export interface DropdownProps
   extends Omit<PickerProps, "title" | "modalSize"> {
+  searchEnabled?: boolean;
   maxListHeight?: number;
   SelectComponent?: React.FC<SelectComponentProps>;
 }
@@ -38,6 +39,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   listEmptyText,
   error,
   customSections,
+  searchEnabled,
   maxListHeight,
   SelectComponent,
 }) => {
@@ -93,6 +95,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       hideOptions={hideOptions}
       search={search}
       onSearchChange={onSearchChange}
+      searchEnabled={searchEnabled}
       customSections={customSections}
       maxListHeight={maxListHeight}
     />

@@ -47,7 +47,7 @@ const Dropdowns: React.FC<DropdownsProps> = () => {
         listType="flatList"
       />
       <Dropdown
-        label="Dropdown (flatList)"
+        label="Dropdown (flatList with search)"
         placeholder="Select an option"
         maxListHeight={400}
         options={[...Array(30).keys()].map((_, i) => {
@@ -60,6 +60,7 @@ const Dropdowns: React.FC<DropdownsProps> = () => {
           paddingHorizontal: Spacing.sp3,
           marginBottom: Spacing.sp2,
         }}
+        searchEnabled={true}
         searchPlaceholder="Search"
         listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
         listType="flatList"
@@ -84,6 +85,7 @@ const Dropdowns: React.FC<DropdownsProps> = () => {
             }),
           },
         ]}
+        searchEnabled={true}
         selectedOption={{ label: "option 21", value: "21" }}
         addOptionTitle="Add search input as option"
         onSelectChange={() => null}
@@ -94,23 +96,6 @@ const Dropdowns: React.FC<DropdownsProps> = () => {
         alphabeticScrollEnabled={false}
         searchPlaceholder="Search"
         listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-        listType="sectionList"
-      />
-      <Dropdown
-        label="Dropdown (fullscreen sectionList)"
-        placeholder="Select an option"
-        maxListHeight={400}
-        options={data.countries}
-        selectedOption={data.countries[9]}
-        favoriteOptions={[
-          data.countries[0],
-          data.countries[11],
-          data.countries[9],
-        ]}
-        onSelectChange={() => null}
-        searchPlaceholder="Search"
-        listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-        selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
         listType="sectionList"
       />
     </View>
