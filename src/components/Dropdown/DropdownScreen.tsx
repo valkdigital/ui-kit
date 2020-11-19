@@ -8,13 +8,8 @@ import {
 } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
-import type {
-  ListTypes,
-  SelectSizes,
-  Option,
-  DropdownProps,
-  ModalSizes,
-} from ".";
+import type { ListTypes, SelectSizes, Option } from "../Picker";
+import type { DropdownProps } from ".";
 import FlatList from "../Picker/FlatList";
 import SectionList from "../Picker/SectionList";
 import DismissKeyboard from "../Picker/DismissKeyboard";
@@ -35,7 +30,6 @@ type InheritedProps = Omit<
 
 interface DropdownScreenProps extends InheritedProps {
   size: SelectSizes;
-  modalSize: ModalSizes;
   listType: ListTypes;
   showDropdown: boolean;
   showOptions: () => void;
@@ -62,7 +56,6 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   searchPlaceholder,
   listEmptyText,
   error,
-  modalSize,
   listType,
   showDropdown,
   showOptions,
@@ -70,6 +63,7 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   onSelectOption,
   search,
   onSearchChange,
+  maxListHeight,
 }) => {
   const [position, setPosition] = useState<{
     x: number;
@@ -113,60 +107,47 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
                   left: x,
                 },
                 SELECT_STYLE[size],
+                !!maxListHeight && { maxHeight: maxListHeight },
                 size === "large" && { width },
               ]}
             >
               <DismissKeyboard>
-                <>
-                  {modalSize === "responsive" && (
-                    <FlatList
-                      options={options}
-                      selectedOption={selectedOption}
-                      onSelectOption={onSelectOption}
-                      listEmptyText={listEmptyText}
-                      search={search}
-                      needsPaddingTop={true}
+                <View style={styles.flex}>
+                  <TextInput
+                    containerStyle={styles.input}
+                    placeholder={searchPlaceholder}
+                    onChangeText={onSearchChange}
+                    type="search"
+                  />
+                  {addOptionEnabled && !!search && (
+                    <AddOption
+                      onAddOptionPress={onAddOption}
+                      addOptionTitle={addOptionTitle}
                     />
                   )}
-                  {modalSize === "fullscreen" && (
-                    <View style={styles.flex}>
-                      <TextInput
-                        containerStyle={styles.input}
-                        placeholder={searchPlaceholder}
-                        onChangeText={onSearchChange}
-                        type="search"
+                  <View style={styles.flex}>
+                    {listType === "flatList" && (
+                      <FlatList
+                        options={options}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
                       />
-                      {addOptionEnabled && !!search && (
-                        <AddOption
-                          onAddOptionPress={onAddOption}
-                          addOptionTitle={addOptionTitle}
-                        />
-                      )}
-                      <View style={styles.flex}>
-                        {listType === "flatList" && (
-                          <FlatList
-                            options={options}
-                            selectedOption={selectedOption}
-                            onSelectOption={onSelectOption}
-                            listEmptyText={listEmptyText}
-                            search={search}
-                          />
-                        )}
-                        {listType === "sectionList" && (
-                          <SectionList
-                            options={options}
-                            favoriteOptions={favoriteOptions}
-                            selectedOption={selectedOption}
-                            onSelectOption={onSelectOption}
-                            listEmptyText={listEmptyText}
-                            search={search}
-                            alphabeticScrollEnabled={alphabeticScrollEnabled}
-                          />
-                        )}
-                      </View>
-                    </View>
-                  )}
-                </>
+                    )}
+                    {listType === "sectionList" && (
+                      <SectionList
+                        options={options}
+                        favoriteOptions={favoriteOptions}
+                        selectedOption={selectedOption}
+                        onSelectOption={onSelectOption}
+                        listEmptyText={listEmptyText}
+                        search={search}
+                        alphabeticScrollEnabled={alphabeticScrollEnabled}
+                      />
+                    )}
+                  </View>
+                </View>
               </DismissKeyboard>
             </View>
           );
@@ -182,7 +163,8 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
 
 const styles = StyleSheet.create({
   overlay: {
-    position: "absolute",
+    // @ts-ignore
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
@@ -198,6 +180,7 @@ const styles = StyleSheet.create({
     ...shadow({ x: 0, y: 0, opacity: 0.1, blurRadius: 14 }),
     zIndex: 20,
     flex: 1,
+    marginBottom: Spacing.sp3,
   },
   input: {
     paddingVertical: Spacing.sp3,

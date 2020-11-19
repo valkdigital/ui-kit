@@ -22,7 +22,7 @@ export interface Option {
   image?: ImageSourcePropType;
 }
 
-interface SelectComponentProps {
+export interface SelectComponentProps {
   label?: string;
   placeholder?: string;
   selectedOption?: Option;

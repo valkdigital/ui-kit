@@ -45,6 +45,7 @@ import data from "../storybook/data";
           <Dropdown
             label="Salutation"
             placeholder="Select an option"
+            maxListHeight={400}
             size="small"
             options={[
               { label: "Sir", value: "Dhr." },
@@ -56,11 +57,12 @@ import data from "../storybook/data";
               paddingHorizontal: Spacing.sp3,
               marginBottom: Spacing.sp2,
             }}
-            modalSize="responsive"
+            listType="flatList"
           />
           <Dropdown
-            label="Dropdown (responsive)"
+            label="Dropdown (flatList)"
             placeholder="Select an option"
+            maxListHeight={400}
             options={[...Array(3).keys()].map((_, i) => {
               const value = (i + 1).toString();
               return { label: `option ${value}`, value };
@@ -71,11 +73,12 @@ import data from "../storybook/data";
               paddingHorizontal: Spacing.sp3,
               marginBottom: Spacing.sp2,
             }}
-            modalSize="responsive"
+            listType="flatList"
           />
           <Dropdown
-            label="Dropdown (fullscreen flatList)"
+            label="Dropdown (flatList)"
             placeholder="Select an option"
+            maxListHeight={400}
             options={[...Array(30).keys()].map((_, i) => {
               const value = (i + 1).toString();
               return { label: `option ${value}`, value };
@@ -89,11 +92,11 @@ import data from "../storybook/data";
             searchPlaceholder="Search"
             listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
             listType="flatList"
-            modalSize="fullscreen"
           />
           <Dropdown
             label="Dropdown (fullscreen sectionList)"
             placeholder="Select an option"
+            maxListHeight={400}
             options={data.countries}
             selectedOption={data.countries[9]}
             favoriteOptions={[
@@ -106,7 +109,6 @@ import data from "../storybook/data";
             listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
             selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
             listType="sectionList"
-            modalSize="fullscreen"
           />
         </div>
       </div>

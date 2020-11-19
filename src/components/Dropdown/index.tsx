@@ -1,105 +1,20 @@
 import React, { useState } from "react";
-import {
-  ViewStyle,
-  ImageSourcePropType,
-  StyleProp,
-  LayoutAnimation,
-  LayoutChangeEvent,
-} from "react-native";
+import { LayoutAnimation, LayoutChangeEvent } from "react-native";
+import type {
+  PickerProps,
+  SelectComponentProps as PSelectComponentProps,
+  Option,
+} from "../Picker";
 import DropdownScreen from "./DropdownScreen";
 
-export type ListTypes = "flatList" | "sectionList";
-export type ModalSizes = "responsive" | "fullscreen";
-export type SelectSizes = "small" | "medium" | "large";
-
-export interface Option {
-  label: string;
-  extraLabel?: string;
-  value: any;
-  image?: ImageSourcePropType;
-}
-
-interface SelectComponentProps {
-  label?: string;
-  placeholder?: string;
-  selectedOption?: Option;
-  disabled?: boolean;
-  showOptions: () => void;
-  isFocused?: boolean;
-  error?: string;
+interface SelectComponentProps extends PSelectComponentProps {
   onLayout?: (event: LayoutChangeEvent) => void;
   DropdownComponent?: React.FC;
 }
 
-export interface DropdownProps {
-  label?: string;
-  placeholder?: string;
-  size?: SelectSizes;
-  /**
-   * Option type is:
-   *
-   * `{
-   * label: string;
-   * extraLabel?: string;
-   * value: any;
-   * image?: ImageSourcePropType;
-   * }`
-   */
-  options: Option[];
-  /**
-   * This prop is only active if listType equals `"sectionList"`.
-   */
-  favoriteOptions?: Option[];
-  selectedOption?: Option;
-  onSelectChange: (option: Option) => void;
-  modalSize?: ModalSizes;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  listType?: ListTypes;
-  selectContainerStyle?: StyleProp<ViewStyle>;
-  disabled?: boolean;
-  onClose?: () => void;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  addOptionEnabled?: boolean;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  addOptionTitle?: string;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  onAddOptionPress?: (searchInput: string) => void;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  alphabeticScrollEnabled?: boolean;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  searchPlaceholder?: string;
-  /**
-   * This prop is only active if modalSize equals `"fullscreen"`.
-   */
-  listEmptyText?: string;
-  error?: string;
-  /**
-   * Override internal select component with a custom component.
-   *
-   * SelectComponentProps type is:
-   * `{
-   *  label?: string;
-   *  placeholder?: string;
-   *  selectedOption?: Option;
-   *  disabled?: boolean;
-   *  showOptions: () => void;
-   *  isFocused?: boolean;
-   *  error?: boolean;
-   *  onLayout?: (event: LayoutChangeEvent) => void;
-   *  DropdownComponent?: React.FC;`
-   */
+export interface DropdownProps
+  extends Omit<PickerProps, "title" | "modalSize"> {
+  maxListHeight?: number;
   SelectComponent?: React.FC<SelectComponentProps>;
 }
 
@@ -111,7 +26,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   favoriteOptions,
   selectedOption,
   onSelectChange,
-  modalSize = "fullscreen",
   listType = "sectionList",
   selectContainerStyle,
   disabled,
@@ -123,13 +37,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   searchPlaceholder,
   listEmptyText,
   error,
+  maxListHeight,
   SelectComponent,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [search, setSearch] = useState("");
-
-  const overriddenListType: ListTypes =
-    modalSize === "responsive" ? "flatList" : listType;
 
   const onSelectOption = (option: Option) => {
     onSelectChange(option);
@@ -174,13 +86,13 @@ const Dropdown: React.FC<DropdownProps> = ({
       alphabeticScrollEnabled={alphabeticScrollEnabled}
       listEmptyText={listEmptyText}
       error={error}
-      modalSize={modalSize}
-      listType={overriddenListType}
+      listType={listType}
       showDropdown={showDropdown}
       showOptions={showOptions}
       hideOptions={hideOptions}
       search={search}
       onSearchChange={onSearchChange}
+      maxListHeight={maxListHeight}
     />
   );
 };
