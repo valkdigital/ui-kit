@@ -47,7 +47,7 @@ export interface PickerProps {
    * image?: ImageSourcePropType;
    * }`
    */
-  options: Option[];
+  options?: Option[];
   /**
    * This prop is only active if listType equals `"sectionList"`.
    */
@@ -101,6 +101,11 @@ export interface PickerProps {
    *  error?: boolean;}`
    */
   SelectComponent?: React.FC<SelectComponentProps>;
+
+  /**
+   * Custom sections instead of options
+   */
+  customSections?: { title: string; data: Option[] }[];
 }
 
 const Picker: React.FC<PickerProps> = ({
@@ -125,6 +130,7 @@ const Picker: React.FC<PickerProps> = ({
   listEmptyText,
   error,
   SelectComponent,
+  customSections,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const modalHeight = Dimensions.get("window").height;
@@ -228,6 +234,7 @@ const Picker: React.FC<PickerProps> = ({
       panResponder={panResponder}
       search={search}
       onSearchChange={onSearchChange}
+      customSections={customSections}
     />
   );
 };

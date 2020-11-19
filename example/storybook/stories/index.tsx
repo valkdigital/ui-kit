@@ -289,8 +289,6 @@ inputStories.add("Picker", () => (
         return { label: `option ${value}`, value };
       })}
       selectedOption={{ label: "option 15", value: "15" }}
-      addOptionEnabled={true}
-      addOptionTitle="Add search input as option"
       title="Title"
       onSelectChange={action("onSelectChange")}
       selectContainerStyle={{
@@ -300,6 +298,38 @@ inputStories.add("Picker", () => (
       searchPlaceholder="Search"
       listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
       listType="flatList"
+      modalSize="fullscreen"
+    />
+    <Picker
+      label="Picker custom sections"
+      placeholder="Select an option"
+      customSections={[
+        {
+          title: "Section 1",
+          data: [...Array(30).keys()].map((_, i) => {
+            const value = (i + 1).toString();
+            return { label: `option ${value}`, value };
+          }),
+        },
+        {
+          title: "Section 2",
+          data: [...Array(20).keys()].map((_, i) => {
+            const value = (i + 1).toString();
+            return { label: `option ${value}`, value };
+          }),
+        },
+      ]}
+      selectedOption={{ label: "option 21", value: "21" }}
+      addOptionTitle="Add search input as option"
+      title="Title"
+      onSelectChange={action("onSelectChange")}
+      selectContainerStyle={{
+        paddingHorizontal: Spacing.sp3,
+        marginBottom: Spacing.sp2,
+      }}
+      searchPlaceholder="Search"
+      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
+      listType="sectionList"
       modalSize="fullscreen"
     />
     <Picker

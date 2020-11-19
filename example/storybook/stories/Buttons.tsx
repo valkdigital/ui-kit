@@ -50,7 +50,7 @@ export default ({
         </Text>
 
         <MultipleButtons
-          labels={["Exact date", "± 1 dag", "± 2 dagen", "± 3 dagen"]}
+          labels={["Exact date", "± 1 day", "± 2 days", "± 3 days"]}
           onPress={(i: number) => console.log(i)}
           disabled={disabled}
           containerStyle={{

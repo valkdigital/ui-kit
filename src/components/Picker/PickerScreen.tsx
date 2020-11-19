@@ -87,6 +87,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   onSelectOption,
   search,
   onSearchChange,
+  customSections,
 }) => {
   const { background, typography, border } = useContext(ThemeContext);
   return (
@@ -195,6 +196,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                           listEmptyText={listEmptyText}
                           search={search}
                           alphabeticScrollEnabled={alphabeticScrollEnabled}
+                          customSections={customSections}
                         />
                       )}
                     </View>

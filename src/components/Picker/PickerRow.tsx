@@ -13,49 +13,56 @@ interface PickerRowProps {
   isFirstOption?: boolean;
 }
 
-const PickerRow: React.FC<PickerRowProps> = ({
-  option,
-  selectedOption,
-  onSelectOption,
-  needsSpaceForAlphabet,
-  isFirstOption,
-}) => {
-  const { label, extraLabel, value, image } = option;
-  return (
-    <TouchableOpacity
-      style={[
-        styles.option,
-        needsSpaceForAlphabet && styles.alphabetOffset,
-        isFirstOption && { height: Spacing.sp5, paddingTop: 0 },
-      ]}
-      onPress={() => onSelectOption(option)}
-    >
-      {image && (
-        <Image source={image} style={styles.optionImage} resizeMode="contain" />
-      )}
-
-      <Text type="bodyRegular" numberOfLines={2} style={styles.label}>
-        {label}
-        {extraLabel && (
-          <Text
-            type="bodyRegular"
-            color={colors.greyDark}
-            style={styles.extraLabel}
-          >
-            {extraLabel}
-          </Text>
+class PickerRow extends React.PureComponent<PickerRowProps> {
+  render() {
+    const {
+      option,
+      selectedOption,
+      onSelectOption,
+      needsSpaceForAlphabet,
+      isFirstOption,
+    } = this.props;
+    const { label, extraLabel, value, image } = option;
+    return (
+      <TouchableOpacity
+        style={[
+          styles.option,
+          needsSpaceForAlphabet && styles.alphabetOffset,
+          isFirstOption && { height: Spacing.sp5, paddingTop: 0 },
+        ]}
+        onPress={() => onSelectOption(option)}
+      >
+        {image && (
+          <Image
+            source={image}
+            style={styles.optionImage}
+            resizeMode="contain"
+          />
         )}
-      </Text>
 
-      {selectedOption?.value === value && (
-        <Image
-          source={require("../../media/checkmark.png")}
-          style={styles.checkmark}
-        />
-      )}
-    </TouchableOpacity>
-  );
-};
+        <Text type="bodyRegular" numberOfLines={2} style={styles.label}>
+          {label}
+          {extraLabel && (
+            <Text
+              type="bodyRegular"
+              color={colors.greyDark}
+              style={styles.extraLabel}
+            >
+              {extraLabel}
+            </Text>
+          )}
+        </Text>
+
+        {selectedOption?.value === value && (
+          <Image
+            source={require("../../media/checkmark.png")}
+            style={styles.checkmark}
+          />
+        )}
+      </TouchableOpacity>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   option: {
