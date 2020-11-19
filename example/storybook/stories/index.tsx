@@ -289,8 +289,6 @@ inputStories.add("Picker", () => (
         return { label: `option ${value}`, value };
       })}
       selectedOption={{ label: "option 15", value: "15" }}
-      addOptionEnabled={true}
-      addOptionTitle="Add search input as option"
       title="Title"
       onSelectChange={action("onSelectChange")}
       selectContainerStyle={{
@@ -321,8 +319,7 @@ inputStories.add("Picker", () => (
           }),
         },
       ]}
-      selectedOption={{ label: "option 15", value: "15" }}
-      addOptionEnabled={true}
+      selectedOption={{ label: "option 21", value: "21" }}
       addOptionTitle="Add search input as option"
       title="Title"
       onSelectChange={action("onSelectChange")}
