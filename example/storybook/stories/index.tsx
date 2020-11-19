@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
-import { View, StyleSheet, ViewStyle, Platform } from "react-native";
+import { View, StyleSheet, ViewStyle } from "react-native";
 import {
   Card,
   CardList,

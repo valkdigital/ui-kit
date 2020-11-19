@@ -16,7 +16,6 @@ import type { Option } from ".";
 import getSectionListItemLayout from "./getSectionListItemLayout";
 import ListEmpty from "./ListEmpty";
 import ThemeContext from "../../style/ThemeContext";
-import data from "example/storybook/data";
 
 interface Section {
   title?: string;

@@ -5,7 +5,6 @@ import {
   ViewStyle,
   Pressable,
   LayoutChangeEvent,
-  Platform,
 } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";

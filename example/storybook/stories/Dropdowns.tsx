@@ -1,7 +1,6 @@
 import { Dropdown, Spacing, Text } from "@valkdigital/ui-kit";
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import data from "../data";
 
 interface DropdownsProps {}
 
