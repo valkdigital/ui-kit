@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
       blurRadius: 16,
     }),
     paddingTop: Spacing.sp2,
-    paddingBottom: isIphoneX ? Spacing.sp2 - Spacing["sp1/2"] : Spacing.sp2,
+    paddingBottom: isIphoneX ? Spacing.sp2 + Spacing["sp1/2"] : Spacing.sp2,
   },
 
   img: {
