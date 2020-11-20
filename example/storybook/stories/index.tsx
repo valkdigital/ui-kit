@@ -6,7 +6,6 @@ import {
   CardList,
   Text,
   TextInput,
-  Picker,
   Spacing,
   PhoneInput,
   countries,
@@ -14,7 +13,6 @@ import {
   TextButton,
   SegmentControl,
 } from "@valkdigital/ui-kit";
-import data from "../data";
 import Buttons from "./Buttons";
 import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
 
@@ -24,6 +22,8 @@ import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import AllFAB from "./FAB";
 import NavigationTextStory from "./NavigationTextStory";
+import Pickers from "./Pickers";
+import Dropdowns from "./Dropdowns";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -246,112 +246,9 @@ inputStories.add("Password", () => (
   </CenteredView>
 ));
 
-inputStories.add("Picker", () => (
-  <CenteredView>
-    <Picker
-      label="Salutation"
-      placeholder="Select an option"
-      size="small"
-      options={[
-        { label: "Sir", value: "Dhr." },
-        { label: "Madame", value: "Mevr." },
-      ]}
-      selectedOption={{ label: "Sir", value: "Dhr." }}
-      title="Salutation"
-      onSelectChange={action("onSelectChange")}
-      selectContainerStyle={{
-        paddingHorizontal: Spacing.sp3,
-        marginBottom: Spacing.sp2,
-      }}
-      modalSize="responsive"
-    />
-    <Picker
-      label="Picker (responsive)"
-      placeholder="Select an option"
-      options={[...Array(3).keys()].map((_, i) => {
-        const value = (i + 1).toString();
-        return { label: `option ${value}`, value };
-      })}
-      selectedOption={undefined}
-      title="Title"
-      onSelectChange={action("onSelectChange")}
-      selectContainerStyle={{
-        paddingHorizontal: Spacing.sp3,
-        marginBottom: Spacing.sp2,
-      }}
-      modalSize="responsive"
-    />
-    <Picker
-      label="Picker (fullscreen flatList)"
-      placeholder="Select an option"
-      options={[...Array(30).keys()].map((_, i) => {
-        const value = (i + 1).toString();
-        return { label: `option ${value}`, value };
-      })}
-      selectedOption={{ label: "option 15", value: "15" }}
-      title="Title"
-      onSelectChange={action("onSelectChange")}
-      selectContainerStyle={{
-        paddingHorizontal: Spacing.sp3,
-        marginBottom: Spacing.sp2,
-      }}
-      searchPlaceholder="Search"
-      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      listType="flatList"
-      modalSize="fullscreen"
-    />
-    <Picker
-      label="Picker custom sections"
-      placeholder="Select an option"
-      customSections={[
-        {
-          title: "Section 1",
-          data: [...Array(30).keys()].map((_, i) => {
-            const value = (i + 1).toString();
-            return { label: `option ${value}`, value };
-          }),
-        },
-        {
-          title: "Section 2",
-          data: [...Array(20).keys()].map((_, i) => {
-            const value = (i + 1).toString();
-            return { label: `option ${value}`, value };
-          }),
-        },
-      ]}
-      selectedOption={{ label: "option 21", value: "21" }}
-      addOptionTitle="Add search input as option"
-      title="Title"
-      onSelectChange={action("onSelectChange")}
-      selectContainerStyle={{
-        paddingHorizontal: Spacing.sp3,
-        marginBottom: Spacing.sp2,
-      }}
-      searchPlaceholder="Search"
-      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      listType="sectionList"
-      modalSize="fullscreen"
-    />
-    <Picker
-      label="Picker (fullscreen sectionList)"
-      placeholder="Select an option"
-      options={data.countries}
-      selectedOption={data.countries[9]}
-      favoriteOptions={[
-        data.countries[0],
-        data.countries[11],
-        data.countries[9],
-      ]}
-      title="Country"
-      onSelectChange={action("onSelectChange")}
-      searchPlaceholder="Search"
-      listEmptyText="Unfortunately, no results were found for the entered search keywords. Try again please!"
-      selectContainerStyle={{ paddingHorizontal: Spacing.sp3 }}
-      listType="sectionList"
-      modalSize="fullscreen"
-    />
-  </CenteredView>
-));
+inputStories.add("Picker", () => <Pickers />);
+
+inputStories.add("Dropdown", () => <Dropdowns />);
 
 inputStories.add("PhoneInput", () => (
   <CenteredView style={{ paddingHorizontal: Spacing.sp2 }}>

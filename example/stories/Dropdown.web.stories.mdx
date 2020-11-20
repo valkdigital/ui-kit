@@ -1,15 +1,15 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { Picker } from "@valkdigital/ui-kit";
+import { Dropdown } from "@valkdigital/ui-kit";
 import { WithFigma } from "storybook-addon-figma";
-import Pickers from "../storybook/stories/Pickers";
+import Dropdowns from "../storybook/stories/Dropdowns";
 
-<Meta title="Picker" />
+<Meta title="Dropdown" />
 
 # Preview
 
 <Preview>
   <Story
-    name="Picker"
+    name="Dropdown"
     parameters={{
       design: {
         type: "figma",
@@ -18,10 +18,10 @@ import Pickers from "../storybook/stories/Pickers";
       },
     }}
   >
-    <Pickers />
+    <Dropdowns />
   </Story>
 </Preview>
 
 # Props
 
-<Props of={Picker} />
+<Props of={Dropdown} />

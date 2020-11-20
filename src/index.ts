@@ -6,9 +6,10 @@ import ThemeManager, { Theme } from "./style/themeManager";
 import Card from "./components/Card";
 import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
-import Picker from "./components/Picker";
+import Picker, { Option } from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
+import Dropdown from "./components/Dropdown";
 import Button from "./components/Button/Button";
 import Fab from "./components/Button/FAB";
 import MultipleButtons from "./components/Button/MultipleButtons";
@@ -20,7 +21,16 @@ import NavigationTextButton from "./components/Button/NavigationTextButton";
 export { Fonts, Spacing, ThemeContext, ThemeManager };
 
 // Text (Input) components exports
-export { Text, Card, CardList, Picker, TextInput, PhoneInput, countries };
+export {
+  Text,
+  Card,
+  CardList,
+  Picker,
+  TextInput,
+  PhoneInput,
+  countries,
+  Dropdown,
+};
 
 // Button components exports
 export {
@@ -33,4 +43,4 @@ export {
 };
 
 // Types
-export type { TypographyLiterals, Theme };
+export type { TypographyLiterals, Theme, Option as PickerOption };

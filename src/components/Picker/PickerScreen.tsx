@@ -22,13 +22,9 @@ import type {
   PickerProps,
   ModalSizes,
 } from ".";
-import FlatList from "./FlatList";
-import SectionList from "./SectionList";
-import DismissKeyboard from "./DismissKeyboard";
-import TextInput from "../input/TextInput";
 import Select from "./Select";
-import AddOption from "./AddOption";
 import ThemeContext from "../../style/ThemeContext";
+import PickerList from "./PickerList";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -44,7 +40,7 @@ type InheritedProps = Omit<
   "onClose" | "onSelectChange" | "onAddOptionPress"
 >;
 
-interface PickerScreenProps extends InheritedProps {
+export interface PickerScreenProps extends InheritedProps {
   size: SelectSizes;
   modalSize: ModalSizes;
   listType: ListTypes;
@@ -98,6 +94,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           placeholder,
           selectedOption,
           showOptions,
+          isFocused: showModal,
           disabled,
           error,
         })
@@ -110,6 +107,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           error={error}
           size={size}
           showOptions={showOptions}
+          isFocused={showModal}
           selectedOption={selectedOption}
         />
       )}
@@ -146,62 +144,23 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
               </View>
             </View>
 
-            <DismissKeyboard>
-              <>
-                {modalSize === "responsive" && (
-                  <FlatList
-                    options={options}
-                    selectedOption={selectedOption}
-                    onSelectOption={onSelectOption}
-                    listEmptyText={listEmptyText}
-                    search={search}
-                    needsPaddingTop={true}
-                  />
-                )}
-                {modalSize === "fullscreen" && (
-                  <View style={styles.flex}>
-                    <TextInput
-                      containerStyle={[
-                        styles.input,
-                        { backgroundColor: background },
-                      ]}
-                      placeholder={searchPlaceholder}
-                      onChangeText={onSearchChange}
-                      type="search"
-                    />
-                    {addOptionEnabled && !!search && (
-                      <AddOption
-                        onAddOptionPress={onAddOption}
-                        addOptionTitle={addOptionTitle}
-                      />
-                    )}
-                    <View style={styles.flex}>
-                      {listType === "flatList" && (
-                        <FlatList
-                          options={options}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
-                        />
-                      )}
-                      {listType === "sectionList" && (
-                        <SectionList
-                          options={options}
-                          favoriteOptions={favoriteOptions}
-                          selectedOption={selectedOption}
-                          onSelectOption={onSelectOption}
-                          listEmptyText={listEmptyText}
-                          search={search}
-                          alphabeticScrollEnabled={alphabeticScrollEnabled}
-                          customSections={customSections}
-                        />
-                      )}
-                    </View>
-                  </View>
-                )}
-              </>
-            </DismissKeyboard>
+            <PickerList
+              options={options}
+              favoriteOptions={favoriteOptions}
+              selectedOption={selectedOption}
+              modalSize={modalSize}
+              onSelectOption={onSelectOption}
+              listEmptyText={listEmptyText}
+              search={search}
+              searchPlaceholder={searchPlaceholder}
+              onSearchChange={onSearchChange}
+              addOptionEnabled={addOptionEnabled}
+              addOptionTitle={addOptionTitle}
+              onAddOption={onAddOption}
+              listType={listType}
+              alphabeticScrollEnabled={alphabeticScrollEnabled}
+              customSections={customSections}
+            />
           </Animated.View>
         </Modal>
       )}
@@ -244,13 +203,6 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
   },
-  input: {
-    paddingVertical: Spacing.sp3,
-    paddingHorizontal: Spacing.sp3,
-    backgroundColor: "#ffffff",
-    zIndex: 10,
-  },
-  flex: { flex: 1 },
 });
 
 export default PickerScreen;

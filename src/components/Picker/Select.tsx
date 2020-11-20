@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   Image,
   StyleProp,
+  LayoutChangeEvent,
+  ImageStyle,
+  Platform,
 } from "react-native";
 import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
@@ -27,7 +30,10 @@ interface SelectProps {
   error?: string;
   size: SelectSizes;
   showOptions: () => void;
+  isFocused?: boolean;
   selectedOption?: Option;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  DropdownComponent?: React.FC;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -38,31 +44,38 @@ const Select: React.FC<SelectProps> = ({
   error,
   size,
   showOptions,
+  isFocused,
   selectedOption,
+  onLayout,
+  DropdownComponent,
 }) => {
   const {
     border,
     error: { midDark },
+    info,
     typography,
   } = useContext(ThemeContext);
+
+  const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
+
   return (
     <View
       style={[
         styles.container,
         selectContainerStyle,
         disabled && { opacity: 0.4 },
+        // @ts-ignore
+        isFocused &&
+          DropdownComponent &&
+          Platform.OS === "web" && { zIndex: "unset" },
       ]}
     >
       <Text type="subtextSemiBold" style={styles.label}>
         {label}
       </Text>
       <View
-        style={[
-          styles.selectContainer,
-          { borderColor: border },
-          !!error && { borderColor: midDark },
-          SELECT_STYLE[size],
-        ]}
+        onLayout={onLayout}
+        style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
       >
         <TouchableOpacity
           onPress={showOptions}
@@ -73,7 +86,7 @@ const Select: React.FC<SelectProps> = ({
             {selectedOption?.image && (
               <Image
                 source={selectedOption?.image}
-                style={styles.optionImage}
+                style={styles.optionImage as StyleProp<ImageStyle>}
                 resizeMode="contain"
               />
             )}
@@ -81,15 +94,24 @@ const Select: React.FC<SelectProps> = ({
               type="bodyRegular"
               numberOfLines={1}
               style={
-                selectedOption === undefined ? styles.placeholder : undefined
+                selectedOption === undefined
+                  ? [styles.placeholder, { color: typography.placeholder }]
+                  : undefined
               }
             >
               {selectedOption?.label ?? placeholder}
             </Text>
           </View>
           <Image
-            source={require("../../media/arrow_down.png")}
-            style={[styles.chevron, { tintColor: typography.color }]}
+            source={
+              isFocused
+                ? require("../../media/arrow_up.png")
+                : require("../../media/arrow_down.png")
+            }
+            style={[
+              styles.chevron as StyleProp<ImageStyle>,
+              { tintColor: typography.color },
+            ]}
           />
         </TouchableOpacity>
       </View>
@@ -98,6 +120,7 @@ const Select: React.FC<SelectProps> = ({
           {error}
         </Text>
       )}
+      {DropdownComponent && isFocused && <DropdownComponent />}
     </View>
   );
 };
@@ -138,7 +161,6 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     flex: 1,
-    color: colors.greyDark,
   },
   error: { marginTop: Spacing["sp1/2"] },
 });

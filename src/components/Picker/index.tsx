@@ -22,12 +22,13 @@ export interface Option {
   image?: ImageSourcePropType;
 }
 
-interface SelectComponentProps {
+export interface SelectComponentProps {
   label?: string;
   placeholder?: string;
   selectedOption?: Option;
   disabled?: boolean;
   showOptions: () => void;
+  isFocused?: boolean;
   error?: string;
 }
 
@@ -96,12 +97,13 @@ export interface PickerProps {
    *  selectedOption?: Option;
    *  disabled?: boolean;
    *  showOptions: () => void;
+   *  isFocused?: boolean;
    *  error?: boolean;}`
    */
   SelectComponent?: React.FC<SelectComponentProps>;
 
   /**
-   * Custom sections instead of options
+   * Custom sections instead of options. Available only when listType equals `"sectionList"`.
    */
   customSections?: { title: string; data: Option[] }[];
 }
@@ -120,10 +122,10 @@ const Picker: React.FC<PickerProps> = ({
   selectContainerStyle,
   disabled,
   onClose,
-  addOptionEnabled = false,
+  addOptionEnabled,
   addOptionTitle,
   onAddOptionPress,
-  alphabeticScrollEnabled = true,
+  alphabeticScrollEnabled,
   searchPlaceholder,
   listEmptyText,
   error,

@@ -1,4 +1,4 @@
-import { Text } from "@valkdigital/ui-kit";
+import Text from "../Text";
 import React from "react";
 import {
   View,
