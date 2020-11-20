@@ -6,7 +6,7 @@ import ThemeManager, { Theme } from "./style/themeManager";
 import Card from "./components/Card";
 import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
-import Picker from "./components/Picker";
+import Picker, { Option } from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
 import countries from "./components/input/countries";
 import Dropdown from "./components/Dropdown";
@@ -43,4 +43,4 @@ export {
 };
 
 // Types
-export type { TypographyLiterals, Theme };
+export type { TypographyLiterals, Theme, Option as PickerOption };

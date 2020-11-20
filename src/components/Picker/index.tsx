@@ -103,7 +103,7 @@ export interface PickerProps {
   SelectComponent?: React.FC<SelectComponentProps>;
 
   /**
-   * Custom sections instead of options
+   * Custom sections instead of options. Available only when listType equals `"sectionList"`.
    */
   customSections?: { title: string; data: Option[] }[];
 }
@@ -122,10 +122,10 @@ const Picker: React.FC<PickerProps> = ({
   selectContainerStyle,
   disabled,
   onClose,
-  addOptionEnabled = false,
+  addOptionEnabled,
   addOptionTitle,
   onAddOptionPress,
-  alphabeticScrollEnabled = true,
+  alphabeticScrollEnabled,
   searchPlaceholder,
   listEmptyText,
   error,

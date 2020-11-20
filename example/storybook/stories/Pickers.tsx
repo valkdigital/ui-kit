@@ -80,7 +80,6 @@ const Pickers: React.FC<PickersProps> = () => {
           },
         ]}
         selectedOption={{ label: "option 21", value: "21" }}
-        addOptionTitle="Add search input as option"
         title="Title"
         onSelectChange={() => null}
         selectContainerStyle={{

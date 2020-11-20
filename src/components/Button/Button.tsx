@@ -101,6 +101,7 @@ const Button: React.FC<ButtonProps> = ({
       image && type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
     flexDirection: "row",
     borderRadius: 4,
+    marginHorizontal: Spacing.sp2,
     height: 48,
     ...styleBySize[size],
     ...styleByType[type],
@@ -139,7 +140,7 @@ const Button: React.FC<ButtonProps> = ({
                 source={image}
               />
             )}
-            <Text type="h6" color={buttonLabelColor} style={styles.label}>
+            <Text type="h6" color={buttonLabelColor}>
               {label}
             </Text>
           </>
@@ -179,9 +180,7 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.sp2,
     paddingBottom: isIphoneX ? Spacing.sp2 - Spacing["sp1/2"] : Spacing.sp2,
   },
-  label: {
-    marginHorizontal: Spacing.sp2,
-  },
+
   img: {
     marginLeft: Spacing.sp2,
     marginRight: Spacing.sp1,
