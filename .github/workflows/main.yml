@@ -15,8 +15,7 @@ jobs:
       - uses: actions/setup-node@v2.1.2
       - name: Install
         run: |
-          cd example && yarn
-          yarn
+          yarn && cd example && yarn
       - name: Release
         run: yarn release
       - name: Deploy storybook
