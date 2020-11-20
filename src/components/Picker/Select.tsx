@@ -105,8 +105,8 @@ const Select: React.FC<SelectProps> = ({
           <Image
             source={
               isFocused
-                ? require("../../media/arrow_down.png")
-                : require("../../media/arrow_up.png")
+                ? require("../../media/arrow_up.png")
+                : require("../../media/arrow_down.png")
             }
             style={[
               styles.chevron as StyleProp<ImageStyle>,
