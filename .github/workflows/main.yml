@@ -13,12 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.2
+      - name: Install
+        run: |
+          cd example && yarn
+          yarn
       - name: Release
-        run: |
-          yarn
-          yarn release
+        run: yarn release
       - name: Deploy storybook
-        run: |
-          cd example
-          yarn
-          yarn deploy-storybook
+        run: yarn deploy-storybook
