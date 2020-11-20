@@ -19,7 +19,8 @@ jobs:
           yarn
           cd ..
           yarn
-      - name: Release
-        run: yarn release
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
       - name: Deploy storybook
         run: yarn deploy-storybook
