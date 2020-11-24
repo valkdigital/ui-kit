@@ -101,13 +101,13 @@ import { action } from "@storybook/addon-actions";
   <Story name="Segment control" decorators={[withKnobs]}>
     <View style={{ marginHorizontal: Spacing.sp1, flex: 1 }}>
       <SegmentControl
-        segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+        segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
         onPress={action("pressed")}
         style={{ marginBottom: Spacing.sp2 }}
       />
       <SegmentControl
         type="text"
-        segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+        segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
         onPress={action("pressed")}
         style={{ marginBottom: Spacing.sp2 }}
       />
