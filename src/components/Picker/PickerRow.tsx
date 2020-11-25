@@ -4,6 +4,7 @@ import Spacing from "../../style/spacing";
 import Text from "../Text";
 import type { Option } from ".";
 import colors from "../../style/colors";
+import { isEqual } from "lodash";
 
 interface PickerRowProps {
   option: Option;
@@ -22,7 +23,7 @@ class PickerRow extends React.PureComponent<PickerRowProps> {
       needsSpaceForAlphabet,
       isFirstOption,
     } = this.props;
-    const { label, extraLabel, value, image } = option;
+    const { label, extraLabel, image } = option;
     return (
       <TouchableOpacity
         style={[
@@ -53,7 +54,7 @@ class PickerRow extends React.PureComponent<PickerRowProps> {
           )}
         </Text>
 
-        {selectedOption?.value === value && (
+        {isEqual(selectedOption, option) && (
           <Image
             source={require("../../media/checkmark.png")}
             style={styles.checkmark}
