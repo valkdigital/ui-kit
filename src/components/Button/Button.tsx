@@ -60,7 +60,7 @@ const styleByType: { [key in ButtonTypes]: ViewStyle } = {
 };
 const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   [ButtonSizes.small]: {
-    width: 156,
+    width: 164,
   },
   [ButtonSizes.medium]: {
     alignSelf: "stretch",
