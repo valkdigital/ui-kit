@@ -57,6 +57,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const hideOptions = () => {
     setShowDropdown(false);
+    setSearch("");
     onClose && onClose();
   };
 
