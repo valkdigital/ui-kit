@@ -33,7 +33,7 @@ interface SelectProps {
   isFocused?: boolean;
   selectedOption?: Option;
   onLayout?: (event: LayoutChangeEvent) => void;
-  DropdownComponent?: React.FC;
+  DropdownComponent?: JSX.Element;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -120,7 +120,7 @@ const Select: React.FC<SelectProps> = ({
           {error}
         </Text>
       )}
-      {DropdownComponent && isFocused && <DropdownComponent />}
+      {DropdownComponent && isFocused && DropdownComponent}
     </View>
   );
 };

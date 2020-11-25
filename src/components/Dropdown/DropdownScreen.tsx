@@ -95,40 +95,38 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
         isFocused={showDropdown}
         selectedOption={selectedOption}
         onLayout={onLayout}
-        DropdownComponent={() => {
-          return (
-            <View
-              style={[
-                styles.dropdown,
-                {
-                  top: height + y,
-                  left: x,
-                },
-                SELECT_STYLE[size],
-                !!maxListHeight && { maxHeight: maxListHeight },
-                size === "large" && { width },
-              ]}
-            >
-              <PickerList
-                options={options}
-                favoriteOptions={favoriteOptions}
-                selectedOption={selectedOption}
-                modalSize={searchEnabled ? "fullscreen" : "responsive"}
-                onSelectOption={onSelectOption}
-                listEmptyText={listEmptyText}
-                search={search}
-                searchPlaceholder={searchPlaceholder}
-                onSearchChange={onSearchChange}
-                addOptionEnabled={addOptionEnabled}
-                addOptionTitle={addOptionTitle}
-                onAddOption={onAddOption}
-                listType={listType}
-                alphabeticScrollEnabled={alphabeticScrollEnabled}
-                customSections={customSections}
-              />
-            </View>
-          );
-        }}
+        DropdownComponent={
+          <View
+            style={[
+              styles.dropdown,
+              {
+                top: height + y,
+                left: x,
+              },
+              SELECT_STYLE[size],
+              !!maxListHeight && { maxHeight: maxListHeight },
+              size === "large" && { width },
+            ]}
+          >
+            <PickerList
+              options={options}
+              favoriteOptions={favoriteOptions}
+              selectedOption={selectedOption}
+              modalSize={searchEnabled ? "fullscreen" : "responsive"}
+              onSelectOption={onSelectOption}
+              listEmptyText={listEmptyText}
+              search={search}
+              searchPlaceholder={searchPlaceholder}
+              onSearchChange={onSearchChange}
+              addOptionEnabled={addOptionEnabled}
+              addOptionTitle={addOptionTitle}
+              onAddOption={onAddOption}
+              listType={listType}
+              alphabeticScrollEnabled={alphabeticScrollEnabled}
+              customSections={customSections}
+            />
+          </View>
+        }
       />
 
       {showDropdown && (
