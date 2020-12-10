@@ -19,10 +19,12 @@ import useMergedRef from "../../hooks/useMergedRef";
 import Typography, { MaxFontSizeMultiplier } from "../../style/typography";
 import ThemeContext from "../../style/ThemeContext";
 
+type Sizes = "small" | "medium" | "large";
+
 export interface BaseInputProps extends TIP {
   label?: string;
   containerStyle?: StyleProp<ViewStyle>;
-  size?: "small" | "medium" | "large";
+  size?: Sizes;
   useFullHeight?: boolean;
 
   /**
@@ -41,7 +43,7 @@ export interface BaseInputProps extends TIP {
   RightIconComponent?: JSX.Element | null | boolean;
 }
 const MAX_HEIGHT = 160;
-const SIZE: { [key: string]: ViewStyle } = {
+const SIZE: { [key in Sizes]: ViewStyle } = {
   small: { width: 160 },
   medium: { width: 287 },
   large: {},

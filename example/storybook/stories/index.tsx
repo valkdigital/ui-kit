@@ -265,6 +265,12 @@ inputStories.add("XL Text Input", () => (
       textAlign="center"
       disabled={true}
     />
+    <XLTextInput
+      label="Label"
+      placeholder="000"
+      textAlign="center"
+      size="small"
+    />
   </View>
 ));
 
