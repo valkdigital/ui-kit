@@ -17,7 +17,10 @@ import useMergedRef from "../../hooks/useMergedRef";
 import defaultCountries from "./countries";
 
 interface PhoneInputProps
-  extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
+  extends Omit<
+    BaseInputProps,
+    "LeftIconComponent" | "RightIconComponent" | "textAlign" | "labelStyle"
+  > {
   countries?: { [key in CountryCodes]: Option };
   defaultCountry: CountryCodes;
   favoriteCountries?: CountryCodes[];

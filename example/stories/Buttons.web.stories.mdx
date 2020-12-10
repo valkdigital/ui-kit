@@ -1,0 +1,258 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View, ScrollView } from "react-native";
+import {
+  Button,
+  Text,
+  Fab,
+  MultipleButtons,
+  Stepper,
+  TextButton,
+  Spacing,
+  SegmentControl,
+  NavigationTextButton,
+} from "@valkdigital/ui-kit";
+import { WithFigma } from "storybook-addon-figma";
+import Buttons from "../storybook/stories/Buttons";
+import AllFAB from "../storybook/stories/FAB";
+import NavigationTextStory from "../storybook/stories/NavigationTextStory";
+import { withKnobs, boolean, color, array } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+<Meta title="Buttons" />
+
+# CTA
+
+<Preview>
+  <Story name="CTA" decorators={[withKnobs]}>
+    <ScrollView
+      contentContainerStyle={{
+        paddingHorizontal: Spacing.sp2,
+        paddingTop: Spacing.sp3,
+      }}
+    >
+      <Button
+        onPress={() => console.log("pressed")}
+        size="full"
+        label="Full button"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      >
+        <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
+          helper text
+        </Text>
+      </Button>
+      <Button
+        onPress={() => console.log("pressed")}
+        size="full"
+        label="Full button"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      >
+        <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
+          Select a date of stay
+        </Text>
+        <MultipleButtons
+          labels={["Exact date", "± 1 day", "± 2 days", "± 3 days"]}
+          onPress={(i) => console.log(i)}
+          disabled={boolean("disabled", false, "cta")}
+          containerStyle={{
+            marginBottom: Spacing.sp2,
+            marginTop: Spacing["sp1/2"],
+            paddingLeft: Spacing.sp2,
+          }}
+        />
+      </Button>
+      <Button
+        onPress={() => console.log("pressed")}
+        type="progressbar"
+        currentProgress="50"
+        label="Full button progressbar"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Medium button"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Small button"
+        size="small"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Ghost button"
+        type="ghost"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Ghost button with icon"
+        type="ghost"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
+        image={require("../src/media/plus.png")}
+      />
+    </ScrollView>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Button} />
+
+# FAB
+
+<Preview>
+  <Story name="FAB" decorators={[withKnobs]}>
+    <View style={{ width: 300, paddingTop: Spacing.sp2, alignItems: "center" }}>
+      <Fab
+        label="Placeholder"
+        backgroundColor={color("background color", "#2BB9F5", "fab")}
+        color={color("color", "#1AA0E2", "fab")}
+        source={require("../src/media/plus.png")}
+        imgStyle={{ tintColor: color("icon color", "#FFFFFF", "fab") }}
+        onPress={action("pressed")}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Fab} />
+
+# Multiple Buttons
+
+<Preview>
+  <Story name="Multiple Buttons" decorators={[withKnobs]}>
+    <View style={{ marginTop: 16 }}>
+      <MultipleButtons
+        activeColor={color("active color", "#2BB9F5", "multiple buttons")}
+        inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
+        onPress={(i) => action(i)}
+        labels={array("buttons", ["btn 1", "button", "button 12"])}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={MultipleButtons} />
+
+<Preview>
+  <Story name="Text Button" decorators={[withKnobs]}>
+    <View style={{ marginTop: Spacing.sp2, marginLeft: Spacing.sp2 }}>
+      <TextButton
+        label="text button"
+        color={color("color", "#FF8100", "text button")}
+        onPress={action("pressed")}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={TextButton} />
+
+# Segment control
+
+<Preview>
+  <Story name="Segment control" decorators={[withKnobs]}>
+    <View style={{ marginHorizontal: Spacing.sp1, flex: 1 }}>
+      <SegmentControl
+        segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+      <SegmentControl
+        type="text"
+        segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
+        onPress={action("pressed")}
+        style={{ marginBottom: Spacing.sp2 }}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={SegmentControl} />
+
+# Navigation Text Button
+
+<Preview>
+  <Story name="Navigation Text Button" decorators={[withKnobs]}>
+    <View style={{ flex: 1 }}>
+      <NavigationTextButton
+        showTopBorder={true}
+        label="Label"
+        onPress={action("NavigationTextButton pressed")}
+      />
+      <NavigationTextButton
+        customLabel={
+          <View style={{ flexDirection: "row" }}>
+            <Text type="bodySemiBold">Custom label</Text>
+            <View
+              style={{
+                borderRadius: 4,
+                backgroundColor: "blue",
+                marginLeft: 4,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                type="subtextBold"
+                color="white"
+                style={{ marginHorizontal: Spacing.sp1 }}
+              >
+                New!
+              </Text>
+            </View>
+          </View>
+        }
+        onPress={action("NavigationTextButton pressed")}
+      />
+    </View>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={SegmentControl} />

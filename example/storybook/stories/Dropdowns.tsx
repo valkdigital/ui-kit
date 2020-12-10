@@ -1,13 +1,13 @@
 import { Dropdown, Spacing, Text } from "@valkdigital/ui-kit";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 
 interface DropdownsProps {}
 
 const Dropdowns: React.FC<DropdownsProps> = () => {
   return (
-    <View style={styles.container}>
-      <Text type="bodySemiBold" style={styles.info}>
+    <View style={{ flex: 1 }}>
+      <Text type="bodySemiBold" style={{ margin: Spacing.sp3 }}>
         Use this component only when your target is desktop/web. Otherwise use
         the Picker component.
       </Text>
@@ -100,10 +100,5 @@ const Dropdowns: React.FC<DropdownsProps> = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  info: { margin: Spacing.sp3 },
-});
 
 export default Dropdowns;

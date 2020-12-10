@@ -16,7 +16,7 @@ import { omit } from "lodash";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import useMergedRef from "../../hooks/useMergedRef";
-import { MaxFontSizeMultiplier } from "../../style/typography";
+import Typography, { MaxFontSizeMultiplier } from "../../style/typography";
 import ThemeContext from "../../style/ThemeContext";
 
 export interface BaseInputProps extends TIP {
@@ -35,6 +35,8 @@ export interface BaseInputProps extends TIP {
    * won't be shown when there is an error.
    */
   helperText?: string;
+  textAlign?: "center" | "left";
+  labelStyle?: StyleProp<ViewStyle>;
   LeftIconComponent?: JSX.Element | null | boolean;
   RightIconComponent?: JSX.Element | null | boolean;
 }
@@ -59,6 +61,8 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     disabled,
     helperText,
     style,
+    textAlign = "left",
+    labelStyle,
     LeftIconComponent,
     RightIconComponent,
   } = props;
@@ -127,7 +131,11 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     >
       {!!label && (
         <TouchableOpacity disabled={disabled} onPress={focusInputField}>
-          <Text style={styles.label} type="subtextSemiBold">
+          <Text
+            style={[styles.label, labelStyle]}
+            textAlign={textAlign}
+            type="subtextSemiBold"
+          >
             {label}
           </Text>
         </TouchableOpacity>
@@ -142,7 +150,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           textAlignVertical="center"
           style={[
             styles.input,
-            { color: typography.color },
+            { color: typography.color, textAlign },
             useFullHeight && { height: MAX_HEIGHT },
             style,
           ]}
@@ -169,12 +177,21 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
         )}
       </View>
       {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={primary}>
+        <Text
+          textAlign={textAlign}
+          style={styles.error}
+          type="subtextRegular"
+          color={primary}
+        >
           {error}
         </Text>
       )}
       {!error && helperText && (
-        <Text type="subtextRegular" color={typography.placeholder}>
+        <Text
+          textAlign={textAlign}
+          type="subtextRegular"
+          color={typography.placeholder}
+        >
           {helperText}
         </Text>
       )}
@@ -190,12 +207,12 @@ const styles = StyleSheet.create({
     maxHeight: MAX_HEIGHT,
     flex: 1,
     minWidth: 100,
-    fontSize: 16,
     borderWidth: 0,
+    ...Typography.bodyRegular,
     ...Platform.select({ web: { outlineWidth: 0 } }),
   },
   inputWrapper: {
-    borderRadius: 4,
+    borderRadius: Spacing["sp1/2"],
     borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",

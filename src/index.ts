@@ -16,6 +16,7 @@ import MultipleButtons from "./components/Button/MultipleButtons";
 import TextButton from "./components/Button/TextButton";
 import SegmentControl from "./components/Button/SegmentControl";
 import NavigationTextButton from "./components/Button/NavigationTextButton";
+import XLTextInput from "./components/input/XLTextInput";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, ThemeManager };
@@ -30,6 +31,7 @@ export {
   PhoneInput,
   countries,
   Dropdown,
+  XLTextInput,
 };
 
 // Button components exports

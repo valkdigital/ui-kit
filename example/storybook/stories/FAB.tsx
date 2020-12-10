@@ -1,27 +1,20 @@
 import { action } from "@storybook/addon-actions";
+import { color } from "@storybook/addon-knobs";
 import { Fab, Spacing } from "@valkdigital/ui-kit";
 import React from "react";
 import { View } from "react-native";
 
-interface FABProps {
-  backgroundColor?: string;
-  color?: string;
-  iconColor?: string;
-}
+interface FABProps {}
 
-const AllFAB: React.FC<FABProps> = ({
-  backgroundColor = "#2BB9F5",
-  color = "#1AA0E2",
-  iconColor = "white",
-}) => {
+const AllFAB: React.FC<FABProps> = () => {
   return (
     <View style={{ width: 300, paddingTop: Spacing.sp2, alignItems: "center" }}>
       <Fab
         label="Placeholder"
-        backgroundColor={backgroundColor}
-        color={color}
+        backgroundColor={color("background color", "#2BB9F5", "fab")}
+        color={color("color", "#1AA0E2", "fab")}
         source={require("../../src/media/plus.png")}
-        imgStyle={{ tintColor: iconColor }}
+        imgStyle={{ tintColor: color("icon color", "#FFFFFF", "fab") }}
         onPress={action("pressed")}
       />
     </View>

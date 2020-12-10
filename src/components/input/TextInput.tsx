@@ -13,7 +13,10 @@ import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
 
 interface TextInputProps
-  extends Omit<BaseInputProps, "LeftIconComponent" | "RightIconComponent"> {
+  extends Omit<
+    BaseInputProps,
+    "LeftIconComponent" | "RightIconComponent" | "textAlign" | "labelStyle"
+  > {
   type?: "password" | "search";
 }
 
