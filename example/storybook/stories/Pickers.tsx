@@ -1,13 +1,12 @@
-import { Picker, Spacing } from "@valkdigital/ui-kit";
+import { countries, Picker, Spacing } from "@valkdigital/ui-kit";
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import data from "../data";
+import { View } from "react-native";
 
 interface PickersProps {}
 
 const Pickers: React.FC<PickersProps> = () => {
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <Picker
         label="Salutation"
         placeholder="Select an option"
@@ -94,13 +93,9 @@ const Pickers: React.FC<PickersProps> = () => {
       <Picker
         label="Picker (fullscreen sectionList)"
         placeholder="Select an option"
-        options={data.countries}
-        selectedOption={data.countries[9]}
-        favoriteOptions={[
-          data.countries[0],
-          data.countries[11],
-          data.countries[9],
-        ]}
+        options={Object.values(countries.en)}
+        selectedOption={countries.en.AG}
+        favoriteOptions={[countries.en.NL, countries.en.DE]}
         title="Country"
         onSelectChange={() => null}
         searchPlaceholder="Search"
@@ -112,9 +107,5 @@ const Pickers: React.FC<PickersProps> = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-});
 
 export default Pickers;

@@ -52,6 +52,17 @@ export default {
     list: {
       sectionBackground: colors.grey0,
     },
+    grey: {
+      0: colors.grey0,
+      1: colors.grey1,
+      2: colors.grey2,
+      3: colors.grey3,
+      4: colors.grey4,
+      5: colors.grey5,
+      6: colors.grey6,
+      7: colors.grey7,
+      8: colors.grey8,
+    },
   },
   dark: {
     background: colors.black,

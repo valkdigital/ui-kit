@@ -131,7 +131,7 @@ const Button: React.FC<ButtonProps> = ({
         ]}
       >
         {loading ? (
-          <ActivityIndicator size="large" color={buttonLabelColor} />
+          <ActivityIndicator size="small" color={buttonLabelColor} />
         ) : (
           <>
             {image && (

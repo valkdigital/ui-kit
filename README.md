@@ -1,11 +1,12 @@
-# vex-ui
+# Valk Digital UI-kit
+
+https://valkdigital.github.io/ui-kit
 
 A fully typed component library for react native (web) development.
-With the use of React.Context you can provide a custom theme to your project.
 
 ## Setup
 
-Instruction for using the library
+Instructions for using the library
 
 ### Font
 
@@ -35,7 +36,7 @@ export default function App() {
 In order for this component library to work you need to provide your app with a theme.
 Wrap your app with a provider and set your theme with the value prop. See the following examples.
 
-#### Set custom theme
+#### Set a custom theme
 
 Set a light and/or a dark theme.
 
@@ -61,17 +62,15 @@ Get the theme value (dark/light) from the ThemeManager and place the provider ar
 </ThemeContext.Provider>
 ```
 
-That's all!
+## Example
 
-## Playground
-
-You can see an extensive documented web preview of the component library by running `yarn && yarn storybook` in the example directory. With the use of storybook you'll be able to see each component with the following topics:
+You can see an extensive documented web preview of the component library at https://valkdigital.github.io/ui-kit or by running `yarn && yarn storybook` in the example directory. With the use of storybook you'll be able to see each component with the following topics:
 
 - Preview
 - Props overview
 - Additional information regarding the behavior of the component (optional)
 
-For a preview of what the components look like on iOS and Android you can run:
+To preview the UI-kit components on iOS and Android you can run:
 
 - iOS:
 

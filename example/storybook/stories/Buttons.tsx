@@ -1,37 +1,29 @@
 import * as React from "react";
 import { Button, MultipleButtons, Spacing, Text } from "@valkdigital/ui-kit";
 import { ScrollView } from "react-native";
+import { boolean, color } from "@storybook/addon-knobs";
 
-export default ({
-  loading,
-  disabled,
-  labelColor,
-  color,
-}: {
-  loading?: boolean;
-  disabled?: boolean;
-  color?: string;
-  labelColor?: string;
-}) => {
-  const { sp2, sp3 } = Spacing;
+interface ButtonsProps {}
+
+const Buttons: React.FC<ButtonsProps> = () => {
   return (
     <ScrollView
       contentContainerStyle={{
-        paddingHorizontal: sp2,
-        paddingTop: sp3,
+        paddingHorizontal: Spacing.sp2,
+        paddingTop: Spacing.sp3,
       }}
     >
       <Button
         onPress={() => console.log("pressed")}
         size="full"
         label="Full button"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       >
-        <Text style={{ marginLeft: sp2 }} color="#C2C2C2">
+        <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
           helper text
         </Text>
       </Button>
@@ -39,24 +31,23 @@ export default ({
         onPress={() => console.log("pressed")}
         size="full"
         label="Full button"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       >
-        <Text style={{ marginLeft: sp2 }} color="#C2C2C2">
+        <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
           Select a date of stay
         </Text>
-
         <MultipleButtons
           labels={["Exact date", "± 1 day", "± 2 days", "± 3 days"]}
-          onPress={(i: number) => console.log(i)}
-          disabled={disabled}
+          onPress={(i) => console.log(i)}
+          disabled={boolean("disabled", false, "cta")}
           containerStyle={{
-            marginBottom: sp2,
+            marginBottom: Spacing.sp2,
             marginTop: Spacing["sp1/2"],
-            paddingLeft: sp2,
+            paddingLeft: Spacing.sp2,
           }}
         />
       </Button>
@@ -65,52 +56,54 @@ export default ({
         type="progressbar"
         currentProgress="50"
         label="Full button progressbar"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
         label="Medium button"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
         label="Small button"
         size="small"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
         label="Ghost button"
         type="ghost"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
         label="Ghost button with icon"
         type="ghost"
-        loading={loading}
-        disabled={disabled}
-        labelColor={labelColor}
-        containerStyle={{ marginBottom: sp2 }}
-        color={color}
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        color={color("color", "#FF8100", "cta")}
         image={require("../../src/media/plus.png")}
       />
     </ScrollView>
   );
 };
+
+export default Buttons;

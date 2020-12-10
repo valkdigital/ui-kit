@@ -1,19 +1,17 @@
 import React from "react";
 import { View } from "react-native";
-import { Text, NavigationTextButton } from "@valkdigital/ui-kit";
-interface NavigationTextStoryProps {
-  onPress: () => void;
-}
+import { Text, NavigationTextButton, Spacing } from "@valkdigital/ui-kit";
+import { action } from "@storybook/addon-actions";
 
-const NavigationTextStory: React.FC<NavigationTextStoryProps> = ({
-  onPress,
-}) => {
+interface NavigationTextStoryProps {}
+
+const NavigationTextStory: React.FC<NavigationTextStoryProps> = () => {
   return (
     <View style={{ flex: 1 }}>
       <NavigationTextButton
         showTopBorder={true}
         label="Label"
-        onPress={onPress}
+        onPress={action("NavigationTextButton pressed")}
       />
       <NavigationTextButton
         customLabel={
@@ -31,14 +29,14 @@ const NavigationTextStory: React.FC<NavigationTextStoryProps> = ({
               <Text
                 type="subtextBold"
                 color="white"
-                style={{ marginHorizontal: 8 }}
+                style={{ marginHorizontal: Spacing.sp1 }}
               >
                 New!
               </Text>
             </View>
           </View>
         }
-        onPress={onPress}
+        onPress={action("NavigationTextButton pressed")}
       />
     </View>
   );

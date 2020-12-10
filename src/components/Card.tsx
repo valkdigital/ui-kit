@@ -205,11 +205,10 @@ const Card: React.FC<CardProps> = ({
         )}
         {showButton && (
           <Button
-            // @ts-ignore showButon checks  if buttomText isn't undefined
-            label={buttonText}
+            label={buttonText ?? ""}
             onPress={onPress}
-            size="medium"
-            buttonStyle={styles.button}
+            size="full"
+            containerStyle={styles.button}
           />
         )}
       </View>
@@ -261,10 +260,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing["sp1/2"],
   },
   button: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
     marginTop: Spacing.sp3,
-    borderRadius: 0,
   },
   gradient: {
     position: "absolute",

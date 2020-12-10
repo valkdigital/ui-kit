@@ -12,9 +12,10 @@ import {
   MultipleButtons,
   TextButton,
   SegmentControl,
+  XLTextInput,
 } from "@valkdigital/ui-kit";
 import Buttons from "./Buttons";
-import { boolean, withKnobs, color, array } from "@storybook/addon-knobs";
+import { withKnobs, color, array } from "@storybook/addon-knobs";
 
 // the action function has one argument which is the name of the action,
 // this will be displayed in the actions tab in the addons panel
@@ -186,7 +187,7 @@ storiesOf("Cards", module).add("Card vertical list", () => (
   </CenteredView>
 ));
 
-const inputStories = storiesOf("InputFields", module);
+const inputStories = storiesOf("Inputs", module);
 
 const Fields: React.FC = () => {
   const ref = useRef<any>(null);
@@ -234,6 +235,44 @@ const Fields: React.FC = () => {
 inputStories.add("Text Input", () => {
   return <Fields />;
 });
+
+inputStories.add("XL Text Input", () => (
+  <View
+    style={{
+      alignItems: "center",
+      flex: 1,
+      padding: Spacing.sp2,
+    }}
+  >
+    <XLTextInput
+      value="Some input"
+      label="Label"
+      showCheckmark={true}
+      placeholder="Placeholder"
+      helperText="* required"
+      containerStyle={{ marginBottom: Spacing.sp2 }}
+    />
+    <XLTextInput
+      label="Label"
+      placeholder="Centered"
+      textAlign="center"
+      error="Invalid input"
+      containerStyle={{ marginBottom: Spacing.sp2 }}
+    />
+    <XLTextInput
+      label="Label"
+      placeholder="Disabled"
+      textAlign="center"
+      disabled={true}
+    />
+    <XLTextInput
+      label="Label"
+      placeholder="000"
+      textAlign="center"
+      size="small"
+    />
+  </View>
+));
 
 inputStories.add("Password", () => (
   <CenteredView style={{ paddingHorizontal: Spacing.sp4 }}>
@@ -291,26 +330,11 @@ storiesOf("Text", module).add("All Text", () => (
 ));
 
 const buttonStories = storiesOf("Buttons", module);
-const orangePrimary = "#FF8100";
 buttonStories.addDecorator(withKnobs);
-buttonStories.add("CTA", () => (
-  <Buttons
-    loading={boolean("loading", false, "cta")}
-    disabled={boolean("disabled", false, "cta")}
-    color={color("color", orangePrimary, "cta")}
-    labelColor={color("label color", "white", "cta")}
-  />
-));
-buttonStories.add("FAB", () => (
-  <AllFAB
-    color={color("color", "#1AA0E2", "fab")}
-    backgroundColor={color("background color", "#2BB9F5", "fab")}
-    iconColor={color("icon color", "#FFFFFF", "fab")}
-  />
-));
-
+buttonStories.add("CTA", () => <Buttons />);
+buttonStories.add("FAB", () => <AllFAB />);
 buttonStories.add("Multiple Buttons", () => (
-  <View style={{ marginTop: 16 }}>
+  <View style={{ marginTop: Spacing.sp2 }}>
     <MultipleButtons
       activeColor={color("active color", "#2BB9F5", "multiple buttons")}
       inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
@@ -345,9 +369,8 @@ buttonStories.add("Segment control", () => (
   </View>
 ));
 
-buttonStories.add("Navigation Text Button", () => (
-  <NavigationTextStory onPress={action("Pressed")} />
-));
+buttonStories.add("Navigation Text Button", () => <NavigationTextStory />);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

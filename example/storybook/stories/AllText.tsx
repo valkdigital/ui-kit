@@ -20,6 +20,7 @@ const AllText: React.FC<TextProps> = () => (
     <Text type="bodyRegular">Body - Regular</Text>
     <Text type="bodySemiBold">Body Semi - Bold</Text>
     <Text type="bodyItalic">Body Italic</Text>
+    <Text type="XLBodyText">XL Body Text</Text>
     <Text>{"\n"}</Text>
     <Text>{"\n"}</Text>
     <Text type="subtextRegular">Subtext - Regular</Text>

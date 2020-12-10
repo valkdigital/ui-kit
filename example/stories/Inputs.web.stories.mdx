@@ -1,0 +1,173 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View } from "react-native";
+import {
+  TextInput,
+  XLTextInput,
+  PhoneInput,
+  Spacing,
+  countries,
+} from "@valkdigital/ui-kit";
+
+<Meta title="Inputs" />
+
+# TextInput
+
+<Preview>
+  <Story
+    name="TextInput"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2451%3A0",
+      },
+    }}
+  >
+    <View
+      style={{
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flex: 1,
+        paddingHorizontal: Spacing.sp2,
+      }}
+    >
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        error="Invalid input"
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        disabled={true}
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        size="medium"
+        showCheckmark={true}
+      />
+      <TextInput
+        label="Label"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        size="small"
+        helperText="Helper text"
+      />
+      <TextInput
+        label="Password"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        value="password 123"
+        type="password"
+      />
+      <TextInput
+        label="Search"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Search"
+        type="search"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={TextInput} />
+
+# XLTextInput
+
+<Preview>
+  <Story
+    name="XLTextInput"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/JdbljcIvyMoEVsBZgsg7bbu8/1.-Apps-Styleguide-and-Components?node-id=2451%3A0",
+      },
+    }}
+  >
+    <View
+      style={{
+        alignItems: "center",
+        flex: 1,
+        padding: Spacing.sp2,
+      }}
+    >
+      <XLTextInput
+        value="Some input"
+        label="Label"
+        showCheckmark={true}
+        placeholder="Placeholder"
+        helperText="* required"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+      />
+      <XLTextInput
+        label="Label"
+        placeholder="Centered"
+        textAlign="center"
+        error="Invalid input"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+      />
+      <XLTextInput
+        label="Label"
+        placeholder="Disabled"
+        textAlign="center"
+        disabled={true}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+      />
+      <XLTextInput
+        label="Label"
+        placeholder="000"
+        textAlign="center"
+        size="small"
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={XLTextInput} />
+
+# PhoneInput
+
+<Preview>
+  <Story name="PhoneInput">
+    <View
+      style={{
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flex: 1,
+        paddingHorizontal: Spacing.sp2,
+      }}
+    >
+      <PhoneInput
+        label="Phone"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        countries={countries.en}
+        favoriteCountries={["NL", "BE", "DE", "GB"]}
+        defaultCountry="NL"
+        listTitle="Phone"
+        listEmptyText="No results found"
+        listSearchPlaceholder="Search"
+        onChangeText={(text) => null}
+      />
+    </View>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={PhoneInput} />

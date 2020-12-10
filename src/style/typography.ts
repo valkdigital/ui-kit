@@ -58,6 +58,7 @@ const Typography = {
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.15,
+    fontFamily: Fonts.Regular,
   },
 
   bodySemiBold: {
@@ -74,10 +75,18 @@ const Typography = {
     fontFamily: Fonts.Italic,
   },
 
+  XLBodyText: {
+    fontSize: 28,
+    lineHeight: 36,
+    letterSpacing: 0.1,
+    fontFamily: Fonts.Regular,
+  },
+
   subtextRegular: {
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.15,
+    fontFamily: Fonts.Regular,
   },
 
   subtextSemiBold: {
@@ -98,6 +107,7 @@ const Typography = {
     fontSize: 10,
     lineHeight: 12,
     letterSpacing: 0.25,
+    fontFamily: Fonts.Regular,
   },
 };
 
@@ -112,6 +122,7 @@ export const MaxFontSizeMultiplier: { [key in TypographyLiterals]: number } = {
   bodyRegular: 1.45,
   bodySemiBold: 1.45,
   bodyItalic: 1.45,
+  XLBodyText: 1.15,
   subtextRegular: 1.5,
   subtextSemiBold: 1.5,
   subtextBold: 1.5,
