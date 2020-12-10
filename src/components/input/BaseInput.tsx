@@ -193,6 +193,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           textAlign={textAlign}
           type="subtextRegular"
           color={typography.placeholder}
+          style={styles.error}
         >
           {helperText}
         </Text>
