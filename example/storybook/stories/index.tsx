@@ -187,7 +187,7 @@ storiesOf("Cards", module).add("Card vertical list", () => (
   </CenteredView>
 ));
 
-const inputStories = storiesOf("InputFields", module);
+const inputStories = storiesOf("Inputs", module);
 
 const Fields: React.FC = () => {
   const ref = useRef<any>(null);
