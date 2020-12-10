@@ -1,7 +1,6 @@
 import { countries, Picker, Spacing } from "@valkdigital/ui-kit";
 import React from "react";
 import { View } from "react-native";
-import data from "../data";
 
 interface PickersProps {}
 
