@@ -7,11 +7,7 @@ import type { Option } from "../Picker";
 // @ts-ignore
 import examples from "libphonenumber-js/examples.mobile.json";
 import { AsYouType, getExampleNumber } from "libphonenumber-js/min";
-import type {
-  NativeSyntheticEvent,
-  TextInput as RNTI,
-  TextInputFocusEventData,
-} from "react-native";
+import type { TextInput as RNTI } from "react-native";
 import type { CountryCodes } from "./countries";
 import useMergedRef from "../../hooks/useMergedRef";
 import defaultCountries from "./countries";
@@ -27,7 +23,7 @@ interface PhoneInputProps
   listTitle: string;
   listEmptyText: string;
   listSearchPlaceholder: string;
-  errorMessage?: string;
+  onValidation?: (isValid: boolean) => void;
 }
 
 const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
@@ -39,23 +35,13 @@ const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
     listEmptyText,
     listSearchPlaceholder,
     onChangeText,
-    onBlur,
-    errorMessage = "",
+    onValidation,
   } = props;
   const [country, setCountry] = useState<Option>(countries[defaultCountry]);
-  const [showCheckMark, setShowCheckMark] = useState(false);
-  const [error, setError] = useState<boolean>(false);
   const inputRef = useRef<RNTI>(null);
   const mergedRef = useMergedRef<RNTI>(ref, inputRef);
 
-  const passInputProps = omit(
-    props,
-    "placeholder",
-    "showCheckMark",
-    "error",
-    "onChangeText",
-    "onBlur"
-  );
+  const passInputProps = omit(props, "placeholder", "onChangeText");
   const placeholder = getExampleNumber(
     country.value,
     examples
@@ -73,13 +59,8 @@ const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
     const nr = asYouType.getNumber();
     const isValid = !!nr?.isValid();
     if (nr?.country) setCountry(countries[nr?.country as CountryCodes]);
-    setShowCheckMark(isValid);
+    onValidation && onValidation(isValid);
     onChangeText && onChangeText(phoneNr);
-  };
-
-  const _onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    setError(!showCheckMark);
-    onBlur && onBlur(e);
   };
 
   const onModalClose = () => {
@@ -92,9 +73,6 @@ const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
       {...passInputProps}
       placeholder={placeholder}
       onChangeText={_onChangeText}
-      showCheckmark={showCheckMark}
-      onBlur={_onBlur}
-      error={error ? errorMessage : undefined}
       LeftIconComponent={
         <PhonePicker
           title={listTitle}

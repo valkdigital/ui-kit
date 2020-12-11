@@ -193,6 +193,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           textAlign={textAlign}
           type="subtextRegular"
           color={typography.placeholder}
+          style={styles.error}
         >
           {helperText}
         </Text>
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minWidth: 100,
     borderWidth: 0,
-    ...Typography.bodyRegular,
+    fontSize: Typography.bodyRegular.fontSize,
     ...Platform.select({ web: { outlineWidth: 0 } }),
   },
   inputWrapper: {

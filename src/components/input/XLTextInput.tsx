@@ -20,10 +20,10 @@ const SIZE: { [key in Sizes]: ViewStyle } = {
 
 const TEXTSTYLE: { [key in Sizes]: TextStyle } = {
   small: {
-    ...Typography.XLBodyText,
+    fontSize: Typography.XLBodyText.fontSize,
   },
   large: {
-    ...Typography.subHeading,
+    fontSize: Typography.subHeading.fontSize,
   },
 };
 
