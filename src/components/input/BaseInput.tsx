@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minWidth: 100,
     borderWidth: 0,
-    ...Typography.bodyRegular,
+    fontSize: Typography.bodyRegular.fontSize,
     ...Platform.select({ web: { outlineWidth: 0 } }),
   },
   inputWrapper: {

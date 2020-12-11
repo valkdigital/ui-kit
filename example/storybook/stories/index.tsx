@@ -301,7 +301,6 @@ inputStories.add("PhoneInput", () => (
       listEmptyText="No results found"
       listSearchPlaceholder="Search"
       onChangeText={action("onChangeText")}
-      errorMessage="Invalid phone number"
     />
   </CenteredView>
 ));
