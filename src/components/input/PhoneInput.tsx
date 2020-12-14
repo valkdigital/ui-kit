@@ -15,7 +15,11 @@ import defaultCountries from "./countries";
 interface PhoneInputProps
   extends Omit<
     BaseInputProps,
-    "LeftIconComponent" | "RightIconComponent" | "textAlign" | "labelStyle"
+    | "LeftIconComponent"
+    | "RightIconComponent"
+    | "textAlign"
+    | "labelStyle"
+    | "onChangeText"
   > {
   countries?: { [key in CountryCodes]: Option };
   defaultCountry: CountryCodes;
@@ -23,7 +27,15 @@ interface PhoneInputProps
   listTitle: string;
   listEmptyText: string;
   listSearchPlaceholder: string;
-  onValidation?: (isValid: boolean) => void;
+  onChangeText?: ({
+    national,
+    e164,
+    isValid,
+  }: {
+    national: string;
+    e164?: string;
+    isValid: boolean;
+  }) => void;
 }
 
 const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
@@ -35,7 +47,6 @@ const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
     listEmptyText,
     listSearchPlaceholder,
     onChangeText,
-    onValidation,
   } = props;
   const [country, setCountry] = useState<Option>(countries[defaultCountry]);
   const inputRef = useRef<RNTI>(null);
@@ -59,8 +70,12 @@ const PhoneInput = React.forwardRef<RNTI, PhoneInputProps>((props, ref) => {
     const nr = asYouType.getNumber();
     const isValid = !!nr?.isValid();
     if (nr?.country) setCountry(countries[nr?.country as CountryCodes]);
-    onValidation && onValidation(isValid);
-    onChangeText && onChangeText(phoneNr);
+    onChangeText &&
+      onChangeText({
+        national: phoneNr,
+        e164: nr?.format("E.164"),
+        isValid,
+      });
   };
 
   const onModalClose = () => {

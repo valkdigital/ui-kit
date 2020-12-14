@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import {
   View,
-  Modal,
+  Modal as RNModal,
   ViewStyle,
   StyleProp,
   StyleSheet,
@@ -11,21 +11,20 @@ import {
 type AnimationTypes = "none" | "slide" | "fade";
 
 interface ModalProps {
-  children: ReactNode;
   onClose?: () => void;
   animationType?: AnimationTypes;
   backgroundColor?: string;
   style?: StyleProp<ViewStyle>;
 }
 
-export default ({
+const Modal: React.FC<ModalProps> = ({
   children,
   onClose,
   animationType = "none",
   backgroundColor = "transparent",
   style,
-}: ModalProps) => (
-  <Modal
+}) => (
+  <RNModal
     visible={true}
     transparent={true}
     animationType={animationType}
@@ -46,7 +45,7 @@ export default ({
         </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
-  </Modal>
+  </RNModal>
 );
 
 const styles = StyleSheet.create({
@@ -61,3 +60,5 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
 });
+
+export default Modal;
