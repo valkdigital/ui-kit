@@ -62,6 +62,7 @@ const SegmentControl: React.FC<SegmentControlProps> = ({
         if (type === SegmentTypes.default)
           return (
             <DefaultSegment
+              key={idx}
               label={segment}
               selected={selected}
               selectedBackgroundColor={selectedBackgroundColor}
@@ -70,6 +71,7 @@ const SegmentControl: React.FC<SegmentControlProps> = ({
           );
         return (
           <TextSegment
+            key={idx}
             label={segment}
             selected={selected}
             onPress={() => onSegmentPressed(idx)}
