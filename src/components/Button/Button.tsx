@@ -9,6 +9,7 @@ import {
   Image,
   ImageStyle,
   Platform,
+  StyleProp,
 } from "react-native";
 import shadow from "../../style/shadow";
 import colors from "../../style/colors";
@@ -35,13 +36,13 @@ interface ButtonProps {
   color?: string;
   type?: keyof typeof ButtonTypes;
   size?: keyof typeof ButtonSizes;
-  buttonStyle?: ViewStyle;
-  containerStyle?: ViewStyle;
+  buttonStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
   image?: ImageProps["source"];
-  imageStyle?: ImageStyle;
+  imageStyle?: StyleProp<ImageStyle>;
 }
 
 const styleByType: { [key in ButtonTypes]: ViewStyle } = {
