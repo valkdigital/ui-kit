@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, ScrollView, ViewStyle, Pressable } from "react-native";
+import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
 import Text from "../Text";
 
 interface MultipleButtonsProps {
   containerStyle?: ViewStyle;
-  onPress: (idx: number) => void;
+  onPress: (selectedLabel: string) => void;
+  selectedLabel: string;
   labels: string[];
   activeColor?: string;
   inActiveColor?: string;
@@ -15,18 +17,13 @@ interface MultipleButtonsProps {
 const MultipleButtons: React.FC<MultipleButtonsProps> = ({
   labels,
   onPress,
-  activeColor = "#2BB9F5",
-  inActiveColor = "#EFEFEF",
+  selectedLabel,
+  activeColor,
+  inActiveColor,
   containerStyle,
   disabled,
 }) => {
-  const [index, setIndex] = useState(0);
-
-  const onButtonPressed = (i: number) => {
-    if (disabled) return;
-    setIndex(i);
-    onPress(i);
-  };
+  const { info, grey } = useContext(ThemeContext);
 
   return (
     <ScrollView
@@ -35,13 +32,14 @@ const MultipleButtons: React.FC<MultipleButtonsProps> = ({
       style={styles.container}
       showsHorizontalScrollIndicator={false}
     >
-      {labels.map((l, i) => (
+      {labels.map((label, i) => (
         <Button
-          isSelected={index === i}
-          onPress={() => onButtonPressed(i)}
-          activeColor={activeColor}
-          inActiveColor={inActiveColor}
-          label={l}
+          key={i}
+          isSelected={selectedLabel === label}
+          onPress={onPress}
+          activeColor={activeColor ?? info.primary}
+          inActiveColor={inActiveColor ?? grey[0]}
+          label={label}
           disabled={disabled}
         />
       ))}
@@ -50,9 +48,9 @@ const MultipleButtons: React.FC<MultipleButtonsProps> = ({
 };
 
 interface ButtonProps {
-  onPress: () => void;
-  activeColor?: string;
-  inActiveColor?: string;
+  onPress: (selectedLabel: string) => void;
+  activeColor: string;
+  inActiveColor: string;
   isSelected: boolean;
   label: string;
   disabled?: boolean;
@@ -65,20 +63,26 @@ const Button: React.FC<ButtonProps> = ({
   isSelected,
   label,
   disabled,
-}) => (
-  <Pressable
-    style={({ pressed }) => [
-      styles.button,
-      (pressed || disabled) && { opacity: 0.4 },
-      { backgroundColor: isSelected ? activeColor : inActiveColor },
-    ]}
-    onPress={onPress}
-  >
-    <Text color={isSelected ? "white" : "black"} type="bodySemiBold">
-      {label}
-    </Text>
-  </Pressable>
-);
+}) => {
+  const onButtonPressed = () => {
+    onPress(label);
+  };
+
+  return (
+    <Pressable
+      style={({ pressed }) => [
+        styles.button,
+        (pressed || disabled) && { opacity: 0.4 },
+        { backgroundColor: isSelected ? activeColor : inActiveColor },
+      ]}
+      onPress={onButtonPressed}
+    >
+      <Text color={isSelected ? "white" : "black"} type="bodySemiBold">
+        {label}
+      </Text>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

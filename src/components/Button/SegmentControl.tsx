@@ -1,50 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, ScrollView, ViewStyle, Pressable } from "react-native";
-import colors from "../../style/colors";
+import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
 import Text from "../Text";
+
 enum SegmentTypes {
   default = "default",
   text = "text",
 }
 interface SegmentControlProps {
   type?: keyof typeof SegmentTypes;
+  value: string;
   segments: string[];
-  onPress: (idx: number) => void;
-  selectedBackgroundColor?: string;
+  onPress: (value: string) => void;
   backgroundColor?: string;
-  activeIndicatorColor?: string;
+  activeColor?: string;
   style?: ViewStyle;
 }
 
 const SegmentControl: React.FC<SegmentControlProps> = ({
   type = SegmentTypes.default,
+  value,
   segments,
   onPress,
-  backgroundColor = colors.grey2,
-  selectedBackgroundColor = colors.white,
+  backgroundColor,
   style,
-  activeIndicatorColor = "#D9AE5F",
+  activeColor,
 }) => {
-  const [index, setIndex] = useState(0);
-
-  const onSegmentPressed = (idx: number) => {
-    setIndex(idx);
-    onPress(idx);
-  };
+  const { background, grey } = useContext(ThemeContext);
 
   const styleBytype: { [key in SegmentTypes]: ViewStyle } = {
     [SegmentTypes.default]: {
       width: "100%",
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? grey[2],
       borderWidth: 2,
-      borderColor: colors.grey2,
+      borderColor: grey[2],
       borderRadius: 4,
     },
     [SegmentTypes.text]: {
       flexGrow: 1,
       justifyContent: "center",
     },
+  };
+
+  const ACTIVE_COLOR: { [key in SegmentTypes]: string } = {
+    [SegmentTypes.default]: background,
+    [SegmentTypes.text]: "#D9AE5F",
   };
 
   return (
@@ -58,72 +59,56 @@ const SegmentControl: React.FC<SegmentControlProps> = ({
       showsHorizontalScrollIndicator={false}
     >
       {segments.map((segment, idx) => {
-        const selected = idx === index;
-        if (type === SegmentTypes.default)
-          return (
-            <DefaultSegment
-              key={idx}
-              label={segment}
-              selected={selected}
-              selectedBackgroundColor={selectedBackgroundColor}
-              onPress={() => onSegmentPressed(idx)}
-            />
-          );
         return (
-          <TextSegment
+          <Segment
             key={idx}
             label={segment}
-            selected={selected}
-            onPress={() => onSegmentPressed(idx)}
-            activeIndicatorColor={activeIndicatorColor}
+            selected={value === segment}
+            activeColor={activeColor ?? ACTIVE_COLOR[type]}
+            onPress={onPress}
+            type={type}
           />
         );
       })}
     </ScrollView>
   );
 };
-interface SegmentPops {
+
+interface SegmentProps {
   label: string;
   selected: boolean;
-  selectedBackgroundColor?: string;
-  activeIndicatorColor?: string;
-  onPress: () => void;
+  activeColor: string;
+  onPress: (value: string) => void;
+  type: keyof typeof SegmentTypes;
 }
-const DefaultSegment: React.FC<SegmentPops> = ({
+const Segment: React.FC<SegmentProps> = ({
   label,
   selected,
-  selectedBackgroundColor,
+  activeColor,
   onPress,
+  type,
 }) => {
-  return (
-    <Pressable
-      style={[
-        styles.defaultSegment,
-        selected && { backgroundColor: selectedBackgroundColor },
-      ]}
-      onPress={onPress}
-    >
-      <Text type={selected ? "bodySemiBold" : "bodyRegular"}>{label}</Text>
-    </Pressable>
-  );
-};
+  const onSegmentPress = () => {
+    onPress(label);
+  };
 
-const TextSegment: React.FC<SegmentPops> = ({
-  label,
-  selected,
-  onPress,
-  activeIndicatorColor,
-}) => {
   return (
     <Pressable
-      style={[
-        styles.textSegment,
-        selected && {
-          borderColor: activeIndicatorColor,
-          borderBottomWidth: 2,
-        },
-      ]}
-      onPress={onPress}
+      style={
+        type === SegmentTypes.default
+          ? [
+              styles.defaultSegment,
+              selected && { backgroundColor: activeColor },
+            ]
+          : [
+              styles.textSegment,
+              selected && {
+                borderColor: activeColor,
+                borderBottomWidth: 2,
+              },
+            ]
+      }
+      onPress={onSegmentPress}
     >
       <Text type={selected ? "bodySemiBold" : "bodyRegular"}>{label}</Text>
     </Pressable>

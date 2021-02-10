@@ -52,17 +52,17 @@ export default {
     list: {
       sectionBackground: colors.grey0,
     },
-    grey: {
-      0: colors.grey0,
-      1: colors.grey1,
-      2: colors.grey2,
-      3: colors.grey3,
-      4: colors.grey4,
-      5: colors.grey5,
-      6: colors.grey6,
-      7: colors.grey7,
-      8: colors.grey8,
-    },
+    grey: [
+      colors.grey0,
+      colors.grey1,
+      colors.grey2,
+      colors.grey3,
+      colors.grey4,
+      colors.grey5,
+      colors.grey6,
+      colors.grey7,
+      colors.grey8,
+    ],
   },
   dark: {
     background: colors.black,
@@ -116,5 +116,16 @@ export default {
     list: {
       sectionBackground: colors.grey8,
     },
+    grey: [
+      colors.grey8,
+      colors.grey7,
+      colors.grey6,
+      colors.grey5,
+      colors.grey4,
+      colors.grey3,
+      colors.grey2,
+      colors.grey1,
+      colors.grey0,
+    ],
   },
 };

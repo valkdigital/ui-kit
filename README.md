@@ -50,13 +50,13 @@ Set a light and/or a dark theme.
 
 #### Provider
 
-Get the theme value (dark/light) from the ThemeManager and place the provider around your app.
+Get the theme value (dark/light) from Theme and place the provider around your app.
 
 ```
+import { Theme } from "@valkdigital/ui-kit"
+
 <ThemeContext.Provider
-    value={
-    ThemeManager.getTheme(darkmodeOn ? "dark" : "light"),
-    }
+    value={darkModeOn ? Theme.dark : Theme.light}
 >
     <YourAwesomeApp />
 </ThemeContext.Provider>
@@ -64,18 +64,18 @@ Get the theme value (dark/light) from the ThemeManager and place the provider ar
 
 ## Example
 
-You can see an extensive documented web preview of the component library at https://valkdigital.github.io/ui-kit or by running `yarn && yarn storybook` in the example directory. With the use of storybook you'll be able to see each component with the following topics:
+You can see an extensive documented web preview of the component library at https://valkdigital.github.io/ui-kit or by running `yarn storybook`. With the use of storybook you'll be able to see each component with the following topics:
 
 - Preview
 - Props overview
-- Additional information regarding the behavior of the component (optional)
+- Additional information regarding the behavior of the component
 
 To preview the UI-kit components on iOS and Android you can run:
 
 - iOS:
 
-  `yarn ios`
+  `yarn run-ios`
 
 - Android:
 
-  `yarn android`
+  `yarn run-android`

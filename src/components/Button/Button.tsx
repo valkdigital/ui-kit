@@ -10,6 +10,7 @@ import {
   ImageStyle,
   Platform,
   StyleProp,
+  PressableProps,
 } from "react-native";
 import shadow from "../../style/shadow";
 import colors from "../../style/colors";
@@ -17,6 +18,7 @@ import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
+import { omit } from "lodash";
 
 enum ButtonTypes {
   default = "default",
@@ -29,8 +31,7 @@ enum ButtonSizes {
   full = "full",
 }
 
-interface ButtonProps {
-  onPress: () => void;
+interface ButtonProps extends PressableProps {
   label: string;
   labelColor?: string;
   color?: string;
@@ -71,28 +72,27 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   },
 };
 
-const Button: React.FC<ButtonProps> = ({
-  color = colors.orangePrimary,
-  label,
-  labelColor = "white",
-  size = ButtonSizes.medium,
-  type = ButtonTypes.default,
-  onPress,
-  buttonStyle,
-  containerStyle,
-  children,
-  disabled,
-  loading,
-  currentProgress,
-  image,
-  imageStyle,
-}) => {
+const Button: React.FC<ButtonProps> = (props) => {
+  const {
+    color = colors.orangePrimary,
+    label,
+    labelColor = "white",
+    size = ButtonSizes.medium,
+    type = ButtonTypes.default,
+    buttonStyle,
+    containerStyle,
+    children,
+    disabled,
+    loading,
+    currentProgress,
+    image,
+    imageStyle,
+  } = props;
+  const passButtonProps = omit(props, "children", "disabled");
+
   const { onBackground } = useContext(ThemeContext);
 
   const buttonLabelColor = type === ButtonTypes.ghost ? color : labelColor;
-  const onPressButton = () => {
-    if (!disabled) onPress();
-  };
 
   const defaultStyle: ViewStyle = {
     backgroundColor: color,
@@ -124,12 +124,13 @@ const Button: React.FC<ButtonProps> = ({
         <Progressbar currentProgress={currentProgress} />
       )}
       <Pressable
-        onPress={onPressButton}
         style={({ pressed }) => [
           defaultStyle,
           buttonStyle,
           (pressed || disabled) && { opacity: 0.4 },
         ]}
+        disabled={disabled}
+        {...passButtonProps}
       >
         {loading ? (
           <ActivityIndicator size="small" color={buttonLabelColor} />
