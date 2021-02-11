@@ -11,6 +11,7 @@ import {
   Platform,
   StyleProp,
   PressableProps,
+  LayoutChangeEvent,
 } from "react-native";
 import shadow from "../../style/shadow";
 import colors from "../../style/colors";
@@ -44,6 +45,7 @@ interface ButtonProps extends PressableProps {
   currentProgress?: string | number;
   image?: ImageProps["source"];
   imageStyle?: StyleProp<ImageStyle>;
+  onLayout?: (event: LayoutChangeEvent) => void;
 }
 
 const styleByType: { [key in ButtonTypes]: ViewStyle } = {
@@ -87,8 +89,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     currentProgress,
     image,
     imageStyle,
+    onLayout,
   } = props;
-  const passButtonProps = omit(props, "children", "disabled");
+  const passButtonProps = omit(props, "children", "disabled", "onLayout");
 
   const { onBackground } = useContext(ThemeContext);
 
@@ -118,6 +121,7 @@ const Button: React.FC<ButtonProps> = (props) => {
         showFullWidthContainer && { backgroundColor: onBackground },
         containerStyle,
       ]}
+      onLayout={onLayout}
     >
       {children}
       {currentProgress && type === ButtonTypes.progressbar && (
