@@ -27,7 +27,11 @@
     "release": "npm publish",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "storybook": "cd example && yarn storybook",
+    "run-ios": "cd example && yarn ios",
+    "run-android": "cd example && yarn android",
+    "run-web": "cd example && yarn web"
   },
   "keywords": [
     "react-native",

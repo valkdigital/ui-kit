@@ -28,7 +28,7 @@ export interface Parameters {
   extraOffset?: number;
 }
 
-export default ({
+const getSectionListItemLayout = ({
   getItemHeight,
   getSeparatorHeight = () => 0,
   getSectionHeaderHeight = () => 0,
@@ -114,3 +114,5 @@ export default ({
 
   return { length, offset, index };
 };
+
+export default getSectionListItemLayout;

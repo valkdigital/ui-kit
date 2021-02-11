@@ -2,7 +2,7 @@ import Text from "./components/Text";
 import { Fonts, TypographyLiterals } from "./style/typography";
 import Spacing from "./style/spacing";
 import ThemeContext from "./style/ThemeContext";
-import ThemeManager, { Theme } from "./style/themeManager";
+import Theme from "./style/appThemes";
 import Card from "./components/Card";
 import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
@@ -19,7 +19,7 @@ import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
 
 // Style & Theme exports
-export { Fonts, Spacing, ThemeContext, ThemeManager };
+export { Fonts, Spacing, ThemeContext, Theme };
 
 // Text (Input) components exports
 export {
@@ -45,4 +45,4 @@ export {
 };
 
 // Types
-export type { TypographyLiterals, Theme, Option as PickerOption };
+export type { TypographyLiterals, Option as PickerOption };

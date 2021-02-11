@@ -7,8 +7,11 @@ interface ItemSeparatorProps {
   needsSpaceForAlphabet?: boolean;
 }
 
-export default ({ needsSpaceForAlphabet }: ItemSeparatorProps) => {
+const ItemSeparator: React.FC<ItemSeparatorProps> = ({
+  needsSpaceForAlphabet,
+}) => {
   const { border } = useContext(ThemeContext);
+
   return (
     <View
       style={[
@@ -29,3 +32,5 @@ const styles = StyleSheet.create({
     marginRight: Spacing.sp5,
   },
 });
+
+export default ItemSeparator;

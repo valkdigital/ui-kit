@@ -335,6 +335,7 @@ buttonStories.add("FAB", () => <AllFAB />);
 buttonStories.add("Multiple Buttons", () => (
   <View style={{ marginTop: Spacing.sp2 }}>
     <MultipleButtons
+      selectedLabel="button"
       activeColor={color("active color", "#2BB9F5", "multiple buttons")}
       inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
       onPress={(i) => console.log(i)}
@@ -355,13 +356,15 @@ buttonStories.add("Text Button", () => (
 buttonStories.add("Segment control", () => (
   <View style={{ marginHorizontal: Spacing.sp1 }}>
     <SegmentControl
-      segments={array("segmenst", ["segment 1", "segmet 2", "segment 3"])}
+      value="segment 2"
+      segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
       onPress={action("pressed")}
       style={{ marginBottom: Spacing.sp2 }}
     />
     <SegmentControl
       type="text"
-      segments={array("segmenst", ["segment 1", "segment 2", "segment 3"])}
+      value="segment 3"
+      segments={array("segments", ["segment 1", "segment 2", "segment 3"])}
       onPress={action("pressed")}
       style={{ marginBottom: Spacing.sp2 }}
     />

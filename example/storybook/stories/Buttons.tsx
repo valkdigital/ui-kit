@@ -41,6 +41,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
           Select a date of stay
         </Text>
         <MultipleButtons
+          selectedLabel="Exact date"
           labels={["Exact date", "± 1 day", "± 2 days", "± 3 days"]}
           onPress={(i) => console.log(i)}
           disabled={boolean("disabled", false, "cta")}

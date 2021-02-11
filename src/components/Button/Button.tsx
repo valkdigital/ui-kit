@@ -9,6 +9,9 @@ import {
   Image,
   ImageStyle,
   Platform,
+  StyleProp,
+  PressableProps,
+  LayoutChangeEvent,
 } from "react-native";
 import shadow from "../../style/shadow";
 import colors from "../../style/colors";
@@ -16,6 +19,7 @@ import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
+import { omit } from "lodash";
 
 enum ButtonTypes {
   default = "default",
@@ -28,20 +32,20 @@ enum ButtonSizes {
   full = "full",
 }
 
-interface ButtonProps {
-  onPress: () => void;
+interface ButtonProps extends PressableProps {
   label: string;
   labelColor?: string;
   color?: string;
   type?: keyof typeof ButtonTypes;
   size?: keyof typeof ButtonSizes;
-  buttonStyle?: ViewStyle;
-  containerStyle?: ViewStyle;
+  buttonStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
   image?: ImageProps["source"];
-  imageStyle?: ImageStyle;
+  imageStyle?: StyleProp<ImageStyle>;
+  onLayout?: (event: LayoutChangeEvent) => void;
 }
 
 const styleByType: { [key in ButtonTypes]: ViewStyle } = {
@@ -70,28 +74,28 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   },
 };
 
-const Button: React.FC<ButtonProps> = ({
-  color = colors.orangePrimary,
-  label,
-  labelColor = "white",
-  size = ButtonSizes.medium,
-  type = ButtonTypes.default,
-  onPress,
-  buttonStyle,
-  containerStyle,
-  children,
-  disabled,
-  loading,
-  currentProgress,
-  image,
-  imageStyle,
-}) => {
+const Button: React.FC<ButtonProps> = (props) => {
+  const {
+    color = colors.orangePrimary,
+    label,
+    labelColor = "white",
+    size = ButtonSizes.medium,
+    type = ButtonTypes.default,
+    buttonStyle,
+    containerStyle,
+    children,
+    disabled,
+    loading,
+    currentProgress,
+    image,
+    imageStyle,
+    onLayout,
+  } = props;
+  const passButtonProps = omit(props, "children", "disabled", "onLayout");
+
   const { onBackground } = useContext(ThemeContext);
 
   const buttonLabelColor = type === ButtonTypes.ghost ? color : labelColor;
-  const onPressButton = () => {
-    if (!disabled) onPress();
-  };
 
   const defaultStyle: ViewStyle = {
     backgroundColor: color,
@@ -117,18 +121,20 @@ const Button: React.FC<ButtonProps> = ({
         showFullWidthContainer && { backgroundColor: onBackground },
         containerStyle,
       ]}
+      onLayout={onLayout}
     >
       {children}
       {currentProgress && type === ButtonTypes.progressbar && (
         <Progressbar currentProgress={currentProgress} />
       )}
       <Pressable
-        onPress={onPressButton}
         style={({ pressed }) => [
           defaultStyle,
           buttonStyle,
           (pressed || disabled) && { opacity: 0.4 },
         ]}
+        disabled={disabled}
+        {...passButtonProps}
       >
         {loading ? (
           <ActivityIndicator size="small" color={buttonLabelColor} />
