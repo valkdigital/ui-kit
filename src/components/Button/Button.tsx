@@ -32,7 +32,7 @@ enum ButtonSizes {
   full = "full",
 }
 
-interface ButtonProps extends PressableProps {
+interface ButtonProps extends Omit<PressableProps, "children"> {
   label: string;
   labelColor?: string;
   color?: string;
@@ -91,7 +91,24 @@ const Button: React.FC<ButtonProps> = (props) => {
     imageStyle,
     onLayout,
   } = props;
-  const passButtonProps = omit(props, "children", "disabled", "onLayout");
+  // remove custom props or overrided props
+  const passButtonProps = omit(
+    props,
+    "color",
+    "label",
+    "labelColor",
+    "size",
+    "type",
+    "buttonStyle",
+    "containerStyle",
+    "children",
+    "disabled",
+    "loading",
+    "currentProgress",
+    "image",
+    "imageStyle",
+    "onLayout"
+  );
 
   const { onBackground } = useContext(ThemeContext);
 
