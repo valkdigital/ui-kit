@@ -1,0 +1,72 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View, ScrollView } from "react-native";
+import { Notification } from "@valkdigital/ui-kit";
+import { Text } from "@valkdigital/ui-kit";
+
+
+<Meta title="Notifications" />
+
+<Preview>
+  <Story 
+    name="Notification"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/KVbqwH1I4lStgUwTK4Wr8z/App-Design-System?node-id=1632%3A0",
+      },
+    }}
+    >
+    <View>
+      <Text type="h3">Notifications</Text>
+      <Text type="h4">Default</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification type="positive" content="This is a success IN with only one line of text"></Notification>
+        <Notification type="negative" content="This is a error IN with only one line of text"></Notification>
+        <Notification type="informative" content="This is a warning IN with only one line of text"></Notification>
+        <Notification type="default" content="This is a info IN with only one line of text"></Notification>
+      </View>
+      <Text type="h4">With heading</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+      </View>
+      <Text type="h4">With cue arrow</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification type="positive" arrowEnabled={true} arrowPosition="top" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification type="negative" arrowEnabled={true} arrowPosition="top" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification type="informative" arrowEnabled={true} arrowPosition="top" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification type="default" arrowEnabled={true} arrowPosition="top" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+        <Notification type="positive" arrowEnabled={true} arrowPosition="bottom" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification type="negative" arrowEnabled={true} arrowPosition="bottom" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification type="informative" arrowEnabled={true} arrowPosition="bottom" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification type="default" arrowEnabled={true} arrowPosition="bottom" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+      </View>
+      <Text type="h4">With close button</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" closeable={true}></Notification>
+        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" closeable={true}></Notification>
+        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" closeable={true}></Notification>
+        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" closeable={true}></Notification>
+      </View>
+      <Text type="h4">Banner type</Text>
+      <Text type="bodyRegular">TODO</Text>
+      <Text type="h4">With icons</Text>
+    </View>
+  </Story>
+</Preview>
+
+<Props of={Notification} />
