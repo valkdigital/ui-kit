@@ -3,13 +3,8 @@
  | Notification component
  |------------------------------------------------------------------------------
  |
- | Description
- |
- | ---------------------------------------------------------------------------
- |
- |
- |
  */
+
 /* ========================================================================== *\
   IMPORTS
 \* ========================================================================== */
@@ -23,6 +18,7 @@ import {
   View,
   ViewStyle,
   ViewProps,
+  ImageSourcePropType,
 } from "react-native";
 import colors from "../../style/colors";
 import ThemeContext from "../../style/ThemeContext";
@@ -35,11 +31,19 @@ import { isEmpty, omit } from "lodash";
 /* ========================================================================== *\
     TYPES
 \* ========================================================================== */
-enum NotificationTypes {
+enum NotificationColorTypes {
   default = "default",
   informative = "informative",
   negative = "negative",
   positive = "positive",
+}
+
+enum NotificationIconTypes {
+  default = "default",
+  error = "error",
+  info = "info",
+  success = "success",
+  warning = "warning",
 }
 
 enum NotificationArrowPosition {
@@ -54,13 +58,16 @@ enum NotificationArrowPosition {
 interface NotificationProps extends ViewProps {
   arrowEnabled?: boolean;
   arrowPosition?: keyof typeof NotificationArrowPosition;
-  closeable?: boolean;
-  contentStyle: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<ViewStyle>;
   content?: string;
   cueArrow?: StyleProp<ViewStyle>;
+  hasIcon?: boolean;
   heading?: string;
-  type?: keyof typeof NotificationTypes;
-  textStyle: StyleProp<TextStyle>;
+  isBanner?: boolean;
+  isCloseable?: boolean;
+  iconType?: keyof typeof NotificationIconTypes;
+  colorType?: keyof typeof NotificationColorTypes;
+  textStyle?: StyleProp<TextStyle>;
 }
 /* == INTERFACE ============================================================= */
 
@@ -76,94 +83,144 @@ const Notification: React.FC<NotificationProps> = (props) => {
     arrowEnabled,
     arrowPosition = NotificationArrowPosition.top,
     children,
-    heading,
     content,
-    closeable,
-    type = NotificationTypes.default,
+    hasIcon,
+    heading,
+    isBanner,
+    isCloseable,
+    iconType = NotificationIconTypes.default,
+    colorType = NotificationColorTypes.default,
   } = props;
 
   const passNotificationProps = omit(props, "type");
   const themeColors = useContext(ThemeContext);
-  const contentStyleByType: { [key in NotificationTypes]: ViewStyle } = {
-    [NotificationTypes.default]: { borderColor: themeColors.info.midDark },
-    [NotificationTypes.informative]: {
-      borderColor: themeColors.warning.midDark,
+  const notificationStyleByType: {
+    [key in NotificationColorTypes]: ViewStyle;
+  } = {
+    [NotificationColorTypes.default]: { borderColor: themeColors.info.midDark },
+    [NotificationColorTypes.informative]: {
+      borderColor: themeColors.warning.primary,
     },
-    [NotificationTypes.negative]: { borderColor: themeColors.error.midDark },
-    [NotificationTypes.positive]: { borderColor: themeColors.success.midDark },
+    [NotificationColorTypes.negative]: {
+      borderColor: themeColors.error.midDark,
+    },
+    [NotificationColorTypes.positive]: {
+      borderColor: themeColors.success.midDark,
+    },
   };
 
-  const textColorByType: { [key in NotificationTypes]: string } = {
-    [NotificationTypes.default]: themeColors.info.dark,
-    [NotificationTypes.informative]: colors.grey8,
-    [NotificationTypes.negative]: themeColors.error.dark,
-    [NotificationTypes.positive]: themeColors.success.dark,
+  const textColorByType: { [key in NotificationColorTypes]: string } = {
+    [NotificationColorTypes.default]: themeColors.info.dark,
+    [NotificationColorTypes.informative]: colors.grey8,
+    [NotificationColorTypes.negative]: themeColors.error.dark,
+    [NotificationColorTypes.positive]: themeColors.success.dark,
   };
 
-  const backgroundColorByType: { [key in NotificationTypes]: string } = {
-    [NotificationTypes.default]: themeColors.info.light,
-    [NotificationTypes.informative]: themeColors.warning.midLight,
-    [NotificationTypes.negative]: themeColors.error.light,
-    [NotificationTypes.positive]: themeColors.success.light,
+  const backgroundColorByType: { [key in NotificationColorTypes]: string } = {
+    [NotificationColorTypes.default]: themeColors.info.light,
+    [NotificationColorTypes.informative]: themeColors.warning.midLight,
+    [NotificationColorTypes.negative]: themeColors.error.light,
+    [NotificationColorTypes.positive]: themeColors.success.light,
   };
+
+  const iconByType: { [key in NotificationIconTypes]: ImageSourcePropType } = {
+    [NotificationIconTypes.default]: require("../../media/iconInfo.png"),
+    [NotificationIconTypes.error]: require("../../media/iconError.png"),
+    [NotificationIconTypes.info]: require("../../media/iconInfo.png"),
+    [NotificationIconTypes.success]: require("../../media/iconSuccess.png"),
+    [NotificationIconTypes.warning]: require("../../media/iconWarning.png"),
+  };
+
+  /* eslint-disable prettier/prettier */
+  //Format on save keeps messing up ;)
+  const bannerStyle: ViewStyle = isBanner
+    ? {
+      borderRadius: 0,
+      margin: 0,
+    }
+    : {
+      borderRadius: 4,
+      ...shadow({ x: 0, y: 2, blurRadius: 8, opacity: 0.16 }),
+    };
+  /* eslint-enable prettier/prettier */
 
   const arrowPostionStyle: { [key in NotificationArrowPosition]: ViewStyle } = {
     [NotificationArrowPosition.top]: {
       left: 16,
-      top: -18,
-      borderBottomWidth: 18,
-      borderBottomColor: backgroundColorByType[type],
+      top: -10,
+      borderBottomWidth: 10,
+      borderBottomColor: backgroundColorByType[colorType],
     },
     [NotificationArrowPosition.bottom]: {
       right: 16,
-      bottom: -18,
-      borderTopWidth: 18,
-      borderTopColor: backgroundColorByType[type],
+      bottom: -10,
+      borderTopWidth: 10,
+      borderTopColor: backgroundColorByType[colorType],
     },
   };
 
   return (
     <View
       style={[
-        styles.notification,
-        contentStyleByType[type],
-        { backgroundColor: backgroundColorByType[type] },
+        styles.notificationStyle,
+        notificationStyleByType[colorType],
+        bannerStyle,
+        { backgroundColor: backgroundColorByType[colorType] },
       ]}
       {...passNotificationProps}
     >
       {arrowEnabled && (
-        <View style={[styles.arrow, arrowPostionStyle[arrowPosition]]} />
+        <View style={[styles.arrowStyle, arrowPostionStyle[arrowPosition]]} />
       )}
-      <View style={[styles.wrapper]}>
-        <View style={styles.content}>
-          {!isEmpty(heading) && (
-            <Text
-              style={[{ color: textColorByType[type] }]}
-              type="subtextSemiBold"
-            >
-              {heading}
-            </Text>
-          )}
-          {!isEmpty(content) && (
-            <Text
-              style={[{ color: textColorByType[type] }]}
-              type="subtextRegular"
-            >
-              {content}
-            </Text>
-          )}
-        </View>
 
-        {closeable && (
-          <TouchableOpacity>
+      <View style={[styles.wrapperIconStyle]}>
+        {hasIcon && (
+          <View style={[styles.iconHolder]}>
             <Image
-              source={require("../../media/close.png")}
-              style={[styles.closeImg, { tintColor: textColorByType[type] }]}
+              source={iconByType[iconType]}
+              style={[
+                styles.iconStyle,
+                { tintColor: textColorByType[colorType] },
+              ]}
             />
-          </TouchableOpacity>
+          </View>
         )}
 
-        {children}
+        <View style={[styles.wrapperContentStyle]}>
+          <View style={styles.contentStyle}>
+            {!isEmpty(heading) && (
+              <Text
+                style={[{ color: textColorByType[colorType] }]}
+                type="subtextSemiBold"
+              >
+                {heading}
+              </Text>
+            )}
+
+            {!isEmpty(content) && (
+              <Text
+                style={[{ color: textColorByType[colorType] }]}
+                type="subtextRegular"
+              >
+                {content}
+              </Text>
+            )}
+
+            {children}
+          </View>
+
+          {isCloseable && (
+            <TouchableOpacity>
+              <Image
+                source={require("../../media/close.png")}
+                style={[
+                  styles.closeStyle,
+                  { tintColor: textColorByType[colorType] },
+                ]}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
     </View>
   );
@@ -174,44 +231,56 @@ const Notification: React.FC<NotificationProps> = (props) => {
   STYLES
 \* ========================================================================== */
 const styles = StyleSheet.create({
-  notification: {
-    borderRadius: 4,
+  notificationStyle: {
     borderWidth: 0,
-    borderLeftWidth: 4,
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    margin: 8,
-    paddingBottom: Spacing.sp2,
-    paddingLeft: Spacing.sp2,
-    paddingRight: Spacing.sp1,
-    paddingTop: Spacing.sp2,
-    ...shadow({ x: 0, y: 4, blurRadius: 14, opacity: 0.24 }),
+    borderLeftWidth: Spacing["sp1/2"],
+    margin: Spacing.sp1,
+    paddingHorizontal: Spacing.sp1,
+    paddingVertical: Spacing.sp2,
   },
-  content: {
+  contentStyle: {
     flexShrink: 1,
   },
-  arrow: {
-    position: "absolute",
-    width: 0,
-    height: 0,
-    borderLeftWidth: 12,
+  arrowStyle: {
+    borderLeftWidth: Spacing.sp1,
     borderLeftColor: "transparent",
-    borderRightWidth: 12,
+    borderRightWidth: Spacing.sp1,
     borderRightColor: "transparent",
+    position: "absolute",
+    height: 0,
+    width: 0,
   },
-  closeImg: {
-    display: "flex",
-    width: 12,
+  iconWrapperStyle: {
+    flexDirection: "row",
+  },
+  iconHolder: {
+    height: Spacing.sp3,
+    marginRight: 10,
+    marginTop: Spacing["sp1/2"],
+    width: Spacing.sp3,
+  },
+  iconStyle: {
+    flex: 1,
+    height: undefined,
+    resizeMode: "contain",
+    width: undefined,
+  },
+  closeStyle: {
     height: 12,
-    marginLeft: 12,
+    marginLeft: Spacing.sp1,
     marginTop: 2,
     marginRight: Spacing.sp1,
+    width: 12,
   },
-  wrapper: {
-    display: "flex",
+  wrapperContentStyle: {
     flexDirection: "row",
     justifyContent: "space-between",
+    flexShrink: 1,
+    width: "100%",
+  },
+  wrapperIconStyle: {
+    flexDirection: "row",
+    flexShrink: 1,
   },
 });
 /* == STYLES ================================================================ */

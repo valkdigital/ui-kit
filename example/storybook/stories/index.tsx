@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
-import { View, StyleSheet, ViewStyle } from "react-native";
+import { View, StyleSheet, ViewStyle, ScrollView } from "react-native";
 import {
   Card,
   CardList,
@@ -10,6 +10,7 @@ import {
   PhoneInput,
   countries,
   MultipleButtons,
+  Notification,
   TextButton,
   SegmentControl,
   XLTextInput,
@@ -372,6 +373,155 @@ buttonStories.add("Segment control", () => (
 ));
 
 buttonStories.add("Navigation Text Button", () => <NavigationTextStory />);
+
+const notificationStories = storiesOf("Notification", module);
+notificationStories.add("Notification", () => (
+  <ScrollView>
+    <Text type="h4">Default</Text>
+    <View>
+      <Notification
+        colorType="positive"
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        colorType="positive"
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        colorType="negative"
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        colorType="informative"
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        colorType="default"
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">With heading</Text>
+    <View>
+      <Notification
+        colorType="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        colorType="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        colorType="informative"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        colorType="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Tooltip</Text>
+    <View>
+      <Notification
+        colorType="positive"
+        arrowEnabled={true}
+        arrowPosition="top"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        colorType="negative"
+        arrowEnabled={true}
+        arrowPosition="top"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        colorType="informative"
+        arrowEnabled={true}
+        arrowPosition="top"
+        heading="The core of the warning IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        colorType="default"
+        arrowEnabled={true}
+        arrowPosition="top"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+      <Notification
+        colorType="positive"
+        arrowEnabled={true}
+        arrowPosition="bottom"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        colorType="negative"
+        arrowEnabled={true}
+        arrowPosition="bottom"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        colorType="informative"
+        arrowEnabled={true}
+        arrowPosition="bottom"
+        heading="The core of the warning IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        colorType="default"
+        arrowEnabled={true}
+        arrowPosition="bottom"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Banner status icon</Text>
+    <View>
+      <Notification
+        colorType="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        iconType="success"
+      />
+      <Notification
+        colorType="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        iconType="error"
+      />
+      <Notification
+        colorType="informative"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        iconType="warning"
+      />
+      <Notification
+        colorType="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        iconType="info"
+      />
+    </View>
+  </ScrollView>
+));
 
 const styles = StyleSheet.create({
   container: {
