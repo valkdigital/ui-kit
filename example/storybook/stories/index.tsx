@@ -453,6 +453,38 @@ notificationStories.add("Notification", () => (
       />
     </View>
 
+    <Text type="h4">Notification status icons</Text>
+    <View>
+      <Notification
+        notificationType="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        hasIcon={true}
+        iconType="success"
+      />
+      <Notification
+        notificationType="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        hasIcon={true}
+        iconType="error"
+      />
+      <Notification
+        notificationType="informative"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        hasIcon={true}
+        iconType="warning"
+      />
+      <Notification
+        notificationType="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+        hasIcon={true}
+        iconType="info"
+      />
+    </View>
+
     <Text type="h4">Notification cta</Text>
     <View>
       <Notification
