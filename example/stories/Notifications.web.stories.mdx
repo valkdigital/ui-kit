@@ -26,65 +26,73 @@ import { Text } from "@valkdigital/ui-kit";
     >
     <View>
       <Text type="h3">Notifications</Text>
-      <Text type="h4">Default</Text>
+      <Text type="h4">Notification default</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" content="This is a success IN with only one line of text"></Notification>
-        <Notification colorType="negative" content="This is a error IN with only one line of text"></Notification>
-        <Notification colorType="informative" content="This is a warning IN with only one line of text"></Notification>
-        <Notification colorType="default" content="This is a info IN with only one line of text"></Notification>
+        <Notification notificationType="positive" content="This is a success IN with only one line of text"></Notification>
+        <Notification notificationType="negative" content="This is a error IN with only one line of text"></Notification>
+        <Notification notificationType="informative" content="This is a warning IN with only one line of text"></Notification>
+        <Notification notificationType="default" content="This is a info IN with only one line of text"></Notification>
       </View>
-      <Text type="h4">With heading</Text>
+      <Text type="h4">Notification with heading</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
-        <Notification colorType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
-        <Notification colorType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text"></Notification>
-        <Notification colorType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+      </View>
+      <Text type="h4">Notification closeable</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isCloseable={true}></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isCloseable={true}></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isCloseable={true}></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isCloseable={true}></Notification>
+      </View>
+      <Text type="h4">Notification cta</Text>
+      <View
+      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" hasCta={true}></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" hasCta={true}></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" hasCta={true}></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" hasCta={true}></Notification>
       </View>
       <Text type="h4">Tooltip</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" arrowEnabled={true} arrowPosition="top" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
-        <Notification colorType="negative" arrowEnabled={true} arrowPosition="top" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
-        <Notification colorType="informative" arrowEnabled={true} arrowPosition="top" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
-        <Notification colorType="default" arrowEnabled={true} arrowPosition="top" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
-        <Notification colorType="positive" arrowEnabled={true} arrowPosition="bottom" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
-        <Notification colorType="negative" arrowEnabled={true} arrowPosition="bottom" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
-        <Notification colorType="informative" arrowEnabled={true} arrowPosition="bottom" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
-        <Notification colorType="default" arrowEnabled={true} arrowPosition="bottom" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
-      </View>
-      <Text type="h4">With close button</Text>
-      <View
-      style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isCloseable={true}></Notification>
-        <Notification colorType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isCloseable={true}></Notification>
-        <Notification colorType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isCloseable={true}></Notification>
-        <Notification colorType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isCloseable={true}></Notification>
+        <Notification notificationType="positive" isTooltip={true} tooltipPosition="below" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification notificationType="negative" isTooltip={true} tooltipPosition="below" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification notificationType="informative" isTooltip={true} tooltipPosition="below" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification notificationType="default" isTooltip={true} tooltipPosition="below" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
+        <Notification notificationType="positive" isTooltip={true} tooltipPosition="above" heading="The core of the success IN in one line." content="This is a success IN with only one line of text"></Notification>
+        <Notification notificationType="negative" isTooltip={true} tooltipPosition="above" heading="The core of the error IN in one line." content="This is a error IN with only one line of text"></Notification>
+        <Notification notificationType="informative" isTooltip={true} tooltipPosition="above" heading="The core of the warning IN in one line." content="This is a warning IN with only one line of text"></Notification>
+        <Notification notificationType="default" isTooltip={true} tooltipPosition="above" heading="The core of the info IN in one line." content="This is a info IN with only one line of text"></Notification>
       </View>
       <Text type="h4">Banner</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true}></Notification>
-        <Notification colorType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true}></Notification>
-        <Notification colorType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true}></Notification>
-        <Notification colorType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true}></Notification>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true}></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true}></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true}></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true}></Notification>
       </View>
       <Text type="h4">Banner closeable</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification colorType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification colorType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification colorType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
       </View>
       <Text type="h4">Banner status icons</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification colorType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} hasIcon={true} iconType="success"></Notification>
-        <Notification colorType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} hasIcon={true} iconType="error"></Notification>
-        <Notification colorType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} hasIcon={true} iconType="warning"></Notification>
-        <Notification colorType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} hasIcon={true} iconType="info"></Notification>
+        <Notification notificationType="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} hasIcon={true} iconType="success"></Notification>
+        <Notification notificationType="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} hasIcon={true} iconType="error"></Notification>
+        <Notification notificationType="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} hasIcon={true} iconType="warning"></Notification>
+        <Notification notificationType="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} hasIcon={true} iconType="info"></Notification>
         </View>
     </View>
   </Story>

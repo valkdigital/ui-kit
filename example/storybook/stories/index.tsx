@@ -377,109 +377,165 @@ buttonStories.add("Navigation Text Button", () => <NavigationTextStory />);
 const notificationStories = storiesOf("Notification", module);
 notificationStories.add("Notification", () => (
   <ScrollView>
-    <Text type="h4">Default</Text>
+    <Text type="h4">Notification default</Text>
     <View>
       <Notification
-        colorType="positive"
+        notificationType="positive"
         content="This is a success IN with only one line of text"
       />
       <Notification
-        colorType="positive"
+        notificationType="positive"
         content="This is a success IN with only one line of text"
       />
       <Notification
-        colorType="negative"
+        notificationType="negative"
         content="This is a error IN with only one line of text"
       />
       <Notification
-        colorType="informative"
+        notificationType="informative"
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        colorType="default"
+        notificationType="default"
         content="This is a info IN with only one line of text"
       />
     </View>
 
-    <Text type="h4">With heading</Text>
+    <Text type="h4">Notification with heading</Text>
     <View>
       <Notification
-        colorType="positive"
+        notificationType="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        colorType="negative"
+        notificationType="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        colorType="informative"
+        notificationType="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        colorType="default"
+        notificationType="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Notification closeable</Text>
+    <View>
+      <Notification
+        notificationType="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        notificationType="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        notificationType="informative"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        notificationType="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+        isCloseable={true}
+      />
+    </View>
+
+    <Text type="h4">Notification cta</Text>
+    <View>
+      <Notification
+        notificationType="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        notificationType="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        notificationType="informative"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        notificationType="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+        hasCta={true}
       />
     </View>
 
     <Text type="h4">Tooltip</Text>
     <View>
       <Notification
-        colorType="positive"
-        arrowEnabled={true}
-        arrowPosition="top"
+        notificationType="positive"
+        isTooltip={true}
+        tooltipPosition="below"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        colorType="negative"
-        arrowEnabled={true}
-        arrowPosition="top"
+        notificationType="negative"
+        isTooltip={true}
+        tooltipPosition="below"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        colorType="informative"
-        arrowEnabled={true}
-        arrowPosition="top"
+        notificationType="informative"
+        isTooltip={true}
+        tooltipPosition="below"
         heading="The core of the warning IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        colorType="default"
-        arrowEnabled={true}
-        arrowPosition="top"
+        notificationType="default"
+        isTooltip={true}
+        tooltipPosition="below"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
       />
       <Notification
-        colorType="positive"
-        arrowEnabled={true}
-        arrowPosition="bottom"
+        notificationType="positive"
+        isTooltip={true}
+        tooltipPosition="above"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        colorType="negative"
-        arrowEnabled={true}
-        arrowPosition="bottom"
+        notificationType="negative"
+        isTooltip={true}
+        tooltipPosition="above"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        colorType="informative"
-        arrowEnabled={true}
-        arrowPosition="bottom"
+        notificationType="informative"
+        isTooltip={true}
+        tooltipPosition="above"
         heading="The core of the warning IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        colorType="default"
-        arrowEnabled={true}
-        arrowPosition="bottom"
+        notificationType="default"
+        isTooltip={true}
+        tooltipPosition="above"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
       />
@@ -488,7 +544,7 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Banner status icon</Text>
     <View>
       <Notification
-        colorType="positive"
+        notificationType="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         isBanner={true}
@@ -496,7 +552,7 @@ notificationStories.add("Notification", () => (
         iconType="success"
       />
       <Notification
-        colorType="negative"
+        notificationType="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         isBanner={true}
@@ -504,7 +560,7 @@ notificationStories.add("Notification", () => (
         iconType="error"
       />
       <Notification
-        colorType="informative"
+        notificationType="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         isBanner={true}
@@ -512,7 +568,7 @@ notificationStories.add("Notification", () => (
         iconType="warning"
       />
       <Notification
-        colorType="default"
+        notificationType="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
         isBanner={true}

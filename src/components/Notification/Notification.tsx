@@ -13,7 +13,6 @@ import {
   Image,
   StyleSheet,
   StyleProp,
-  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -31,14 +30,14 @@ import { isEmpty, omit } from "lodash";
 /* ========================================================================== *\
     TYPES
 \* ========================================================================== */
-enum NotificationColorTypes {
+enum NotificationType {
   default = "default",
   informative = "informative",
   negative = "negative",
   positive = "positive",
 }
 
-enum NotificationIconTypes {
+enum NotificationIcon {
   default = "default",
   error = "error",
   info = "info",
@@ -46,9 +45,9 @@ enum NotificationIconTypes {
   warning = "warning",
 }
 
-enum NotificationArrowPosition {
-  bottom = "bottom",
-  top = "top",
+enum NotificationTooltip {
+  above = "above",
+  below = "below",
 }
 /* == TYPES ================================================================= */
 
@@ -56,18 +55,18 @@ enum NotificationArrowPosition {
     INTERFACE
 \* ========================================================================== */
 interface NotificationProps extends ViewProps {
-  arrowEnabled?: boolean;
-  arrowPosition?: keyof typeof NotificationArrowPosition;
   contentStyle?: StyleProp<ViewStyle>;
   content?: string;
   cueArrow?: StyleProp<ViewStyle>;
+  hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
   isBanner?: boolean;
   isCloseable?: boolean;
-  iconType?: keyof typeof NotificationIconTypes;
-  colorType?: keyof typeof NotificationColorTypes;
-  textStyle?: StyleProp<TextStyle>;
+  isTooltip?: boolean;
+  iconType?: keyof typeof NotificationIcon;
+  notificationType?: keyof typeof NotificationType;
+  tooltipPosition?: keyof typeof NotificationTooltip;
 }
 /* == INTERFACE ============================================================= */
 
@@ -80,56 +79,58 @@ interface NotificationProps extends ViewProps {
  */
 const Notification: React.FC<NotificationProps> = (props) => {
   const {
-    arrowEnabled,
-    arrowPosition = NotificationArrowPosition.top,
+    notificationType = NotificationType.default,
     children,
     content,
+    hasCta,
     hasIcon,
     heading,
     isBanner,
     isCloseable,
-    iconType = NotificationIconTypes.default,
-    colorType = NotificationColorTypes.default,
+    isTooltip,
+    tooltipPosition = NotificationTooltip.above,
+    iconType = NotificationIcon.default,
   } = props;
 
-  const passNotificationProps = omit(props, "type");
-  const themeColors = useContext(ThemeContext);
-  const notificationStyleByType: {
-    [key in NotificationColorTypes]: ViewStyle;
-  } = {
-    [NotificationColorTypes.default]: { borderColor: themeColors.info.midDark },
-    [NotificationColorTypes.informative]: {
-      borderColor: themeColors.warning.primary,
+  const passNotificationProps = omit(props, "type"),
+    themeColors = useContext(ThemeContext),
+    iconByType: { [key in NotificationIcon]: ImageSourcePropType } = {
+      [NotificationIcon.default]: require("../../media/iconInfo.png"),
+      [NotificationIcon.error]: require("../../media/iconError.png"),
+      [NotificationIcon.info]: require("../../media/iconInfo.png"),
+      [NotificationIcon.success]: require("../../media/iconSuccess.png"),
+      [NotificationIcon.warning]: require("../../media/iconWarning.png"),
     },
-    [NotificationColorTypes.negative]: {
-      borderColor: themeColors.error.midDark,
-    },
-    [NotificationColorTypes.positive]: {
-      borderColor: themeColors.success.midDark,
-    },
-  };
-
-  const textColorByType: { [key in NotificationColorTypes]: string } = {
-    [NotificationColorTypes.default]: themeColors.info.dark,
-    [NotificationColorTypes.informative]: colors.grey8,
-    [NotificationColorTypes.negative]: themeColors.error.dark,
-    [NotificationColorTypes.positive]: themeColors.success.dark,
-  };
-
-  const backgroundColorByType: { [key in NotificationColorTypes]: string } = {
-    [NotificationColorTypes.default]: themeColors.info.light,
-    [NotificationColorTypes.informative]: themeColors.warning.midLight,
-    [NotificationColorTypes.negative]: themeColors.error.light,
-    [NotificationColorTypes.positive]: themeColors.success.light,
-  };
-
-  const iconByType: { [key in NotificationIconTypes]: ImageSourcePropType } = {
-    [NotificationIconTypes.default]: require("../../media/iconInfo.png"),
-    [NotificationIconTypes.error]: require("../../media/iconError.png"),
-    [NotificationIconTypes.info]: require("../../media/iconInfo.png"),
-    [NotificationIconTypes.success]: require("../../media/iconSuccess.png"),
-    [NotificationIconTypes.warning]: require("../../media/iconWarning.png"),
-  };
+    colorsByType: { [key in NotificationType]: any } = {
+      [NotificationType.default]: {
+        bg: themeColors.info.light,
+        border: themeColors.info.primary,
+        contentText: themeColors.info.dark,
+        ctaText: "#fff",
+        ctaBg: themeColors.info.primary,
+      },
+      [NotificationType.informative]: {
+        bg: themeColors.warning.midLight,
+        border: themeColors.warning.primary,
+        contentText: colors.grey8,
+        ctaText: colors.grey8,
+        ctaBg: themeColors.warning.primary,
+      },
+      [NotificationType.negative]: {
+        bg: themeColors.error.light,
+        border: themeColors.error.primary,
+        contentText: themeColors.error.dark,
+        ctaText: "#fff",
+        ctaBg: themeColors.error.primary,
+      },
+      [NotificationType.positive]: {
+        bg: themeColors.success.light,
+        border: themeColors.success.primary,
+        contentText: themeColors.success.dark,
+        ctaText: "#fff",
+        ctaBg: themeColors.success.primary,
+      },
+    };
 
   /* eslint-disable prettier/prettier */
   //Format on save keeps messing up ;)
@@ -144,18 +145,18 @@ const Notification: React.FC<NotificationProps> = (props) => {
     };
   /* eslint-enable prettier/prettier */
 
-  const arrowPostionStyle: { [key in NotificationArrowPosition]: ViewStyle } = {
-    [NotificationArrowPosition.top]: {
-      left: 16,
-      top: -10,
-      borderBottomWidth: 10,
-      borderBottomColor: backgroundColorByType[colorType],
-    },
-    [NotificationArrowPosition.bottom]: {
+  const arrowPostionStyle: { [key in NotificationTooltip]: ViewStyle } = {
+    [NotificationTooltip.above]: {
       right: 16,
       bottom: -10,
       borderTopWidth: 10,
-      borderTopColor: backgroundColorByType[colorType],
+      borderTopColor: colorsByType[notificationType].bg,
+    },
+    [NotificationTooltip.below]: {
+      left: 16,
+      top: -10,
+      borderBottomWidth: 10,
+      borderBottomColor: colorsByType[notificationType].bg,
     },
   };
 
@@ -163,14 +164,16 @@ const Notification: React.FC<NotificationProps> = (props) => {
     <View
       style={[
         styles.notificationStyle,
-        notificationStyleByType[colorType],
         bannerStyle,
-        { backgroundColor: backgroundColorByType[colorType] },
+        {
+          backgroundColor: colorsByType[notificationType].bg,
+          borderColor: colorsByType[notificationType].border,
+        },
       ]}
       {...passNotificationProps}
     >
-      {arrowEnabled && (
-        <View style={[styles.arrowStyle, arrowPostionStyle[arrowPosition]]} />
+      {isTooltip && (
+        <View style={[styles.arrowStyle, arrowPostionStyle[tooltipPosition]]} />
       )}
 
       <View style={[styles.wrapperIconStyle]}>
@@ -180,7 +183,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
               source={iconByType[iconType]}
               style={[
                 styles.iconStyle,
-                { tintColor: textColorByType[colorType] },
+                { tintColor: colorsByType[notificationType].contentText },
               ]}
             />
           </View>
@@ -190,7 +193,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           <View style={styles.contentStyle}>
             {!isEmpty(heading) && (
               <Text
-                style={[{ color: textColorByType[colorType] }]}
+                style={[{ color: colorsByType[notificationType].contentText }]}
                 type="subtextSemiBold"
               >
                 {heading}
@@ -199,7 +202,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
             {!isEmpty(content) && (
               <Text
-                style={[{ color: textColorByType[colorType] }]}
+                style={[{ color: colorsByType[notificationType].contentText }]}
                 type="subtextRegular"
               >
                 {content}
@@ -215,7 +218,24 @@ const Notification: React.FC<NotificationProps> = (props) => {
                 source={require("../../media/close.png")}
                 style={[
                   styles.closeStyle,
-                  { tintColor: textColorByType[colorType] },
+                  { tintColor: colorsByType[notificationType].contentText },
+                ]}
+              />
+            </TouchableOpacity>
+          )}
+
+          {hasCta && (
+            <TouchableOpacity
+              style={[
+                styles.ctaStyle,
+                { backgroundColor: colorsByType[notificationType].ctaBg },
+              ]}
+            >
+              <Image
+                source={require("../../media/arrow_right.png")}
+                style={[
+                  styles.ctaImgStyle,
+                  { tintColor: colorsByType[notificationType].ctaText },
                 ]}
               />
             </TouchableOpacity>
@@ -240,6 +260,25 @@ const styles = StyleSheet.create({
   },
   contentStyle: {
     flexShrink: 1,
+  },
+  ctaStyle: {
+    alignItems: "center",
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
+    flexDirection: "column",
+    justifyContent: "center",
+    marginLeft: Spacing.sp1,
+    marginRight: -Spacing.sp1,
+    marginVertical: -Spacing.sp2,
+    paddingHorizontal: Spacing.sp1,
+    width: Spacing.sp7,
+  },
+  ctaImgStyle: {
+    height: 14,
+    marginLeft: Spacing.sp1,
+    marginRight: Spacing.sp1,
+    resizeMode: "contain",
+    width: 14,
   },
   arrowStyle: {
     borderLeftWidth: Spacing.sp1,
