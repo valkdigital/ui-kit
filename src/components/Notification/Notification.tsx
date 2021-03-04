@@ -255,8 +255,7 @@ const styles = StyleSheet.create({
   },
   iconHolder: {
     height: Spacing.sp3,
-    marginRight: 10,
-    marginTop: Spacing["sp1/2"],
+    marginRight: Spacing.sp1,
     width: Spacing.sp3,
   },
   iconStyle: {
