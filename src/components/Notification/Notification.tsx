@@ -61,10 +61,12 @@ interface NotificationProps extends ViewProps {
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
+  iconType?: keyof typeof NotificationIcon;
   isBanner?: boolean;
   isCloseable?: boolean;
   isTooltip?: boolean;
-  iconType?: keyof typeof NotificationIcon;
+  onPressClose?: () => void;
+  onPressCta?: () => void;
   tooltipPosition?: keyof typeof NotificationTooltip;
   type?: keyof typeof NotificationType;
 }
@@ -88,6 +90,8 @@ const Notification: React.FC<NotificationProps> = (props) => {
     isBanner,
     isCloseable,
     isTooltip,
+    onPressClose,
+    onPressCta,
     tooltipPosition = NotificationTooltip.above,
     type = NotificationType.default,
   } = props;
@@ -213,7 +217,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           </View>
 
           {isCloseable && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPressClose}>
               <Image
                 source={require("../../media/close.png")}
                 style={[
@@ -230,6 +234,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
                 styles.ctaStyle,
                 { backgroundColor: colorsByType[type].ctaBg },
               ]}
+              onPress={onPressCta}
             >
               <Image
                 source={require("../../media/arrow_right.png")}

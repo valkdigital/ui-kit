@@ -53,18 +53,18 @@ import { Text } from "@valkdigital/ui-kit";
       <Text type="h4">Notification closeable</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isCloseable={true}></Notification>
-        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isCloseable={true}></Notification>
-        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isCloseable={true}></Notification>
-        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isCloseable={true}></Notification>
+        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
       </View>
       <Text type="h4">Notification cta</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" hasCta={true}></Notification>
-        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" hasCta={true}></Notification>
-        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" hasCta={true}></Notification>
-        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" hasCta={true}></Notification>
+        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" hasCta={true} onPressCta={() => console.log("cta pressed")}></Notification>
+        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" hasCta={true} onPressCta={() => console.log("cta pressed")}></Notification>
+        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" hasCta={true} onPressCta={() => console.log("cta pressed")}></Notification>
+        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" hasCta={true} onPressCta={() => console.log("cta pressed")}></Notification>
       </View>
       <Text type="h4">Tooltip</Text>
       <View
@@ -89,10 +89,10 @@ import { Text } from "@valkdigital/ui-kit";
       <Text type="h4">Banner closeable</Text>
       <View
       style={{ alignItems: "flex-start", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridColumnGap: 10, gridRowGap: 10, maxWidth: 1400}}>
-        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
-        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} isCloseable={true}></Notification>
+        <Notification type="positive" heading="The core of the success IN in one line." content="This is a success IN with only one line of text" isBanner={true} isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="negative" heading="The core of the error IN in one line." content="This is a error IN with only one line of text" isBanner={true} isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="informative" heading="The core of the informative IN in one line." content="This is a warning IN with only one line of text" isBanner={true} isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
+        <Notification type="default" heading="The core of the info IN in one line." content="This is a info IN with only one line of text" isBanner={true} isCloseable={true} onPressClose={() => console.log("close pressed")}></Notification>
       </View>
       <Text type="h4">Banner status icons</Text>
       <View
