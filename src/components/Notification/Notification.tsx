@@ -65,8 +65,8 @@ interface NotificationProps extends ViewProps {
   isCloseable?: boolean;
   isTooltip?: boolean;
   iconType?: keyof typeof NotificationIcon;
-  notificationType?: keyof typeof NotificationType;
   tooltipPosition?: keyof typeof NotificationTooltip;
+  type?: keyof typeof NotificationType;
 }
 /* == INTERFACE ============================================================= */
 
@@ -79,17 +79,17 @@ interface NotificationProps extends ViewProps {
  */
 const Notification: React.FC<NotificationProps> = (props) => {
   const {
-    notificationType = NotificationType.default,
     children,
     content,
     hasCta,
     hasIcon,
     heading,
+    iconType = NotificationIcon.default,
     isBanner,
     isCloseable,
     isTooltip,
     tooltipPosition = NotificationTooltip.above,
-    iconType = NotificationIcon.default,
+    type = NotificationType.default,
   } = props;
 
   const passNotificationProps = omit(props, "type"),
@@ -150,13 +150,13 @@ const Notification: React.FC<NotificationProps> = (props) => {
       right: 16,
       bottom: -10,
       borderTopWidth: 10,
-      borderTopColor: colorsByType[notificationType].bg,
+      borderTopColor: colorsByType[type].bg,
     },
     [NotificationTooltip.below]: {
       left: 16,
       top: -10,
       borderBottomWidth: 10,
-      borderBottomColor: colorsByType[notificationType].bg,
+      borderBottomColor: colorsByType[type].bg,
     },
   };
 
@@ -166,8 +166,8 @@ const Notification: React.FC<NotificationProps> = (props) => {
         styles.notificationStyle,
         bannerStyle,
         {
-          backgroundColor: colorsByType[notificationType].bg,
-          borderColor: colorsByType[notificationType].border,
+          backgroundColor: colorsByType[type].bg,
+          borderColor: colorsByType[type].border,
         },
       ]}
       {...passNotificationProps}
@@ -183,7 +183,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
               source={iconByType[iconType]}
               style={[
                 styles.iconStyle,
-                { tintColor: colorsByType[notificationType].contentText },
+                { tintColor: colorsByType[type].contentText },
               ]}
             />
           </View>
@@ -193,7 +193,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           <View style={styles.contentStyle}>
             {!isEmpty(heading) && (
               <Text
-                style={[{ color: colorsByType[notificationType].contentText }]}
+                style={[{ color: colorsByType[type].contentText }]}
                 type="subtextSemiBold"
               >
                 {heading}
@@ -202,7 +202,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
             {!isEmpty(content) && (
               <Text
-                style={[{ color: colorsByType[notificationType].contentText }]}
+                style={[{ color: colorsByType[type].contentText }]}
                 type="subtextRegular"
               >
                 {content}
@@ -218,7 +218,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
                 source={require("../../media/close.png")}
                 style={[
                   styles.closeStyle,
-                  { tintColor: colorsByType[notificationType].contentText },
+                  { tintColor: colorsByType[type].contentText },
                 ]}
               />
             </TouchableOpacity>
@@ -228,14 +228,14 @@ const Notification: React.FC<NotificationProps> = (props) => {
             <TouchableOpacity
               style={[
                 styles.ctaStyle,
-                { backgroundColor: colorsByType[notificationType].ctaBg },
+                { backgroundColor: colorsByType[type].ctaBg },
               ]}
             >
               <Image
                 source={require("../../media/arrow_right.png")}
                 style={[
                   styles.ctaImgStyle,
-                  { tintColor: colorsByType[notificationType].ctaText },
+                  { tintColor: colorsByType[type].ctaText },
                 ]}
               />
             </TouchableOpacity>

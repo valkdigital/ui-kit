@@ -380,23 +380,23 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Notification default</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         content="This is a success IN with only one line of text"
       />
       <Notification
-        notificationType="positive"
+        type="positive"
         content="This is a success IN with only one line of text"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         content="This is a error IN with only one line of text"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        notificationType="default"
+        type="default"
         content="This is a info IN with only one line of text"
       />
     </View>
@@ -404,22 +404,22 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Notification with heading</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        notificationType="default"
+        type="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
       />
@@ -428,25 +428,25 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Notification closeable</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         isCloseable={true}
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         isCloseable={true}
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         isCloseable={true}
       />
       <Notification
-        notificationType="default"
+        type="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
         isCloseable={true}
@@ -456,28 +456,28 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Notification status icons</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         hasIcon={true}
         iconType="success"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         hasIcon={true}
         iconType="error"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         hasIcon={true}
         iconType="warning"
       />
       <Notification
-        notificationType="default"
+        type="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
         hasIcon={true}
@@ -488,25 +488,25 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Notification cta</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         hasCta={true}
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         hasCta={true}
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         hasCta={true}
       />
       <Notification
-        notificationType="default"
+        type="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
         hasCta={true}
@@ -516,56 +516,56 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Tooltip</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         isTooltip={true}
         tooltipPosition="below"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         isTooltip={true}
         tooltipPosition="below"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         isTooltip={true}
         tooltipPosition="below"
         heading="The core of the warning IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        notificationType="default"
+        type="default"
         isTooltip={true}
         tooltipPosition="below"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
       />
       <Notification
-        notificationType="positive"
+        type="positive"
         isTooltip={true}
         tooltipPosition="above"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         isTooltip={true}
         tooltipPosition="above"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         isTooltip={true}
         tooltipPosition="above"
         heading="The core of the warning IN in one line."
         content="This is a warning IN with only one line of text"
       />
       <Notification
-        notificationType="default"
+        type="default"
         isTooltip={true}
         tooltipPosition="above"
         heading="The core of the info IN in one line."
@@ -576,7 +576,7 @@ notificationStories.add("Notification", () => (
     <Text type="h4">Banner status icon</Text>
     <View>
       <Notification
-        notificationType="positive"
+        type="positive"
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         isBanner={true}
@@ -584,7 +584,7 @@ notificationStories.add("Notification", () => (
         iconType="success"
       />
       <Notification
-        notificationType="negative"
+        type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         isBanner={true}
@@ -592,7 +592,7 @@ notificationStories.add("Notification", () => (
         iconType="error"
       />
       <Notification
-        notificationType="informative"
+        type="informative"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         isBanner={true}
@@ -600,7 +600,7 @@ notificationStories.add("Notification", () => (
         iconType="warning"
       />
       <Notification
-        notificationType="default"
+        type="default"
         heading="The core of the info IN in one line."
         content="This is a info IN with only one line of text"
         isBanner={true}
