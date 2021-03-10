@@ -208,6 +208,18 @@ const Fields: React.FC = () => {
           label="Label"
           containerStyle={{ marginBottom: Spacing.sp2 }}
           placeholder="Placeholder"
+          size="large"
+          multiline={true}
+          useFullHeight={true}
+          onSubmitEditing={() => {
+            console.log(ref?.current);
+            ref?.current?.focus();
+          }}
+        />
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
           disabled={true}
         />
         <TextInput

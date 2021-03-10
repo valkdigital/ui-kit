@@ -1,6 +1,6 @@
 {
   "name": "@valkdigital/ui-kit",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "ui kit for Valk Digital",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -52,6 +52,9 @@
     "@react-native-community/bob": "^0.16.2",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^1.1.4",
+    "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-knobs": "^6.1.18",
+    "@storybook/react-native": "^5.3.23",
     "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.157",
     "@types/react": "^16.9.19",
@@ -141,6 +144,8 @@
     ]
   },
   "dependencies": {
+    "expo-cli": "^4.1.6",
+    "global": "^4.4.0",
     "libphonenumber-js": "^1.8.5",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-web-linear-gradient": "^1.1.1"
