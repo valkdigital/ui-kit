@@ -136,18 +136,15 @@ const Notification: React.FC<NotificationProps> = (props) => {
       },
     };
 
-  /* eslint-disable prettier/prettier */
-  //Format on save keeps messing up ;)
   const bannerStyle: ViewStyle = isBanner
     ? {
-      borderRadius: 0,
-      margin: 0,
-    }
+        borderRadius: 0,
+        margin: 0,
+      }
     : {
-      borderRadius: 4,
-      ...shadow({ x: 0, y: 2, blurRadius: 8, opacity: 0.16 }),
-    };
-  /* eslint-enable prettier/prettier */
+        borderRadius: 4,
+        ...shadow({ x: 0, y: 2, blurRadius: 8, opacity: 0.16 }),
+      };
 
   const arrowPostionStyle: { [key in NotificationTooltip]: ViewStyle } = {
     [NotificationTooltip.above]: {
