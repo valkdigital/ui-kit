@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useLayoutEffect, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
   StyleProp,
-  LayoutChangeEvent,
   ImageStyle,
   Platform,
 } from "react-native";
@@ -15,6 +14,13 @@ import Spacing from "../../style/spacing";
 import type { Option, SelectSizes } from ".";
 import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
+
+export interface MeasuredLayout {
+  width: number;
+  height: number;
+  px: number;
+  py: number;
+}
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -32,7 +38,7 @@ interface SelectProps {
   showOptions: () => void;
   isFocused?: boolean;
   selectedOption?: Option;
-  onLayout?: (event: LayoutChangeEvent) => void;
+  onLayout?: (event: MeasuredLayout) => void;
   DropdownComponent?: JSX.Element;
 }
 
@@ -55,8 +61,16 @@ const Select: React.FC<SelectProps> = ({
     info,
     typography,
   } = useContext(ThemeContext);
+  const viewRef = useRef<View>(null);
 
   const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
+
+  useLayoutEffect(() => {
+    if (onLayout && viewRef.current)
+      viewRef.current.measure((_x, _y, width, height, px, py) => {
+        onLayout({ width, height, px, py });
+      });
+  }, []);
 
   return (
     <View
@@ -74,7 +88,7 @@ const Select: React.FC<SelectProps> = ({
         {label}
       </Text>
       <View
-        onLayout={onLayout}
+        ref={viewRef}
         style={[styles.selectContainer, { borderColor }, SELECT_STYLE[size]]}
       >
         <TouchableOpacity
