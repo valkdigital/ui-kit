@@ -96,7 +96,20 @@ const Notification: React.FC<NotificationProps> = (props) => {
     type = NotificationType.default,
   } = props;
 
-  const passNotificationProps = omit(props, "type"),
+  const passNotificationProps = omit(
+      props,
+      "hasCta",
+      "hasIcon",
+      "heading",
+      "iconType",
+      "isBanner",
+      "isCloseable",
+      "isTooltip",
+      "onPressClose",
+      "onPressCta",
+      "tooltipPosition",
+      "type"
+    ),
     themeColors = useContext(ThemeContext),
     iconByType: { [key in NotificationIcon]: ImageSourcePropType } = {
       [NotificationIcon.default]: require("../../media/iconInfo.png"),
