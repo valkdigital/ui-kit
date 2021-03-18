@@ -110,7 +110,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
         bg: themeColors.info.light,
         border: themeColors.info.primary,
         contentText: themeColors.info.dark,
-        ctaText: "#fff",
+        ctaText: colors.white,
         ctaBg: themeColors.info.primary,
       },
       [NotificationType.informative]: {
@@ -124,14 +124,14 @@ const Notification: React.FC<NotificationProps> = (props) => {
         bg: themeColors.error.light,
         border: themeColors.error.primary,
         contentText: themeColors.error.dark,
-        ctaText: "#fff",
+        ctaText: colors.white,
         ctaBg: themeColors.error.primary,
       },
       [NotificationType.positive]: {
         bg: themeColors.success.light,
         border: themeColors.success.primary,
         contentText: themeColors.success.dark,
-        ctaText: "#fff",
+        ctaText: colors.white,
         ctaBg: themeColors.success.primary,
       },
     };
