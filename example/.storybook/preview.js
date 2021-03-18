@@ -20,6 +20,7 @@ const ThemeWrapper = ({ children }) => {
         "SourceSansPro-Regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
         "SourceSansPro-SemiBold": require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
         "SourceSansPro-Italic": require("../assets/fonts/SourceSansPro-Italic.ttf"),
+        "icomoon": require("../assets/fonts/icomoon.ttf"),
       });
     };
 

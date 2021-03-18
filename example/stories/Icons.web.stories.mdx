@@ -1,0 +1,29 @@
+import {
+  Meta,
+  Story,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { ThemeManager, Text } from "@valkdigital/ui-kit";
+import Icons from "../storybook/stories/Icons"
+
+
+<Meta title="Icons" />
+
+<Preview>
+  <Story
+    name="Icons"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/KVbqwH1I4lStgUwTK4Wr8z/App-Design-System?node-id=1304%3A6046",
+      },
+    }}
+  >
+  <View>
+    <Text>Icons</Text>
+    <Icons />
+  </View>
+  </Story>
+</Preview>
