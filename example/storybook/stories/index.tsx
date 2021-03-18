@@ -420,7 +420,7 @@ notificationStories.add("Notification", () => (
       />
       <Notification
         type="default"
-        heading="The core of the info IN in one line."
+        heading="The core of the default IN in one line."
         content="This is a info IN with only one line of text"
       />
     </View>
@@ -447,7 +447,7 @@ notificationStories.add("Notification", () => (
       />
       <Notification
         type="default"
-        heading="The core of the info IN in one line."
+        heading="The core of the default IN in one line."
         content="This is a info IN with only one line of text"
         isCloseable={true}
       />
@@ -478,10 +478,9 @@ notificationStories.add("Notification", () => (
       />
       <Notification
         type="default"
-        heading="The core of the info IN in one line."
+        heading="The core of the default IN in one line."
         content="This is a info IN with only one line of text"
         hasIcon={true}
-        iconType="info"
       />
     </View>
 
@@ -507,7 +506,7 @@ notificationStories.add("Notification", () => (
       />
       <Notification
         type="default"
-        heading="The core of the info IN in one line."
+        heading="The core of the default IN in one line."
         content="This is a info IN with only one line of text"
         hasCta={true}
       />
@@ -605,7 +604,6 @@ notificationStories.add("Notification", () => (
         content="This is a info IN with only one line of text"
         isBanner={true}
         hasIcon={true}
-        iconType="info"
       />
     </View>
   </ScrollView>
