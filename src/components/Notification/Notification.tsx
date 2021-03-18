@@ -41,7 +41,6 @@ enum NotificationType {
 enum NotificationIcon {
   default = "default",
   error = "error",
-  info = "info",
   success = "success",
   warning = "warning",
 }
@@ -102,7 +101,6 @@ const Notification: React.FC<NotificationProps> = (props) => {
     iconByType: { [key in NotificationIcon]: ImageSourcePropType } = {
       [NotificationIcon.default]: require("../../media/iconInfo.png"),
       [NotificationIcon.error]: require("../../media/iconError.png"),
-      [NotificationIcon.info]: require("../../media/iconInfo.png"),
       [NotificationIcon.success]: require("../../media/iconSuccess.png"),
       [NotificationIcon.warning]: require("../../media/iconWarning.png"),
     },
