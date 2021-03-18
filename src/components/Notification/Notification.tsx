@@ -22,6 +22,7 @@ import {
 import colors from "../../style/colors";
 import ThemeContext from "../../style/ThemeContext";
 import shadow from "../../style/shadow";
+import hitSlop from "../../style/hitSlop";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import { isEmpty, omit } from "lodash";
@@ -214,7 +215,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           </View>
 
           {isCloseable && (
-            <TouchableOpacity onPress={onPressClose}>
+            <TouchableOpacity onPress={onPressClose} hitSlop={hitSlop}>
               <Image
                 source={require("../../media/close.png")}
                 style={[
