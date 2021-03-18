@@ -148,13 +148,13 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
   const arrowPostionStyle: { [key in NotificationTooltip]: ViewStyle } = {
     [NotificationTooltip.above]: {
-      right: 16,
+      right: Spacing.sp2,
       bottom: -10,
       borderTopWidth: 10,
       borderTopColor: colorsByType[type].bg,
     },
     [NotificationTooltip.below]: {
-      left: 16,
+      left: Spacing.sp2,
       top: -10,
       borderBottomWidth: 10,
       borderBottomColor: colorsByType[type].bg,
