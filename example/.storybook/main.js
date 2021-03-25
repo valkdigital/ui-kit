@@ -29,6 +29,7 @@ module.exports = {
       "react": path.resolve(node_modules, "react"),
       "react-native": path.resolve(node_modules, "react-native-web"),
       "react-native-web": path.resolve(node_modules, "react-native-web"),
+      "@expo/vector-icons": path.resolve(node_modules, "react-native-vector-icons"),
     });
 
     return config;
