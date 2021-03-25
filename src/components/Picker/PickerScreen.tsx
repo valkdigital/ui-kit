@@ -99,18 +99,18 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           error,
         })
       ) : (
-        <Select
-          label={label}
-          placeholder={placeholder}
-          selectContainerStyle={selectContainerStyle}
-          disabled={disabled}
-          error={error}
-          size={size}
-          showOptions={showOptions}
-          isFocused={showModal}
-          selectedOption={selectedOption}
-        />
-      )}
+          <Select
+            label={label}
+            placeholder={placeholder}
+            selectContainerStyle={selectContainerStyle}
+            disabled={disabled}
+            error={error}
+            size={size}
+            showOptions={showOptions}
+            isFocused={showModal}
+            selectedOption={selectedOption}
+          />
+        )}
       {showModal && (
         <Modal
           animationType="none"
