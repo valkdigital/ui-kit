@@ -18,6 +18,7 @@ import TextButton from "./components/Button/TextButton";
 import SegmentControl from "./components/Button/SegmentControl";
 import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
+import Notification from "./components/Notification/Notification";
 import Icon from "./components/Icon";
 
 // Style & Theme exports
@@ -45,6 +46,9 @@ export {
   SegmentControl,
   NavigationTextButton,
 };
+
+// Notification component export
+export { Notification };
 
 // Icon components exports
 export { Icon };

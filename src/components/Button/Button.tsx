@@ -14,7 +14,6 @@ import {
   LayoutChangeEvent,
 } from "react-native";
 import shadow from "../../style/shadow";
-import colors from "../../style/colors";
 import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
@@ -26,6 +25,7 @@ enum ButtonTypes {
   ghost = "ghost",
   progressbar = "progressbar",
 }
+
 enum ButtonSizes {
   small = "small",
   medium = "medium",
@@ -75,8 +75,10 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
+  const { onBackground, cta } = useContext(ThemeContext);
+
   const {
-    color = colors.orangePrimary,
+    color = cta.primary,
     label,
     labelColor = "white",
     size = ButtonSizes.medium,
@@ -109,8 +111,6 @@ const Button: React.FC<ButtonProps> = (props) => {
     "imageStyle",
     "onLayout"
   );
-
-  const { onBackground } = useContext(ThemeContext);
 
   const buttonLabelColor = type === ButtonTypes.ghost ? color : labelColor;
 
@@ -178,10 +178,11 @@ const Progressbar: React.FC<{ currentProgress: string | number }> = ({
 }) => {
   const {
     info: { primary },
+    grey,
   } = useContext(ThemeContext);
 
   return (
-    <View style={[styles.progressbarContainer]}>
+    <View style={[styles.progressbarContainer, { backgroundColor: grey[0] }]}>
       <View
         style={[
           styles.progress,
@@ -214,7 +215,6 @@ const styles = StyleSheet.create({
   progressbarContainer: {
     alignSelf: "stretch",
     height: 4,
-    backgroundColor: colors.grey0,
     marginHorizontal: Spacing.sp2,
   },
 
