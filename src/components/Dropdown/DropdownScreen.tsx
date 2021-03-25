@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  Pressable,
-  LayoutChangeEvent,
-} from "react-native";
+import { View, StyleSheet, ViewStyle, Pressable } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import type { ListTypes, SelectSizes, Option } from "../Picker";
 import type { DropdownProps } from ".";
 import Select from "../Picker/Select";
 import PickerList from "../Picker/PickerList";
+import Modal from "../Modal";
+import type { MeasuredLayout } from "../Picker/Select";
 
 const SELECT_STYLE: { [key in SelectSizes]: ViewStyle } = {
   small: { width: 160 },
@@ -63,23 +59,18 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
   customSections,
   maxListHeight,
 }) => {
-  const [position, setPosition] = useState<{
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  }>({
-    x: 0,
-    y: 0,
+  const [position, setPosition] = useState<MeasuredLayout>({
     width: 0,
     height: 0,
+    px: 0,
+    py: 0,
   });
 
-  const { x, y, width, height } = position;
+  const { px, py, width, height } = position;
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { x, y, width, height } = event.nativeEvent.layout;
-    setPosition({ x, y, width, height });
+  const onLayout = (event: MeasuredLayout) => {
+    const { width, height, px, py } = event;
+    setPosition({ width, height, px, py });
   };
 
   return (
@@ -96,36 +87,42 @@ const DropdownScreen: React.FC<DropdownScreenProps> = ({
         selectedOption={selectedOption}
         onLayout={onLayout}
         DropdownComponent={
-          <View
-            style={[
-              styles.dropdown,
-              {
-                top: height + y,
-                left: x,
-              },
-              SELECT_STYLE[size],
-              !!maxListHeight && { maxHeight: maxListHeight },
-              size === "large" && { width },
-            ]}
+          <Modal
+            animationType="none"
+            onClose={hideOptions}
+            backgroundColor="transparent"
           >
-            <PickerList
-              options={options}
-              favoriteOptions={favoriteOptions}
-              selectedOption={selectedOption}
-              modalSize={searchEnabled ? "fullscreen" : "responsive"}
-              onSelectOption={onSelectOption}
-              listEmptyText={listEmptyText}
-              search={search}
-              searchPlaceholder={searchPlaceholder}
-              onSearchChange={onSearchChange}
-              addOptionEnabled={addOptionEnabled}
-              addOptionTitle={addOptionTitle}
-              onAddOption={onAddOption}
-              listType={listType}
-              alphabeticScrollEnabled={alphabeticScrollEnabled}
-              customSections={customSections}
-            />
-          </View>
+            <View
+              style={[
+                styles.dropdown,
+                {
+                  top: height + py,
+                  left: px,
+                },
+                SELECT_STYLE[size],
+                !!maxListHeight && { maxHeight: maxListHeight },
+                size === "large" && { width },
+              ]}
+            >
+              <PickerList
+                options={options}
+                favoriteOptions={favoriteOptions}
+                selectedOption={selectedOption}
+                modalSize={searchEnabled ? "fullscreen" : "responsive"}
+                onSelectOption={onSelectOption}
+                listEmptyText={listEmptyText}
+                search={search}
+                searchPlaceholder={searchPlaceholder}
+                onSearchChange={onSearchChange}
+                addOptionEnabled={addOptionEnabled}
+                addOptionTitle={addOptionTitle}
+                onAddOption={onAddOption}
+                listType={listType}
+                alphabeticScrollEnabled={alphabeticScrollEnabled}
+                customSections={customSections}
+              />
+            </View>
+          </Modal>
         }
       />
 

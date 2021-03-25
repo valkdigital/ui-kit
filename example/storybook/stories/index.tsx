@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
-import { View, StyleSheet, ViewStyle } from "react-native";
+import { View, StyleSheet, ViewStyle, ScrollView } from "react-native";
 import {
   Card,
   CardList,
@@ -10,6 +10,7 @@ import {
   PhoneInput,
   countries,
   MultipleButtons,
+  Notification,
   TextButton,
   SegmentControl,
   XLTextInput,
@@ -208,6 +209,18 @@ const Fields: React.FC = () => {
           label="Label"
           containerStyle={{ marginBottom: Spacing.sp2 }}
           placeholder="Placeholder"
+          size="large"
+          multiline={true}
+          useFullHeight={true}
+          onSubmitEditing={() => {
+            console.log(ref?.current);
+            ref?.current?.focus();
+          }}
+        />
+        <TextInput
+          label="Label"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
           disabled={true}
         />
         <TextInput
@@ -372,6 +385,241 @@ buttonStories.add("Segment control", () => (
 ));
 
 buttonStories.add("Navigation Text Button", () => <NavigationTextStory />);
+
+const notificationStories = storiesOf("Notification", module);
+notificationStories.add("Notification", () => (
+  <ScrollView>
+    <Text type="h4">Notification default</Text>
+    <View>
+      <Notification
+        type="positive"
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        type="positive"
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        type="negative"
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        type="warning"
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        type="default"
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Notification with heading</Text>
+    <View>
+      <Notification
+        type="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        type="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        type="warning"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        type="default"
+        heading="The core of the default IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Notification closeable</Text>
+    <View>
+      <Notification
+        type="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        type="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        type="warning"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        isCloseable={true}
+      />
+      <Notification
+        type="default"
+        heading="The core of the default IN in one line."
+        content="This is a info IN with only one line of text"
+        isCloseable={true}
+      />
+    </View>
+
+    <Text type="h4">Notification status icons</Text>
+    <View>
+      <Notification
+        type="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        hasIcon={true}
+        icon={require("../../../src/media/iconSuccess.png")}
+      />
+      <Notification
+        type="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        hasIcon={true}
+        icon={require("../../../src/media/iconError.png")}
+      />
+      <Notification
+        type="warning"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        hasIcon={true}
+        icon={require("../../../src/media/iconWarning.png")}
+      />
+      <Notification
+        type="default"
+        heading="The core of the default IN in one line."
+        content="This is a info IN with only one line of text"
+        hasIcon={true}
+      />
+    </View>
+
+    <Text type="h4">Notification cta</Text>
+    <View>
+      <Notification
+        type="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        type="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        type="warning"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        hasCta={true}
+      />
+      <Notification
+        type="default"
+        heading="The core of the default IN in one line."
+        content="This is a info IN with only one line of text"
+        hasCta={true}
+      />
+    </View>
+
+    <Text type="h4">Tooltip</Text>
+    <View>
+      <Notification
+        type="positive"
+        isTooltip={true}
+        tooltipPosition="below"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        type="negative"
+        isTooltip={true}
+        tooltipPosition="below"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        type="warning"
+        isTooltip={true}
+        tooltipPosition="below"
+        heading="The core of the warning IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        type="default"
+        isTooltip={true}
+        tooltipPosition="below"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+      <Notification
+        type="positive"
+        isTooltip={true}
+        tooltipPosition="above"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+      />
+      <Notification
+        type="negative"
+        isTooltip={true}
+        tooltipPosition="above"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+      />
+      <Notification
+        type="warning"
+        isTooltip={true}
+        tooltipPosition="above"
+        heading="The core of the warning IN in one line."
+        content="This is a warning IN with only one line of text"
+      />
+      <Notification
+        type="default"
+        isTooltip={true}
+        tooltipPosition="above"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+      />
+    </View>
+
+    <Text type="h4">Banner status icon</Text>
+    <View>
+      <Notification
+        type="positive"
+        heading="The core of the success IN in one line."
+        content="This is a success IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        icon={require("../../../src/media/iconSuccess.png")}
+      />
+      <Notification
+        type="negative"
+        heading="The core of the error IN in one line."
+        content="This is a error IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        icon={require("../../../src/media/iconError.png")}
+      />
+      <Notification
+        type="warning"
+        heading="The core of the informative IN in one line."
+        content="This is a warning IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+        icon={require("../../../src/media/iconWarning.png")}
+      />
+      <Notification
+        type="default"
+        heading="The core of the info IN in one line."
+        content="This is a info IN with only one line of text"
+        isBanner={true}
+        hasIcon={true}
+      />
+    </View>
+  </ScrollView>
+));
 
 const styles = StyleSheet.create({
   container: {

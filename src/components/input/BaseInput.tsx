@@ -153,7 +153,11 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           style={[
             styles.input,
             { color: typography.color, textAlign },
-            useFullHeight && { height: MAX_HEIGHT },
+            useFullHeight && {
+              height: MAX_HEIGHT,
+              textAlignVertical: "top",
+              paddingTop: Spacing.sp1,
+            },
             style,
           ]}
           {...passInputProps}
