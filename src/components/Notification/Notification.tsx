@@ -33,16 +33,9 @@ import { isEmpty, omit } from "lodash";
 \* ========================================================================== */
 enum NotificationType {
   default = "default",
-  informative = "informative",
+  warning = "warning",
   negative = "negative",
   positive = "positive",
-}
-
-enum NotificationIcon {
-  default = "default",
-  error = "error",
-  success = "success",
-  warning = "warning",
 }
 
 enum NotificationTooltip {
@@ -61,7 +54,7 @@ interface NotificationProps extends ViewProps {
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
-  iconType?: keyof typeof NotificationIcon;
+  icon?: ImageSourcePropType;
   isBanner?: boolean;
   isCloseable?: boolean;
   isTooltip?: boolean;
@@ -86,7 +79,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
     hasCta,
     hasIcon,
     heading,
-    iconType = NotificationIcon.default,
+    icon = require("../../media/iconInfo.png"),
     isBanner,
     isCloseable,
     isTooltip,
@@ -96,12 +89,14 @@ const Notification: React.FC<NotificationProps> = (props) => {
     type = NotificationType.default,
   } = props;
 
+  console.log(icon);
+
   const passNotificationProps = omit(
       props,
       "hasCta",
       "hasIcon",
       "heading",
-      "iconType",
+      "icon",
       "isBanner",
       "isCloseable",
       "isTooltip",
@@ -111,12 +106,6 @@ const Notification: React.FC<NotificationProps> = (props) => {
       "type"
     ),
     themeColors = useContext(ThemeContext),
-    iconByType: { [key in NotificationIcon]: ImageSourcePropType } = {
-      [NotificationIcon.default]: require("../../media/iconInfo.png"),
-      [NotificationIcon.error]: require("../../media/iconError.png"),
-      [NotificationIcon.success]: require("../../media/iconSuccess.png"),
-      [NotificationIcon.warning]: require("../../media/iconWarning.png"),
-    },
     colorsByType: { [key in NotificationType]: any } = {
       [NotificationType.default]: {
         bg: themeColors.info.light,
@@ -125,7 +114,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
         ctaText: colors.white,
         ctaBg: themeColors.info.primary,
       },
-      [NotificationType.informative]: {
+      [NotificationType.warning]: {
         bg: themeColors.warning.midLight,
         border: themeColors.warning.primary,
         contentText: colors.grey8,
@@ -193,7 +182,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
         {hasIcon && (
           <View style={[styles.iconHolder]}>
             <Image
-              source={iconByType[iconType]}
+              source={icon}
               style={[
                 styles.iconStyle,
                 { tintColor: colorsByType[type].contentText },
