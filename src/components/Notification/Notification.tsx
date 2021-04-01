@@ -47,7 +47,7 @@ enum NotificationTooltip {
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
-interface NotificationProps extends ViewProps {
+interface NotificationProps extends Omit<ViewProps, "style"> {
   containerStyle?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   content?: string;
@@ -103,6 +103,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
       "isTooltip",
       "onPressClose",
       "onPressCta",
+      "style",
       "tooltipPosition",
       "type"
     ),
@@ -165,6 +166,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
   return (
     <View
+      {...passNotificationProps}
       style={[
         styles.notificationStyle,
         bannerStyle,
@@ -172,14 +174,14 @@ const Notification: React.FC<NotificationProps> = (props) => {
           backgroundColor: colorsByType[type].bg,
           borderColor: colorsByType[type].border,
         },
+        containerStyle,
       ]}
-      {...passNotificationProps}
     >
       {isTooltip && (
         <View style={[styles.arrowStyle, arrowPostionStyle[tooltipPosition]]} />
       )}
 
-      <View style={[styles.wrapperIconStyle, containerStyle]}>
+      <View style={[styles.wrapperIconStyle]}>
         {hasIcon && (
           <View style={[styles.iconHolder]}>
             <Image
