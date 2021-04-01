@@ -1,0 +1,38 @@
+import {
+  Meta,
+  Story,
+  Preview,
+  Props,
+  ColorPalette,
+  ColorItem,
+} from "@storybook/addon-docs/blocks";
+import { View, ScrollView } from "react-native";
+import { Skeleton } from "@valkdigital/ui-kit";
+import { Text } from "@valkdigital/ui-kit";
+
+
+<Meta title="Skeleton" />
+
+<Preview>
+  <Story 
+    name="Skeleton"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/KVbqwH1I4lStgUwTK4Wr8z/App-Design-System?node-id=2249%3A0",
+      },
+    }}
+    >
+    <View>
+      <Text type="h3">Skeleton</Text>
+      <Text type="h4">Skeleton Example</Text>
+      <View>
+        <Skeleton></Skeleton>
+      </View>
+      
+    </View>
+  </Story>
+</Preview>
+
+<Props of={Skeleton} />

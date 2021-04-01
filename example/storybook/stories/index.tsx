@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   Spacing,
+  Skeleton,
   PhoneInput,
   countries,
   MultipleButtons,

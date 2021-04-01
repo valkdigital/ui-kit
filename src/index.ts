@@ -18,6 +18,7 @@ import SegmentControl from "./components/Button/SegmentControl";
 import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
 import Notification from "./components/Notification/Notification";
+import Skeleton from "./components/Skeleton/Skeleton";
 
 // Style & Theme exports
 export { Fonts, Spacing, ThemeContext, Theme };
@@ -47,6 +48,9 @@ export {
 
 // Notification component export
 export { Notification };
+
+// Skeleton component export
+export { Skeleton };
 
 // Types
 export type { TypographyLiterals, Option as PickerOption };

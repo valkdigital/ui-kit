@@ -89,8 +89,6 @@ const Notification: React.FC<NotificationProps> = (props) => {
     type = NotificationType.default,
   } = props;
 
-  console.log(icon);
-
   const passNotificationProps = omit(
       props,
       "hasCta",
