@@ -194,7 +194,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           </View>
         )}
 
-        <View style={[styles.wrapperContentStyle]}>
+        <View style={styles.wrapperContentStyle}>
           <View style={styles.contentStyle}>
             {!isEmpty(heading) && (
               <Text
