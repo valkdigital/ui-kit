@@ -1,5 +1,6 @@
 import Text from "./components/Text";
 import { Fonts, TypographyLiterals } from "./style/typography";
+import shadow from "./style/shadow";
 import Spacing from "./style/spacing";
 import ThemeContext from "./style/ThemeContext";
 import Theme from "./style/appThemes";
@@ -20,7 +21,7 @@ import XLTextInput from "./components/input/XLTextInput";
 import Notification from "./components/Notification/Notification";
 
 // Style & Theme exports
-export { Fonts, Spacing, ThemeContext, Theme };
+export { Fonts, Spacing, ThemeContext, Theme, shadow as Shadow };
 
 // Text (Input) components exports
 export {
