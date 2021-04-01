@@ -165,7 +165,7 @@ const SectionList: React.FC<SectionListProps> = ({
     const timeout = setTimeout(() => {
       const { label } = selectedOption;
 
-      let indices: any[] = [];
+      let indices: number[] = [];
       for (let i = 0; i < sections.length; i++) {
         if (!sections[i].title) continue;
         const itemIndex = sections[i].data?.findIndex((x) => {
