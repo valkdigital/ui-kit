@@ -122,7 +122,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       image && type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
     flexDirection: "row",
     borderRadius: 4,
-    marginHorizontal: Spacing.sp2,
+    paddingHorizontal: Spacing.sp2,
     height: 48,
     ...styleBySize[size],
     ...styleByType[type],

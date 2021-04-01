@@ -13,12 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.2
-      - name: Release
-        run: |
-          yarn
-          yarn release
-      - name: Deploy storybook
+      - name: Install
         run: |
           cd example
           yarn
-          yarn deploy-storybook
+          cd ..
+          yarn
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: Deploy storybook
+        run: |
+          cd example 
+          npm run deploy-storybook -- --ci
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

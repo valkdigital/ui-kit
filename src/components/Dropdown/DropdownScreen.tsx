@@ -153,13 +153,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: Spacing.sp3,
   },
-  input: {
-    paddingVertical: Spacing.sp3,
-    paddingHorizontal: Spacing.sp3,
-    backgroundColor: "#ffffff",
-    zIndex: 10,
-  },
-  flex: { flex: 1 },
 });
 
 export default DropdownScreen;
