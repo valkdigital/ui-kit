@@ -47,7 +47,8 @@ enum NotificationTooltip {
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
-interface NotificationProps extends ViewProps {
+interface NotificationProps extends Omit<ViewProps, "style"> {
+  containerStyle?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   content?: string;
   cueArrow?: StyleProp<ViewStyle>;
@@ -75,6 +76,7 @@ interface NotificationProps extends ViewProps {
 const Notification: React.FC<NotificationProps> = (props) => {
   const {
     children,
+    containerStyle,
     content,
     hasCta,
     hasIcon,
@@ -89,10 +91,9 @@ const Notification: React.FC<NotificationProps> = (props) => {
     type = NotificationType.default,
   } = props;
 
-  console.log(icon);
-
   const passNotificationProps = omit(
       props,
+      "containerStyle",
       "hasCta",
       "hasIcon",
       "heading",
@@ -102,6 +103,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
       "isTooltip",
       "onPressClose",
       "onPressCta",
+      "style",
       "tooltipPosition",
       "type"
     ),
@@ -164,6 +166,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
   return (
     <View
+      {...passNotificationProps}
       style={[
         styles.notificationStyle,
         bannerStyle,
@@ -171,8 +174,8 @@ const Notification: React.FC<NotificationProps> = (props) => {
           backgroundColor: colorsByType[type].bg,
           borderColor: colorsByType[type].border,
         },
+        containerStyle,
       ]}
-      {...passNotificationProps}
     >
       {isTooltip && (
         <View style={[styles.arrowStyle, arrowPostionStyle[tooltipPosition]]} />
@@ -191,7 +194,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           </View>
         )}
 
-        <View style={[styles.wrapperContentStyle]}>
+        <View style={styles.wrapperContentStyle}>
           <View style={styles.contentStyle}>
             {!isEmpty(heading) && (
               <Text
