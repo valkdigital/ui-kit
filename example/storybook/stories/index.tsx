@@ -240,6 +240,13 @@ const Fields: React.FC = () => {
           size="small"
           helperText="Helper text"
         />
+
+        <TextInput
+          label="Prefix"
+          containerStyle={{ marginBottom: Spacing.sp2 }}
+          placeholder="Placeholder"
+          LeftIconComponent={<Text>Prefix - </Text>}
+        />
       </View>
     </CenteredView>
   );

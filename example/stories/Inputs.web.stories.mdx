@@ -8,6 +8,7 @@ import {
 } from "@storybook/addon-docs/blocks";
 import { View } from "react-native";
 import {
+  Text,
   TextInput,
   XLTextInput,
   PhoneInput,
@@ -83,6 +84,12 @@ import {
         containerStyle={{ marginBottom: Spacing.sp2 }}
         placeholder="Search"
         type="search"
+      />
+      <TextInput
+        label="Prefix"
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        placeholder="Placeholder"
+        LeftIconComponent={<Text>Prefix - </Text>}
       />
     </View>
   </Story>
