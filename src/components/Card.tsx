@@ -181,12 +181,12 @@ const Card: React.FC<CardProps> = ({
               { backgroundColor: onBackground },
             ]}
           >
-            {header && (
+            {!!header && (
               <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
                 {header}
               </Text>
             )}
-            {subHeader && (
+            {!!subHeader && (
               <Text
                 type="subtextRegular"
                 style={[styles.subHeader, SUBHEADER_STYLE[size]]}
@@ -195,7 +195,7 @@ const Card: React.FC<CardProps> = ({
                 {subHeader}
               </Text>
             )}
-            {supportiveText && (
+            {!!supportiveText && (
               <Text type="bodyRegular" style={styles.supportive}>
                 {supportiveText}
               </Text>
