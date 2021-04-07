@@ -5,7 +5,6 @@ import Spacing from "./style/spacing";
 import ThemeContext from "./style/ThemeContext";
 import Theme from "./style/appThemes";
 import Card from "./components/Card";
-import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
 import Picker, { Option } from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
@@ -27,7 +26,6 @@ export { Fonts, Spacing, ThemeContext, Theme, shadow as Shadow };
 export {
   Text,
   Card,
-  CardList,
   Picker,
   TextInput,
   PhoneInput,
