@@ -190,9 +190,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
   return (
     <TouchableOpacity
       disabled={!hasCta}
-      onPress={() => {
-        hasCta && onPressCta ? onPressCta() : null;
-      }}
+      onPress={onPressCta}
       {...passNotificationProps}
       style={[
         styles.notificationStyle,
