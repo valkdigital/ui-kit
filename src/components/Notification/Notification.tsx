@@ -52,7 +52,6 @@ interface NotificationProps extends Omit<ViewProps, "style"> {
   containerStyle?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   content?: string;
-  cueArrow?: StyleProp<ViewStyle>;
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
