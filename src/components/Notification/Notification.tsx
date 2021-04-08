@@ -283,7 +283,6 @@ const styles = StyleSheet.create({
   notificationStyle: {
     borderWidth: 0,
     borderLeftWidth: Spacing["sp1/2"],
-    margin: Spacing.sp1,
     paddingHorizontal: Spacing.sp1,
     paddingVertical: Spacing.sp2,
   },
