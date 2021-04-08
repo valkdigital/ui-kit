@@ -188,7 +188,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
   };
 
   return (
-    <View
+    <TouchableOpacity
+      disabled={!hasCta}
+      onPress={() => {
+        hasCta && onPressCta ? onPressCta() : null;
+      }}
       {...passNotificationProps}
       style={[
         styles.notificationStyle,
@@ -253,12 +257,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
           )}
 
           {hasCta && (
-            <TouchableOpacity
+            <View
               style={[
                 styles.ctaStyle,
                 { backgroundColor: colorsByType[type].ctaBg },
               ]}
-              onPress={onPressCta}
             >
               <Image
                 source={require("../../media/arrow_right.png")}
@@ -267,11 +270,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
                   { tintColor: colorsByType[type].ctaText },
                 ]}
               />
-            </TouchableOpacity>
+            </View>
           )}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 /* == METHODS =============================================================== */
