@@ -15,38 +15,86 @@ const Icons: React.FC<IconsProps> = () => {
 
   return (
     <ScrollView contentContainerStyle={[styles.contentContainer]}>
-      {IconSet.iconNames.map((name) => (
-        <View
-          style={[styles.wrapper, { borderColor: grey[8] }]}
-          key={`${name}-wrapper`}
-        >
-          <Text type="h4">{name}</Text>
-          <Icon
-            name={name}
-            key={`${name}-${IconSet.iconSizes.small}`}
-            size={IconSet.iconSizes.small}
-            color={typography.color}
-          />
-          <Icon
-            name={name}
-            key={`${name}-${IconSet.iconSizes.medium}`}
-            size={IconSet.iconSizes.medium}
-            color={typography.color}
-          />
-          <Icon
-            name={name}
-            key={`${name}-${IconSet.iconSizes.large}`}
-            size={IconSet.iconSizes.large}
-            color={typography.color}
-          />
-          <Icon
-            name={name}
-            key={`${name}-${IconSet.iconSizes["x-large"]}`}
-            size={IconSet.iconSizes["x-large"]}
-            color={typography.color}
-          />
-        </View>
-      ))}
+      <Text type="h1">Icons</Text>
+      <Text type="h2">Icons solid</Text>
+      <View style={[styles.gridContainer]}>
+        {IconSet.iconNames.map((name) => (
+          <View
+            style={[styles.wrapper, { borderColor: grey[8] }]}
+            key={`${name}-wrapper`}
+          >
+            <Text type="h4">{name}</Text>
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.small}`}
+              size={IconSet.iconSizes.small}
+              color={typography.color}
+              solid
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.medium}`}
+              size={IconSet.iconSizes.medium}
+              color={typography.color}
+              solid
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.large}`}
+              size={IconSet.iconSizes.large}
+              color={typography.color}
+              solid
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes["x-large"]}`}
+              size={IconSet.iconSizes["x-large"]}
+              color={typography.color}
+              solid
+            />
+          </View>
+        ))}
+      </View>
+
+      <Text type="h2">Icons outline</Text>
+      <View style={[styles.gridContainer]}>
+        {IconSet.iconNames.map((name) => (
+          <View
+            style={[styles.wrapper, { borderColor: grey[8] }]}
+            key={`${name}-wrapper`}
+          >
+            <Text type="h4">{name}</Text>
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.small}`}
+              size={IconSet.iconSizes.small}
+              color={typography.color}
+              outline
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.medium}`}
+              size={IconSet.iconSizes.medium}
+              color={typography.color}
+              outline
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.large}`}
+              size={IconSet.iconSizes.large}
+              color={typography.color}
+              outline
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes["x-large"]}`}
+              size={IconSet.iconSizes["x-large"]}
+              color={typography.color}
+              outline
+            />
+          </View>
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -56,7 +104,7 @@ const Icons: React.FC<IconsProps> = () => {
 \* ========================================================================== */
 const styles = StyleSheet.create({
   contentContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     flexWrap: "wrap",
     overflow: "hidden",
     paddingHorizontal: Spacing.sp1,
@@ -68,6 +116,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     paddingHorizontal: Spacing.sp1,
     paddingVertical: Spacing.sp2,
+  },
+  gridContainer: {
+    alignItems: "flex-start",
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 1fr)",
+    gridColumnGap: 10,
+    gridRowGap: 10,
+    maxWidth: 1400,
   },
 });
 /* == STYLES ================================================================ */
