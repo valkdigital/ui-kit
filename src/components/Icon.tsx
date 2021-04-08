@@ -12,13 +12,8 @@ import React from "react";
 import { createIconSetFromIcoMoon } from "react-native-vector-icons";
 import icomoonConfig from "../media/icomoon/icomoon.json";
 
+import type { IconProps } from "react-native-vector-icons/Icon";
 /* == IMPORTS =============================================================== */
-
-interface IconProps {
-  name: string;
-  size?: number;
-  color?: string;
-}
 
 const VectorIcon = createIconSetFromIcoMoon(icomoonConfig, "icomoon");
 
