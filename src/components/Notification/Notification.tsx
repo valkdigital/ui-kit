@@ -32,10 +32,11 @@ import { isEmpty, omit } from "lodash";
     TYPES
 \* ========================================================================== */
 enum NotificationType {
+  attention = "attention",
   default = "default",
-  warning = "warning",
   negative = "negative",
   positive = "positive",
+  warning = "warning",
 }
 
 enum NotificationTooltip {
@@ -115,6 +116,13 @@ const Notification: React.FC<NotificationProps> = (props) => {
         contentText: themeColors.info.dark,
         ctaText: colors.white,
         ctaBg: themeColors.info.primary,
+      },
+      [NotificationType.attention]: {
+        bg: themeColors.cta.light,
+        border: themeColors.cta.primary,
+        contentText: themeColors.cta.midDark,
+        ctaText: colors.white,
+        ctaBg: themeColors.cta.primary,
       },
       [NotificationType.warning]: {
         bg: themeColors.warning.midLight,
