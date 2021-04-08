@@ -41,7 +41,9 @@ enum NotificationType {
 
 enum NotificationTooltip {
   above = "above",
+  aboveCentered = "aboveCentered",
   below = "below",
+  belowCentered = "belowCentered",
 }
 /* == TYPES ================================================================= */
 
@@ -158,16 +160,30 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
   const arrowPostionStyle: { [key in NotificationTooltip]: ViewStyle } = {
     [NotificationTooltip.above]: {
-      right: Spacing.sp2,
       bottom: -10,
       borderTopWidth: 10,
       borderTopColor: colorsByType[type].bg,
+      right: Spacing.sp2,
+    },
+    [NotificationTooltip.aboveCentered]: {
+      bottom: -10,
+      borderTopWidth: 10,
+      borderTopColor: colorsByType[type].bg,
+      left: "50%",
+      marginLeft: -10,
     },
     [NotificationTooltip.below]: {
-      left: Spacing.sp2,
-      top: -10,
       borderBottomWidth: 10,
       borderBottomColor: colorsByType[type].bg,
+      left: Spacing.sp2,
+      top: -10,
+    },
+    [NotificationTooltip.belowCentered]: {
+      borderBottomWidth: 10,
+      borderBottomColor: colorsByType[type].bg,
+      left: "50%",
+      top: -10,
+      marginLeft: -10,
     },
   };
 
