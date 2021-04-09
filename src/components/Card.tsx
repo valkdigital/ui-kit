@@ -67,7 +67,7 @@ const IMAGE_STYLE: { [key in Sizes]: ImageStyle } = {
   },
 };
 
-const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
+const CARD_STYLE: { [key in Sizes]: ViewStyle } = {
   large: {
     flexDirection: "column",
   },
@@ -119,15 +119,15 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <TouchableOpacity
-      style={[styles.card, containerStyle]}
+      style={containerStyle}
       onPress={onPress}
       disabled={showButton}
     >
       <View
         style={[
-          styles.container,
+          styles.card,
           { backgroundColor: onBackground },
-          CONTAINER_STYLE[size],
+          CARD_STYLE[size],
         ]}
       >
         <View>
@@ -209,9 +209,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
-  },
-  container: {
-    borderRadius: Spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
