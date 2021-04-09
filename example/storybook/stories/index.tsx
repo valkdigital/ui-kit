@@ -31,6 +31,7 @@ import AllFAB from "./FAB";
 import NavigationTextStory from "./NavigationTextStory";
 import Pickers from "./Pickers";
 import Dropdowns from "./Dropdowns";
+import Icons from "./Icons";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -180,6 +181,11 @@ storiesOf("Cards", module).add("Cards", () => (
     />
   </ScrollView>
 ));
+
+const iconStories = storiesOf("Icons", module);
+iconStories.add("Icons", () => {
+  return <Icons />;
+});
 
 const inputStories = storiesOf("Inputs", module);
 
