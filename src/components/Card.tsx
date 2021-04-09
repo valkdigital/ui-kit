@@ -67,7 +67,7 @@ const IMAGE_STYLE: { [key in Sizes]: ImageStyle } = {
   },
 };
 
-const CARD_STYLE: { [key in Sizes]: ViewStyle } = {
+const CONTAINER_STYLE: { [key in Sizes]: ViewStyle } = {
   large: {
     flexDirection: "column",
   },
@@ -118,87 +118,89 @@ const Card: React.FC<CardProps> = ({
     imageHeader && imageHeader.length <= 24 ? "h4" : "h5";
 
   return (
-    <TouchableOpacity
-      style={containerStyle}
-      onPress={onPress}
-      disabled={showButton}
-    >
-      <View
-        style={[
-          styles.card,
-          { backgroundColor: onBackground },
-          CARD_STYLE[size],
-        ]}
+    <View style={containerStyle}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={onPress}
+        disabled={showButton}
       >
-        <View>
-          <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
-          {showElementsOnTopOfImage && (
-            <>
-              <View style={styles.imageOverlay}>
-                {imageOverlay && imageOverlay}
-              </View>
-              <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
-                {imageHeader && (
-                  <Text
-                    type={imageHeaderTextType}
-                    color="#ffffff"
-                    style={styles.imageHeader}
-                    numberOfLines={2}
-                  >
-                    {imageHeader}
-                  </Text>
-                )}
-              </View>
-              <LinearGradient
-                colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={styles.gradient}
-              />
-            </>
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: onBackground },
+            CONTAINER_STYLE[size],
+          ]}
+        >
+          <View>
+            <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
+            {showElementsOnTopOfImage && (
+              <>
+                <View style={styles.imageOverlay}>
+                  {imageOverlay && imageOverlay}
+                </View>
+                <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
+                  {imageHeader && (
+                    <Text
+                      type={imageHeaderTextType}
+                      color="#ffffff"
+                      style={styles.imageHeader}
+                      numberOfLines={2}
+                    >
+                      {imageHeader}
+                    </Text>
+                  )}
+                </View>
+                <LinearGradient
+                  colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0, y: 1 }}
+                  style={styles.gradient}
+                />
+              </>
+            )}
+          </View>
+
+          {showBody && (
+            <View
+              style={[
+                styles.bodyContainer,
+                BODY_CONTAINER_STYLE[size],
+                { backgroundColor: onBackground },
+              ]}
+            >
+              {!!header && (
+                <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
+                  {header}
+                </Text>
+              )}
+              {!!subHeader && (
+                <Text
+                  type="subtextRegular"
+                  style={[styles.subHeader, SUBHEADER_STYLE[size]]}
+                  numberOfLines={1}
+                >
+                  {subHeader}
+                </Text>
+              )}
+              {!!supportiveText && (
+                <Text type="bodyRegular" style={styles.supportive}>
+                  {supportiveText}
+                </Text>
+              )}
+              {assets && assets}
+            </View>
+          )}
+          {showButton && (
+            <Button
+              label={buttonText ?? ""}
+              onPress={onPress}
+              size="full"
+              containerStyle={styles.button}
+            />
           )}
         </View>
-
-        {showBody && (
-          <View
-            style={[
-              styles.bodyContainer,
-              BODY_CONTAINER_STYLE[size],
-              { backgroundColor: onBackground },
-            ]}
-          >
-            {!!header && (
-              <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
-                {header}
-              </Text>
-            )}
-            {!!subHeader && (
-              <Text
-                type="subtextRegular"
-                style={[styles.subHeader, SUBHEADER_STYLE[size]]}
-                numberOfLines={1}
-              >
-                {subHeader}
-              </Text>
-            )}
-            {!!supportiveText && (
-              <Text type="bodyRegular" style={styles.supportive}>
-                {supportiveText}
-              </Text>
-            )}
-            {assets && assets}
-          </View>
-        )}
-        {showButton && (
-          <Button
-            label={buttonText ?? ""}
-            onPress={onPress}
-            size="full"
-            containerStyle={styles.button}
-          />
-        )}
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -209,6 +211,9 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
+  },
+  container: {
+    borderRadius: Spacing["sp1/2"],
     overflow: "hidden",
   },
   imageContainer: {
