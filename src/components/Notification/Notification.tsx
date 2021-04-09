@@ -32,15 +32,18 @@ import { isEmpty, omit } from "lodash";
     TYPES
 \* ========================================================================== */
 enum NotificationType {
+  attention = "attention",
   default = "default",
-  warning = "warning",
   negative = "negative",
   positive = "positive",
+  warning = "warning",
 }
 
 enum NotificationTooltip {
   above = "above",
+  aboveCentered = "aboveCentered",
   below = "below",
+  belowCentered = "belowCentered",
 }
 /* == TYPES ================================================================= */
 
@@ -51,7 +54,6 @@ interface NotificationProps extends Omit<ViewProps, "style"> {
   containerStyle?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   content?: string;
-  cueArrow?: StyleProp<ViewStyle>;
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
@@ -116,6 +118,13 @@ const Notification: React.FC<NotificationProps> = (props) => {
         ctaText: colors.white,
         ctaBg: themeColors.info.primary,
       },
+      [NotificationType.attention]: {
+        bg: themeColors.cta.light,
+        border: themeColors.cta.primary,
+        contentText: themeColors.cta.midDark,
+        ctaText: colors.white,
+        ctaBg: themeColors.cta.primary,
+      },
       [NotificationType.warning]: {
         bg: themeColors.warning.midLight,
         border: themeColors.warning.primary,
@@ -151,21 +160,37 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
   const arrowPostionStyle: { [key in NotificationTooltip]: ViewStyle } = {
     [NotificationTooltip.above]: {
-      right: Spacing.sp2,
       bottom: -10,
       borderTopWidth: 10,
       borderTopColor: colorsByType[type].bg,
+      right: Spacing.sp2,
+    },
+    [NotificationTooltip.aboveCentered]: {
+      bottom: -10,
+      borderTopWidth: 10,
+      borderTopColor: colorsByType[type].bg,
+      left: "50%",
+      marginLeft: -10,
     },
     [NotificationTooltip.below]: {
-      left: Spacing.sp2,
-      top: -10,
       borderBottomWidth: 10,
       borderBottomColor: colorsByType[type].bg,
+      left: Spacing.sp2,
+      top: -10,
+    },
+    [NotificationTooltip.belowCentered]: {
+      borderBottomWidth: 10,
+      borderBottomColor: colorsByType[type].bg,
+      left: "50%",
+      top: -10,
+      marginLeft: -10,
     },
   };
 
   return (
-    <View
+    <TouchableOpacity
+      disabled={!hasCta}
+      onPress={onPressCta}
       {...passNotificationProps}
       style={[
         styles.notificationStyle,
@@ -230,12 +255,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
           )}
 
           {hasCta && (
-            <TouchableOpacity
+            <View
               style={[
                 styles.ctaStyle,
                 { backgroundColor: colorsByType[type].ctaBg },
               ]}
-              onPress={onPressCta}
             >
               <Image
                 source={require("../../media/arrow_right.png")}
@@ -244,11 +268,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
                   { tintColor: colorsByType[type].ctaText },
                 ]}
               />
-            </TouchableOpacity>
+            </View>
           )}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 /* == METHODS =============================================================== */
@@ -260,7 +284,6 @@ const styles = StyleSheet.create({
   notificationStyle: {
     borderWidth: 0,
     borderLeftWidth: Spacing["sp1/2"],
-    margin: Spacing.sp1,
     paddingHorizontal: Spacing.sp1,
     paddingVertical: Spacing.sp2,
   },
