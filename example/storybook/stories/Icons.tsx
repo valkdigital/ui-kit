@@ -119,10 +119,7 @@ const styles = StyleSheet.create({
   },
   gridContainer: {
     alignItems: "flex-start",
-    display: "grid",
-    gridTemplateColumns: "repeat(6, 1fr)",
-    gridColumnGap: 10,
-    gridRowGap: 10,
+    display: "flex",
     maxWidth: 1400,
   },
 });
