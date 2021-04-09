@@ -1,6 +1,6 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { Card, Text, Spacing } from "@valkdigital/ui-kit";
-import { View } from "react-native";
+import { Card, Spacing, Text } from "@valkdigital/ui-kit";
+import { View, FlatList } from "react-native";
 import { WithFigma } from "storybook-addon-figma";
 
 <Meta title="Card" />
@@ -11,7 +11,7 @@ With `MDX` we can define a story for `stories`
 
 <Preview>
   <Story
-    name="Header"
+    name="Card"
     parameters={{
       design: {
         type: "figma",
@@ -20,29 +20,160 @@ With `MDX` we can define a story for `stories`
       },
     }}
   >
-    <View>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        imageHeader="Diner"
-        size="single"
-        imageOverlay={
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              alignSelf: "flex-end",
-              paddingRight: Spacing.sp2,
-            }}
-          >
-            <Text type="h4">1 2 3 </Text>
-          </View>
-        }
-        onPress={() => null}
-        wrapperStyle={{ margin: Spacing.sp3 }}
-      />
-    </View>
+    <ScrollView style={{ flex: 1, width: "100vw" }}>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Large card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="large"
+          onPress={() => null}
+          assets={
+            <View style={{ flexDirection: "row" }}>
+              <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+                2 persons
+              </Text>
+              <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+                18:00
+              </Text>
+            </View>
+          }
+          buttonText="Button"
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Medium card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="medium"
+          onPress={() => null}
+          assets={
+            <View style={{ flexDirection: "row" }}>
+              <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+                2 persons
+              </Text>
+              <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+                18:00
+              </Text>
+            </View>
+          }
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Small card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          header="Diner"
+          subHeader="From €89,- per person"
+          size="small"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Tiny card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          header="Diner"
+          subHeader="From €89,- per person"
+          size="tiny"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Single card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="single"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View>
+        <Text
+          type="bodySemiBold"
+          style={{ margin: Spacing.sp2, marginBottom: 0 }}
+        >
+          Horizontal cardlist
+        </Text>
+        <FlatList
+          data={["Diner", "Lunch", "Breakfast"]}
+          keyExtractor={(item) => item}
+          horizontal={true}
+          contentContainerStyle={{
+            padding: Spacing.sp2,
+          }}
+          ItemSeparatorComponent={() => <View style={{ width: Spacing.sp1 }} />}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => {
+            return (
+              <Card
+                image={{
+                  uri:
+                    "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+                }}
+                imageHeader={item}
+                size="large"
+                supportiveText="Some text here"
+                onPress={() => null}
+                containerStyle={{
+                  width: 300 - Spacing.sp4,
+                }}
+              />
+            );
+          }}
+        />
+      </View>
+      <View>
+        <Text
+          type="bodySemiBold"
+          style={{ margin: Spacing.sp2, marginBottom: 0 }}
+        >
+          Vertical cardlist
+        </Text>
+        <FlatList
+          data={["Diner", "Lunch", "Breakfast"]}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{
+            padding: Spacing.sp2,
+            paddingTop: Spacing.sp1,
+          }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: Spacing.sp1 }} />
+          )}
+          renderItem={({ item }) => {
+            return (
+              <Card
+                image={{
+                  uri:
+                    "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+                }}
+                header={item}
+                subHeader="sub header"
+                size="tiny"
+                onPress={() => null}
+              />
+            );
+          }}
+        />
+      </View>
+    </ScrollView>
   </Story>
 </Preview>
 

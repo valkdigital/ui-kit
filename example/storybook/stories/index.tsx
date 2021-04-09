@@ -1,9 +1,14 @@
 import React, { useRef } from "react";
 import { storiesOf } from "@storybook/react-native";
-import { View, StyleSheet, ViewStyle, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import {
   Card,
-  CardList,
   Text,
   TextInput,
   Spacing,
@@ -26,167 +31,161 @@ import AllFAB from "./FAB";
 import NavigationTextStory from "./NavigationTextStory";
 import Pickers from "./Pickers";
 import Dropdowns from "./Dropdowns";
+import Icons from "./Icons";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
 };
 
-storiesOf("Cards", module).add("Large card", () => (
-  <CenteredView>
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+storiesOf("Cards", module).add("Cards", () => (
+  <ScrollView style={{ flex: 1 }}>
+    <View style={{ margin: Spacing.sp2 }}>
+      <Text type="bodySemiBold">Large card</Text>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        imageHeader="Diner"
+        size="large"
+        onPress={() => null}
+        assets={
+          <View style={{ flexDirection: "row" }}>
+            <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+              2 persons
+            </Text>
+            <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+              18:00
+            </Text>
+          </View>
+        }
+        buttonText="Button"
+        containerStyle={{ marginTop: Spacing.sp1 }}
+      />
+    </View>
+    <View style={{ margin: Spacing.sp2 }}>
+      <Text type="bodySemiBold">Medium card</Text>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        imageHeader="Diner"
+        size="medium"
+        onPress={() => null}
+        assets={
+          <View style={{ flexDirection: "row" }}>
+            <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+              2 persons
+            </Text>
+            <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+              18:00
+            </Text>
+          </View>
+        }
+        containerStyle={{ marginTop: Spacing.sp1 }}
+      />
+    </View>
+    <View style={{ margin: Spacing.sp2 }}>
+      <Text type="bodySemiBold">Small card</Text>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        header="Diner"
+        subHeader="From €89,- per person"
+        size="small"
+        onPress={() => null}
+        containerStyle={{ marginTop: Spacing.sp1 }}
+      />
+    </View>
+    <View style={{ margin: Spacing.sp2 }}>
+      <Text type="bodySemiBold">Tiny card</Text>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        header="Diner"
+        subHeader="From €89,- per person"
+        size="tiny"
+        onPress={() => null}
+        containerStyle={{ marginTop: Spacing.sp1 }}
+      />
+    </View>
+    <View style={{ margin: Spacing.sp2 }}>
+      <Text type="bodySemiBold">Single card</Text>
+      <Card
+        image={{
+          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+        }}
+        imageHeader="Diner"
+        size="single"
+        onPress={() => null}
+        containerStyle={{ marginTop: Spacing.sp1 }}
+      />
+    </View>
+
+    <Text type="bodySemiBold" style={{ margin: Spacing.sp2, marginBottom: 0 }}>
+      Horizontal cardlist
+    </Text>
+    <FlatList
+      data={["Diner", "Lunch", "Breakfast"]}
+      keyExtractor={(item) => item}
+      horizontal={true}
+      contentContainerStyle={{
+        padding: Spacing.sp2,
       }}
-      imageHeader="Diner"
-      size="large"
-      onPress={() => null}
-      assets={
-        <View style={{ flexDirection: "row" }}>
-          <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
-            2 persons
-          </Text>
-          <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
-            18:00
-          </Text>
-        </View>
-      }
-      buttonText="Button"
-    />
-  </CenteredView>
-));
-storiesOf("Cards", module).add("Medium card", () => (
-  <CenteredView>
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      ItemSeparatorComponent={() => <View style={{ width: Spacing.sp1 }} />}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => {
+        return (
+          <Card
+            image={{
+              uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+            }}
+            imageHeader={item}
+            size="large"
+            supportiveText="Some text here"
+            onPress={() => null}
+            containerStyle={{
+              width: 300 - Spacing.sp4,
+            }}
+          />
+        );
       }}
-      imageHeader="Diner"
-      size="medium"
-      onPress={() => null}
-      assets={
-        <View style={{ flexDirection: "row" }}>
-          <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
-            2 persons
-          </Text>
-          <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
-            18:00
-          </Text>
-        </View>
-      }
     />
-  </CenteredView>
-));
-storiesOf("Cards", module).add("Small card", () => (
-  <CenteredView>
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+
+    <Text type="bodySemiBold" style={{ margin: Spacing.sp2, marginBottom: 0 }}>
+      Vertical cardlist
+    </Text>
+    <FlatList
+      data={["Diner", "Lunch", "Breakfast"]}
+      keyExtractor={(item) => item}
+      contentContainerStyle={{
+        padding: Spacing.sp2,
+        paddingTop: Spacing.sp1,
       }}
-      header="Diner"
-      subHeader="From €89,- per person"
-      size="small"
-      onPress={() => null}
-    />
-  </CenteredView>
-));
-storiesOf("Cards", module).add("Tiny card", () => (
-  <CenteredView>
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+      showsVerticalScrollIndicator={false}
+      ItemSeparatorComponent={() => <View style={{ height: Spacing.sp1 }} />}
+      renderItem={({ item }) => {
+        return (
+          <Card
+            image={{
+              uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+            }}
+            header={item}
+            subHeader="sub header"
+            size="tiny"
+            onPress={() => null}
+          />
+        );
       }}
-      header="Diner"
-      subHeader="From €89,- per person"
-      size="tiny"
-      onPress={() => null}
     />
-  </CenteredView>
-));
-storiesOf("Cards", module).add("Single card", () => (
-  <CenteredView>
-    <Card
-      image={{
-        uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-      }}
-      imageHeader="Diner"
-      size="single"
-      onPress={() => null}
-    />
-  </CenteredView>
-));
-storiesOf("Cards", module).add("Card list horizontal", () => (
-  <CenteredView>
-    <CardList
-      direction="horizontal"
-      size="large"
-      onItemPress={() => null}
-      data={[
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Ellipsis mode for text that no longer fits on the screen",
-          subHeader: "Available for 37 hotels",
-        },
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Sprightly Spring",
-          subHeader: "Available for 37 hotels",
-        },
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Sprightly Spring",
-          subHeader: "Available for 37 hotels",
-        },
-      ]}
-      containerStyle={{ paddingTop: Spacing.sp3 }}
-    />
-  </CenteredView>
+  </ScrollView>
 ));
 
-storiesOf("Cards", module).add("Card vertical list", () => (
-  <CenteredView>
-    <CardList
-      direction="vertical"
-      size="small"
-      onItemPress={() => null}
-      data={[
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Ellipsis mode for text that no longer fits on the screen",
-          subHeader: "Available for 37 hotels",
-        },
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Sprightly Spring",
-          subHeader: "Available for 37 hotels",
-        },
-        {
-          image: {
-            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-          },
-          imageHeader: "Header text",
-          header: "Sprightly Spring",
-          subHeader: "Available for 37 hotels",
-        },
-      ]}
-      containerStyle={{ paddingTop: Spacing.sp3, paddingHorizontal: 16 }}
-    />
-  </CenteredView>
-));
+const iconStories = storiesOf("Icons", module);
+iconStories.add("Icons", () => {
+  return <Icons />;
+});
 
 const inputStories = storiesOf("Inputs", module);
 
