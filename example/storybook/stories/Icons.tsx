@@ -116,8 +116,6 @@ const styles = StyleSheet.create({
   gridContainer: {
     alignItems: "flex-start",
     display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
     maxWidth: 1400,
   },
 });
