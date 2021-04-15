@@ -16,6 +16,42 @@ const Icons: React.FC<IconsProps> = () => {
   return (
     <ScrollView contentContainerStyle={[styles.contentContainer]}>
       <Text type="h1">Icons</Text>
+      <Text type="h2">Icons default (outline)</Text>
+      <View style={[styles.gridContainer]}>
+        {IconSet.iconNames.map((name) => (
+          <View
+            style={[styles.wrapper, { borderColor: grey[8] }]}
+            key={`${name}-wrapper`}
+          >
+            <Text type="h4">{name}</Text>
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.small}`}
+              size={IconSet.iconSizes.small}
+              color={typography.color}
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.medium}`}
+              size={IconSet.iconSizes.medium}
+              color={typography.color}
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes.large}`}
+              size={IconSet.iconSizes.large}
+              color={typography.color}
+            />
+            <Icon
+              name={name}
+              key={`${name}-${IconSet.iconSizes["x-large"]}`}
+              size={IconSet.iconSizes["x-large"]}
+              color={typography.color}
+            />
+          </View>
+        ))}
+      </View>
+
       <Text type="h2">Icons solid</Text>
       <View style={[styles.gridContainer]}>
         {IconSet.iconNames.map((name) => (
@@ -29,68 +65,28 @@ const Icons: React.FC<IconsProps> = () => {
               key={`${name}-${IconSet.iconSizes.small}`}
               size={IconSet.iconSizes.small}
               color={typography.color}
-              solid
+              solid={true}
             />
             <Icon
               name={name}
               key={`${name}-${IconSet.iconSizes.medium}`}
               size={IconSet.iconSizes.medium}
               color={typography.color}
-              solid
+              solid={true}
             />
             <Icon
               name={name}
               key={`${name}-${IconSet.iconSizes.large}`}
               size={IconSet.iconSizes.large}
               color={typography.color}
-              solid
+              solid={true}
             />
             <Icon
               name={name}
               key={`${name}-${IconSet.iconSizes["x-large"]}`}
               size={IconSet.iconSizes["x-large"]}
               color={typography.color}
-              solid
-            />
-          </View>
-        ))}
-      </View>
-
-      <Text type="h2">Icons outline</Text>
-      <View style={[styles.gridContainer]}>
-        {IconSet.iconNames.map((name) => (
-          <View
-            style={[styles.wrapper, { borderColor: grey[8] }]}
-            key={`${name}-wrapper`}
-          >
-            <Text type="h4">{name}</Text>
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.small}`}
-              size={IconSet.iconSizes.small}
-              color={typography.color}
-              outline
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.medium}`}
-              size={IconSet.iconSizes.medium}
-              color={typography.color}
-              outline
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.large}`}
-              size={IconSet.iconSizes.large}
-              color={typography.color}
-              outline
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes["x-large"]}`}
-              size={IconSet.iconSizes["x-large"]}
-              color={typography.color}
-              outline
+              solid={true}
             />
           </View>
         ))}
@@ -119,10 +115,9 @@ const styles = StyleSheet.create({
   },
   gridContainer: {
     alignItems: "flex-start",
-    display: "grid",
-    gridTemplateColumns: "repeat(6, 1fr)",
-    gridColumnGap: 10,
-    gridRowGap: 10,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
     maxWidth: 1400,
   },
 });
