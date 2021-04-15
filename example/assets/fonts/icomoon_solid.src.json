@@ -2547,7 +2547,7 @@
     "fontPref": {
       "prefix": "icon-",
       "metadata": {
-        "fontFamily": "icomoon",
+        "fontFamily": "icomoon_solid",
         "majorVersion": 1,
         "minorVersion": 0
       },
@@ -2583,5 +2583,5 @@
     "historySize": 50,
     "gridSize": 16
   },
-  "time": 1617890420932
+  "time": 1618478756115
 }
