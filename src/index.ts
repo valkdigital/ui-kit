@@ -2,10 +2,10 @@ import Text from "./components/Text";
 import { Fonts, TypographyLiterals } from "./style/typography";
 import shadow from "./style/shadow";
 import Spacing from "./style/spacing";
+import IconSet from "./style/iconSet";
 import ThemeContext from "./style/ThemeContext";
 import Theme from "./style/appThemes";
 import Card from "./components/Card";
-import CardList from "./components/CardList";
 import TextInput from "./components/input/TextInput";
 import Picker, { Option } from "./components/Picker";
 import PhoneInput from "./components/input/PhoneInput";
@@ -19,15 +19,15 @@ import SegmentControl from "./components/Button/SegmentControl";
 import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
 import Notification from "./components/Notification/Notification";
+import Icon from "./components/Icon";
 
 // Style & Theme exports
-export { Fonts, Spacing, ThemeContext, Theme, shadow as Shadow };
+export { Fonts, Spacing, IconSet, ThemeContext, Theme, shadow as Shadow };
 
 // Text (Input) components exports
 export {
   Text,
   Card,
-  CardList,
   Picker,
   TextInput,
   PhoneInput,
@@ -48,6 +48,9 @@ export {
 
 // Notification component export
 export { Notification };
+
+// Icon components exports
+export { Icon };
 
 // Types
 export type { TypographyLiterals, Option as PickerOption };

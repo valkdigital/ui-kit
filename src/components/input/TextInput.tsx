@@ -13,10 +13,7 @@ import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
 
 interface TextInputProps
-  extends Omit<
-    BaseInputProps,
-    "LeftIconComponent" | "RightIconComponent" | "textAlign" | "labelStyle"
-  > {
+  extends Omit<BaseInputProps, "textAlign" | "labelStyle" | "secureTextEntry"> {
   type?: "password" | "search";
 }
 
@@ -25,7 +22,13 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
   const { typography } = useContext(ThemeContext);
   const [hideText, setHideText] = useState(type === "password");
 
-  const passInputProps = omit(props, "type", "secureTextEntry");
+  const passInputProps = omit(
+    props,
+    "type",
+    "textAlign",
+    "labelStyle",
+    "secureTextEntry"
+  );
 
   const toggleHideText = () => {
     setHideText(!hideText);
@@ -34,7 +37,6 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
   return (
     <BaseInput
       ref={ref}
-      {...passInputProps}
       secureTextEntry={hideText}
       LeftIconComponent={
         type === "search" && (
@@ -51,6 +53,7 @@ const TextInput = React.forwardRef<RNTI, TextInputProps>((props, ref) => {
           </TouchableOpacity>
         )
       }
+      {...passInputProps}
     />
   );
 });

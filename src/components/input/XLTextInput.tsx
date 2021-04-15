@@ -29,11 +29,7 @@ const TEXTSTYLE: { [key in Sizes]: TextStyle } = {
   },
 };
 
-interface XLTextInputProps
-  extends Omit<
-    BaseInputProps,
-    "LeftIconComponent" | "RightIconComponent" | "size"
-  > {
+interface XLTextInputProps extends Omit<BaseInputProps, "size"> {
   size?: Sizes;
 }
 

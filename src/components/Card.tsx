@@ -1,4 +1,4 @@
-import React, { ReactChild, useContext, useEffect, useState } from "react";
+import React, { ReactChild, useContext } from "react";
 import {
   View,
   Image,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ViewStyle,
   ImageStyle,
-  Dimensions,
   TextStyle,
   StyleProp,
 } from "react-native";
@@ -95,7 +94,7 @@ export interface CardProps {
   buttonText?: string;
   onPress: () => void;
   size?: Sizes;
-  wrapperStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 const Card: React.FC<CardProps> = ({
   image,
@@ -108,111 +107,100 @@ const Card: React.FC<CardProps> = ({
   buttonText,
   onPress,
   size = "large",
-  wrapperStyle,
+  containerStyle,
 }) => {
   const { onBackground } = useContext(ThemeContext);
-  const [width, setWidth] = useState<number>(Dimensions.get("window").width);
 
-  // Default size is full width minus the default 24 spacing each side ( 2 x Spacing.sp3).
-  const cardWidth = width - Spacing.sp6;
   const showBody = size !== "single";
   const showButton = !!buttonText && size === "large";
   const showElementsOnTopOfImage = !["small", "tiny"].includes(size);
   const imageHeaderTextType =
     imageHeader && imageHeader.length <= 24 ? "h4" : "h5";
 
-  useEffect(() => {
-    Dimensions.addEventListener("change", (event) => {
-      setWidth(event.window.width);
-    });
-    return () =>
-      Dimensions.removeEventListener("change", (event) => {
-        setWidth(event.window.width);
-      });
-  }, []);
-
   return (
-    <TouchableOpacity
-      style={[styles.card, { width: cardWidth }, wrapperStyle]}
-      onPress={onPress}
-      disabled={showButton}
-    >
-      <View
-        style={[
-          styles.container,
-          { backgroundColor: onBackground },
-          CONTAINER_STYLE[size],
-        ]}
+    <View style={containerStyle}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={onPress}
+        disabled={showButton}
       >
-        <View>
-          <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
-          {showElementsOnTopOfImage && (
-            <>
-              <View style={styles.imageOverlay}>
-                {imageOverlay && imageOverlay}
-              </View>
-              <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
-                {imageHeader && (
-                  <Text
-                    type={imageHeaderTextType}
-                    color="#ffffff"
-                    style={styles.imageHeader}
-                    numberOfLines={2}
-                  >
-                    {imageHeader}
-                  </Text>
-                )}
-              </View>
-              <LinearGradient
-                colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={styles.gradient}
-              />
-            </>
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: onBackground },
+            CONTAINER_STYLE[size],
+          ]}
+        >
+          <View>
+            <Image source={image} style={[styles.image, IMAGE_STYLE[size]]} />
+            {showElementsOnTopOfImage && (
+              <>
+                <View style={styles.imageOverlay}>
+                  {imageOverlay && imageOverlay}
+                </View>
+                <View style={[styles.imageContainer, IMAGE_STYLE[size]]}>
+                  {imageHeader && (
+                    <Text
+                      type={imageHeaderTextType}
+                      color="#ffffff"
+                      style={styles.imageHeader}
+                      numberOfLines={2}
+                    >
+                      {imageHeader}
+                    </Text>
+                  )}
+                </View>
+                <LinearGradient
+                  colors={["transparent", "rgba(0, 0, 0, 0.4)"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0, y: 1 }}
+                  style={styles.gradient}
+                />
+              </>
+            )}
+          </View>
+
+          {showBody && (
+            <View
+              style={[
+                styles.bodyContainer,
+                BODY_CONTAINER_STYLE[size],
+                { backgroundColor: onBackground },
+              ]}
+            >
+              {!!header && (
+                <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
+                  {header}
+                </Text>
+              )}
+              {!!subHeader && (
+                <Text
+                  type="subtextRegular"
+                  style={[styles.subHeader, SUBHEADER_STYLE[size]]}
+                  numberOfLines={1}
+                >
+                  {subHeader}
+                </Text>
+              )}
+              {!!supportiveText && (
+                <Text type="bodyRegular" style={styles.supportive}>
+                  {supportiveText}
+                </Text>
+              )}
+              {assets && assets}
+            </View>
+          )}
+          {showButton && (
+            <Button
+              label={buttonText ?? ""}
+              onPress={onPress}
+              size="full"
+              containerStyle={styles.button}
+            />
           )}
         </View>
-
-        {showBody && (
-          <View
-            style={[
-              styles.bodyContainer,
-              BODY_CONTAINER_STYLE[size],
-              { backgroundColor: onBackground },
-            ]}
-          >
-            {header && (
-              <Text type={BODY_HEADER_TYPE[size]} numberOfLines={1}>
-                {header}
-              </Text>
-            )}
-            {subHeader && (
-              <Text
-                type="subtextRegular"
-                style={[styles.subHeader, SUBHEADER_STYLE[size]]}
-                numberOfLines={1}
-              >
-                {subHeader}
-              </Text>
-            )}
-            {supportiveText && (
-              <Text type="bodyRegular" style={styles.supportive}>
-                {supportiveText}
-              </Text>
-            )}
-            {assets && assets}
-          </View>
-        )}
-        {showButton && (
-          <Button
-            label={buttonText ?? ""}
-            onPress={onPress}
-            size="full"
-            containerStyle={styles.button}
-          />
-        )}
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -220,6 +208,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
+    width: "100%",
     borderRadius: Spacing["sp1/2"],
     ...shadow({ x: 0, y: 2, opacity: 0.13, blurRadius: 8 }),
   },
