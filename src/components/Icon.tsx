@@ -20,21 +20,25 @@ import { omit } from "lodash";
 \* ========================================================================== */
 interface CustomIconProps extends IconProps {
   solid?: boolean;
-  outline?: boolean;
 }
 
 /* ========================================================================== *\
     METHODS
 \* ========================================================================== */
-const getIcomoonConfig = (isSolid: boolean, isOutline: boolean) => {
+const getIcomoonConfig = (isSolid: boolean) => {
   if (isSolid) {
     return require("../media/icomoon/icomoon_solid.json");
   }
-  if (isOutline) {
-    return require("../media/icomoon/icomoon_outline.json");
+
+  return require("../media/icomoon/icomoon_outline.json");
+};
+
+const getIcomoonType = (isSolid: boolean) => {
+  if (isSolid) {
+    return "icomoon_solid";
   }
 
-  return require("../media/icomoon/icomoon.json");
+  return "icomoon_outline";
 };
 
 /**
@@ -42,13 +46,13 @@ const getIcomoonConfig = (isSolid: boolean, isOutline: boolean) => {
  * @param props properties
  */
 const Icon: React.FC<CustomIconProps> = (props) => {
-  const { solid = false, outline = false } = props;
+  const { solid = false } = props;
 
-  const passIconProps = omit(props, "solid", "outline");
+  const passIconProps = omit(props, "solid");
 
   const VectorIcon = createIconSetFromIcoMoon(
-    getIcomoonConfig(solid, outline),
-    "icomoon"
+    getIcomoonConfig(solid),
+    getIcomoonType(solid)
   );
 
   return <VectorIcon {...passIconProps} />;

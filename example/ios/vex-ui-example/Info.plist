@@ -45,7 +45,8 @@
 		<string>SourceSansPro-Regular.ttf</string>
 		<string>SourceSansPro-SemiBold.ttf</string>
 		<string>SourceSansPro-Italic.ttf</string>
-		<string>icomoon.ttf</string>
+		<string>icomoon_solid.ttf</string>
+		<string>icomoon_outline.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
