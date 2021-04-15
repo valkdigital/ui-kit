@@ -20,7 +20,8 @@ const ThemeWrapper = ({ children }) => {
         "SourceSansPro-Regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
         "SourceSansPro-SemiBold": require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
         "SourceSansPro-Italic": require("../assets/fonts/SourceSansPro-Italic.ttf"),
-        "icomoon": require("../assets/fonts/icomoon.ttf"),
+        "icomoon_solid": require("../assets/fonts/icomoon_solid.ttf"),
+        "icomoon_outline": require("../assets/fonts/icomoon_outline.ttf"),
       });
     };
 

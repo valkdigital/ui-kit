@@ -2583,7 +2583,9 @@
     "fontPref": {
       "prefix": "icon-",
       "metadata": {
-        "fontFamily": "icomoon"
+        "fontFamily": "icomoon_outline",
+        "majorVersion": 1,
+        "minorVersion": 0
       },
       "metrics": {
         "emSize": 1024,
@@ -2597,11 +2599,14 @@
       "useClassSelector": true,
       "color": 0,
       "bgColor": 16777215,
-      "name": "icomoon",
-      "classSelector": ".icon"
+      "name": "icomoon_outline",
+      "classSelector": ".icon",
+      "height": 32,
+      "columns": 16,
+      "margin": 16
     },
     "historySize": 50,
     "gridSize": 16
   },
-  "time": 1617896551275
+  "time": 1618478891606
 }
