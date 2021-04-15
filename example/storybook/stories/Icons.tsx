@@ -15,7 +15,6 @@ const Icons: React.FC<IconsProps> = () => {
 
   return (
     <ScrollView contentContainerStyle={[styles.contentContainer]}>
-      <Text type="h1">Icons</Text>
       <Text type="h2">Icons default (outline)</Text>
       <View style={[styles.gridContainer]}>
         {IconSet.iconNames.map((name) => (

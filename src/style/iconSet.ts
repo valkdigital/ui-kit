@@ -1,3 +1,8 @@
+const types = {
+  solid: "icomoon_solid",
+  outline: "icomoon_outline",
+};
+
 const sizes = {
   "small": 16,
   "medium": 24,
@@ -88,6 +93,7 @@ const names = [
 const IconSet = {
   iconNames: names,
   iconSizes: sizes,
+  iconTypes: types,
 };
 
 export default IconSet;
