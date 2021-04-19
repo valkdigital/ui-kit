@@ -20,6 +20,7 @@ import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
 import Notification from "./components/Notification/Notification";
 import Icon from "./components/Icon";
+import type { TextInputType } from "./components/input/BaseInput";
 
 // Style & Theme exports
 export { Fonts, Spacing, IconSet, ThemeContext, Theme, shadow as Shadow };
@@ -53,4 +54,4 @@ export { Notification };
 export { Icon };
 
 // Types
-export type { TypographyLiterals, Option as PickerOption };
+export type { TypographyLiterals, Option as PickerOption, TextInputType };

@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  TextInput as RNTI,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { StyleSheet, ViewStyle, TextStyle } from "react-native";
 import BaseInput from "./BaseInput";
-import type { BaseInputProps } from "./BaseInput";
+import type { BaseInputProps, TextInputType } from "./BaseInput";
 import Typography from "../../style/typography";
 import { omit } from "lodash";
 import Spacing from "../../style/spacing";
@@ -33,20 +28,22 @@ interface XLTextInputProps extends Omit<BaseInputProps, "size"> {
   size?: Sizes;
 }
 
-const XLTextInput = React.forwardRef<RNTI, XLTextInputProps>((props, ref) => {
-  const { size = "large", style, containerStyle } = props;
-  const passInputProps = omit(props, "labelStyle");
+const XLTextInput = React.forwardRef<TextInputType, XLTextInputProps>(
+  (props, ref) => {
+    const { size = "large", style, containerStyle } = props;
+    const passInputProps = omit(props, "labelStyle");
 
-  return (
-    <BaseInput
-      ref={ref}
-      {...passInputProps}
-      style={[style, styles.input, TEXTSTYLE[size]]}
-      containerStyle={[containerStyle, SIZE[size]]}
-      labelStyle={styles.label}
-    />
-  );
-});
+    return (
+      <BaseInput
+        ref={ref}
+        {...passInputProps}
+        style={[style, styles.input, TEXTSTYLE[size]]}
+        containerStyle={[containerStyle, SIZE[size]]}
+        labelStyle={styles.label}
+      />
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   input: {
