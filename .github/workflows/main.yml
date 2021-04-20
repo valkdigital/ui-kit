@@ -25,6 +25,6 @@ jobs:
       - name: Deploy storybook
         run: |
           cd example 
-          npm run deploy-storybook -- --ci
-        with:
+          npm run deploy-storybook -- --ci -t=${{GH_TOKEN}}
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
