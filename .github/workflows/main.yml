@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
       - uses: actions/setup-node@v2.1.2
       - name: Install
         run: |
