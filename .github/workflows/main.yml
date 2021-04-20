@@ -24,9 +24,13 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+      - name: Build storybook
+        run: | 
+          cd example 
+          yarn build-storybook -o public
       - name: Deploy storybook
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh_pages
-          folder: public
+          folder: example/public
