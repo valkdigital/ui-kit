@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2.1.2
       - name: Install
         run: |
@@ -25,6 +27,7 @@ jobs:
       - name: Deploy storybook
         run: |
           cd example 
-          npm run deploy-storybook -- --ci -t=${{ secrets.GITHUB_TOKEN }}
+          npm run deploy-storybook -- --ci
         env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_TOKEN: ''
