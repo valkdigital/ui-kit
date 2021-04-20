@@ -25,9 +25,8 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
       - name: Deploy storybook
-        run: |
-          cd example 
-          npm run deploy-storybook -- --ci
-        env: 
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_TOKEN: ''
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh_pages
+          folder: public
