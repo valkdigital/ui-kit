@@ -26,3 +26,5 @@ jobs:
         run: |
           cd example 
           npm run deploy-storybook -- --ci -t=${{ secrets.GITHUB_TOKEN }}
+        env: 
+          INPUT_TOKEN: ''
