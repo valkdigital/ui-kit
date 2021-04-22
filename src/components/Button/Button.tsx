@@ -20,7 +20,6 @@ import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
 import { omit } from "lodash";
-import spacing from "../../style/spacing";
 
 enum ButtonTypes {
   default = "default",
