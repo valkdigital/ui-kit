@@ -20,8 +20,16 @@ import { omit } from "lodash";
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
-interface IconProps extends DefaultIconProps {
+interface IconProps extends Omit<DefaultIconProps, "size"> {
   solid?: boolean;
+  size?: IconSizes;
+}
+
+enum IconSizes {
+  small = IconSet.iconSizes.small,
+  medium = IconSet.iconSizes.medium,
+  large = IconSet.iconSizes.large,
+  xlarge = IconSet.iconSizes["x-large"],
 }
 
 /* ========================================================================== *\
@@ -48,7 +56,7 @@ const getIcomoonType = (isSolid: boolean) =>
  * @param props properties
  */
 const Icon: React.FC<IconProps> = (props) => {
-  const { size = IconSet.iconSizes.medium, solid = false } = props;
+  const { size = IconSizes.medium, solid = false } = props;
 
   const passIconProps = omit(props, "solid", "size");
 
