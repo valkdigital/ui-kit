@@ -23,7 +23,7 @@ enum IconSizes {
   small = IconSet.iconSizes.small,
   medium = IconSet.iconSizes.medium,
   large = IconSet.iconSizes.large,
-  xlarge = IconSet.iconSizes["x-large"],
+  xlarge = IconSet.iconSizes.xlarge,
 }
 /* == TYPES ================================================================= */
 
@@ -77,4 +77,5 @@ const Icon: React.FC<IconProps> = (props) => {
   EXPORTS
 \* ========================================================================== */
 export default Icon;
+export { IconSizes };
 /* == EXPORTS =============================================================== */
