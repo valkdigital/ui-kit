@@ -10,12 +10,22 @@
 \* ========================================================================== */
 import React from "react";
 import { createIconSetFromIcoMoon } from "react-native-vector-icons";
-import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
-
 import IconSet from "../style/iconSet";
-
 import { omit } from "lodash";
 /* == IMPORTS =============================================================== */
+
+/* ========================================================================== *\
+    TYPES
+\* ========================================================================== */
+import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
+
+enum IconSizes {
+  small = IconSet.iconSizes.small,
+  medium = IconSet.iconSizes.medium,
+  large = IconSet.iconSizes.large,
+  xlarge = IconSet.iconSizes["x-large"],
+}
+/* == TYPES ================================================================= */
 
 /* ========================================================================== *\
     INTERFACE
@@ -24,13 +34,7 @@ interface IconProps extends Omit<DefaultIconProps, "size"> {
   solid?: boolean;
   size?: IconSizes;
 }
-
-enum IconSizes {
-  small = IconSet.iconSizes.small,
-  medium = IconSet.iconSizes.medium,
-  large = IconSet.iconSizes.large,
-  xlarge = IconSet.iconSizes["x-large"],
-}
+/* == INTERFACE ============================================================= */
 
 /* ========================================================================== *\
     METHODS
