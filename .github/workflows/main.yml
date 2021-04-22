@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v2.1.2
       - name: Install
         run: |
@@ -22,10 +24,15 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
-      - name: Deploy storybook
-        run: |
+      - name: Build storybook
+        run: | 
           cd example 
-          npm run deploy-storybook -- --ci
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_TOKEN: ""
+          yarn build-storybook -o public
+        env: 
+          INPUT_TOKEN: ''
+      - name: Deploy storybook
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh_pages
+          folder: example/public

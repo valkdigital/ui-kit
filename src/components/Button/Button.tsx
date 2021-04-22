@@ -15,10 +15,12 @@ import {
 } from "react-native";
 import shadow from "../../style/shadow";
 import Text from "../Text";
+import Icon from "../Icon";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
 import { omit } from "lodash";
+import spacing from "../../style/spacing";
 
 enum ButtonTypes {
   default = "default",
@@ -43,6 +45,9 @@ interface ButtonProps extends Omit<PressableProps, "children"> {
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
+  icon?: string;
+  iconColor?: string;
+  iconOpposite?: boolean;
   image?: ImageProps["source"];
   imageStyle?: StyleProp<ImageStyle>;
   onLayout?: (event: LayoutChangeEvent) => void;
@@ -89,6 +94,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     disabled,
     loading,
     currentProgress,
+    icon,
+    iconColor = "white",
+    iconOpposite = false,
     image,
     imageStyle,
     onLayout,
@@ -107,6 +115,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     "disabled",
     "loading",
     "currentProgress",
+    "icon",
+    "iconColor",
+    "iconOpposite",
     "image",
     "imageStyle",
     "onLayout"
@@ -163,9 +174,26 @@ const Button: React.FC<ButtonProps> = (props) => {
                 source={image}
               />
             )}
+
+            {icon && iconOpposite && (
+              <Icon
+                name={icon}
+                solid={true}
+                style={[styles.icon, { color: iconColor }]}
+              />
+            )}
+
             <Text type="h6" color={buttonLabelColor}>
               {label}
             </Text>
+
+            {icon && !iconOpposite && (
+              <Icon
+                name={icon}
+                solid={true}
+                style={[styles.icon, { color: iconColor }]}
+              />
+            )}
           </>
         )}
       </Pressable>
@@ -210,6 +238,12 @@ const styles = StyleSheet.create({
     marginRight: Spacing.sp1,
     width: 24,
     height: 24,
+  },
+
+  icon: {
+    marginLeft: Spacing.sp1,
+    marginRight: Spacing.sp1,
+    textAlign: "center",
   },
 
   progressbarContainer: {

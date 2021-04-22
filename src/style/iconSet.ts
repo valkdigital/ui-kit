@@ -4,10 +4,10 @@ const types = {
 };
 
 const sizes = {
-  "small": 16,
-  "medium": 24,
-  "large": 32,
-  "x-large": 64,
+  small: 16,
+  medium: 24,
+  large: 32,
+  xlarge: 64,
 };
 
 const names = [
@@ -22,6 +22,9 @@ const names = [
   "cashier",
   "checkmark",
   "chevron-down",
+  "chevron-right",
+  "chevron-left",
+  "chevron-up",
   "clock",
   "close",
   "coffee",
