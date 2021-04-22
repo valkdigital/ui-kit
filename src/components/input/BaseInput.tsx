@@ -243,3 +243,4 @@ const styles = StyleSheet.create({
 });
 
 export default BaseInput;
+export type { RNTI as TextInputType };

@@ -19,6 +19,7 @@ import {
   TextButton,
   SegmentControl,
   XLTextInput,
+  TextInputType,
 } from "@valkdigital/ui-kit";
 import Buttons from "./Buttons";
 import { withKnobs, color, array } from "@storybook/addon-knobs";
@@ -190,7 +191,8 @@ iconStories.add("Icons", () => {
 const inputStories = storiesOf("Inputs", module);
 
 const Fields: React.FC = () => {
-  const ref = useRef<any>(null);
+  const ref = useRef<TextInputType>(null);
+
   return (
     <CenteredView>
       <View style={{ width: "100%", paddingHorizontal: Spacing.sp2 }}>
@@ -200,8 +202,7 @@ const Fields: React.FC = () => {
           placeholder="Placeholder"
           error="Invalid input"
           onSubmitEditing={() => {
-            console.log(ref?.current);
-            ref?.current?.focus();
+            ref.current?.focus();
           }}
         />
         <TextInput
@@ -212,8 +213,7 @@ const Fields: React.FC = () => {
           multiline={true}
           useFullHeight={true}
           onSubmitEditing={() => {
-            console.log(ref?.current);
-            ref?.current?.focus();
+            ref.current?.focus();
           }}
         />
         <TextInput

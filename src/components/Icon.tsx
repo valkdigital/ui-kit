@@ -10,7 +10,9 @@
 \* ========================================================================== */
 import React from "react";
 import { createIconSetFromIcoMoon } from "react-native-vector-icons";
-import type { IconProps } from "react-native-vector-icons/Icon";
+import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
+
+import IconSet from "../style/iconSet";
 
 import { omit } from "lodash";
 /* == IMPORTS =============================================================== */
@@ -18,40 +20,44 @@ import { omit } from "lodash";
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
-interface CustomIconProps extends IconProps {
+interface IconProps extends DefaultIconProps {
   solid?: boolean;
-  outline?: boolean;
 }
 
 /* ========================================================================== *\
     METHODS
 \* ========================================================================== */
-const getIcomoonConfig = (isSolid: boolean, isOutline: boolean) => {
-  if (isSolid) {
-    return require("../media/icomoon/icomoon_solid.json");
-  }
-  if (isOutline) {
-    return require("../media/icomoon/icomoon_outline.json");
-  }
+/**
+ * getIcomoonConfig
+ * @param isSolid
+ */
+const getIcomoonConfig = (isSolid: boolean) =>
+  isSolid
+    ? require("../media/icomoon/icomoon_solid.json")
+    : require("../media/icomoon/icomoon_outline.json");
 
-  return require("../media/icomoon/icomoon.json");
-};
+/**
+ * getIcomoonType
+ * @param isSolid
+ */
+const getIcomoonType = (isSolid: boolean) =>
+  isSolid ? IconSet.iconTypes.solid : IconSet.iconTypes.outline;
 
 /**
  * Icon
  * @param props properties
  */
-const Icon: React.FC<CustomIconProps> = (props) => {
-  const { solid = false, outline = false } = props;
+const Icon: React.FC<IconProps> = (props) => {
+  const { size = IconSet.iconSizes.medium, solid = false } = props;
 
-  const passIconProps = omit(props, "solid", "outline");
+  const passIconProps = omit(props, "solid", "size");
 
   const VectorIcon = createIconSetFromIcoMoon(
-    getIcomoonConfig(solid, outline),
-    "icomoon"
+    getIcomoonConfig(solid),
+    getIcomoonType(solid)
   );
 
-  return <VectorIcon {...passIconProps} />;
+  return <VectorIcon size={size} {...passIconProps} />;
 };
 /* == METHODS =============================================================== */
 
