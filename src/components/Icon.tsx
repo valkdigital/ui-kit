@@ -25,13 +25,14 @@ enum IconSizes {
   large = IconSet.iconSizes.large,
   xlarge = IconSet.iconSizes.xlarge,
 }
+type IconNames = typeof IconSet.iconNames[number];
 /* == TYPES ================================================================= */
 
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
 interface IconProps extends Omit<DefaultIconProps, "size" | "name"> {
-  name: typeof IconSet.iconNames[number];
+  name: IconNames;
   solid?: boolean;
   size?: IconSizes;
 }
@@ -78,5 +79,5 @@ const Icon: React.FC<IconProps> = (props) => {
   EXPORTS
 \* ========================================================================== */
 export default Icon;
-export { IconSizes };
+export { IconSizes, IconNames };
 /* == EXPORTS =============================================================== */
