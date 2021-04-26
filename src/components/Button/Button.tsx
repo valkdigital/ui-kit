@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import shadow from "../../style/shadow";
 import Text from "../Text";
-import Icon from "../Icon";
+import Icon, { IconNames } from "../Icon";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
@@ -44,7 +44,7 @@ interface ButtonProps extends Omit<PressableProps, "children"> {
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
-  icon?: string;
+  icon?: IconNames;
   iconColor?: string;
   iconOpposite?: boolean;
   image?: ImageProps["source"];
