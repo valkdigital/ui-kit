@@ -43,8 +43,8 @@ const Icons: React.FC<IconsProps> = () => {
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes["x-large"]}`}
-              size={IconSet.iconSizes["x-large"]}
+              key={`${name}-${IconSet.iconSizes.xlarge}`}
+              size={IconSet.iconSizes.xlarge}
               color={typography.color}
             />
           </View>
@@ -82,8 +82,8 @@ const Icons: React.FC<IconsProps> = () => {
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes["x-large"]}`}
-              size={IconSet.iconSizes["x-large"]}
+              key={`${name}-${IconSet.iconSizes.xlarge}`}
+              size={IconSet.iconSizes.xlarge}
               color={typography.color}
               solid={true}
             />
