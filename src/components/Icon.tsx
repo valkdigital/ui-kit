@@ -30,7 +30,8 @@ enum IconSizes {
 /* ========================================================================== *\
     INTERFACE
 \* ========================================================================== */
-interface IconProps extends Omit<DefaultIconProps, "size"> {
+interface IconProps extends Omit<DefaultIconProps, "size" | "name"> {
+  name: typeof IconSet.iconNames[number];
   solid?: boolean;
   size?: IconSizes;
 }

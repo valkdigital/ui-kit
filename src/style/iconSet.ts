@@ -91,7 +91,7 @@ const names = [
   "review",
   "table",
   "warning",
-];
+] as const;
 
 const IconSet = {
   iconNames: names,
