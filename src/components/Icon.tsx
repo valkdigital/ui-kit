@@ -8,9 +8,10 @@
 /* ========================================================================== *\
   IMPORTS
 \* ========================================================================== */
-import React from "react";
+import React, { useContext } from "react";
 import { createIconSetFromIcoMoon } from "react-native-vector-icons";
 import IconSet from "../style/iconSet";
+import ThemeContext from "../style/ThemeContext";
 import { omit } from "lodash";
 /* == IMPORTS =============================================================== */
 
@@ -19,13 +20,8 @@ import { omit } from "lodash";
 \* ========================================================================== */
 import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
 
-enum IconSizes {
-  small = IconSet.iconSizes.small,
-  medium = IconSet.iconSizes.medium,
-  large = IconSet.iconSizes.large,
-  xlarge = IconSet.iconSizes.xlarge,
-}
-type IconNames = typeof IconSet.iconNames[number];
+type IconSizes = keyof typeof IconSet.sizes;
+type IconNames = typeof IconSet.names[number];
 /* == TYPES ================================================================= */
 
 /* ========================================================================== *\
@@ -55,23 +51,27 @@ const getIcomoonConfig = (isSolid: boolean) =>
  * @param isSolid
  */
 const getIcomoonType = (isSolid: boolean) =>
-  isSolid ? IconSet.iconTypes.solid : IconSet.iconTypes.outline;
+  isSolid ? IconSet.types.solid : IconSet.types.outline;
 
 /**
  * Icon
  * @param props properties
  */
 const Icon: React.FC<IconProps> = (props) => {
-  const { size = IconSizes.medium, solid = false } = props;
+  const { typography } = useContext(ThemeContext);
 
-  const passIconProps = omit(props, "solid", "size");
+  const { size = "medium", solid = false, color = typography.color } = props;
+
+  const passIconProps = omit(props, "solid", "size", "color");
 
   const VectorIcon = createIconSetFromIcoMoon(
     getIcomoonConfig(solid),
     getIcomoonType(solid)
   );
 
-  return <VectorIcon size={size} {...passIconProps} />;
+  return (
+    <VectorIcon size={IconSet.sizes[size]} color={color} {...passIconProps} />
+  );
 };
 /* == METHODS =============================================================== */
 

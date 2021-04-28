@@ -94,9 +94,9 @@ const names = [
 ] as const;
 
 const IconSet = {
-  iconNames: names,
-  iconSizes: sizes,
-  iconTypes: types,
+  names,
+  sizes,
+  types,
 };
 
 export default IconSet;
