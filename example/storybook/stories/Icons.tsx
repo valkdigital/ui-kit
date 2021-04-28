@@ -17,7 +17,7 @@ const Icons: React.FC<IconsProps> = () => {
     <ScrollView contentContainerStyle={[styles.contentContainer]}>
       <Text type="h2">Icons default (outline)</Text>
       <View style={[styles.gridContainer]}>
-        {IconSet.iconNames.map((name) => (
+        {IconSet.names.map((name) => (
           <View
             style={[styles.wrapper, { borderColor: grey[8] }]}
             key={`${name}-wrapper`}
@@ -25,26 +25,26 @@ const Icons: React.FC<IconsProps> = () => {
             <Text type="h4">{name}</Text>
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.small}`}
-              size={IconSet.iconSizes.small}
+              key={`${name}-small`}
+              size="small"
               color={typography.color}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.medium}`}
-              size={IconSet.iconSizes.medium}
+              key={`${name}-medium`}
+              size="medium"
               color={typography.color}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.large}`}
-              size={IconSet.iconSizes.large}
+              key={`${name}-large`}
+              size="large"
               color={typography.color}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.xlarge}`}
-              size={IconSet.iconSizes.xlarge}
+              key={`${name}-xlarge`}
+              size="xlarge"
               color={typography.color}
             />
           </View>
@@ -53,7 +53,7 @@ const Icons: React.FC<IconsProps> = () => {
 
       <Text type="h2">Icons solid</Text>
       <View style={[styles.gridContainer]}>
-        {IconSet.iconNames.map((name) => (
+        {IconSet.names.map((name) => (
           <View
             style={[styles.wrapper, { borderColor: grey[8] }]}
             key={`${name}-wrapper`}
@@ -61,29 +61,25 @@ const Icons: React.FC<IconsProps> = () => {
             <Text type="h4">{name}</Text>
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.small}`}
-              size={IconSet.iconSizes.small}
+              size="small"
               color={typography.color}
               solid={true}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.medium}`}
-              size={IconSet.iconSizes.medium}
+              size="medium"
               color={typography.color}
               solid={true}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.large}`}
-              size={IconSet.iconSizes.large}
+              size="large"
               color={typography.color}
               solid={true}
             />
             <Icon
               name={name}
-              key={`${name}-${IconSet.iconSizes.xlarge}`}
-              size={IconSet.iconSizes.xlarge}
+              size="xlarge"
               color={typography.color}
               solid={true}
             />
