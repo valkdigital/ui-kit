@@ -103,6 +103,27 @@ const Buttons: React.FC<ButtonsProps> = () => {
         color={color("color", "#FF8100", "cta")}
         image={require("../../src/media/plus.png")}
       />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Icon button"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        color={color("color", "#FF8100", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        icon="chevron-right"
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Icon opposite button"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        labelColor={color("label color", "#FFFFFF", "cta")}
+        color={color("color", "#FF8100", "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        icon="chevron-left"
+        iconOpposite={true}
+      />
     </ScrollView>
   );
 };
