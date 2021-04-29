@@ -91,12 +91,12 @@ const names = [
   "review",
   "table",
   "warning",
-];
+] as const;
 
 const IconSet = {
-  iconNames: names,
-  iconSizes: sizes,
-  iconTypes: types,
+  names,
+  sizes,
+  types,
 };
 
 export default IconSet;

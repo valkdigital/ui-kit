@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import shadow from "../../style/shadow";
 import Text from "../Text";
-import Icon from "../Icon";
+import Icon, { IconNames } from "../Icon";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
@@ -44,7 +44,7 @@ interface ButtonProps extends Omit<PressableProps, "children"> {
   loading?: boolean;
   disabled?: boolean;
   currentProgress?: string | number;
-  icon?: string;
+  icon?: IconNames;
   iconColor?: string;
   iconOpposite?: boolean;
   image?: ImageProps["source"];
@@ -159,6 +159,7 @@ const Button: React.FC<ButtonProps> = (props) => {
           defaultStyle,
           buttonStyle,
           (pressed || disabled) && { opacity: 0.4 },
+          icon && styles.buttonWithIconStyle,
         ]}
         disabled={disabled}
         {...passButtonProps}
@@ -182,7 +183,14 @@ const Button: React.FC<ButtonProps> = (props) => {
               />
             )}
 
-            <Text type="h6" color={buttonLabelColor}>
+            <Text
+              type="h6"
+              color={buttonLabelColor}
+              style={[
+                icon && styles.labelWithIcon,
+                iconOpposite && styles.labelWithIconOppostie,
+              ]}
+            >
               {label}
             </Text>
 
@@ -240,9 +248,25 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    marginLeft: Spacing.sp1,
-    marginRight: Spacing.sp1,
     textAlign: "center",
+    width: 24,
+    height: 24,
+  },
+
+  buttonWithIconStyle: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  labelWithIcon: {
+    flexGrow: 1,
+    textAlign: "center",
+    paddingLeft: Spacing.sp3,
+  },
+
+  labelWithIconOppostie: {
+    paddingLeft: 0,
+    paddingRight: Spacing.sp3,
   },
 
   progressbarContainer: {

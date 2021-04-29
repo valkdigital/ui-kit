@@ -1,13 +1,12 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
 import {
-  Meta,
-  Story,
-  ColorPalette,
-  ColorItem,
-  Props
-} from "@storybook/addon-docs/blocks";
-import { ThemeManager, Text, Icon, Spacing, IconSet} from "@valkdigital/ui-kit";
-import Icons from "../storybook/stories/Icons"
-
+  ThemeManager,
+  Text,
+  Icon,
+  Spacing,
+  IconSet,
+} from "@valkdigital/ui-kit";
+import Icons from "../storybook/stories/Icons";
 
 <Meta title="Icons" />
 
@@ -24,78 +23,74 @@ import Icons from "../storybook/stories/Icons"
       },
     }}
   >
-  <View style={{flexDirection: "column", flexWrap: "wrap", overflow: "hidden", paddingHorizontal: Spacing.sp1, paddingTop: Spacing.sp1}} >
+    <View
+      style={{
+        flexDirection: "column",
+        flexWrap: "wrap",
+        overflow: "hidden",
+        paddingHorizontal: Spacing.sp1,
+        paddingTop: Spacing.sp1,
+      }}
+    >
       <Text type="h2">Icons default (outline)</Text>
-      <View style={{alignItems: "flex-start", display: "flex", flexDirection: "row", flexWrap: "wrap", maxWidth: 1400}}>
-        {IconSet.iconNames.map((name) => (
+      <View
+        style={{
+          alignItems: "flex-start",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          maxWidth: 1400,
+        }}
+      >
+        {IconSet.names.map((name) => (
           <View
-            style={{borderWidth: 1, borderColor: "black", borderStyle: "solid", display: "flex", margin: Spacing.sp1, flexDirection: "column", padding: Spacing.sp1}}
+            style={{
+              borderWidth: 1,
+              borderColor: "black",
+              borderStyle: "solid",
+              display: "flex",
+              margin: Spacing.sp1,
+              flexDirection: "column",
+              padding: Spacing.sp1,
+            }}
             key={`${name}-wrapper`}
           >
             <Text type="h4">{name}</Text>
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.small}`}
-              size={IconSet.iconSizes.small}
-              color="black"
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.medium}`}
-              size={IconSet.iconSizes.medium}
-              color="black"
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.large}`}
-              size={IconSet.iconSizes.large}
-              color="black"
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.xlarge}`}
-              size={IconSet.iconSizes.xlarge}
-              color="black"
-            />
+            <Icon name={name} size="small" />
+            <Icon name={name} size="medium" />
+            <Icon name={name} size="large" />
+            <Icon name={name} size="xlarge" />
           </View>
         ))}
       </View>
       <Text type="h2">Icons solid</Text>
-      <View style={{alignItems: "flex-start", display: "flex", flexDirection: "row", flexWrap: "wrap", maxWidth: 1400}}>
-        {IconSet.iconNames.map((name) => (
+      <View
+        style={{
+          alignItems: "flex-start",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          maxWidth: 1400,
+        }}
+      >
+        {IconSet.names.map((name) => (
           <View
-            style={{borderWidth: 1, borderColor: "black", borderStyle: "solid", display: "flex", margin: Spacing.sp1, flexDirection: "column", padding: Spacing.sp1}}
+            style={{
+              borderWidth: 1,
+              borderColor: "black",
+              borderStyle: "solid",
+              display: "flex",
+              margin: Spacing.sp1,
+              flexDirection: "column",
+              padding: Spacing.sp1,
+            }}
             key={`${name}-wrapper`}
           >
             <Text type="h4">{name}</Text>
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.small}`}
-              size={IconSet.iconSizes.small}
-              color="black"
-              solid={true}
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.medium}`}
-              size={IconSet.iconSizes.medium}
-              color="black"
-              solid={true}
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.large}`}
-              size={IconSet.iconSizes.large}
-              color="black"
-              solid={true}
-            />
-            <Icon
-              name={name}
-              key={`${name}-${IconSet.iconSizes.xlarge}`}
-              size={IconSet.iconSizes.xlarge}
-              color="black"
-              solid={true}
-            />
+            <Icon name={name} size="small" solid={true} />
+            <Icon name={name} size="medium" solid={true} />
+            <Icon name={name} size="large" solid={true} />
+            <Icon name={name} size="xlarge" solid={true} />
           </View>
         ))}
       </View>
