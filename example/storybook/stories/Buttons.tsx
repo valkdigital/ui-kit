@@ -19,9 +19,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
         label="Full button"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       >
         <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
           helper text
@@ -33,9 +31,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
         label="Full button"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       >
         <Text style={{ marginLeft: Spacing.sp2 }} color="#C2C2C2">
           Select a date of stay
@@ -59,18 +55,14 @@ const Buttons: React.FC<ButtonsProps> = () => {
         label="Full button progressbar"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
         label="Medium button"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
@@ -78,9 +70,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
         size="small"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
@@ -88,9 +78,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
         type="ghost"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
       />
       <Button
         onPress={() => console.log("pressed")}
@@ -98,9 +86,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
         type="ghost"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        color={color("color", "#FF8100", "cta")}
         image={require("../../src/media/plus.png")}
       />
       <Button
@@ -108,8 +94,6 @@ const Buttons: React.FC<ButtonsProps> = () => {
         label="Icon button"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
-        color={color("color", "#FF8100", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
         icon="chevron-right"
       />
@@ -118,8 +102,6 @@ const Buttons: React.FC<ButtonsProps> = () => {
         label="Icon opposite button"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
-        labelColor={color("label color", "#FFFFFF", "cta")}
-        color={color("color", "#FF8100", "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
         icon="chevron-left"
         iconOpposite={true}
