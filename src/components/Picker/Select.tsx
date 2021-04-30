@@ -97,13 +97,7 @@ const Select: React.FC<SelectProps> = ({
           disabled={disabled}
         >
           <View style={styles.row}>
-            {selectedOption?.image && (
-              <Image
-                source={selectedOption?.image}
-                style={styles.optionImage as StyleProp<ImageStyle>}
-                resizeMode="contain"
-              />
-            )}
+            {selectedOption?.leftComponent && selectedOption?.leftComponent}
             <Text
               type="bodyRegular"
               numberOfLines={1}
@@ -161,6 +155,7 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: "row",
+    alignItems: "center",
   },
   optionImage: {
     width: Spacing.sp3,

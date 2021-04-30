@@ -23,7 +23,7 @@ class PickerRow extends React.PureComponent<PickerRowProps> {
       needsSpaceForAlphabet,
       isFirstOption,
     } = this.props;
-    const { label, extraLabel, image } = option;
+    const { label, extraLabel, leftComponent } = option;
     return (
       <TouchableOpacity
         style={[
@@ -33,13 +33,7 @@ class PickerRow extends React.PureComponent<PickerRowProps> {
         ]}
         onPress={() => onSelectOption(option)}
       >
-        {image && (
-          <Image
-            source={image}
-            style={styles.optionImage}
-            resizeMode="contain"
-          />
-        )}
+        {leftComponent && leftComponent}
 
         <Text type="bodyRegular" numberOfLines={2} style={styles.label}>
           {label}
@@ -73,12 +67,6 @@ const styles = StyleSheet.create({
     height: Spacing.sp7,
     marginHorizontal: Spacing.sp3,
     paddingVertical: Spacing.sp2,
-  },
-  optionImage: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    alignSelf: "center",
-    marginRight: Spacing.sp1,
   },
   checkmark: {
     width: 16,
