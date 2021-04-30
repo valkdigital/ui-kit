@@ -157,12 +157,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  optionImage: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    alignSelf: "center",
-    marginRight: Spacing.sp1,
-  },
   chevron: {
     marginLeft: Spacing.sp2,
     width: 14,
