@@ -5543,7 +5543,7 @@ const putFlagInTextComponent = (
       return result;
     },
     {}
-  );
+  ) as Record<CountryCodes, Option>;
 };
 
 const styles = StyleSheet.create({
