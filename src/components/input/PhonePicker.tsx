@@ -43,13 +43,7 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
             style={[styles.selectContainer, { borderColor: border }]}
             disabled={disabled}
           >
-            {selectedOption?.image && (
-              <Image
-                source={selectedOption?.image}
-                style={styles.optionImage}
-                resizeMode="contain"
-              />
-            )}
+            {selectedOption?.leftComponent && selectedOption.leftComponent}
             <Image
               source={require("../../media/arrow_down.png")}
               style={[styles.arrow, { tintColor: typography.color }]}
@@ -69,12 +63,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     borderRightWidth: 1,
-    marginRight: Spacing.sp1,
-  },
-  optionImage: {
-    width: Spacing.sp3,
-    height: Spacing.sp3,
-    alignSelf: "center",
     marginRight: Spacing.sp1,
   },
   arrow: {

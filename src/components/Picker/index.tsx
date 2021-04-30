@@ -5,7 +5,6 @@ import {
   Animated,
   PanResponder,
   Keyboard,
-  ImageSourcePropType,
   StyleProp,
   LayoutAnimation,
 } from "react-native";
@@ -19,7 +18,7 @@ export interface Option {
   label: string;
   extraLabel?: string;
   value: any;
-  image?: ImageSourcePropType;
+  leftComponent?: JSX.Element | null | boolean;
 }
 
 export interface SelectComponentProps {
@@ -44,7 +43,7 @@ export interface PickerProps {
    * label: string;
    * extraLabel?: string;
    * value: any;
-   * image?: ImageSourcePropType;
+   * leftComponent?: JSX.Element | null | boolean;
    * }`
    */
   options?: Option[];
