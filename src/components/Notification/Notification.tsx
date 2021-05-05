@@ -224,7 +224,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
             {!isEmpty(heading) && (
               <Text
                 style={[{ color: colorsByType[type].contentText }]}
-                type="subtextSemiBold"
+                type="bodySemiBold"
               >
                 {heading}
               </Text>
@@ -233,7 +233,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
             {!isEmpty(content) && (
               <Text
                 style={[{ color: colorsByType[type].contentText }]}
-                type="subtextRegular"
+                type="bodyRegular"
               >
                 {content}
               </Text>
