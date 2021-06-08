@@ -8,7 +8,7 @@
     {
       "selection": [
         {
-          "order": 13,
+          "order": 150,
           "id": 141,
           "name": "actions",
           "prevSize": 32,
@@ -16,12 +16,20 @@
           "tempChar": ""
         },
         {
+          "order": 151,
+          "id": 145,
+          "prevSize": 32,
+          "code": 59654,
+          "name": "actions-horizontal",
+          "tempChar": ""
+        },
+        {
           "order": 15,
           "id": 139,
           "name": "addresses",
           "prevSize": 32,
           "code": 59661,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 17,
@@ -29,7 +37,7 @@
           "name": "archive",
           "prevSize": 32,
           "code": 59663,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 19,
@@ -37,7 +45,7 @@
           "name": "assistent",
           "prevSize": 32,
           "code": 59665,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 20,
@@ -45,7 +53,7 @@
           "name": "bike",
           "prevSize": 32,
           "code": 59666,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 22,
@@ -53,7 +61,7 @@
           "name": "briefcase",
           "prevSize": 32,
           "code": 59668,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 24,
@@ -61,7 +69,7 @@
           "name": "calendar",
           "prevSize": 32,
           "code": 59670,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 26,
@@ -69,7 +77,7 @@
           "name": "camera",
           "prevSize": 32,
           "code": 59672,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 28,
@@ -77,7 +85,7 @@
           "name": "cashier",
           "prevSize": 32,
           "code": 59674,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 29,
@@ -85,7 +93,7 @@
           "name": "checkmark",
           "prevSize": 32,
           "code": 59675,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 30,
@@ -93,7 +101,7 @@
           "name": "chevron-down",
           "prevSize": 32,
           "code": 59676,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 147,
@@ -101,7 +109,7 @@
           "prevSize": 32,
           "code": 59648,
           "name": "chevron-right",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 148,
@@ -109,7 +117,7 @@
           "prevSize": 32,
           "code": 59650,
           "name": "chevron-left",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 149,
@@ -117,7 +125,7 @@
           "prevSize": 32,
           "code": 59652,
           "name": "chevron-up",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 146,
@@ -125,7 +133,7 @@
           "name": "clock",
           "prevSize": 32,
           "code": 59678,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 33,
@@ -133,7 +141,7 @@
           "name": "close",
           "prevSize": 32,
           "code": 59679,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 35,
@@ -141,7 +149,7 @@
           "name": "coffee",
           "prevSize": 32,
           "code": 59681,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 37,
@@ -149,7 +157,7 @@
           "name": "compass",
           "prevSize": 32,
           "code": 59683,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 39,
@@ -157,7 +165,7 @@
           "name": "dashboard",
           "prevSize": 32,
           "code": 59685,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 40,
@@ -165,7 +173,7 @@
           "name": "do-not-disturb",
           "prevSize": 32,
           "code": 59686,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 42,
@@ -173,7 +181,7 @@
           "name": "document",
           "prevSize": 32,
           "code": 59688,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 43,
@@ -181,7 +189,7 @@
           "name": "download",
           "prevSize": 32,
           "code": 59689,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 45,
@@ -189,7 +197,7 @@
           "name": "education",
           "prevSize": 32,
           "code": 59691,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 47,
@@ -197,7 +205,7 @@
           "name": "email",
           "prevSize": 32,
           "code": 59693,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 49,
@@ -205,7 +213,7 @@
           "name": "favorite",
           "prevSize": 32,
           "code": 59695,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 51,
@@ -213,7 +221,7 @@
           "name": "filter",
           "prevSize": 32,
           "code": 59697,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 145,
@@ -221,7 +229,7 @@
           "name": "help",
           "prevSize": 32,
           "code": 59699,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 55,
@@ -229,7 +237,7 @@
           "name": "hide",
           "prevSize": 32,
           "code": 59701,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 57,
@@ -237,7 +245,7 @@
           "name": "hotel",
           "prevSize": 32,
           "code": 59703,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 59,
@@ -245,7 +253,7 @@
           "name": "id-card",
           "prevSize": 32,
           "code": 59705,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 61,
@@ -253,7 +261,7 @@
           "name": "information",
           "prevSize": 32,
           "code": 59707,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 63,
@@ -261,7 +269,7 @@
           "name": "internet",
           "prevSize": 32,
           "code": 59709,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 65,
@@ -269,7 +277,7 @@
           "name": "key",
           "prevSize": 32,
           "code": 59711,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 67,
@@ -277,7 +285,7 @@
           "name": "kids-club",
           "prevSize": 32,
           "code": 59713,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 69,
@@ -285,7 +293,7 @@
           "name": "label",
           "prevSize": 32,
           "code": 59715,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 71,
@@ -293,7 +301,7 @@
           "name": "language",
           "prevSize": 32,
           "code": 59717,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 73,
@@ -301,7 +309,7 @@
           "name": "like",
           "prevSize": 32,
           "code": 59719,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 75,
@@ -309,7 +317,7 @@
           "name": "lock-edit",
           "prevSize": 32,
           "code": 59721,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 77,
@@ -317,7 +325,7 @@
           "name": "logout",
           "prevSize": 32,
           "code": 59723,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 79,
@@ -325,7 +333,7 @@
           "name": "mail-edit",
           "prevSize": 32,
           "code": 59725,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 81,
@@ -333,7 +341,7 @@
           "name": "map",
           "prevSize": 32,
           "code": 59727,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 83,
@@ -341,7 +349,7 @@
           "name": "messages",
           "prevSize": 32,
           "code": 59729,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 84,
@@ -349,7 +357,7 @@
           "name": "minus",
           "prevSize": 32,
           "code": 59730,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 86,
@@ -357,7 +365,7 @@
           "name": "nights",
           "prevSize": 32,
           "code": 59732,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 88,
@@ -365,7 +373,7 @@
           "name": "notification-alert",
           "prevSize": 32,
           "code": 59734,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 90,
@@ -373,7 +381,7 @@
           "name": "notification",
           "prevSize": 32,
           "code": 59736,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 92,
@@ -381,7 +389,7 @@
           "name": "overview-home",
           "prevSize": 32,
           "code": 59738,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 94,
@@ -389,7 +397,7 @@
           "name": "people",
           "prevSize": 32,
           "code": 59740,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 96,
@@ -397,7 +405,7 @@
           "name": "person",
           "prevSize": 32,
           "code": 59742,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 98,
@@ -405,7 +413,7 @@
           "name": "phone",
           "prevSize": 32,
           "code": 59744,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 100,
@@ -413,7 +421,7 @@
           "name": "picture",
           "prevSize": 32,
           "code": 59746,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 101,
@@ -421,7 +429,7 @@
           "name": "plus",
           "prevSize": 32,
           "code": 59747,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 103,
@@ -429,7 +437,7 @@
           "name": "present",
           "prevSize": 32,
           "code": 59749,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 105,
@@ -437,7 +445,7 @@
           "name": "print",
           "prevSize": 32,
           "code": 59751,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 107,
@@ -445,7 +453,7 @@
           "name": "privacy",
           "prevSize": 32,
           "code": 59753,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 109,
@@ -453,7 +461,7 @@
           "name": "profile",
           "prevSize": 32,
           "code": 59755,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 110,
@@ -461,7 +469,7 @@
           "name": "qr-code",
           "prevSize": 32,
           "code": 59756,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 112,
@@ -469,7 +477,7 @@
           "name": "receipt",
           "prevSize": 32,
           "code": 59758,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 113,
@@ -477,7 +485,7 @@
           "name": "reload",
           "prevSize": 32,
           "code": 59759,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 115,
@@ -485,7 +493,7 @@
           "name": "report",
           "prevSize": 32,
           "code": 59761,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 117,
@@ -493,7 +501,7 @@
           "name": "restaurant",
           "prevSize": 32,
           "code": 59763,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 119,
@@ -501,7 +509,7 @@
           "name": "room",
           "prevSize": 32,
           "code": 59765,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 121,
@@ -509,7 +517,7 @@
           "name": "roomservice",
           "prevSize": 32,
           "code": 59767,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 123,
@@ -517,7 +525,7 @@
           "name": "savings",
           "prevSize": 32,
           "code": 59769,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 124,
@@ -525,7 +533,7 @@
           "name": "search",
           "prevSize": 32,
           "code": 59770,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 126,
@@ -533,7 +541,7 @@
           "name": "settings",
           "prevSize": 32,
           "code": 59772,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 128,
@@ -541,7 +549,7 @@
           "name": "shoppingbag",
           "prevSize": 32,
           "code": 59774,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 130,
@@ -549,7 +557,7 @@
           "name": "show",
           "prevSize": 32,
           "code": 59776,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 131,
@@ -557,7 +565,7 @@
           "name": "star",
           "prevSize": 32,
           "code": 59777,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 134,
@@ -565,7 +573,7 @@
           "name": "suitcase-label",
           "prevSize": 32,
           "code": 59781,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 136,
@@ -573,7 +581,7 @@
           "name": "suitcase",
           "prevSize": 32,
           "code": 59783,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 138,
@@ -581,7 +589,7 @@
           "name": "tasks",
           "prevSize": 32,
           "code": 59785,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 140,
@@ -589,7 +597,7 @@
           "name": "update",
           "prevSize": 32,
           "code": 59787,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 142,
@@ -597,7 +605,7 @@
           "name": "voucher",
           "prevSize": 32,
           "code": 59789,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 144,
@@ -605,7 +613,7 @@
           "name": "wallet",
           "prevSize": 32,
           "code": 59791,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 3,
@@ -613,7 +621,7 @@
           "name": "dislike",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -621,7 +629,7 @@
           "name": "placeholder",
           "prevSize": 32,
           "code": 59651,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -629,7 +637,7 @@
           "name": "review",
           "prevSize": 32,
           "code": 59653,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 9,
@@ -637,7 +645,7 @@
           "name": "table",
           "prevSize": 32,
           "code": 59655,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 11,
@@ -645,7 +653,7 @@
           "name": "warning",
           "prevSize": 32,
           "code": 59657,
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 0,
@@ -673,9 +681,35 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "actions"
+          ],
+          "colorPermutations": {
+            "12552552551": [
+              {},
+              {},
+              {}
+            ]
+          }
+        },
+        {
+          "id": 145,
+          "paths": [
+            "M682.666 512c0 70.691 57.308 128 128.001 128s128-57.309 128-128c0-70.691-57.308-128-128-128s-128.001 57.309-128.001 128z",
+            "M384 512c0 70.691 57.309 128 128 128s128-57.309 128-128c0-70.691-57.309-128-128-128s-128 57.309-128 128z",
+            "M85.334 512c0 70.691 57.306 128 128 128 70.691 0 128-57.309 128-128s-57.309-128-128-128c-70.694 0-128 57.309-128 128z"
+          ],
+          "attrs": [
+            {},
+            {},
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 16,
+          "tags": [
+            "actions-horizontal"
           ],
           "colorPermutations": {
             "12552552551": [
@@ -701,7 +735,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "addresses"
           ],
@@ -726,7 +760,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "archive"
           ],
@@ -751,7 +785,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "assistent"
           ],
@@ -773,7 +807,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "bike"
           ],
@@ -797,7 +831,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "briefcase"
           ],
@@ -825,7 +859,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "calendar"
           ],
@@ -850,7 +884,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "camera"
           ],
@@ -877,7 +911,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "cashier"
           ],
@@ -900,7 +934,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "checkmark"
           ],
@@ -920,7 +954,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "chevron-down"
           ],
@@ -940,7 +974,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "chevron-right"
           ],
@@ -960,7 +994,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "chevron-left"
           ],
@@ -980,7 +1014,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "chevron-up"
           ],
@@ -1000,7 +1034,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "clock"
           ],
@@ -1020,7 +1054,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "close"
           ],
@@ -1046,7 +1080,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "coffee"
           ],
@@ -1071,7 +1105,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "compass"
           ],
@@ -1098,7 +1132,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "dashboard"
           ],
@@ -1123,7 +1157,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "do-not-disturb"
           ],
@@ -1144,7 +1178,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "document"
           ],
@@ -1166,7 +1200,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "download"
           ],
@@ -1191,7 +1225,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "education"
           ],
@@ -1219,7 +1253,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "email"
           ],
@@ -1242,7 +1276,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "favorite"
           ],
@@ -1266,7 +1300,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "filter"
           ],
@@ -1288,7 +1322,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "help"
           ],
@@ -1318,7 +1352,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "hide"
           ],
@@ -1343,7 +1377,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "hotel"
           ],
@@ -1363,7 +1397,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "id-card"
           ],
@@ -1383,7 +1417,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "information"
           ],
@@ -1433,7 +1467,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "internet"
           ],
@@ -1468,7 +1502,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "key"
           ],
@@ -1496,7 +1530,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "kids-club"
           ],
@@ -1520,7 +1554,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "label"
           ],
@@ -1548,7 +1582,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "language"
           ],
@@ -1574,7 +1608,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "like"
           ],
@@ -1599,7 +1633,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "lock-edit"
           ],
@@ -1625,7 +1659,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "logout"
           ],
@@ -1661,7 +1695,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "mail-edit"
           ],
@@ -1692,7 +1726,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "map"
           ],
@@ -1716,7 +1750,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "messages"
           ],
@@ -1737,7 +1771,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "minus"
           ],
@@ -1757,7 +1791,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "nights"
           ],
@@ -1779,7 +1813,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "notification-alert"
           ],
@@ -1800,7 +1834,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "notification"
           ],
@@ -1820,7 +1854,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "overview-home"
           ],
@@ -1842,7 +1876,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "people"
           ],
@@ -1863,7 +1897,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "person"
           ],
@@ -1883,7 +1917,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "phone"
           ],
@@ -1905,7 +1939,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "picture"
           ],
@@ -1926,7 +1960,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "plus"
           ],
@@ -1946,7 +1980,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "present"
           ],
@@ -1970,7 +2004,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "print"
           ],
@@ -1996,7 +2030,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "privacy"
           ],
@@ -2018,7 +2052,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "profile"
           ],
@@ -2056,7 +2090,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "qr-code"
           ],
@@ -2087,7 +2121,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "receipt"
           ],
@@ -2108,7 +2142,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "reload"
           ],
@@ -2128,7 +2162,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "report"
           ],
@@ -2152,7 +2186,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "restaurant"
           ],
@@ -2178,7 +2212,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "room"
           ],
@@ -2204,7 +2238,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "roomservice"
           ],
@@ -2226,7 +2260,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "savings"
           ],
@@ -2246,7 +2280,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "search"
           ],
@@ -2266,7 +2300,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "settings"
           ],
@@ -2286,7 +2320,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "shoppingbag"
           ],
@@ -2312,7 +2346,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "show"
           ],
@@ -2335,7 +2369,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "star-o"
           ],
@@ -2361,7 +2395,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "suitcase-label"
           ],
@@ -2388,7 +2422,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "suitcase"
           ],
@@ -2410,7 +2444,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "tasks"
           ],
@@ -2432,7 +2466,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "update"
           ],
@@ -2453,7 +2487,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "voucher"
           ],
@@ -2477,7 +2511,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "wallet"
           ],
@@ -2501,7 +2535,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "dislike"
           ],
@@ -2522,7 +2556,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "placeholder"
           ],
@@ -2546,7 +2580,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "review"
           ],
@@ -2568,7 +2602,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "table"
           ],
@@ -2588,7 +2622,7 @@
           ],
           "isMulticolor": false,
           "isMulticolor2": false,
-          "grid": 0,
+          "grid": 16,
           "tags": [
             "warning"
           ],
@@ -2665,7 +2699,8 @@
       "margin": 16
     },
     "historySize": 50,
-    "gridSize": 16
+    "gridSize": 16,
+    "showGrid": true
   },
-  "time": 1619084049842
+  "time": 1622724262047
 }

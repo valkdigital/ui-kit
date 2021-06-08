@@ -12,6 +12,7 @@ const sizes = {
 
 const names = [
   "actions",
+  "actions-horizontal",
   "addresses",
   "archive",
   "assistent",
