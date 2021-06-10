@@ -6,6 +6,7 @@ import { omit } from "lodash";
 import hitSlop from "../../style/hitSlop";
 import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
+import Icon from "../Icon";
 
 interface TextInputProps
   extends Omit<BaseInputProps, "textAlign" | "labelStyle" | "secureTextEntry"> {
@@ -36,9 +37,9 @@ const TextInput = React.forwardRef<TextInputType, TextInputProps>(
         secureTextEntry={hideText}
         LeftIconComponent={
           type === "search" && (
-            <Image
-              source={require("../../media/search.png")}
-              style={[styles.search, { tintColor: typography.color }]}
+            <Icon
+              name="search"
+              style={[styles.search, { color: typography.color }]}
             />
           )
         }
@@ -60,8 +61,7 @@ const TextInput = React.forwardRef<TextInputType, TextInputProps>(
 
 const styles = StyleSheet.create({
   search: {
-    width: 13,
-    height: 13,
+    fontSize: 16,
     alignSelf: "center",
     marginRight: spacing.sp1,
   },
