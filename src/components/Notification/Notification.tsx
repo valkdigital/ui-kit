@@ -304,7 +304,6 @@ const styles = StyleSheet.create({
   ctaImgStyle: {
     marginLeft: Spacing.sp1,
     marginRight: Spacing.sp1,
-    resizeMode: "contain",
   },
   arrowStyle: {
     borderLeftWidth: Spacing.sp1,
@@ -326,7 +325,6 @@ const styles = StyleSheet.create({
   iconStyle: {
     flex: 1,
     height: undefined,
-    resizeMode: "contain",
     width: undefined,
   },
   closeStyle: {
