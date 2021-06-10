@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import type { Option } from ".";
 import colors from "../../style/colors";
 import { isEqual } from "lodash";
+import { Icon } from "@valkdigital/ui-kit";
 
 interface PickerRowProps {
   option: Option;
@@ -49,10 +50,7 @@ class PickerRow extends React.PureComponent<PickerRowProps> {
         </Text>
 
         {isEqual(selectedOption, option) && (
-          <Image
-            source={require("../../media/checkmark.png")}
-            style={styles.checkmark}
-          />
+          <Icon style={styles.checkmark} name="checkmark" />
         )}
       </TouchableOpacity>
     );
@@ -69,9 +67,8 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.sp2,
   },
   checkmark: {
-    width: 16,
-    height: 11.61,
-    marginLeft: Spacing.sp2,
+    marginLeft: Spacing.sp1,
+    color: colors.greenPrimary,
   },
   alphabetOffset: {
     marginRight: Spacing.sp5,

@@ -7,17 +7,18 @@ import {
   TextInputProps as TIP,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  Image,
   TouchableOpacity,
   Platform,
   StyleProp,
 } from "react-native";
 import { omit } from "lodash";
+import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import useMergedRef from "../../hooks/useMergedRef";
 import Typography, { MaxFontSizeMultiplier } from "../../style/typography";
 import ThemeContext from "../../style/ThemeContext";
+import { Icon } from "@valkdigital/ui-kit";
 
 type Sizes = "small" | "medium" | "large";
 
@@ -173,10 +174,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
             {RightIconComponent && RightIconComponent}
             {showCheckmark && (
               <TouchableOpacity>
-                <Image
-                  style={styles.checkmark}
-                  source={require("../../media/checkmark.png")}
-                />
+                <Icon style={styles.checkmark} name="checkmark" />
               </TouchableOpacity>
             )}
           </View>
@@ -237,8 +235,7 @@ const styles = StyleSheet.create({
   },
   checkmark: {
     marginLeft: Spacing.sp1,
-    width: 16,
-    height: 12,
+    color: colors.greenPrimary,
   },
 });
 
