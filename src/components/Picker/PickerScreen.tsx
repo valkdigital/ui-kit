@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Image,
   Animated,
   ViewStyle,
   Dimensions,
@@ -25,6 +24,7 @@ import type {
 import Select from "./Select";
 import ThemeContext from "../../style/ThemeContext";
 import PickerList from "./PickerList";
+import Icon from "../Icon";
 
 const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
   responsive: {
@@ -133,12 +133,9 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
                   {title}
                 </Text>
                 <TouchableOpacity onPress={hideOptions} hitSlop={hitSlop}>
-                  <Image
-                    source={require("../../media/close.png")}
-                    style={[
-                      styles.headerRight,
-                      { tintColor: typography.color },
-                    ]}
+                  <Icon
+                    name="close"
+                    style={[styles.headerRight, { color: typography.color }]}
                   />
                 </TouchableOpacity>
               </View>
@@ -200,8 +197,7 @@ const styles = StyleSheet.create({
     width: 16,
   },
   headerRight: {
-    width: 12,
-    height: 12,
+    width: 16,
   },
 });
 

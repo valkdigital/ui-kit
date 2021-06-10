@@ -12,7 +12,7 @@ import Spacing from "../../style/spacing";
 import type { Option, SelectSizes } from ".";
 import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
-import { Icon } from "@valkdigital/ui-kit";
+import Icon from "../Icon";
 
 export interface MeasuredLayout {
   width: number;

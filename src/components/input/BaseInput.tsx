@@ -18,7 +18,7 @@ import Text from "../Text";
 import useMergedRef from "../../hooks/useMergedRef";
 import Typography, { MaxFontSizeMultiplier } from "../../style/typography";
 import ThemeContext from "../../style/ThemeContext";
-import { Icon } from "@valkdigital/ui-kit";
+import Icon from "../Icon";
 
 type Sizes = "small" | "medium" | "large";
 

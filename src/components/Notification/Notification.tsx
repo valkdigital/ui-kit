@@ -24,7 +24,7 @@ import hitSlop from "../../style/hitSlop";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import { isEmpty, omit } from "lodash";
-import { Icon } from "@valkdigital/ui-kit";
+import Icon, { IconNames } from "../Icon";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
@@ -56,7 +56,7 @@ interface NotificationProps extends Omit<ViewProps, "style"> {
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
-  icon?: string;
+  icon?: IconNames;
   isBanner?: boolean;
   isCloseable?: boolean;
   isTooltip?: boolean;

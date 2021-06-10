@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import Picker, { Option } from "../Picker";
-import { Icon } from "@valkdigital/ui-kit";
+import Icon from "../Icon";
 
 interface PhonePickerProps {
   title: string;
