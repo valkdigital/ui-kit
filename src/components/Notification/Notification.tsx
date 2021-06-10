@@ -10,14 +10,12 @@
 \* ========================================================================== */
 import React, { useContext } from "react";
 import {
-  Image,
   StyleSheet,
   StyleProp,
   TouchableOpacity,
   View,
   ViewStyle,
   ViewProps,
-  ImageSourcePropType,
 } from "react-native";
 import colors from "../../style/colors";
 import ThemeContext from "../../style/ThemeContext";
@@ -26,6 +24,7 @@ import hitSlop from "../../style/hitSlop";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import { isEmpty, omit } from "lodash";
+import { Icon } from "@valkdigital/ui-kit";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
@@ -57,7 +56,7 @@ interface NotificationProps extends Omit<ViewProps, "style"> {
   hasCta?: boolean;
   hasIcon?: boolean;
   heading?: string;
-  icon?: ImageSourcePropType;
+  icon?: string;
   isBanner?: boolean;
   isCloseable?: boolean;
   isTooltip?: boolean;
@@ -209,11 +208,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
       <View style={[styles.wrapperIconStyle]}>
         {hasIcon && (
           <View style={[styles.iconHolder]}>
-            <Image
-              source={icon}
+            <Icon
+              name={icon}
               style={[
                 styles.iconStyle,
-                { tintColor: colorsByType[type].contentText },
+                { color: colorsByType[type].contentText },
               ]}
             />
           </View>
@@ -244,11 +243,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
 
           {isCloseable && (
             <TouchableOpacity onPress={onPressClose} hitSlop={hitSlop}>
-              <Image
-                source={require("../../media/close.png")}
+              <Icon
+                name="close"
                 style={[
                   styles.closeStyle,
-                  { tintColor: colorsByType[type].contentText },
+                  { color: colorsByType[type].contentText },
                 ]}
               />
             </TouchableOpacity>
@@ -261,11 +260,11 @@ const Notification: React.FC<NotificationProps> = (props) => {
                 { backgroundColor: colorsByType[type].ctaBg },
               ]}
             >
-              <Image
-                source={require("../../media/arrow_right.png")}
+              <Icon
+                name="chevron-right"
                 style={[
                   styles.ctaImgStyle,
-                  { tintColor: colorsByType[type].ctaText },
+                  { color: colorsByType[type].ctaText },
                 ]}
               />
             </View>
@@ -303,11 +302,9 @@ const styles = StyleSheet.create({
     width: Spacing.sp7,
   },
   ctaImgStyle: {
-    height: 14,
     marginLeft: Spacing.sp1,
     marginRight: Spacing.sp1,
     resizeMode: "contain",
-    width: 14,
   },
   arrowStyle: {
     borderLeftWidth: Spacing.sp1,
@@ -333,11 +330,8 @@ const styles = StyleSheet.create({
     width: undefined,
   },
   closeStyle: {
-    height: 12,
     marginLeft: Spacing.sp1,
-    marginTop: 2,
     marginRight: Spacing.sp1,
-    width: 12,
   },
   wrapperContentStyle: {
     flexDirection: "row",
