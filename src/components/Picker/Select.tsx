@@ -4,9 +4,7 @@ import {
   StyleSheet,
   ViewStyle,
   TouchableOpacity,
-  Image,
   StyleProp,
-  ImageStyle,
   Platform,
 } from "react-native";
 import colors from "../../style/colors";
@@ -14,6 +12,7 @@ import Spacing from "../../style/spacing";
 import type { Option, SelectSizes } from ".";
 import Text from "../Text";
 import ThemeContext from "../../style/ThemeContext";
+import { Icon } from "@valkdigital/ui-kit";
 
 export interface MeasuredLayout {
   width: number;
@@ -110,16 +109,9 @@ const Select: React.FC<SelectProps> = ({
               {selectedOption?.label ?? placeholder}
             </Text>
           </View>
-          <Image
-            source={
-              isFocused
-                ? require("../../media/arrow_up.png")
-                : require("../../media/arrow_down.png")
-            }
-            style={[
-              styles.chevron as StyleProp<ImageStyle>,
-              { tintColor: typography.color },
-            ]}
+          <Icon
+            name={isFocused ? "chevron-up" : "chevron-down"}
+            style={[styles.chevron, { color: typography.color }]}
           />
         </TouchableOpacity>
       </View>
@@ -159,8 +151,6 @@ const styles = StyleSheet.create({
   },
   chevron: {
     marginLeft: Spacing.sp2,
-    width: 14,
-    height: 8,
   },
   placeholder: {
     flex: 1,
