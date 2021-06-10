@@ -82,7 +82,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
     hasCta,
     hasIcon,
     heading,
-    icon = require("../../media/iconInfo.png"),
+    icon = "information",
     isBanner,
     isCloseable,
     isTooltip,
