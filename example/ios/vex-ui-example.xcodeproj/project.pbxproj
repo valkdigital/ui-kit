@@ -160,6 +160,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				460FDE1424C988F800455F9A /* Bundle Expo Assets */,
 				A3F3AC3C3964D059C26B939D /* [CP] Copy Pods Resources */,
+				935F4153D7B11B01B8A718AF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -275,6 +276,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "../node_modules/expo-updates/bundle-expo-assets.sh\n";
+		};
+		935F4153D7B11B01B8A718AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-vex-ui-example/Pods-vex-ui-example-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vex-ui-example/Pods-vex-ui-example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A3F3AC3C3964D059C26B939D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
