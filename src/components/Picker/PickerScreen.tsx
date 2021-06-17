@@ -194,10 +194,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   headerLeft: {
-    width: 16,
+    width: 24,
   },
   headerRight: {
-    width: 16,
+    width: 24,
   },
 });
 
