@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   toucan: {
-    width: 129,
+    width: 128,
     height: 34,
     marginBottom: Spacing.sp2,
   },
