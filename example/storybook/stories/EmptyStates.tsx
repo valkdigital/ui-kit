@@ -16,7 +16,6 @@ const EmptyStates: React.FC<EmptyStatesProps> = () => {
         heading="Not logged in"
         content="Please login to view your reservations."
         buttons={[{ label: "Primary", onPress: () => console.log("Primary") }]}
-        style={{ padding: Spacing.sp2 }}
       />
       <EmptyState
         heading="No rooms available"
@@ -28,17 +27,12 @@ const EmptyStates: React.FC<EmptyStatesProps> = () => {
             onPress: () => console.log("Longer label"),
           },
         ]}
-        style={{ padding: Spacing.sp2 }}
       />
       <EmptyState
         heading="Page not found"
         content="Something went wrong. Go back or contact support@domain"
-        style={{ padding: Spacing.sp2 }}
       />
-      <EmptyState
-        heading="Unfortunately, there is no e-learning content yet."
-        style={{ padding: Spacing.sp2 }}
-      />
+      <EmptyState heading="Unfortunately, there is no e-learning content yet." />
       <EmptyState
         heading="Something went wrong"
         content="Try again, choose a different pin terminal or choose another payment method"
@@ -53,7 +47,6 @@ const EmptyStates: React.FC<EmptyStatesProps> = () => {
             onPress: () => console.log("Other payment method"),
           },
         ]}
-        style={{ padding: Spacing.sp2 }}
       />
       <EmptyState
         heading="Something went wrong"
@@ -65,7 +58,6 @@ const EmptyStates: React.FC<EmptyStatesProps> = () => {
             onPress: () => console.log("Other pin terminal"),
           },
         ]}
-        style={{ padding: Spacing.sp2 }}
       >
         <Notification
           content="Still having the same problem?"

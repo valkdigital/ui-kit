@@ -63,6 +63,7 @@ const PickerList: React.FC<PickerListProps> = ({
         {modalSize === "fullscreen" && (
           <View style={styles.flex}>
             <TextInput
+              autoCorrect={false}
               containerStyle={[styles.input, { backgroundColor: background }]}
               placeholder={searchPlaceholder}
               onChangeText={onSearchChange}

@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    padding: Spacing.sp6,
   },
   toucan: {
     width: 128,
