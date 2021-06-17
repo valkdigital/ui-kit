@@ -12,7 +12,6 @@ import {
   StyleProp,
 } from "react-native";
 import { omit } from "lodash";
-import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import useMergedRef from "../../hooks/useMergedRef";
@@ -89,6 +88,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     info,
     border,
     typography,
+    success,
   } = useContext(ThemeContext);
   const [borderColor, setBorderColor] = useState(border);
   const [isFocused, setIsFocused] = useState(false);
@@ -174,7 +174,11 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
             {RightIconComponent && RightIconComponent}
             {showCheckmark && (
               <TouchableOpacity>
-                <Icon style={styles.checkmark} name="checkmark" />
+                <Icon
+                  style={styles.checkmark}
+                  name="checkmark"
+                  color={success.primary}
+                />
               </TouchableOpacity>
             )}
           </View>
@@ -235,7 +239,6 @@ const styles = StyleSheet.create({
   },
   checkmark: {
     marginLeft: Spacing.sp1,
-    color: colors.greenPrimary,
   },
 });
 
