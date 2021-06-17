@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import BaseInput from "./BaseInput";
 import type { BaseInputProps, TextInputType } from "./BaseInput";
 import { omit } from "lodash";
@@ -46,10 +46,7 @@ const TextInput = React.forwardRef<TextInputType, TextInputProps>(
         RightIconComponent={
           type === "password" && (
             <TouchableOpacity onPress={toggleHideText} hitSlop={hitSlop}>
-              <Image
-                style={styles.eye}
-                source={require("../../media/eye.png")}
-              />
+              <Icon name="show" style={styles.show} />
             </TouchableOpacity>
           )
         }
@@ -65,10 +62,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginRight: spacing.sp1,
   },
-  eye: {
+  show: {
     marginLeft: spacing.sp1,
-    width: 16,
-    height: 16,
+    width: 24,
+    height: 24,
   },
 });
 
