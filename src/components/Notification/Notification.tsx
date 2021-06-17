@@ -210,10 +210,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
           <View style={[styles.iconHolder]}>
             <Icon
               name={icon}
-              style={[
-                styles.iconStyle,
-                { color: colorsByType[type].contentText },
-              ]}
+              style={[{ color: colorsByType[type].contentText }]}
             />
           </View>
         )}
@@ -321,11 +318,6 @@ const styles = StyleSheet.create({
   iconMargin: {
     marginLeft: Spacing.sp1,
     marginRight: Spacing.sp1,
-  },
-  iconStyle: {
-    flex: 1,
-    height: undefined,
-    width: undefined,
   },
   wrapperContentStyle: {
     flexDirection: "row",
