@@ -7,7 +7,6 @@ import {
   TextInputProps as TIP,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  Image,
   TouchableOpacity,
   Platform,
   StyleProp,
@@ -18,6 +17,7 @@ import Text from "../Text";
 import useMergedRef from "../../hooks/useMergedRef";
 import Typography, { MaxFontSizeMultiplier } from "../../style/typography";
 import ThemeContext from "../../style/ThemeContext";
+import Icon from "../Icon";
 
 type Sizes = "small" | "medium" | "large";
 
@@ -88,6 +88,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     info,
     border,
     typography,
+    success,
   } = useContext(ThemeContext);
   const [borderColor, setBorderColor] = useState(border);
   const [isFocused, setIsFocused] = useState(false);
@@ -173,9 +174,10 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
             {RightIconComponent && RightIconComponent}
             {showCheckmark && (
               <TouchableOpacity>
-                <Image
+                <Icon
                   style={styles.checkmark}
-                  source={require("../../media/checkmark.png")}
+                  name="checkmark"
+                  color={success.primary}
                 />
               </TouchableOpacity>
             )}
@@ -237,8 +239,6 @@ const styles = StyleSheet.create({
   },
   checkmark: {
     marginLeft: Spacing.sp1,
-    width: 16,
-    height: 12,
   },
 });
 
