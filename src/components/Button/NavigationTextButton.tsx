@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Pressable, Image, ViewStyle } from "react-native";
+import { StyleSheet, Pressable, ViewStyle } from "react-native";
 import spacing from "../../style/spacing";
 import ThemeContext from "../../style/ThemeContext";
 import Text from "../Text";
