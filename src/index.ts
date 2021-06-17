@@ -20,8 +20,10 @@ import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
 import Notification from "./components/Notification/Notification";
 import Icon from "./components/Icon";
+import EmptyState from "./components/EmptyState";
 import type { IconSizes, IconNames } from "./components/Icon";
 import type { TextInputType } from "./components/input/BaseInput";
+import type { EmptyStateButton } from "./components/EmptyState/Buttons";
 
 // Style & Theme exports
 export { Fonts, Spacing, IconSet, ThemeContext, Theme, shadow as Shadow };
@@ -54,6 +56,9 @@ export { Notification };
 // Icon components exports
 export { Icon };
 
+// EmptyState component export
+export { EmptyState };
+
 // Types
 export type {
   TypographyLiterals,
@@ -61,4 +66,5 @@ export type {
   TextInputType,
   IconSizes,
   IconNames,
+  EmptyStateButton,
 };
