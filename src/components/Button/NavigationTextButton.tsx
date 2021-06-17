@@ -3,6 +3,7 @@ import { StyleSheet, Pressable, Image, ViewStyle } from "react-native";
 import spacing from "../../style/spacing";
 import ThemeContext from "../../style/ThemeContext";
 import Text from "../Text";
+import Icon from "../Icon";
 
 interface NavigationTextButtonProps {
   label?: string;
@@ -33,10 +34,7 @@ const NavigationTextButton: React.FC<NavigationTextButtonProps> = ({
       onPress={onPress}
     >
       {customLabel ? customLabel : <Text type="bodySemiBold">{label}</Text>}
-      <Image
-        style={styles.icon}
-        source={require("../../media/arrow_right.png")}
-      />
+      <Icon name="chevron-right" style={styles.icon} />
     </Pressable>
   );
 };
@@ -54,8 +52,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    height: 14,
-    width: 8,
+    height: 24,
+    width: 24,
   },
 });
 
