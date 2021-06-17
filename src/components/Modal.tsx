@@ -23,30 +23,32 @@ const Modal: React.FC<ModalProps> = ({
   animationType = "none",
   backgroundColor = "transparent",
   style,
-}) => (
-  <RNModal
-    visible={true}
-    transparent={true}
-    animationType={animationType}
-    supportedOrientations={["landscape", "portrait"]}
-  >
-    <TouchableWithoutFeedback onPress={onClose}>
-      <View
-        style={[
-          styles.overlay,
-          {
-            backgroundColor,
-          },
-          style,
-        ]}
-      >
-        <TouchableWithoutFeedback>
-          {typeof children === "function" ? children(onClose) : children}
-        </TouchableWithoutFeedback>
-      </View>
-    </TouchableWithoutFeedback>
-  </RNModal>
-);
+}) => {
+  return (
+    <RNModal
+      visible={true}
+      transparent={true}
+      animationType={animationType}
+      supportedOrientations={["landscape", "portrait"]}
+    >
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View
+          style={[
+            styles.overlay,
+            {
+              backgroundColor,
+            },
+            style,
+          ]}
+        >
+          <TouchableWithoutFeedback>
+            {typeof children === "function" ? children(onClose) : children}
+          </TouchableWithoutFeedback>
+        </View>
+      </TouchableWithoutFeedback>
+    </RNModal>
+  );
+};
 
 const styles = StyleSheet.create({
   overlay: {

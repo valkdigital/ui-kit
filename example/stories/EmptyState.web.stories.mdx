@@ -1,0 +1,89 @@
+import { Meta, Preview, Story, Props } from "@storybook/addon-docs/blocks";
+import {
+  EmptyState,
+  Spacing,
+  Notification,
+  TextButton,
+} from "@valkdigital/ui-kit";
+import { action } from "@storybook/addon-actions";
+
+<Meta title="EmptyState" />
+
+# EmptyState
+
+<Preview>
+  <Story
+    name="EmptyState"
+    parameters={{
+      design: {
+        type: "figma",
+        url:
+          "https://www.figma.com/file/KVbqwH1I4lStgUwTK4Wr8z/App-Design-System?node-id=2190%3A254",
+      },
+    }}
+  >
+    <ScrollView style={{ flex: 1 }}>
+      <EmptyState
+        heading="Not logged in"
+        content="Please login to view your reservations."
+        buttons={[{ label: "Primary", onPress: () => console.log("Primary") }]}
+      />
+      <EmptyState
+        heading="No rooms available"
+        content="Add a new space by pressing the button below."
+        buttons={[
+          { label: "Short label", onPress: () => console.log("Short label") },
+          {
+            label: "Longer label stretches both buttons",
+            onPress: () => console.log("Longer label"),
+          },
+        ]}
+      />
+      <EmptyState
+        heading="Page not found"
+        content="Something went wrong. Go back or contact support@domain"
+      />
+      <EmptyState heading="Unfortunately, there is no e-learning content yet." />
+      <EmptyState
+        heading="Something went wrong"
+        content="Try again, choose a different pin terminal or choose another payment method"
+        buttons={[
+          { label: "Try again", onPress: () => console.log("Try again") },
+          {
+            label: "Other pin terminal",
+            onPress: () => console.log("Other pin terminal"),
+          },
+          {
+            label: "Other payment method",
+            onPress: () => console.log("Other payment method"),
+          },
+        ]}
+      />
+      <EmptyState
+        heading="Something went wrong"
+        content="Try again or choose a different pin terminal"
+        buttons={[
+          { label: "Try again", onPress: () => console.log("Try again") },
+          {
+            label: "Other pin terminal",
+            onPress: () => console.log("Other pin terminal"),
+          },
+        ]}
+      >
+        <Notification
+          content="Still having the same problem?"
+          containerStyle={{ marginTop: Spacing.sp5 }}
+        >
+          <TextButton
+            label="Select a different payment method"
+            onPress={() => console.log("Select a different payment method")}
+          />
+        </Notification>
+      </EmptyState>
+    </ScrollView>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={EmptyState} />

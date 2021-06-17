@@ -33,6 +33,7 @@ import NavigationTextStory from "./NavigationTextStory";
 import Pickers from "./Pickers";
 import Dropdowns from "./Dropdowns";
 import Icons from "./Icons";
+import EmptyStates from "./EmptyStates";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
@@ -626,6 +627,10 @@ notificationStories.add("Notification", () => (
     </View>
   </ScrollView>
 ));
+
+const emptyStateStories = storiesOf("Empty State", module);
+emptyStateStories.addDecorator(withKnobs);
+emptyStateStories.add("Empty State", () => <EmptyStates />);
 
 const styles = StyleSheet.create({
   container: {
