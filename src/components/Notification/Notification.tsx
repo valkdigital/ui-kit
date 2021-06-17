@@ -246,7 +246,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
               <Icon
                 name="close"
                 style={[
-                  styles.closeStyle,
+                  styles.iconMargin,
                   { color: colorsByType[type].contentText },
                 ]}
               />
@@ -263,7 +263,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
               <Icon
                 name="chevron-right"
                 style={[
-                  styles.ctaImgStyle,
+                  styles.iconMargin,
                   { color: colorsByType[type].ctaText },
                 ]}
               />
@@ -301,10 +301,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.sp1,
     width: Spacing.sp7,
   },
-  ctaImgStyle: {
-    marginLeft: Spacing.sp1,
-    marginRight: Spacing.sp1,
-  },
   arrowStyle: {
     borderLeftWidth: Spacing.sp1,
     borderLeftColor: "transparent",
@@ -322,14 +318,14 @@ const styles = StyleSheet.create({
     marginRight: Spacing.sp1,
     width: Spacing.sp3,
   },
+  iconMargin: {
+    marginLeft: Spacing.sp1,
+    marginRight: Spacing.sp1,
+  },
   iconStyle: {
     flex: 1,
     height: undefined,
     width: undefined,
-  },
-  closeStyle: {
-    marginLeft: Spacing.sp1,
-    marginRight: Spacing.sp1,
   },
   wrapperContentStyle: {
     flexDirection: "row",
