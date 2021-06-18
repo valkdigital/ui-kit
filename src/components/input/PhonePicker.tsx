@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import Picker, { Option } from "../Picker";
+import Icon from "../Icon";
 
 interface PhonePickerProps {
   title: string;
@@ -44,9 +45,9 @@ const PhonePicker: React.FC<PhonePickerProps> = ({
             disabled={disabled}
           >
             {selectedOption?.leftComponent && selectedOption.leftComponent}
-            <Image
-              source={require("../../media/arrow_down.png")}
-              style={[styles.arrow, { tintColor: typography.color }]}
+            <Icon
+              name="chevron-down"
+              style={[styles.arrow, { color: typography.color }]}
             />
           </TouchableOpacity>
         );
@@ -66,8 +67,6 @@ const styles = StyleSheet.create({
     marginRight: Spacing.sp1,
   },
   arrow: {
-    width: 14,
-    height: 8,
     marginRight: Spacing.sp1,
   },
 });

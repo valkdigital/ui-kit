@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import BaseInput from "./BaseInput";
 import type { BaseInputProps, TextInputType } from "./BaseInput";
 import { omit } from "lodash";
 import hitSlop from "../../style/hitSlop";
 import ThemeContext from "../../style/ThemeContext";
 import spacing from "../../style/spacing";
+import Icon from "../Icon";
 
 interface TextInputProps
   extends Omit<BaseInputProps, "textAlign" | "labelStyle" | "secureTextEntry"> {
@@ -36,19 +37,16 @@ const TextInput = React.forwardRef<TextInputType, TextInputProps>(
         secureTextEntry={hideText}
         LeftIconComponent={
           type === "search" && (
-            <Image
-              source={require("../../media/search.png")}
-              style={[styles.search, { tintColor: typography.color }]}
+            <Icon
+              name="search"
+              style={[styles.search, { color: typography.color }]}
             />
           )
         }
         RightIconComponent={
           type === "password" && (
             <TouchableOpacity onPress={toggleHideText} hitSlop={hitSlop}>
-              <Image
-                style={styles.eye}
-                source={require("../../media/eye.png")}
-              />
+              <Icon name="show" style={styles.show} />
             </TouchableOpacity>
           )
         }
@@ -60,15 +58,14 @@ const TextInput = React.forwardRef<TextInputType, TextInputProps>(
 
 const styles = StyleSheet.create({
   search: {
-    width: 13,
-    height: 13,
+    fontSize: 16,
     alignSelf: "center",
     marginRight: spacing.sp1,
   },
-  eye: {
+  show: {
     marginLeft: spacing.sp1,
-    width: 16,
-    height: 16,
+    width: 24,
+    height: 24,
   },
 });
 

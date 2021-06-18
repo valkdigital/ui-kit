@@ -479,21 +479,21 @@ notificationStories.add("Notification", () => (
         heading="The core of the success IN in one line."
         content="This is a success IN with only one line of text"
         hasIcon={true}
-        icon={require("../../../src/media/iconSuccess.png")}
+        icon="checkmark"
       />
       <Notification
         type="negative"
         heading="The core of the error IN in one line."
         content="This is a error IN with only one line of text"
         hasIcon={true}
-        icon={require("../../../src/media/iconError.png")}
+        icon="close"
       />
       <Notification
         type="warning"
         heading="The core of the informative IN in one line."
         content="This is a warning IN with only one line of text"
         hasIcon={true}
-        icon={require("../../../src/media/iconWarning.png")}
+        icon="warning"
       />
       <Notification
         type="default"
@@ -599,7 +599,7 @@ notificationStories.add("Notification", () => (
         content="This is a success IN with only one line of text"
         isBanner={true}
         hasIcon={true}
-        icon={require("../../../src/media/iconSuccess.png")}
+        icon="checkmark"
       />
       <Notification
         type="negative"
@@ -607,7 +607,7 @@ notificationStories.add("Notification", () => (
         content="This is a error IN with only one line of text"
         isBanner={true}
         hasIcon={true}
-        icon={require("../../../src/media/iconError.png")}
+        icon="close"
       />
       <Notification
         type="warning"
@@ -615,7 +615,7 @@ notificationStories.add("Notification", () => (
         content="This is a warning IN with only one line of text"
         isBanner={true}
         hasIcon={true}
-        icon={require("../../../src/media/iconWarning.png")}
+        icon={"warning"}
       />
       <Notification
         type="default"
