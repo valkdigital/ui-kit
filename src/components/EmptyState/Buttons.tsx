@@ -1,16 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Button from "../Button/Button";
+import Button, { ButtonProps } from "../Button/Button";
 import Spacing from "../../style/spacing";
 
-export type EmptyStateButton = {
-  label: string;
-  onPress: () => void;
-  loading?: boolean;
-};
-
 interface ButtonsProps {
-  buttons: EmptyStateButton[];
+  buttons: ButtonProps[];
 }
 
 const Buttons: React.FC<ButtonsProps> = ({ buttons }) => {
@@ -18,21 +12,18 @@ const Buttons: React.FC<ButtonsProps> = ({ buttons }) => {
 
   return (
     <View>
-      {buttons.map((button, index) => {
-        const { label, onPress, loading } = button;
+      {buttons.map((props, index) => {
         const isFirstButton = index === 0;
         const isLastButton = index !== buttons.length - 1;
 
         return (
           <Button
             key={index}
-            label={label}
-            onPress={onPress}
             size="medium"
             type={isFirstButton ? "default" : "ghost"}
             containerStyle={isLastButton && styles.button}
-            loading={loading}
             disabled={disabled}
+            {...props}
           />
         );
       })}

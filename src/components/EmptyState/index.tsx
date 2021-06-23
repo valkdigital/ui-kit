@@ -2,14 +2,15 @@ import React, { useContext } from "react";
 import { View, StyleSheet, Image, ViewProps } from "react-native";
 import Spacing from "../../style/spacing";
 import ThemeContext from "../../style/ThemeContext";
-import Buttons, { EmptyStateButton } from "./Buttons";
+import Buttons from "./Buttons";
 import Text from "../Text";
 import { omit } from "lodash";
+import type { ButtonProps } from "../Button/Button";
 
 interface EmptyStateProps extends ViewProps {
   heading: string;
   content?: string;
-  buttons?: EmptyStateButton[];
+  buttons?: ButtonProps[];
 }
 
 const EmptyState: React.FC<EmptyStateProps> = (props) => {

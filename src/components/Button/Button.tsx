@@ -33,7 +33,7 @@ enum ButtonSizes {
   full = "full",
 }
 
-interface ButtonProps extends Omit<PressableProps, "children"> {
+export interface ButtonProps extends Omit<PressableProps, "children"> {
   label: string;
   labelColor?: string;
   color?: string;
