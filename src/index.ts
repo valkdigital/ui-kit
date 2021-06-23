@@ -23,7 +23,6 @@ import Icon from "./components/Icon";
 import EmptyState from "./components/EmptyState";
 import type { IconSizes, IconNames } from "./components/Icon";
 import type { TextInputType } from "./components/input/BaseInput";
-import type { EmptyStateButton } from "./components/EmptyState/Buttons";
 
 // Style & Theme exports
 export { Fonts, Spacing, IconSet, ThemeContext, Theme, shadow as Shadow };
@@ -66,5 +65,4 @@ export type {
   TextInputType,
   IconSizes,
   IconNames,
-  EmptyStateButton,
 };
