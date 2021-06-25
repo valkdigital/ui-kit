@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     minHeight: 60,
   },
   label: {
+    ...Typography.bodySemiBold,
     marginBottom: Spacing.sp1,
   },
 });
