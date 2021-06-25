@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Spacing from "../../style/spacing";
 import colors from "../../style/colors";
 import Text from "../Text";
+import Icon from "../Icon";
 
 interface AddOptionProps {
   onAddOptionPress?: () => void;
@@ -15,7 +16,7 @@ const AddOption: React.FC<AddOptionProps> = ({
 }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onAddOptionPress}>
-      <Image source={require("../../media/add.png")} style={styles.add} />
+      <Icon name="plus" style={styles.add} />
       {addOptionTitle && <Text type="bodyRegular">{addOptionTitle}</Text>}
     </TouchableOpacity>
   );
@@ -32,8 +33,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sp3,
   },
   add: {
-    width: 24,
-    height: 24,
     marginRight: Spacing.sp1,
   },
 });
