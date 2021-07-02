@@ -6,7 +6,6 @@ import {
   LayoutAnimation,
 } from "react-native";
 import Spacing from "../../style/spacing";
-import colors from "../../style/colors";
 import Text from "../Text";
 import AlphabetScroll from "./AlphabetScroll";
 import ItemSeparator from "./ItemSeparator";
@@ -248,7 +247,6 @@ const styles = StyleSheet.create({
   sectionHeader: {
     justifyContent: "center",
     height: Spacing.sp3,
-    backgroundColor: colors.greyLight,
     paddingHorizontal: Spacing.sp3,
   },
 });

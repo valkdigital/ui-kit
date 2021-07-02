@@ -7,7 +7,6 @@ import {
   StyleProp,
   Platform,
 } from "react-native";
-import colors from "../../style/colors";
 import Spacing from "../../style/spacing";
 import type { Option, SelectSizes } from ".";
 import Text from "../Text";
@@ -56,13 +55,17 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const {
     border,
-    error: { midDark },
+    error: { midDark: errorMidDark, primary: errorPrimary },
     info,
     typography,
   } = useContext(ThemeContext);
   const viewRef = useRef<View>(null);
 
-  const borderColor = !!error ? midDark : isFocused ? info.midDark : border;
+  const borderColor = !!error
+    ? errorMidDark
+    : isFocused
+    ? info.midDark
+    : border;
 
   useLayoutEffect(() => {
     if (onLayout && viewRef.current)
@@ -116,7 +119,7 @@ const Select: React.FC<SelectProps> = ({
         </TouchableOpacity>
       </View>
       {!!error && (
-        <Text style={styles.error} type="subtextRegular" color={colors.redDark}>
+        <Text style={styles.error} type="subtextRegular" color={errorPrimary}>
           {error}
         </Text>
       )}

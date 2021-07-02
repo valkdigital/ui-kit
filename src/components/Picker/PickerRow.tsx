@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Spacing from "../../style/spacing";
 import Text from "../Text";
 import type { Option } from ".";
-import colors from "../../style/colors";
 import { isEqual } from "lodash";
 import { Icon } from "@valkdigital/ui-kit";
 import ThemeContext from "../../style/ThemeContext";
@@ -23,7 +22,7 @@ const PickerRow: React.FC<PickerRowProps> = ({
   needsSpaceForAlphabet,
   isFirstOption,
 }) => {
-  const { success } = useContext(ThemeContext);
+  const { success, grey } = useContext(ThemeContext);
 
   const { label, extraLabel, leftComponent } = option;
 
@@ -45,11 +44,7 @@ const PickerRow: React.FC<PickerRowProps> = ({
       <Text type="bodyRegular" numberOfLines={2} style={styles.label}>
         {label}
         {extraLabel && (
-          <Text
-            type="bodyRegular"
-            color={colors.greyDark}
-            style={styles.extraLabel}
-          >
+          <Text type="bodyRegular" color={grey[4]} style={styles.extraLabel}>
             {extraLabel}
           </Text>
         )}
