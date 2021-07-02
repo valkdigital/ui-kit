@@ -13,8 +13,7 @@ const AllFAB: React.FC<FABProps> = () => {
         label="Placeholder"
         backgroundColor={color("background color", "#2BB9F5", "fab")}
         color={color("color", "#1AA0E2", "fab")}
-        source={require("../../src/media/plus.png")}
-        imgStyle={{ tintColor: color("icon color", "#FFFFFF", "fab") }}
+        icon="plus"
         onPress={action("pressed")}
       />
     </View>

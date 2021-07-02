@@ -10,21 +10,23 @@ const shadow = ({
   y: number;
   opacity: number;
   blurRadius: number;
-}): ViewStyle => ({
-  ...Platform.select({
-    default: {
-      shadowColor: "#000",
-      shadowOffset: {
-        width: x,
-        height: y,
+}): ViewStyle => {
+  return {
+    ...Platform.select({
+      default: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: x,
+          height: y,
+        },
+        shadowOpacity: opacity,
+        shadowRadius: blurRadius,
       },
-      shadowOpacity: opacity,
-      shadowRadius: blurRadius,
-    },
-    android: {
-      elevation: y * 2,
-    },
-  }),
-});
+      android: {
+        elevation: y * 2,
+      },
+    }),
+  };
+};
 
 export default shadow;

@@ -8,7 +8,6 @@ import {
   Dimensions,
   PanResponderInstance,
 } from "react-native";
-import colors from "../../style/colors";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
 import hitSlop from "../../style/hitSlop";
@@ -85,7 +84,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   onSearchChange,
   customSections,
 }) => {
-  const { background, typography, border } = useContext(ThemeContext);
+  const { onBackground, typography, border, grey } = useContext(ThemeContext);
   return (
     <>
       {SelectComponent ? (
@@ -120,13 +119,13 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           <Animated.View
             style={[
               styles.modal,
-              { backgroundColor: background },
+              { backgroundColor: onBackground },
               MODAL_STYLE[modalSize],
               { transform: [{ translateY }] },
             ]}
           >
             <View {...panResponder.panHandlers}>
-              <View style={styles.handle} />
+              <View style={[styles.handle, { backgroundColor: grey[3] }]} />
               <View style={[styles.header, { borderBottomColor: border }]}>
                 <View style={styles.headerLeft} />
                 <Text type="h6" textAlign="center">
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     right: 0,
     borderTopLeftRadius: Spacing.sp3,
     borderTopRightRadius: Spacing.sp3,
-    backgroundColor: "#ffffff",
     ...shadow({ x: 0, y: 2, opacity: 0.4, blurRadius: 48 }),
     zIndex: 1,
   },
@@ -182,7 +180,6 @@ const styles = StyleSheet.create({
     height: Spacing["sp1/2"],
     alignSelf: "center",
     marginTop: Spacing.sp2,
-    backgroundColor: colors.greyMidDark,
     borderRadius: Spacing.sp2,
   },
   header: {

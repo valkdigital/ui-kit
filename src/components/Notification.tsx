@@ -17,14 +17,14 @@ import {
   ViewStyle,
   ViewProps,
 } from "react-native";
-import colors from "../../style/colors";
-import ThemeContext from "../../style/ThemeContext";
-import shadow from "../../style/shadow";
-import hitSlop from "../../style/hitSlop";
-import Spacing from "../../style/spacing";
-import Text from "../Text";
+import ThemeContext from "../style/ThemeContext";
+import shadow from "../style/shadow";
+import hitSlop from "../style/hitSlop";
+import Spacing from "../style/spacing";
+import Text from "./Text";
 import { isEmpty, omit } from "lodash";
-import Icon, { IconNames } from "../Icon";
+import Icon, { IconNames } from "./Icon";
+import colors from "../style/colors";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
@@ -93,59 +93,61 @@ const Notification: React.FC<NotificationProps> = (props) => {
   } = props;
 
   const passNotificationProps = omit(
-      props,
-      "containerStyle",
-      "hasCta",
-      "hasIcon",
-      "heading",
-      "icon",
-      "isBanner",
-      "isCloseable",
-      "isTooltip",
-      "onPressClose",
-      "onPressCta",
-      "style",
-      "tooltipPosition",
-      "type"
-    ),
-    themeColors = useContext(ThemeContext),
-    colorsByType: { [key in NotificationType]: any } = {
-      [NotificationType.default]: {
-        bg: themeColors.info.light,
-        border: themeColors.info.primary,
-        contentText: themeColors.info.dark,
-        ctaText: colors.white,
-        ctaBg: themeColors.info.primary,
-      },
-      [NotificationType.attention]: {
-        bg: themeColors.cta.light,
-        border: themeColors.cta.primary,
-        contentText: themeColors.cta.midDark,
-        ctaText: colors.white,
-        ctaBg: themeColors.cta.primary,
-      },
-      [NotificationType.warning]: {
-        bg: themeColors.warning.midLight,
-        border: themeColors.warning.primary,
-        contentText: colors.grey8,
-        ctaText: colors.grey8,
-        ctaBg: themeColors.warning.primary,
-      },
-      [NotificationType.negative]: {
-        bg: themeColors.error.light,
-        border: themeColors.error.primary,
-        contentText: themeColors.error.dark,
-        ctaText: colors.white,
-        ctaBg: themeColors.error.primary,
-      },
-      [NotificationType.positive]: {
-        bg: themeColors.success.light,
-        border: themeColors.success.primary,
-        contentText: themeColors.success.dark,
-        ctaText: colors.white,
-        ctaBg: themeColors.success.primary,
-      },
-    };
+    props,
+    "containerStyle",
+    "hasCta",
+    "hasIcon",
+    "heading",
+    "icon",
+    "isBanner",
+    "isCloseable",
+    "isTooltip",
+    "onPressClose",
+    "onPressCta",
+    "style",
+    "tooltipPosition",
+    "type"
+  );
+  const { info, cta, warning, error, success, typography } =
+    useContext(ThemeContext);
+
+  const colorsByType: { [key in NotificationType]: any } = {
+    [NotificationType.default]: {
+      bg: info.light,
+      border: info.primary,
+      contentText: info.dark,
+      ctaText: typography.inverted,
+      ctaBg: info.primary,
+    },
+    [NotificationType.attention]: {
+      bg: cta.light,
+      border: cta.primary,
+      contentText: cta.midDark,
+      ctaText: typography.inverted,
+      ctaBg: cta.primary,
+    },
+    [NotificationType.warning]: {
+      bg: warning.midLight,
+      border: warning.primary,
+      contentText: colors.grey8,
+      ctaText: colors.grey8,
+      ctaBg: warning.primary,
+    },
+    [NotificationType.negative]: {
+      bg: error.light,
+      border: error.primary,
+      contentText: error.dark,
+      ctaText: typography.inverted,
+      ctaBg: error.primary,
+    },
+    [NotificationType.positive]: {
+      bg: success.light,
+      border: success.primary,
+      contentText: success.dark,
+      ctaText: typography.inverted,
+      ctaBg: success.primary,
+    },
+  };
 
   const bannerStyle: ViewStyle = isBanner
     ? {

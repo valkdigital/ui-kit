@@ -64,6 +64,8 @@ const Button: React.FC<ButtonProps> = ({
   label,
   disabled,
 }) => {
+  const { typography } = useContext(ThemeContext);
+
   const onButtonPressed = () => {
     onPress(label);
   };
@@ -77,7 +79,10 @@ const Button: React.FC<ButtonProps> = ({
       ]}
       onPress={onButtonPressed}
     >
-      <Text color={isSelected ? "white" : "black"} type="bodySemiBold">
+      <Text
+        color={isSelected ? typography.inverted : typography.color}
+        type="bodySemiBold"
+      >
         {label}
       </Text>
     </Pressable>

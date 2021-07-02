@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View, StyleSheet, FlatList as RNFLatList } from "react-native";
 import PickerRow from "./PickerRow";
 import ItemSeparator from "./ItemSeparator";
@@ -6,6 +6,7 @@ import ListFooter from "./ListFooter";
 import type { Option } from ".";
 import Spacing from "../../style/spacing";
 import ListEmpty from "./ListEmpty";
+import ThemeContext from "../../style/ThemeContext";
 
 interface FlatListProps {
   options?: Option[];
@@ -24,6 +25,7 @@ const FlatList: React.FC<FlatListProps> = ({
   listEmptyText,
   needsPaddingTop,
 }) => {
+  const { onBackground } = useContext(ThemeContext);
   const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
   const flatListRef = useRef<RNFLatList>(null);
 
@@ -74,6 +76,7 @@ const FlatList: React.FC<FlatListProps> = ({
       ref={flatListRef}
       data={filteredOptions}
       keyExtractor={(_, index) => index.toString()}
+      contentContainerStyle={{ backgroundColor: onBackground }}
       renderItem={({ item, index }) => (
         <PickerRow
           option={item}
