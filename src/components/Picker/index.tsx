@@ -1,12 +1,12 @@
 import React, { useMemo, useRef, useState } from "react";
 import {
   ViewStyle,
-  Dimensions,
   Animated,
   PanResponder,
   Keyboard,
   StyleProp,
   LayoutAnimation,
+  useWindowDimensions,
 } from "react-native";
 import PickerScreen from "./PickerScreen";
 
@@ -132,7 +132,7 @@ const Picker: React.FC<PickerProps> = ({
   customSections,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const modalHeight = Dimensions.get("window").height;
+  const modalHeight = useWindowDimensions().height;
   const translateY = useRef(new Animated.Value(modalHeight)).current;
   const [search, setSearch] = useState("");
 

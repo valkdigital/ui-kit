@@ -4,8 +4,8 @@ import {
   StyleSheet,
   PanResponder,
   LayoutChangeEvent,
-  Dimensions,
   Keyboard,
+  useWindowDimensions,
 } from "react-native";
 import ThemeContext from "../../style/ThemeContext";
 
@@ -20,9 +20,8 @@ interface AlphabetScrollProps {
 
 const AlphabetScroll: React.FC<AlphabetScrollProps> = ({ onLetterChange }) => {
   const [height, setHeight] = useState<number>(0);
+  const screenHeight = useWindowDimensions().height;
   let prevIndex = useRef<number>(-1).current;
-
-  const screenHeight = Dimensions.get("window").height;
 
   const panResponder = useMemo(
     () =>
