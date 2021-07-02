@@ -367,8 +367,6 @@ buttonStories.add("Multiple Buttons", () => (
   <View style={{ marginTop: Spacing.sp2 }}>
     <MultipleButtons
       selectedLabel="button"
-      activeColor={color("active color", "#2BB9F5", "multiple buttons")}
-      inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
       onPress={(i) => console.log(i)}
       labels={array("buttons", ["btn 1", "button", "button 12"])}
     />

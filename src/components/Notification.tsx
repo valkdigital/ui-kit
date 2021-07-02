@@ -17,13 +17,14 @@ import {
   ViewStyle,
   ViewProps,
 } from "react-native";
-import ThemeContext from "../../style/ThemeContext";
-import shadow from "../../style/shadow";
-import hitSlop from "../../style/hitSlop";
-import Spacing from "../../style/spacing";
-import Text from "../Text";
+import ThemeContext from "../style/ThemeContext";
+import shadow from "../style/shadow";
+import hitSlop from "../style/hitSlop";
+import Spacing from "../style/spacing";
+import Text from "./Text";
 import { isEmpty, omit } from "lodash";
-import Icon, { IconNames } from "../Icon";
+import Icon, { IconNames } from "./Icon";
+import colors from "../style/colors";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
@@ -107,7 +108,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
     "tooltipPosition",
     "type"
   );
-  const { info, cta, warning, error, success, grey, typography } =
+  const { info, cta, warning, error, success, typography } =
     useContext(ThemeContext);
 
   const colorsByType: { [key in NotificationType]: any } = {
@@ -128,8 +129,8 @@ const Notification: React.FC<NotificationProps> = (props) => {
     [NotificationType.warning]: {
       bg: warning.midLight,
       border: warning.primary,
-      contentText: grey[8],
-      ctaText: grey[8],
+      contentText: colors.grey8,
+      ctaText: colors.grey8,
       ctaBg: warning.primary,
     },
     [NotificationType.negative]: {
