@@ -45,7 +45,7 @@ const PickerList: React.FC<PickerListProps> = ({
   alphabeticScrollEnabled,
   customSections,
 }) => {
-  const { background } = useContext(ThemeContext);
+  const { onBackground } = useContext(ThemeContext);
 
   return (
     <DismissKeyboard>
@@ -64,7 +64,7 @@ const PickerList: React.FC<PickerListProps> = ({
           <View style={styles.flex}>
             <TextInput
               autoCorrect={false}
-              containerStyle={[styles.input, { backgroundColor: background }]}
+              containerStyle={[styles.input, { backgroundColor: onBackground }]}
               placeholder={searchPlaceholder}
               onChangeText={onSearchChange}
               type="search"

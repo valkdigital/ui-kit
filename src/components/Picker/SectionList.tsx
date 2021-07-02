@@ -42,6 +42,10 @@ const SectionList: React.FC<SectionListProps> = ({
   alphabeticScrollEnabled,
   customSections,
 }) => {
+  const {
+    list: { sectionBackground },
+    onBackground,
+  } = useContext(ThemeContext);
   const [sections, setSections] = useState<Section[]>(customSections ?? []);
   const sectionListRef = useRef<RNSectionList>(null);
 
@@ -194,17 +198,13 @@ const SectionList: React.FC<SectionListProps> = ({
     };
   }, [sections]);
 
-  const {
-    list: { sectionBackground },
-    background,
-  } = useContext(ThemeContext);
   return (
     <>
       <RNSectionList
         ref={sectionListRef}
         sections={sections}
         keyExtractor={(_, index) => index.toString()}
-        contentContainerStyle={{ backgroundColor: background }}
+        contentContainerStyle={{ backgroundColor: onBackground }}
         renderItem={({ item, index, section }) => (
           <PickerRow
             option={item}

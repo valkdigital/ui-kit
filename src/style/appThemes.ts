@@ -114,7 +114,7 @@ export default {
     },
 
     list: {
-      sectionBackground: colors.grey8,
+      sectionBackground: colors.grey7,
     },
     grey: [
       colors.grey8,

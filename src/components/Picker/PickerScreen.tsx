@@ -84,7 +84,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   onSearchChange,
   customSections,
 }) => {
-  const { background, typography, border, grey } = useContext(ThemeContext);
+  const { onBackground, typography, border, grey } = useContext(ThemeContext);
   return (
     <>
       {SelectComponent ? (
@@ -119,7 +119,7 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           <Animated.View
             style={[
               styles.modal,
-              { backgroundColor: background },
+              { backgroundColor: onBackground },
               MODAL_STYLE[modalSize],
               { transform: [{ translateY }] },
             ]}

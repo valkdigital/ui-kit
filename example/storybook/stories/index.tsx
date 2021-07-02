@@ -34,162 +34,171 @@ import Pickers from "./Pickers";
 import Dropdowns from "./Dropdowns";
 import Icons from "./Icons";
 import EmptyStates from "./EmptyStates";
+import decorator from "../decorator";
 
 const CenteredView: React.FC<{ style?: ViewStyle }> = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
 };
 
-storiesOf("Cards", module).add("Cards", () => (
-  <ScrollView style={{ flex: 1 }}>
-    <View style={{ margin: Spacing.sp2 }}>
-      <Text type="bodySemiBold">Large card</Text>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        imageHeader="Diner"
-        size="large"
-        onPress={() => null}
-        assets={
-          <View style={{ flexDirection: "row" }}>
-            <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
-              2 persons
-            </Text>
-            <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
-              18:00
-            </Text>
-          </View>
-        }
-        buttonText="Button"
-        containerStyle={{ marginTop: Spacing.sp1 }}
-      />
-    </View>
-    <View style={{ margin: Spacing.sp2 }}>
-      <Text type="bodySemiBold">Medium card</Text>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        imageHeader="Diner"
-        size="medium"
-        onPress={() => null}
-        assets={
-          <View style={{ flexDirection: "row" }}>
-            <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
-              2 persons
-            </Text>
-            <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
-              18:00
-            </Text>
-          </View>
-        }
-        containerStyle={{ marginTop: Spacing.sp1 }}
-      />
-    </View>
-    <View style={{ margin: Spacing.sp2 }}>
-      <Text type="bodySemiBold">Small card</Text>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        header="Diner"
-        subHeader="From €89,- per person"
-        size="small"
-        onPress={() => null}
-        containerStyle={{ marginTop: Spacing.sp1 }}
-      />
-    </View>
-    <View style={{ margin: Spacing.sp2 }}>
-      <Text type="bodySemiBold">Tiny card</Text>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        header="Diner"
-        subHeader="From €89,- per person"
-        size="tiny"
-        onPress={() => null}
-        containerStyle={{ marginTop: Spacing.sp1 }}
-      />
-    </View>
-    <View style={{ margin: Spacing.sp2 }}>
-      <Text type="bodySemiBold">Single card</Text>
-      <Card
-        image={{
-          uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-        }}
-        imageHeader="Diner"
-        size="single"
-        onPress={() => null}
-        containerStyle={{ marginTop: Spacing.sp1 }}
-      />
-    </View>
+storiesOf("Cards", module)
+  .addDecorator(decorator)
+  .add("Cards", () => (
+    <ScrollView style={{ flex: 1 }}>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Large card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="large"
+          onPress={() => null}
+          assets={
+            <View style={{ flexDirection: "row" }}>
+              <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+                2 persons
+              </Text>
+              <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+                18:00
+              </Text>
+            </View>
+          }
+          buttonText="Button"
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Medium card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="medium"
+          onPress={() => null}
+          assets={
+            <View style={{ flexDirection: "row" }}>
+              <Text type="subtextRegular" style={{ marginRight: Spacing.sp3 }}>
+                2 persons
+              </Text>
+              <Text type="subtextRegular" style={{ marginLeft: Spacing.sp1 }}>
+                18:00
+              </Text>
+            </View>
+          }
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Small card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          header="Diner"
+          subHeader="From €89,- per person"
+          size="small"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Tiny card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          header="Diner"
+          subHeader="From €89,- per person"
+          size="tiny"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
+      <View style={{ margin: Spacing.sp2 }}>
+        <Text type="bodySemiBold">Single card</Text>
+        <Card
+          image={{
+            uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+          }}
+          imageHeader="Diner"
+          size="single"
+          onPress={() => null}
+          containerStyle={{ marginTop: Spacing.sp1 }}
+        />
+      </View>
 
-    <Text type="bodySemiBold" style={{ margin: Spacing.sp2, marginBottom: 0 }}>
-      Horizontal cardlist
-    </Text>
-    <FlatList
-      data={["Diner", "Lunch", "Breakfast"]}
-      keyExtractor={(item) => item}
-      horizontal={true}
-      contentContainerStyle={{
-        padding: Spacing.sp2,
-      }}
-      ItemSeparatorComponent={() => <View style={{ width: Spacing.sp1 }} />}
-      showsHorizontalScrollIndicator={false}
-      renderItem={({ item }) => {
-        return (
-          <Card
-            image={{
-              uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-            }}
-            imageHeader={item}
-            size="large"
-            supportiveText="Some text here"
-            onPress={() => null}
-            containerStyle={{
-              width: 300 - Spacing.sp4,
-            }}
-          />
-        );
-      }}
-    />
+      <Text
+        type="bodySemiBold"
+        style={{ margin: Spacing.sp2, marginBottom: 0 }}
+      >
+        Horizontal cardlist
+      </Text>
+      <FlatList
+        data={["Diner", "Lunch", "Breakfast"]}
+        keyExtractor={(item) => item}
+        horizontal={true}
+        contentContainerStyle={{
+          padding: Spacing.sp2,
+        }}
+        ItemSeparatorComponent={() => <View style={{ width: Spacing.sp1 }} />}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => {
+          return (
+            <Card
+              image={{
+                uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+              }}
+              imageHeader={item}
+              size="large"
+              supportiveText="Some text here"
+              onPress={() => null}
+              containerStyle={{
+                width: 300 - Spacing.sp4,
+              }}
+            />
+          );
+        }}
+      />
 
-    <Text type="bodySemiBold" style={{ margin: Spacing.sp2, marginBottom: 0 }}>
-      Vertical cardlist
-    </Text>
-    <FlatList
-      data={["Diner", "Lunch", "Breakfast"]}
-      keyExtractor={(item) => item}
-      contentContainerStyle={{
-        padding: Spacing.sp2,
-        paddingTop: Spacing.sp1,
-      }}
-      showsVerticalScrollIndicator={false}
-      ItemSeparatorComponent={() => <View style={{ height: Spacing.sp1 }} />}
-      renderItem={({ item }) => {
-        return (
-          <Card
-            image={{
-              uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
-            }}
-            header={item}
-            subHeader="sub header"
-            size="tiny"
-            onPress={() => null}
-          />
-        );
-      }}
-    />
-  </ScrollView>
-));
+      <Text
+        type="bodySemiBold"
+        style={{ margin: Spacing.sp2, marginBottom: 0 }}
+      >
+        Vertical cardlist
+      </Text>
+      <FlatList
+        data={["Diner", "Lunch", "Breakfast"]}
+        keyExtractor={(item) => item}
+        contentContainerStyle={{
+          padding: Spacing.sp2,
+          paddingTop: Spacing.sp1,
+        }}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={() => <View style={{ height: Spacing.sp1 }} />}
+        renderItem={({ item }) => {
+          return (
+            <Card
+              image={{
+                uri: "https://mediabank.valkenhorst.nl/images/0/image32335.jpg",
+              }}
+              header={item}
+              subHeader="sub header"
+              size="tiny"
+              onPress={() => null}
+            />
+          );
+        }}
+      />
+    </ScrollView>
+  ));
 
-const iconStories = storiesOf("Icons", module);
+const iconStories = storiesOf("Icons", module).addDecorator(decorator);
 iconStories.add("Icons", () => {
   return <Icons />;
 });
 
-const inputStories = storiesOf("Inputs", module);
+const inputStories = storiesOf("Inputs", module).addDecorator(decorator);
 
 const Fields: React.FC = () => {
   const ref = useRef<TextInputType>(null);
@@ -325,31 +334,33 @@ inputStories.add("PhoneInput", () => (
   </CenteredView>
 ));
 
-storiesOf("Text", module).add("All Text", () => (
-  <CenteredView>
-    <Text type="h1">Heading 1</Text>
-    <Text type="h2">Heading 2</Text>
-    <Text type="h3">Heading 3</Text>
-    <Text type="h4">Heading 4</Text>
-    <Text type="h5">Heading 5</Text>
-    <Text type="h6">Heading 6</Text>
-    <Text type="subHeading">Sub Heading</Text>
-    <Text>{"\n"}</Text>
-    <Text>{"\n"}</Text>
-    <Text type="bodyRegular">Body - Regular</Text>
-    <Text type="bodySemiBold">Body Semi - Bold</Text>
-    <Text type="bodyItalic">Body Italic</Text>
-    <Text>{"\n"}</Text>
-    <Text>{"\n"}</Text>
-    <Text type="subtextRegular">Subtext - Regular</Text>
-    <Text type="subtextSemiBold">Subtext - Semibold</Text>
-    <Text type="subtextBold">subtextBold - Bold</Text>
-    <Text type="label">Label</Text>
-  </CenteredView>
-));
+storiesOf("Text", module)
+  .addDecorator(decorator)
+  .add("All Text", () => (
+    <CenteredView>
+      <Text type="h1">Heading 1</Text>
+      <Text type="h2">Heading 2</Text>
+      <Text type="h3">Heading 3</Text>
+      <Text type="h4">Heading 4</Text>
+      <Text type="h5">Heading 5</Text>
+      <Text type="h6">Heading 6</Text>
+      <Text type="subHeading">Sub Heading</Text>
+      <Text>{"\n"}</Text>
+      <Text>{"\n"}</Text>
+      <Text type="bodyRegular">Body - Regular</Text>
+      <Text type="bodySemiBold">Body Semi - Bold</Text>
+      <Text type="bodyItalic">Body Italic</Text>
+      <Text>{"\n"}</Text>
+      <Text>{"\n"}</Text>
+      <Text type="subtextRegular">Subtext - Regular</Text>
+      <Text type="subtextSemiBold">Subtext - Semibold</Text>
+      <Text type="subtextBold">subtextBold - Bold</Text>
+      <Text type="label">Label</Text>
+    </CenteredView>
+  ));
 
 const buttonStories = storiesOf("Buttons", module);
-buttonStories.addDecorator(withKnobs);
+buttonStories.addDecorator(withKnobs).addDecorator(decorator);
 buttonStories.add("CTA", () => <Buttons />);
 buttonStories.add("FAB", () => <AllFAB />);
 buttonStories.add("Multiple Buttons", () => (
@@ -393,7 +404,9 @@ buttonStories.add("Segment control", () => (
 
 buttonStories.add("Navigation Text Button", () => <NavigationTextStory />);
 
-const notificationStories = storiesOf("Notification", module);
+const notificationStories = storiesOf("Notification", module).addDecorator(
+  decorator
+);
 notificationStories.add("Notification", () => (
   <ScrollView>
     <Text type="h4">Notification default</Text>
