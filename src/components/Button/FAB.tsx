@@ -1,53 +1,60 @@
 import Text from "../Text";
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
   Pressable,
-  Image,
-  ImageProps,
+  PressableProps,
+  StyleProp,
   ViewStyle,
-  ImageStyle,
 } from "react-native";
+import Icon, { IconNames } from "../Icon";
 import spacing from "../../style/spacing";
 import shadow from "../../style/shadow";
+import ThemeContext from "../../style/ThemeContext";
+import { omit } from "lodash";
 
-interface FABProps {
+interface FABProps extends Omit<PressableProps, "style"> {
   label: string;
   backgroundColor: string;
   color: string;
-  source: ImageProps["source"];
-  imgStyle?: ImageStyle;
-  style?: ViewStyle;
-  onPress: () => void;
+  icon: IconNames;
+  style?: StyleProp<ViewStyle>;
 }
 
-const Fab: React.FC<FABProps> = ({
-  label,
-  color,
-  backgroundColor,
-  source,
-  style,
-  imgStyle,
-  onPress,
-}) => (
-  <Pressable
-    onPress={onPress}
-    style={({ pressed }) => [
-      styles.container,
-      { backgroundColor },
-      style,
-      pressed && { opacity: 0.4 },
-    ]}
-  >
-    <Text type="h6" color="white" style={styles.label}>
-      {label}
-    </Text>
-    <View style={[styles.iconContainer, { backgroundColor: color }]}>
-      <Image source={source} style={[styles.img, imgStyle]} />
-    </View>
-  </Pressable>
-);
+const Fab: React.FC<FABProps> = (props) => {
+  const { typography } = useContext(ThemeContext);
+
+  const passFabProps = omit(
+    props,
+    "label",
+    "backgroundColor",
+    "color",
+    "icon",
+    "style"
+  );
+
+  const { label, backgroundColor, color, icon, style } = props;
+
+  return (
+    <Pressable
+      {...passFabProps}
+      style={({ pressed }) => [
+        styles.container,
+        { backgroundColor },
+        style,
+        pressed && { opacity: 0.4 },
+      ]}
+    >
+      <Text type="h6" color={typography.inverted} style={styles.label}>
+        {label}
+      </Text>
+      <View style={[styles.iconContainer, { backgroundColor: color }]}>
+        <Icon name={icon} color={typography.inverted} style={styles.icon} />
+      </View>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -69,9 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: spacing.sp3,
     justifyContent: "center",
   },
-  img: {
-    width: 24,
-    height: 24,
+  icon: {
     alignSelf: "center",
   },
 });

@@ -148,8 +148,7 @@ import { action } from "@storybook/addon-actions";
         label="Placeholder"
         backgroundColor={color("background color", "#2BB9F5", "fab")}
         color={color("color", "#1AA0E2", "fab")}
-        source={require("../src/media/plus.png")}
-        imgStyle={{ tintColor: color("icon color", "#FFFFFF", "fab") }}
+        icon="plus"
         onPress={action("pressed")}
       />
     </View>
@@ -167,8 +166,6 @@ import { action } from "@storybook/addon-actions";
     <View style={{ marginTop: 16 }}>
       <MultipleButtons
         selectedLabel="button"
-        activeColor={color("active color", "#2BB9F5", "multiple buttons")}
-        inActiveColor={color("inactive color", "#E3E3E3", "multiple buttons")}
         onPress={(i) => action(i)}
         labels={array("buttons", ["btn 1", "button", "button 12"])}
       />

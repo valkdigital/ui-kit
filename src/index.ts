@@ -18,7 +18,7 @@ import TextButton from "./components/Button/TextButton";
 import SegmentControl from "./components/Button/SegmentControl";
 import NavigationTextButton from "./components/Button/NavigationTextButton";
 import XLTextInput from "./components/input/XLTextInput";
-import Notification from "./components/Notification/Notification";
+import Notification from "./components/Notification";
 import Icon from "./components/Icon";
 import EmptyState from "./components/EmptyState";
 import type { IconSizes, IconNames } from "./components/Icon";

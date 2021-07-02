@@ -84,7 +84,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
     "useFullHeight"
   );
   const {
-    error: { primary },
+    error: { primary: errorPrimary },
     info,
     border,
     typography,
@@ -111,7 +111,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
 
   useEffect(() => {
     if (error) {
-      setBorderColor(primary);
+      setBorderColor(errorPrimary);
       return;
     }
     if (isFocused) {
@@ -189,7 +189,7 @@ const BaseInput = React.forwardRef<RNTI, BaseInputProps>((props, ref) => {
           textAlign={textAlign}
           style={styles.error}
           type="subtextRegular"
-          color={primary}
+          color={errorPrimary}
         >
           {error}
         </Text>

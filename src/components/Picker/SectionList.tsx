@@ -6,7 +6,6 @@ import {
   LayoutAnimation,
 } from "react-native";
 import Spacing from "../../style/spacing";
-import colors from "../../style/colors";
 import Text from "../Text";
 import AlphabetScroll from "./AlphabetScroll";
 import ItemSeparator from "./ItemSeparator";
@@ -43,6 +42,10 @@ const SectionList: React.FC<SectionListProps> = ({
   alphabeticScrollEnabled,
   customSections,
 }) => {
+  const {
+    list: { sectionBackground },
+    onBackground,
+  } = useContext(ThemeContext);
   const [sections, setSections] = useState<Section[]>(customSections ?? []);
   const sectionListRef = useRef<RNSectionList>(null);
 
@@ -195,17 +198,13 @@ const SectionList: React.FC<SectionListProps> = ({
     };
   }, [sections]);
 
-  const {
-    list: { sectionBackground },
-    background,
-  } = useContext(ThemeContext);
   return (
     <>
       <RNSectionList
         ref={sectionListRef}
         sections={sections}
         keyExtractor={(_, index) => index.toString()}
-        contentContainerStyle={{ backgroundColor: background }}
+        contentContainerStyle={{ backgroundColor: onBackground }}
         renderItem={({ item, index, section }) => (
           <PickerRow
             option={item}
@@ -248,7 +247,6 @@ const styles = StyleSheet.create({
   sectionHeader: {
     justifyContent: "center",
     height: Spacing.sp3,
-    backgroundColor: colors.greyLight,
     paddingHorizontal: Spacing.sp3,
   },
 });
