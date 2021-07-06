@@ -110,7 +110,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
       <Button
         onPress={() => console.log("pressed")}
         label="Fit content"
-        size="fitContent"
+        size="auto"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
@@ -118,7 +118,7 @@ const Buttons: React.FC<ButtonsProps> = () => {
       <Button
         onPress={() => console.log("pressed")}
         label="Fit content"
-        size="fitContent"
+        size="auto"
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}

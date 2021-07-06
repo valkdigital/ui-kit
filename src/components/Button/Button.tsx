@@ -27,7 +27,7 @@ enum ButtonTypes {
 enum ButtonSizes {
   small = "small",
   medium = "medium",
-  fitContent = "fitContent",
+  auto = "auto",
   full = "full",
 }
 
@@ -68,7 +68,7 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   [ButtonSizes.medium]: {
     alignSelf: "stretch",
   },
-  [ButtonSizes.fitContent]: {
+  [ButtonSizes.auto]: {
     alignSelf: "flex-start",
   },
   [ButtonSizes.full]: {
@@ -172,7 +172,7 @@ const Button: React.FC<ButtonProps> = (props) => {
                 styles.label,
                 icon && styles.labelWithIcon,
                 iconOpposite && styles.labelWithIconOppostie,
-                size !== "fitContent" && styles.stretchLabel,
+                size !== "auto" && styles.stretchLabel,
               ]}
             >
               {label}
