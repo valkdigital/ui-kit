@@ -16,8 +16,9 @@ import { omit } from "lodash";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
-    TYPES
+TYPES
 \* ========================================================================== */
+import type { Fonts } from "../style/typography";
 import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
 
 type IconSizes = keyof typeof IconSet.sizes;
@@ -51,7 +52,7 @@ const getIcomoonConfig = (isSolid: boolean) =>
  * @param isSolid
  */
 const getIcomoonType = (isSolid: boolean) =>
-  isSolid ? IconSet.types.solid : IconSet.types.outline;
+  isSolid ? Fonts.IconSetSolid : Fonts.IconSetOutline;
 
 /**
  * Icon
