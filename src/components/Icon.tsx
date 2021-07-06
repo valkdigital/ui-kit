@@ -13,12 +13,12 @@ import { createIconSetFromIcoMoon } from "react-native-vector-icons";
 import IconSet from "../style/iconSet";
 import ThemeContext from "../style/ThemeContext";
 import { omit } from "lodash";
+import { Fonts } from "../style/typography";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
 TYPES
 \* ========================================================================== */
-import type { Fonts } from "../style/typography";
 import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
 
 type IconSizes = keyof typeof IconSet.sizes;
