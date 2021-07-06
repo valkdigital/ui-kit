@@ -112,7 +112,8 @@ import { action } from "@storybook/addon-actions";
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        image={require("../src/media/plus.png")}
+        icon="plus"
+        iconOpposite={true}
       />
       <Button
         onPress={() => console.log("pressed")}
@@ -130,6 +131,23 @@ import { action } from "@storybook/addon-actions";
         containerStyle={{ marginBottom: Spacing.sp2 }}
         icon="chevron-left"
         iconOpposite={true}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Fit content"
+        size="fitContent"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Fit content"
+        size="fitContent"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        icon="chevron-right"
       />
     </ScrollView>
   </Story>

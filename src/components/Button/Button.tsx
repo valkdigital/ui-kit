@@ -5,9 +5,6 @@ import {
   ViewStyle,
   View,
   ActivityIndicator,
-  ImageProps,
-  Image,
-  ImageStyle,
   Platform,
   StyleProp,
   PressableProps,
@@ -30,6 +27,7 @@ enum ButtonTypes {
 enum ButtonSizes {
   small = "small",
   medium = "medium",
+  fitContent = "fitContent",
   full = "full",
 }
 
@@ -45,10 +43,7 @@ export interface ButtonProps extends Omit<PressableProps, "children"> {
   disabled?: boolean;
   currentProgress?: string | number;
   icon?: IconNames;
-  iconColor?: string;
   iconOpposite?: boolean;
-  image?: ImageProps["source"];
-  imageStyle?: StyleProp<ImageStyle>;
   onLayout?: (event: LayoutChangeEvent) => void;
 }
 
@@ -73,6 +68,9 @@ const styleBySize: { [key in ButtonSizes]: ViewStyle } = {
   [ButtonSizes.medium]: {
     alignSelf: "stretch",
   },
+  [ButtonSizes.fitContent]: {
+    alignSelf: "flex-start",
+  },
   [ButtonSizes.full]: {
     marginHorizontal: Spacing.sp2,
   },
@@ -94,10 +92,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     loading,
     currentProgress,
     icon,
-    iconColor = "white",
     iconOpposite = false,
-    image,
-    imageStyle,
     onLayout,
   } = props;
   // remove custom props or overrided props
@@ -115,10 +110,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     "loading",
     "currentProgress",
     "icon",
-    "iconColor",
     "iconOpposite",
-    "image",
-    "imageStyle",
     "onLayout"
   );
 
@@ -129,10 +121,10 @@ const Button: React.FC<ButtonProps> = (props) => {
     borderColor: color,
     alignItems: "center",
     justifyContent:
-      image && type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
+      type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
     flexDirection: "row",
     borderRadius: 4,
-    paddingHorizontal: Spacing.sp2,
+    paddingHorizontal: Spacing.sp1,
     height: 48,
     ...styleBySize[size],
     ...styleByType[type],
@@ -159,7 +151,6 @@ const Button: React.FC<ButtonProps> = (props) => {
           defaultStyle,
           buttonStyle,
           (pressed || disabled) && { opacity: 0.4 },
-          icon && styles.buttonWithIconStyle,
         ]}
         disabled={disabled}
         {...passButtonProps}
@@ -168,38 +159,27 @@ const Button: React.FC<ButtonProps> = (props) => {
           <ActivityIndicator size="small" color={buttonLabelColor} />
         ) : (
           <>
-            {image && (
-              <Image
-                style={[styles.img, { tintColor: color }, imageStyle]}
-                source={image}
-              />
-            )}
-
             {icon && iconOpposite && (
-              <Icon
-                name={icon}
-                solid={true}
-                style={[styles.icon, { color: iconColor }]}
-              />
+              <Icon name={icon} solid={true} color={buttonLabelColor} />
             )}
 
             <Text
               type="h6"
+              textAlign="center"
               color={buttonLabelColor}
+              numberOfLines={1}
               style={[
+                styles.label,
                 icon && styles.labelWithIcon,
                 iconOpposite && styles.labelWithIconOppostie,
+                size !== "fitContent" && styles.stretchLabel,
               ]}
             >
               {label}
             </Text>
 
             {icon && !iconOpposite && (
-              <Icon
-                name={icon}
-                solid={true}
-                style={[styles.icon, { color: iconColor }]}
-              />
+              <Icon name={icon} solid={true} color={buttonLabelColor} />
             )}
           </>
         )}
@@ -240,33 +220,23 @@ const styles = StyleSheet.create({
     paddingBottom: isIphoneX ? Spacing.sp2 + Spacing["sp1/2"] : Spacing.sp2,
   },
 
-  img: {
-    marginLeft: Spacing.sp2,
-    marginRight: Spacing.sp1,
-    width: 24,
-    height: 24,
+  label: {
+    paddingHorizontal: Spacing.sp1,
   },
 
-  icon: {
-    textAlign: "center",
-    width: 24,
-    height: 24,
-  },
-
-  buttonWithIconStyle: {
-    alignItems: "center",
-    justifyContent: "space-between",
+  stretchLabel: {
+    flex: 1,
   },
 
   labelWithIcon: {
-    flexGrow: 1,
-    textAlign: "center",
-    paddingLeft: Spacing.sp3,
+    alignSelf: "center",
+    paddingLeft: Spacing.sp4,
+    paddingRight: Spacing.sp1,
   },
 
   labelWithIconOppostie: {
-    paddingLeft: 0,
-    paddingRight: Spacing.sp3,
+    paddingLeft: Spacing.sp1,
+    paddingRight: Spacing.sp4,
   },
 
   progressbarContainer: {
