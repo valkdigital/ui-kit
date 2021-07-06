@@ -1,7 +1,9 @@
 import React from "react";
 import themes from "./appThemes";
 
-const ThemeContext = React.createContext({
+type ThemeType = typeof themes.light & typeof themes.dark & Object;
+
+const ThemeContext = React.createContext<ThemeType>({
   ...themes.light,
 });
 

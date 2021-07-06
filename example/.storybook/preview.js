@@ -13,6 +13,7 @@ import { ThemeContext, Theme, Text } from "@valkdigital/ui-kit";
 const ThemeWrapper = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const darkModeOn = useDarkMode();
+
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
@@ -28,6 +29,7 @@ const ThemeWrapper = ({ children }) => {
     loadFonts();
     setLoading(false);
   }, []);
+
   if (loading) return <Text>Setting theme..</Text>;
   return (
     <ThemeContext.Provider value={darkModeOn ? Theme.dark : Theme.light}>

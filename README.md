@@ -8,6 +8,16 @@ A fully typed component library for react native (web) development.
 
 Instructions for using the library
 
+### Installation
+
+Install this package in your React Native or React project.
+
+`npm install @valkdigital/ui-kit`
+
+or
+
+`yarn add @valkdigital/ui-kit`
+
 ### Font
 
 This project uses Source Sans Pro. When you add a font to your project use the same names as the ones in the `./src/style/typography.ts` file.
