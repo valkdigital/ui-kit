@@ -3,6 +3,8 @@ export enum Fonts {
   SemiBold = "SourceSansPro-SemiBold",
   Bold = "SourceSansPro-Bold",
   Italic = "SourceSansPro-Italic",
+  IconSetSolid = "icomoon_solid",
+  IconSetOutline = "icomoon_outline",
 }
 
 const Typography = {

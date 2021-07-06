@@ -7,7 +7,7 @@ import { themes } from "@storybook/theming";
 import * as Font from "expo-font";
 
 // your theme provider
-import { ThemeContext, Theme, Text } from "@valkdigital/ui-kit";
+import { ThemeContext, Theme, Text, Fonts } from "@valkdigital/ui-kit";
 
 // create a component that uses the dark mode hook
 const ThemeWrapper = ({ children }) => {
@@ -17,12 +17,12 @@ const ThemeWrapper = ({ children }) => {
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
-        "SourceSansPro-Bold": require("../assets/fonts/SourceSansPro-Bold.ttf"),
-        "SourceSansPro-Regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
-        "SourceSansPro-SemiBold": require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
-        "SourceSansPro-Italic": require("../assets/fonts/SourceSansPro-Italic.ttf"),
-        "icomoon_solid": require("../assets/fonts/icomoon_solid.ttf"),
-        "icomoon_outline": require("../assets/fonts/icomoon_outline.ttf"),
+        [Fonts.Bold]: require("../assets/fonts/SourceSansPro-Bold.ttf"),
+        [Fonts.Regular]: require("../assets/fonts/SourceSansPro-Regular.ttf"),
+        [Fonts.SemiBold]: require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
+        [Fonts.Italic]: require("../assets/fonts/SourceSansPro-Italic.ttf"),
+        [Fonts.IconSetSolid]: require("../assets/fonts/icomoon_solid.ttf"),
+        [Fonts.IconSetOutline]: require("../assets/fonts/icomoon_outline.ttf"),
       });
     };
 

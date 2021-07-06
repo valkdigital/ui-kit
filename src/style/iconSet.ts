@@ -1,6 +1,8 @@
+import { Fonts } from "./typography";
+
 const types = {
-  solid: "icomoon_solid",
-  outline: "icomoon_outline",
+  solid: Fonts.IconSetSolid,
+  outline: Fonts.IconSetOutline,
 };
 
 const sizes = {
@@ -14,6 +16,7 @@ const names = [
   "actions",
   "actions-horizontal",
   "addresses",
+  "apple",
   "archive",
   "assistent",
   "bike",
@@ -36,8 +39,10 @@ const names = [
   "download",
   "education",
   "email",
+  "facebook",
   "favorite",
   "filter",
+  "free-cancellation",
   "help",
   "hide",
   "hotel",

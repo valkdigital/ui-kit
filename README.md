@@ -35,6 +35,9 @@ export default function App() {
         [Fonts.Bold]: require("../assets/fonts/SourceSansPro-Bold.ttf"),
         [Fonts.Regular]: require("../assets/fonts/SourceSansPro-Regular.ttf"),
         [Fonts.SemiBold]: require("../assets/fonts/SourceSansPro-SemiBold.ttf"),
+        [Fonts.Italic]: require("../assets/fonts/SourceSansPro-Italic.ttf"),
+        [Fonts.IconSetSolid]: require("../assets/fonts/icomoon_solid.ttf"),
+        [Fonts.IconSetOutline]: require("../assets/fonts/icomoon_outline.ttf"),
       });
     };
     loadFonts();
