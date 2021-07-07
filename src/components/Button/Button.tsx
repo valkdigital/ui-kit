@@ -17,6 +17,7 @@ import ThemeContext from "../../style/ThemeContext";
 import Spacing from "../../style/spacing";
 import { isIphoneX } from "../helpers";
 import { omit } from "lodash";
+import IconSet from "../../style/iconSet";
 
 enum ButtonTypes {
   default = "default",
@@ -120,8 +121,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     backgroundColor: color,
     borderColor: color,
     alignItems: "center",
-    justifyContent:
-      type === ButtonTypes.ghost && !loading ? "flex-start" : "center",
+    justifyContent: icon ? "space-between" : "center",
     flexDirection: "row",
     borderRadius: 4,
     paddingHorizontal: Spacing.sp1,
@@ -156,39 +156,34 @@ const Button: React.FC<ButtonProps> = (props) => {
         {...passButtonProps}
       >
         {loading ? (
-          <ActivityIndicator size="small" color={buttonLabelColor} />
+          <ActivityIndicator
+            size="small"
+            color={buttonLabelColor}
+            style={styles.label}
+          />
         ) : (
-          <>
-            {icon && iconOpposite && (
-              <Icon name={icon} solid={true} color={buttonLabelColor} />
-            )}
-
+          <IconWrapper
+            icon={icon}
+            iconOpposite={iconOpposite}
+            buttonLabelColor={buttonLabelColor}
+          >
             <Text
               type="h6"
               textAlign="center"
               color={buttonLabelColor}
               numberOfLines={1}
-              style={[
-                styles.label,
-                icon && styles.labelWithIcon,
-                iconOpposite && styles.labelWithIconOppostie,
-                size !== "auto" && styles.stretchLabel,
-              ]}
+              style={styles.label}
             >
               {label}
             </Text>
-
-            {icon && !iconOpposite && (
-              <Icon name={icon} solid={true} color={buttonLabelColor} />
-            )}
-          </>
+          </IconWrapper>
         )}
       </Pressable>
     </View>
   );
 };
 
-const Progressbar: React.FC<{ currentProgress: string | number }> = ({
+const Progressbar: React.FC<Pick<ButtonProps, "currentProgress">> = ({
   currentProgress,
 }) => {
   const {
@@ -208,6 +203,36 @@ const Progressbar: React.FC<{ currentProgress: string | number }> = ({
   );
 };
 
+interface IconWrapperProps extends Pick<ButtonProps, "icon" | "iconOpposite"> {
+  buttonLabelColor: string;
+}
+
+const IconWrapper: React.FC<IconWrapperProps> = ({
+  children,
+  icon,
+  iconOpposite,
+  buttonLabelColor,
+}) => {
+  if (icon) {
+    return (
+      <>
+        {iconOpposite ? (
+          <Icon name={icon} solid={true} color={buttonLabelColor} />
+        ) : (
+          <View style={styles.iconPlaceholder} />
+        )}
+        {children}
+        {!iconOpposite ? (
+          <Icon name={icon} solid={true} color={buttonLabelColor} />
+        ) : (
+          <View style={styles.iconPlaceholder} />
+        )}
+      </>
+    );
+  }
+  return <>{children}</>;
+};
+
 const styles = StyleSheet.create({
   fullWidthContainer: {
     ...shadow({
@@ -220,23 +245,12 @@ const styles = StyleSheet.create({
     paddingBottom: isIphoneX ? Spacing.sp2 + Spacing["sp1/2"] : Spacing.sp2,
   },
 
+  iconPlaceholder: {
+    width: IconSet.sizes.medium,
+  },
+
   label: {
     paddingHorizontal: Spacing.sp1,
-  },
-
-  stretchLabel: {
-    flex: 1,
-  },
-
-  labelWithIcon: {
-    alignSelf: "center",
-    paddingLeft: Spacing.sp4,
-    paddingRight: Spacing.sp1,
-  },
-
-  labelWithIconOppostie: {
-    paddingLeft: Spacing.sp1,
-    paddingRight: Spacing.sp4,
   },
 
   progressbarContainer: {
