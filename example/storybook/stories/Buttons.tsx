@@ -124,6 +124,24 @@ const Buttons: React.FC<ButtonsProps> = () => {
         containerStyle={{ marginBottom: Spacing.sp2 }}
         icon="chevron-right"
       />
+      <Button
+        label="Continue with Facebook"
+        color="#3578EA"
+        onPress={() => null}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        buttonStyle={{ justifyContent: "flex-start" }}
+        icon="facebook"
+        iconOpposite={true}
+      />
+      <Button
+        label="Continue with Apple"
+        color="grey"
+        onPress={() => null}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        buttonStyle={{ justifyContent: "flex-start" }}
+        icon="apple"
+        iconOpposite={true}
+      />
     </ScrollView>
   );
 };
