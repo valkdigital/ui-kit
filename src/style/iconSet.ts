@@ -1,8 +1,3 @@
-const types = {
-  solid: "icomoon_solid",
-  outline: "icomoon_outline",
-};
-
 const sizes = {
   small: 16,
   medium: 24,
@@ -14,6 +9,7 @@ const names = [
   "actions",
   "actions-horizontal",
   "addresses",
+  "apple",
   "archive",
   "assistent",
   "bike",
@@ -36,8 +32,10 @@ const names = [
   "download",
   "education",
   "email",
+  "facebook",
   "favorite",
   "filter",
+  "free-cancellation",
   "help",
   "hide",
   "hotel",
@@ -97,7 +95,6 @@ const names = [
 const IconSet = {
   names,
   sizes,
-  types,
 };
 
 export default IconSet;

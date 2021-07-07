@@ -13,10 +13,11 @@ import { createIconSetFromIcoMoon } from "react-native-vector-icons";
 import IconSet from "../style/iconSet";
 import ThemeContext from "../style/ThemeContext";
 import { omit } from "lodash";
+import { Fonts } from "../style/typography";
 /* == IMPORTS =============================================================== */
 
 /* ========================================================================== *\
-    TYPES
+TYPES
 \* ========================================================================== */
 import type { IconProps as DefaultIconProps } from "react-native-vector-icons/Icon";
 
@@ -51,7 +52,7 @@ const getIcomoonConfig = (isSolid: boolean) =>
  * @param isSolid
  */
 const getIcomoonType = (isSolid: boolean) =>
-  isSolid ? IconSet.types.solid : IconSet.types.outline;
+  isSolid ? Fonts.IconSetSolid : Fonts.IconSetOutline;
 
 /**
  * Icon

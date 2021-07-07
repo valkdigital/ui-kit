@@ -87,7 +87,8 @@ const Buttons: React.FC<ButtonsProps> = () => {
         loading={boolean("loading", false, "cta")}
         disabled={boolean("disabled", false, "cta")}
         containerStyle={{ marginBottom: Spacing.sp2 }}
-        image={require("../../src/media/plus.png")}
+        icon="plus"
+        iconOpposite={true}
       />
       <Button
         onPress={() => console.log("pressed")}
@@ -105,6 +106,23 @@ const Buttons: React.FC<ButtonsProps> = () => {
         containerStyle={{ marginBottom: Spacing.sp2 }}
         icon="chevron-left"
         iconOpposite={true}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Fit content"
+        size="auto"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+      />
+      <Button
+        onPress={() => console.log("pressed")}
+        label="Fit content"
+        size="auto"
+        loading={boolean("loading", false, "cta")}
+        disabled={boolean("disabled", false, "cta")}
+        containerStyle={{ marginBottom: Spacing.sp2 }}
+        icon="chevron-right"
       />
     </ScrollView>
   );

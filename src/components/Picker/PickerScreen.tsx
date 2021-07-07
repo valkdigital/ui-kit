@@ -4,9 +4,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
-  ViewStyle,
-  Dimensions,
   PanResponderInstance,
+  useWindowDimensions,
 } from "react-native";
 import shadow from "../../style/shadow";
 import Spacing from "../../style/spacing";
@@ -24,15 +23,6 @@ import Select from "./Select";
 import ThemeContext from "../../style/ThemeContext";
 import PickerList from "./PickerList";
 import Icon from "../Icon";
-
-const MODAL_STYLE: { [key in ModalSizes]: ViewStyle } = {
-  responsive: {
-    maxHeight: Dimensions.get("window").height - Spacing.sp8,
-  },
-  fullscreen: {
-    top: Spacing.sp8,
-  },
-};
 
 type InheritedProps = Omit<
   PickerProps,
@@ -85,6 +75,8 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
   customSections,
 }) => {
   const { onBackground, typography, border, grey } = useContext(ThemeContext);
+  const modalHeight = useWindowDimensions().height;
+
   return (
     <>
       {SelectComponent ? (
@@ -119,9 +111,10 @@ const PickerScreen: React.FC<PickerScreenProps> = ({
           <Animated.View
             style={[
               styles.modal,
-              { backgroundColor: onBackground },
-              MODAL_STYLE[modalSize],
-              { transform: [{ translateY }] },
+              modalSize === "responsive"
+                ? { maxHeight: modalHeight - Spacing.sp8 }
+                : { top: Spacing.sp8 },
+              { transform: [{ translateY }], backgroundColor: onBackground },
             ]}
           >
             <View {...panResponder.panHandlers}>
